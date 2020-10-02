@@ -2,53 +2,31 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Anotační Platforma FCheck TAČR';
+use yii\bootstrap4\Html;$this->title = 'Anotační Platforma FCheck TAČR';
 
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+<div class="card mb-3" >
+    <div class="card-body">
+        <h3 class="card-title">WF1: Claim Generation</h3>
+        <p class="card-text">The objective of this task is to generate a mixture of true claims and false claims from a source sentence extracted
+            from Wikipedia.</p>
+        <p class="card-text">In the sandbox mode. Annotations will be saved, but will not form part of the final data set. When done, just close
+            the window 👏 </p>
+        <?=Html::a('Tutoriál',['claim/tutorial'],['class'=>'btn btn-light'])?>
+        <?=Html::a('Zkušební verze (AJ/wiki)', ['claim/sandbox'],['class'=>'btn btn-secondary'])?>
+        <?=Html::a('Ostrá verze (ČJ/čtk)', ['claim/live'],['class'=>'btn btn-primary'])?>
     </div>
+</div>
 
-    <div class="body-content">
+<div class="card" >
+    <div class="card-body">
+        <h3 class="card-title">WF2: Claim Labelling</h3>
+        <p>The purpose of this task is to identify evidence from a Wikipedia page that can be used to support or refute simple
+            factoid sentences called claims.</p>
+        <p>In the sandbox mode. Annotations will be saved, but will not form part of the final data set.</p>
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
+        <?=Html::a('Oracle anotace (test pokrytí)',['label/oracle'],['class'=>'btn btn-warning'])?>
+        <?=Html::a('Zkušební verze (AJ/wiki)', ['label/sandbox'],['class'=>'btn btn-secondary'])?>
+        <?=Html::a('Ostrá verze (ČJ/čtk)', ['label/live'],['class'=>'btn btn-primary'])?>
     </div>
 </div>

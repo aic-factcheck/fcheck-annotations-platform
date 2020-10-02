@@ -5,10 +5,7 @@
 /* @var $content string */
 
 use app\assets\AppAsset;
-use app\assets\ParallaxAsset;
 use app\widgets\Alert;
-use app\widgets\LanguagePicker;
-use app\widgets\Socials;
 use kartik\icons\FontAwesomeAsset;
 use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Nav;
@@ -40,23 +37,21 @@ AppAsset::register($this);
             'brandLabel' => Yii::$app->name,
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
-                'class' => 'navbar-inverse navbar-fixed-top',
+                'class' => 'navbar-expand-lg navbar-light bg-light',
             ],
         ]);
         echo Nav::widget([
-            'options' => ['class' => 'navbar-nav navbar-right'],
+            'options' => ['class' => 'navbar-nav ml-auto'],
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
                 Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
                 ) : (
                     '<li>'
                     . Html::beginForm(['/site/logout'], 'post')
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->email . ')',
-                        ['class' => 'btn btn-link logout']
+                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['class' => 'btn btn-link']
                     )
                     . Html::endForm()
                     . '</li>'
@@ -66,7 +61,7 @@ AppAsset::register($this);
         NavBar::end();
         ?>
 
-        <div class="container">
+        <div class="container py-4">
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>

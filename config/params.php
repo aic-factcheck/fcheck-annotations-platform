@@ -4,10 +4,10 @@ use kartik\datecontrol\Module;
 
 return [
     'bsVersion' => '4.x',
-    'adminEmail' => 'meloun.jack@gmail.com',
-    'contactEmail' => 'ja@bertik.net',
-    'senderEmail' => 'svobodova@bertik.net',
-    'senderName' => 'LucieSvobodova.works mailer',
+    'adminEmail' => 'ullriher@fel.cvut.cz',
+    'contactEmail' => 'ullriher@fel.cvut.cz',
+    'senderEmail' => 'ullriher@fel.cvut.cz',
+    'senderName' => 'Fcheck Anotace mailer',
     'dateControlDisplay' => [
         Module::FORMAT_DATE => 'dd.MM.yyyy',
         Module::FORMAT_TIME => 'hh:mm:ss a',
@@ -18,5 +18,7 @@ return [
         Module::FORMAT_TIME => 'php:H:i:s',
         Module::FORMAT_DATETIME => 'php:Y-m-d H:i:s',
     ],
-    'tinymce' => require __DIR__ . '/tinymce.php'
+    'sandbox' => json_decode(file_get_contents(__DIR__ . '/datasets/sandbox.json')),
+    'live' => json_decode(file_get_contents(__DIR__ . '/datasets/live.json')),
+    'entities' => json_decode(file_get_contents(__DIR__ . '/datasets/entities.json')),
 ];
