@@ -16,10 +16,13 @@ $this->title = 'Tvorba výroků';
     <div class="container wf1b">
         <h1>Claim Modification Task (WF1b)</h1>
 
-        <div ng-show="testingMode">
-            <h4 style="color:red; margin-bottom:0;">Sandbox Environment</h4>
-            <div style="color:red;">Claims you write will be recorded. But will not form part of the final dataset.</div>
-        </div>
+        <?php if ($sandbox) { ?>
+            <div>
+                <h4 style="color:red; margin-bottom:0;">Sandbox Environment</h4>
+                <div style="color:red;">Claims you write will be recorded. But will not form part of the final dataset.
+                </div>
+            </div>
+        <?php } ?>
 
 
         <div class="row topmargin">
@@ -122,7 +125,7 @@ $this->title = 'Tvorba výroků';
                 </div>
             </div>
         </div>
-
+        <h2>Mutujeme výrok: <?=$model->claim->claim?></h2>
         <?php $form = ActiveForm::begin([
             'id' => 'mutate-form',
             'layout' => 'horizontal',

@@ -14,7 +14,7 @@ use yii\bootstrap4\Html;$this->title = 'Anotační Platforma FCheck TAČR';
             the window 👏 </p>
         <?=Html::a('Tutoriál',['claim/tutorial'],['class'=>'btn btn-light'])?>
         <?=Html::a('Zkušební verze (AJ/wiki)', ['claim/annotate','sandbox'=>true],['class'=>'btn btn-secondary'])?>
-        <?=Html::a('Ostrá verze (ČJ/čtk)', ['claim/annotate'],['class'=>'btn btn-primary'])?>
+        <?=Html::a('Ostrá verze (ČJ/čtk)', ['claim/annotate','sandbox'=>false],['class'=>'btn btn-primary'])?>
     </div>
 </div>
 
