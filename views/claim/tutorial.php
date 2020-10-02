@@ -190,6 +190,6 @@ $this->title = 'Tutoriál';
     </div>
 
 
-    <div class="navigation_actions"><button ng-click="tryout()" class="btn btn-primary">Try it out!</button></div>
+    <div class="navigation_actions"><?=Html::a('Vyzkoušejte si to!',['claim/annotate','sandbox'=>1],['class'=>'btn btn-primary'])?></div>
 
 </div>

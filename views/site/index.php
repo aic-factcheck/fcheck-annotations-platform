@@ -13,8 +13,8 @@ use yii\bootstrap4\Html;$this->title = 'Anotační Platforma FCheck TAČR';
         <p class="card-text">In the sandbox mode. Annotations will be saved, but will not form part of the final data set. When done, just close
             the window 👏 </p>
         <?=Html::a('Tutoriál',['claim/tutorial'],['class'=>'btn btn-light'])?>
-        <?=Html::a('Zkušební verze (AJ/wiki)', ['claim/sandbox'],['class'=>'btn btn-secondary'])?>
-        <?=Html::a('Ostrá verze (ČJ/čtk)', ['claim/live'],['class'=>'btn btn-primary'])?>
+        <?=Html::a('Zkušební verze (AJ/wiki)', ['claim/annotate','sandbox'=>true],['class'=>'btn btn-secondary'])?>
+        <?=Html::a('Ostrá verze (ČJ/čtk)', ['claim/annotate'],['class'=>'btn btn-primary'])?>
     </div>
 </div>
 

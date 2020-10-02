@@ -5,6 +5,7 @@
 /* @var $content string */
 
 use app\assets\AppAsset;
+use app\models\Claim;
 use app\widgets\Alert;
 use kartik\icons\FontAwesomeAsset;
 use yii\bootstrap4\Breadcrumbs;
@@ -50,7 +51,9 @@ AppAsset::register($this);
                     '<li>'
                     . Html::beginForm(['/site/logout'], 'post')
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        'Logout (' . Yii::$app->user->identity->username .
+                        ', dnes: '. Claim::find()->where(['user'=>Yii::$app->user->id])->andWhere(['>=','created_at',strtotime('today')])->count().
+                        ', celkem: '.Claim::find()->where(['user'=>Yii::$app->user->id])->count(). ')',
                         ['class' => 'btn btn-link']
                     )
                     . Html::endForm()

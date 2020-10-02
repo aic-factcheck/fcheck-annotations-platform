@@ -2,16 +2,11 @@
 
 namespace app\controllers;
 
-use app\models\LoginForm;
-use app\models\User;
+use app\models\ClaimForm;
+use app\models\MutateForm;
 use Yii;
-use yii\base\InvalidRouteException;
 use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
-use yii\helpers\StringHelper;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\web\Response;
 
 class ClaimController extends Controller
 {
@@ -55,6 +50,27 @@ class ClaimController extends Controller
     {
         return $this->render('index');
     }
+
+    public function actionAnnotate($sandbox = false)
+    {
+        $model = new ClaimForm($sandbox);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['claim/mutate']);
+        }
+        return $this->render('annotate', ['sandbox' => $sandbox, 'model' => $model]);
+    }
+
+    public function actionMutate($sandbox = false)
+    {
+        if (!Yii::$app->session->has('claims') || count(Yii::$app->session->get('claims')) == 0)
+            return $this->redirect(['claim/annotate', 'sandbox' => $sandbox]);
+        $model = new MutateForm();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['claim/mutate', 'sandbox' => $sandbox]);
+        }
+        return $this->render('mutate', ['model'=>$model, 'sandbox' => $sandbox]);
+    }
+
     /**
      * Displays homepage.
      *
