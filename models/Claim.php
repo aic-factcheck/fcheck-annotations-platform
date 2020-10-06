@@ -17,6 +17,7 @@ use yii\db\ActiveRecord;
  * @property int|null $mutated_from Výrok před mutací
  * @property string|null $entity Entita (ČTK článek)
  * @property int $sandbox Je z testovní verze?
+ * @property int $labelled Má label?
  * @property int|null $created_at Datum vzniku
  * @property int $updated_at Datum poslední změny
  *
@@ -79,6 +80,7 @@ class Claim extends ActiveRecord
             'mutated_from' => 'Výrok před mutací',
             'entity' => 'Entita (ČTK článek)',
             'sandbox' => 'Je z testovní verze?',
+            'labelled' => 'Má label?',
             'created_at' => 'Datum vzniku',
             'updated_at' => 'Datum poslední změny',
         ];

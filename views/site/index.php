@@ -25,8 +25,8 @@ use yii\bootstrap4\Html;$this->title = 'Anotační Platforma FCheck TAČR';
             factoid sentences called claims.</p>
         <p>In the sandbox mode. Annotations will be saved, but will not form part of the final data set.</p>
 
-        <?=Html::a('Oracle anotace (test pokrytí)',['label/oracle'],['class'=>'btn btn-warning'])?>
-        <?=Html::a('Zkušební verze (AJ/wiki)', ['label/sandbox'],['class'=>'btn btn-secondary'])?>
-        <?=Html::a('Ostrá verze (ČJ/čtk)', ['label/live'],['class'=>'btn btn-primary'])?>
+        <?=Html::a('Oracle anotace (test pokrytí)',['label','sandbox' => 0, 'oracle'=>1],['class'=>'btn btn-warning'])?>
+        <?=Html::a('Zkušební verze (AJ/wiki)', ['label','sandbox' => 1, 'oracle'=>0],['class'=>'btn btn-secondary'])?>
+        <?=Html::a('Ostrá verze (ČJ/čtk)', ['label','sandbox' => 0, 'oracle'=>0],['class'=>'btn btn-primary'])?>
     </div>
 </div>

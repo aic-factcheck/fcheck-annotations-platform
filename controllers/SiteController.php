@@ -124,32 +124,9 @@ class SiteController extends Controller
         ]);
     }
 
-    public function runAction($id, $params = [])
-    {
-        try {
-            return parent::runAction($id, $params);
-        } catch (InvalidRouteException $exception) {
-            return parent::runAction("content", ['id' => $id]);
-        }
-    }
 
     public function actionSite()
     {
         return $this->redirect(["/"]);
-    }
-
-    public function actionContent($id)
-    {
-        $route = Yii::$app->urlManager->parseRequest(Yii::$app->request)[0];
-        if (StringHelper::endsWith($route, "content")) {
-            return $this->redirect($id);
-        } elseif (StringHelper::endsWith($route, "admin")) {
-            return $this->redirect(['admin/index']);
-        }
-        $page = Page::findOne(['handle' => $id]);
-        if ($page == null) {
-            throw new NotFoundHttpException("Vámi vyhledávaná stránka nebyla nalezena.");
-        }
-        return $this->render('page', ['model' => $page]);
     }
 }
