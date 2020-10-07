@@ -17,7 +17,9 @@ body {
     border-top: 1px solid #ddd;
     padding-top: 20px;
 }
-
+.footer p{
+    margin-bottom: 0;
+}
 .jumbotron {
     text-align: center;
     background-color: transparent;

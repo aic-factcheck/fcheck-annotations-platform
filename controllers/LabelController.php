@@ -2,8 +2,10 @@
 
 namespace app\controllers;
 
-use app\models\ClaimForm;
+use app\models\Claim;
+use app\models\LabelForm;
 use Yii;
+use yii\db\Expression;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
@@ -24,13 +26,28 @@ class LabelController extends Controller
         ];
     }
 
-    public function actionIndex($sandbox = false, $oracle = false)
+    public function actionIndex($sandbox = false, $oracle = false, $claim = null)
     {
-        $model = new ClaimForm($sandbox);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['claim/mutate']);
+        if ($claim == null) {
+            return $this->redirect([
+                'index',
+                'sandbox' => $sandbox,
+                'oracle' => $oracle,
+                'claim' =>
+                    Claim::find()
+                        ->where(['labelled' => $oracle, 'sandbox' => $sandbox])
+                        ->orderBy(new Expression('rand()'))
+                        ->one()
+                        ->getPrimaryKey()
+            ]);
         }
-        return $this->render('annotate', ['sandbox' => $sandbox, 'model' => $model]);
+
+        $model = new LabelForm($sandbox, $oracle, Claim::findOne($claim));
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index', 'sandbox' => $sandbox, 'oracle' => $oracle,]);
+        }
+        return $this->render('index', ['model' => $model]);
     }
 
 }

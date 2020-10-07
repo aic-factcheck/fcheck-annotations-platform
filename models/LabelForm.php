@@ -14,16 +14,17 @@ use yii\base\Model;
 class LabelForm extends Model
 {
     public $claims;
-    public $sentence;
+    public $claim;
     public $sandbox;
+    public $oracle;
     public $sentence_json = null;
 
-    public function __construct($sandbox = false)
+    public function __construct($sandbox = false,$oracle = false, $claim = null)
     {
         parent::__construct();
         $this->sandbox = $sandbox;
-        $pool = $sandbox ? Yii::$app->params['sandbox'] : Yii::$app->params['live'];
-        $this->sentence = $pool[array_rand($pool)];
+        $this->oracle = $oracle;
+        $this->claim = $claim;
     }
 
 
@@ -34,8 +35,7 @@ class LabelForm extends Model
     {
         return [
             // username and password are both required
-            [['claims', 'sentence_json'], 'string'],
-            [['claims'], 'required'],
+            [['evidence'], 'string'],
         ];
     }
 
@@ -43,7 +43,7 @@ class LabelForm extends Model
     {
         $result = parent::load($data, $formName);
         if ($this->sentence_json != null) {
-            $this->sentence = json_decode($this->sentence_json,true);
+            $this->claim = json_decode($this->sentence_json,true);
         }
         return $result;
     }
@@ -54,9 +54,9 @@ class LabelForm extends Model
             $result = [];
             foreach (explode("\n", $this->claims) as $claim_) {
                 $claim = new Claim([
-                    'sentence_id' => $this->sentence['sentence_id'],
+                    'sentence_id' => $this->claim['sentence_id'],
                     'sentence' => $this->sentence_json,
-                    'entity' => $this->sentence['entity'],
+                    'entity' => $this->claim['entity'],
                     'claim' => $claim_,
                     'sandbox'=>$this->sandbox,
                     'user' => Yii::$app->user->id
@@ -69,5 +69,10 @@ class LabelForm extends Model
             return true;
         }
         return false;
+    }
+
+    public function getNumberedEvidences(){
+        $entities = Yii::$app->params['entities'];
+        $result = [];
     }
 }

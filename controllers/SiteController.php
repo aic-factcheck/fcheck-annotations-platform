@@ -5,12 +5,9 @@ namespace app\controllers;
 use app\models\LoginForm;
 use app\models\User;
 use Yii;
-use yii\base\InvalidRouteException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\helpers\StringHelper;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 class SiteController extends Controller
@@ -104,24 +101,6 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['contactEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
     }
 
 
