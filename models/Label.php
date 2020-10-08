@@ -46,7 +46,7 @@ class Label extends ActiveRecord
     {
         return [
             [['user', 'claim', 'sandbox', 'oracle', 'flag', 'created_at', 'updated_at'], 'integer'],
-            [['claim', 'label', 'evidence'], 'required'],
+            [['claim'], 'required'],
             [['label', 'evidence'], 'string'],
             ['label', 'in', 'range' => self::LABELS],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],

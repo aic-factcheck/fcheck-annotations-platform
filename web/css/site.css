@@ -157,3 +157,6 @@ tr.dictionary-item:hover th{
     background-color: #acd7de;
     transition: .4s;
 }
+.alert-dismissible{
+    margin-top: -1rem;
+}

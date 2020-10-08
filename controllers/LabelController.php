@@ -45,6 +45,7 @@ class LabelController extends Controller
         $model = new LabelForm($sandbox, $oracle, Claim::findOne($claim));
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Anotace úspěšně uložena.");
             return $this->redirect(['index', 'sandbox' => $sandbox, 'oracle' => $oracle,]);
         }
         return $this->render('index', ['model' => $model]);

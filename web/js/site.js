@@ -13,7 +13,7 @@ function bindAll() {
         $(".btn-success,.btn-danger").removeAttr('disabled');
         if ($(this).parent().is(":last-child")) {
             $('#evidence tr td:last-child,#evidence tr th:last-child').each(function () {
-                var clone = $(this).clone().html('&nbsp;');
+                var clone = $(this).clone().html('');
                 if (clone.is('th')) {
                     if ($(this).parent().hasClass("table-primary")) {
                         clone.text('#' + (parseInt($(this).text().split("#")[1]) + 1));
@@ -21,7 +21,10 @@ function bindAll() {
                         clone.text('');
                     }
                 } else {
-                    clone.html('<input type="checkbox" class="evidence">')
+                    var $checkbox = $(this).find('input[type=checkbox]').clone().prop('checked', false);
+                    var name = $checkbox.attr('name').split('[');
+                    $checkbox.attr('name', name[0] + '[' + (parseInt(name[1]) + 1) + '][' + name[2]);
+                    clone.append($checkbox);
                 }
                 $(this).parent().append(clone);
             });
@@ -39,4 +42,14 @@ function bindAll() {
     });
 }
 
+$(".autoflag").click(function (e) {
+    $("#flag").get(0).prop('checked', true);
+});
 bindAll();
+$(document).on("keypress", '#label-form', function (e) {
+    var code = e.keyCode || e.which;
+    if (code == 13) {
+        e.preventDefault();
+        return false;
+    }
+});

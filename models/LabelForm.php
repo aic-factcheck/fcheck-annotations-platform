@@ -13,14 +13,14 @@ use yii\base\Model;
  */
 class LabelForm extends Model
 {
-    public $claims;
     public $claim;
     public $flag;
+    public $load;
+    public $label;
     public $sandbox;
     public $oracle;
-    public $sentence_json = null;
 
-    public function __construct($sandbox = false,$oracle = false, $claim = null)
+    public function __construct($sandbox = false, $oracle = false, $claim = null)
     {
         parent::__construct();
         $this->sandbox = $sandbox;
@@ -36,49 +36,27 @@ class LabelForm extends Model
     {
         return [
             // username and password are both required
-            [['evidence'], 'string'],
-            [['flag'], 'integer'],
+            [['flag', 'load'], 'integer'],
         ];
     }
 
-    public function load($data, $formName = null)
-    {
-        $result = parent::load($data, $formName);
-        if ($this->sentence_json != null) {
-            $this->claim = json_decode($this->sentence_json,true);
-        }
-        return $result;
-    }
-
-    public function attributeLabels()
-    {
-        return ['flag'=>'<i class="fas fa-flag"></i> Nahlásit'];
-    }
 
     public function save()
     {
-        if ($this->validate()) {
-            $result = [];
-            foreach (explode("\n", $this->claims) as $claim_) {
-                $claim = new Claim([
-                    'sentence_id' => $this->claim['sentence_id'],
-                    'sentence' => $this->sentence_json,
-                    'entity' => $this->claim['entity'],
-                    'claim' => $claim_,
-                    'sandbox'=>$this->sandbox,
-                    'user' => Yii::$app->user->id
-                ]);
-                if($claim->save()){
-                    $result[]=$claim->id;
-                }
-            }
-            Yii::$app->session->set('claims', $result);
-            return true;
-        }
-        return false;
+        $this->claim->labelled = true;
+        return $this->validate() && (new Label([
+                'claim' => $this->claim->id,
+                'label' => Yii::$app->request->post('label'),
+                'user' => Yii::$app->user->id,
+                'sandbox' => $this->sandbox,
+                'flag' => $this->flag,
+                'oracle' => $this->oracle,
+                'evidence' => json_encode(Yii::$app->request->post('evidence'))
+            ]))->save() && $this->claim->save(false,['labelled']);
     }
 
-    public function getEntitySentences(){
+    public function getEntitySentences()
+    {
         return Yii::$app->params['entities'][$this->claim->sentence["entity"]];
     }
 }
