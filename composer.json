@@ -29,7 +29,8 @@
     "kartik-v/yii2-datecontrol": "^1.9",
     "kartik-v/yii2-editors": "@dev",
     "ext-pdo": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-sqlite3": "*"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

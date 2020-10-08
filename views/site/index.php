@@ -10,6 +10,13 @@ $this->title = 'Anotační Platforma FCheck TAČR';
 <div class="container">
     <div class="card my-3">
         <div class="card-body">
+            <h3 class="card-title">WF0: Nalezení kandidátních vět</h3>
+            <p class="card-text">Cílem úkolu je identifikovat v korpusu ČTK shluky vět, které je možno použít pro úkol WF1</p>
+            <?= Html::a('Ostrá verze', ['candidate/'], ['class' => 'btn btn-primary']) ?>
+        </div>
+    </div>
+    <div class="card my-3">
+        <div class="card-body">
             <h3 class="card-title">WF1: Tvorba výroků</h3>
             <p class="card-text">Cílem úkolu je vygenerovat množství pravdivých a nepravdivých výroků extrakcí z
                 nabízených vět z korpusu tiskových zpráv ČTK.
