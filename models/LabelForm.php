@@ -15,6 +15,7 @@ class LabelForm extends Model
 {
     public $claims;
     public $claim;
+    public $flag;
     public $sandbox;
     public $oracle;
     public $sentence_json = null;
@@ -36,6 +37,7 @@ class LabelForm extends Model
         return [
             // username and password are both required
             [['evidence'], 'string'],
+            [['flag'], 'integer'],
         ];
     }
 
@@ -46,6 +48,11 @@ class LabelForm extends Model
             $this->claim = json_decode($this->sentence_json,true);
         }
         return $result;
+    }
+
+    public function attributeLabels()
+    {
+        return ['flag'=>'<i class="fas fa-flag"></i> Nahlásit'];
     }
 
     public function save()
@@ -71,8 +78,7 @@ class LabelForm extends Model
         return false;
     }
 
-    public function getNumberedEvidences(){
-        $entities = Yii::$app->params['entities'];
-        $result = [];
+    public function getEntitySentences(){
+        return Yii::$app->params['entities'][$this->claim->sentence["entity"]];
     }
 }

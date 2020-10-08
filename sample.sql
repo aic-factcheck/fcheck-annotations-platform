@@ -1,0 +1,1 @@
+select * from documents where rowid > (abs(random()) % (select (select max(rowid) from documents)+1)) LIMIT 20

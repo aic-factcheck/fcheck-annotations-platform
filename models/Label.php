@@ -2,7 +2,9 @@
 
 namespace app\models;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "label".
@@ -20,9 +22,10 @@ use Yii;
  * @property User $user0
  * @property Claim $claim0
  */
-class Label extends \yii\db\ActiveRecord
+class Label extends ActiveRecord
 {
     const LABELS = ["SUPPORTS", "REFUTES", "NOT ENOUGH INFO"];
+
     /**
      * {@inheritdoc}
      */
@@ -31,13 +34,18 @@ class Label extends \yii\db\ActiveRecord
         return 'label';
     }
 
+    public function behaviors()
+    {
+        return [TimestampBehavior::class,];
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['user', 'claim', 'sandbox', 'oracle', 'created_at', 'updated_at'], 'integer'],
+            [['user', 'claim', 'sandbox', 'oracle', 'flag', 'created_at', 'updated_at'], 'integer'],
             [['claim', 'label', 'evidence'], 'required'],
             [['label', 'evidence'], 'string'],
             ['label', 'in', 'range' => self::LABELS],
@@ -67,7 +75,7 @@ class Label extends \yii\db\ActiveRecord
     /**
      * Gets query for [[User0]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getUser0()
     {
@@ -77,7 +85,7 @@ class Label extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Claim0]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getClaim0()
     {

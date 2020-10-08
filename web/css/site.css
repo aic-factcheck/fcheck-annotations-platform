@@ -17,9 +17,11 @@ body {
     border-top: 1px solid #ddd;
     padding-top: 20px;
 }
-.footer p{
+
+.footer p {
     margin-bottom: 0;
 }
+
 .jumbotron {
     text-align: center;
     background-color: transparent;
@@ -95,9 +97,9 @@ a.desc:after {
     border: none;
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
     .nav li > form > button.logout {
-        display:block;
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 15px;
@@ -111,4 +113,47 @@ a.desc:after {
 
 .nav > li > form > button.logout:focus {
     outline: none;
+}
+
+table {
+    overflow: hidden;
+}
+
+td, th {
+    position: relative;
+    transition: .3s;
+}
+
+td:not(:first-child):hover::after,
+th:not(:first-child):hover::after {
+    content: "";
+    position: absolute;
+    background-color: rgba(23, 162, 184, .1);
+    left: 0;
+    top: -5000px;
+    height: 10000px;
+    width: 100%;
+    z-index: -1;
+    transition: .3s;
+}
+
+tr:hover td {
+    transition: .3s;
+    background-color: rgba(23, 162, 184, 0.1);
+}
+
+.checkcell {
+    cursor: pointer;
+}
+
+h2.claim {
+    font-size: 1.5rem;
+}
+
+tr.dictionary-item {
+    cursor: pointer;
+}
+tr.dictionary-item:hover th{
+    background-color: #acd7de;
+    transition: .4s;
 }
