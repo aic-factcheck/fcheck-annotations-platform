@@ -56,9 +56,9 @@ class Claim extends ActiveRecord
     public function rules()
     {
         return [
-            [['user', 'sentence_id', 'mutated_from', 'sandbox', 'created_at', 'updated_at','labelled'], 'integer'],
+            [['user', 'mutated_from', 'sandbox', 'created_at', 'updated_at','labelled'], 'integer'],
             [['claim'], 'required'],
-            [['claim','sentence'], 'string'],
+            [['claim','sentence_id', 'sentence'], 'string'],
             [['mutation_type'], 'string', 'max' => 32],
             [['entity'], 'string', 'max' => 512],
             [['mutated_from'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::className(), 'targetAttribute' => ['mutated_from' => 'id']],

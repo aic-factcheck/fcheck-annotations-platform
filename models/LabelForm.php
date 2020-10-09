@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\helpers\Entity;
 use Yii;
 use yii\base\Model;
 
@@ -51,12 +52,12 @@ class LabelForm extends Model
                 'sandbox' => $this->sandbox,
                 'flag' => $this->flag,
                 'oracle' => $this->oracle,
-                'evidence' => json_encode(Yii::$app->request->post('evidence'))
+                'evidence' => json_encode(Yii::$app->request->post('evidence'),JSON_UNESCAPED_UNICODE)
             ]))->save() && $this->claim->save(false,['labelled']);
     }
 
     public function getEntitySentences()
     {
-        return Yii::$app->params['entities'][$this->claim->sentence["entity"]];
+        return Entity::get($this->claim->sentence["entity"]);
     }
 }

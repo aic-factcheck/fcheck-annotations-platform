@@ -59,6 +59,7 @@ class ClaimForm extends Model
                     'entity' => $this->sentence['entity'],
                     'claim' => $claim_,
                     'sandbox'=>$this->sandbox,
+                    'labelled'=>0,
                     'user' => Yii::$app->user->id
                 ]);
                 if($claim->save()){

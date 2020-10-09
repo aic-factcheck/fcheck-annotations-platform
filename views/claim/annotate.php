@@ -31,9 +31,7 @@ $this->title = 'Tvorba výroků';
                         was extracted from Wikipedia. </p>
 
                     <ul>
-                        <li><strong class="ng-binding">Extract simple factoid claims about Český kraulař Svoboda skončil
-                                na
-                                ME čtvrtý, ale na medaili neměl</strong> given the source sentence
+                        <li><strong class="ng-binding">Extract simple factoid claims about <?=$model->sentence['entity']?></strong> given the source sentence
                         </li>
                         <li>Use the <strong>source sentence and dictionary</strong> as the basis for your claims.</li>
                         <li><strong>Reference any entity directly</strong> (pronouns and nominals should not be used).

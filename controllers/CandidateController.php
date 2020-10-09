@@ -32,9 +32,15 @@ class CandidateController extends Controller
         if($add != null){
             $add = json_decode($add,true);
             Yii::$app->params['live'][] = $add;
-            $fp = fopen('../config/datasets/live2.json', 'w');
-            fwrite($fp, json_encode(Yii::$app->params['live']));
+            $fp = fopen('../config/datasets/live.json', 'w');
+            fwrite($fp, json_encode(Yii::$app->params['live'],JSON_UNESCAPED_UNICODE));
             fclose($fp);
+            Yii::$app->params['entities'][$add['entity']] = $add['entity_sentences'];
+            $fp = fopen('../config/datasets/entities.json', 'w');
+            fwrite($fp, json_encode(Yii::$app->params['entities'],JSON_UNESCAPED_UNICODE));
+            fclose($fp);
+            Yii::$app->session->addFlash("success", "Kandidátní věta byla úspěšně přidána");
+            return $this->redirect(['index']);
         }
         $db = new SQLite3('../ctk.db');
         $res = $db->query('select * from documents where rowid > (abs(random()) % (select (select max(rowid) from documents)+1)) LIMIT 30');

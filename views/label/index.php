@@ -5,6 +5,7 @@
 
 /* @var $model LabelForm */
 
+use app\helpers\Entity;
 use app\models\LabelForm;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
@@ -27,7 +28,7 @@ $this->title = 'Anotace výroků';
         <?php } ?>
         <h2 class="float-left mb-3 claim">Výrok: <strong><?= $model->claim->claim ?></strong></h2>
         <p class="text-right float-right">
-            <?= Html::activeHiddenInput($model, 'load', ['value'=>true]); ?>
+            <?= Html::activeHiddenInput($model, 'load', ['value' => true]); ?>
             <?= Html::activeCheckbox($model, 'flag', ['label' => '<i class="fas fa-flag"></i> Nahlásit', 'id' => 'flag']); ?>
             <?= Html::submitButton('<i class="fas fa-check"></i> Potvrdit', ['name' => 'label', 'value' => 'SUPPORTS', 'class' => 'btn btn-success', 'disabled' => true]) ?>
             <?= Html::submitButton('<i class="fas fa-times"></i> Vyvrátit', ['name' => 'label', 'value' => 'REFUTES', 'class' => 'btn btn-danger', 'disabled' => true]) ?>
@@ -55,7 +56,7 @@ $this->title = 'Anotace výroků';
                 <th class="text-center"><i class="fas fa-caret-down"></i><i class="fas fa-caret-up d-none"></i></th>
             </tr>
             <?php $i = 0;
-            foreach (Yii::$app->params['entities'][$entity] as $sentence) { ?>
+            foreach (Entity::get($entity) as $sentence) { ?>
                 <tr class="d-none">
                     <td class="text-right"><?= $sentence ?></td>
                     <td class="text-center checkcell">

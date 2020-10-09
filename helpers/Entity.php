@@ -4,12 +4,12 @@
 namespace app\helpers;
 
 
-class Dictionary
+class Entity
 {
     public static function get($key){
-        if(array_key_exists($key,\Yii::$app->params['dictionary'])){
-            return \Yii::$app->params['dictionary'][$key];
+        if(array_key_exists($key,\Yii::$app->params['entities'])){
+            return \Yii::$app->params['entities'][$key];
         }
-        return 'Todo';
+        return ['Todo'];
     }
 }

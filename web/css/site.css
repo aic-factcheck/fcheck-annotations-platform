@@ -160,3 +160,6 @@ tr.dictionary-item:hover th{
 .alert-dismissible{
     margin-top: -1rem;
 }
+.candidate a{
+    color:black;
+}
