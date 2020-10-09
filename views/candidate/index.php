@@ -12,6 +12,7 @@ $this->title = 'Předvýběr kandidátních vět';
         foreach ($data as $par) {
             $lines = preg_split('/\d+\t/', $par['lines']);
             foreach ($lines as $line) {
+                $json = '{"id": 200, "sentence_id": "200", "entity": "Tři mrtví při havárii letadla v Rakousku", "sentence": "Příčiny neštěstí se vyšetřují , napsala rakouská agentura APA .", "dictionary": {}, "context_before": "", "context_after": "}';
                 echo "<li>$line</li>";
             }
         }

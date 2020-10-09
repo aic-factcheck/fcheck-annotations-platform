@@ -27,8 +27,15 @@ class CandidateController extends Controller
         ];
     }
 
-    public function actionIndex($sandbox = false, $oracle = false, $claim = null)
+    public function actionIndex($add = null)
     {
+        if($add != null){
+            $add = json_decode($add,true);
+            Yii::$app->params['live'][] = $add;
+            $fp = fopen('../config/datasets/live2.json', 'w');
+            fwrite($fp, json_encode(Yii::$app->params['live']));
+            fclose($fp);
+        }
         $db = new SQLite3('../ctk.db');
         $res = $db->query('select * from documents where rowid > (abs(random()) % (select (select max(rowid) from documents)+1)) LIMIT 30');
         $data = [];
