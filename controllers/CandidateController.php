@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Claim;
 use app\models\LabelForm;
+use yii\httpclient\Client;
 use SQLite3;
 use Yii;
 use yii\db\Expression;
@@ -48,16 +49,33 @@ class CandidateController extends Controller
         while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $data[] = $row;
         }
-        $lines = [];
-        foreach ($data as $par) {
-            $par_lines = preg_split('/\d+\t/', $par['lines']);
-            foreach ($par_lines as $line) {
-                if(strlen($line)>1){
-                    $lines[]=$line;
-                }
-            }
-        }
+
         return $this->render('index', ['data' => $data]);
     }
+
+    public function actionAlt($add = null)
+    {
+        if($add != null){
+            $add = json_decode($add,true);
+            Yii::$app->params['live'][] = $add;
+            $fp = fopen('../config/datasets/live.json', 'w');
+            fwrite($fp, json_encode(Yii::$app->params['live'],JSON_UNESCAPED_UNICODE));
+            fclose($fp);
+            Yii::$app->params['entities'][$add['entity']] = $add['entity_sentences'];
+            $fp = fopen('../config/datasets/entities.json', 'w');
+            fwrite($fp, json_encode(Yii::$app->params['entities'],JSON_UNESCAPED_UNICODE));
+            fclose($fp);
+            Yii::$app->session->addFlash("success", "Kandidátní věta byla úspěšně přidána");
+            return $this->redirect(['index']);
+        }
+
+        $client = new Client();
+        $response = $client->createRequest()
+            ->setMethod('GET')
+            ->setUrl('http://localhost:8601/sample')
+            ->send();
+        return $this->render('alt', ['data' => json_decode($response)]);
+    }
+
 
 }
