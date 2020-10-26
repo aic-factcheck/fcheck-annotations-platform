@@ -74,7 +74,7 @@ class CandidateController extends Controller
             ->setMethod('GET')
             ->setUrl('http://localhost:8601/sample')
             ->send();
-        return $this->render('alt', ['data' => json_decode($response)]);
+        return $this->render('alt', ['data' => $response->getData()]);
     }
 
 

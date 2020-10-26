@@ -20,17 +20,25 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return 'user';
     }
-    public static function generate(){
+
+    public static function generate($name = null)
+    {
         $security = new Security();
-        $user = new User(['auth_key'=>$security->generateRandomString(),'password'=>$security->generateRandomString()]);
-        $user->generateUniqueName();
+        $user = new User(['auth_key' => $security->generateRandomString(), 'password' => $security->generateRandomString()]);
+        if (strlen($name) == 0) {
+            $user->generateUniqueName();
+        }else{
+            $user->username = $name;
+        }
         $user->save();
         return $user;
     }
 
-    public function login(){
-        return Yii::$app->user->login($this,  3600 * 24 * 30);
+    public function login()
+    {
+        return Yii::$app->user->login($this, 3600 * 24 * 30);
     }
+
     /**
      * @inheritdoc
      */
