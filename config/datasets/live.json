@@ -1,1 +1,97 @@
-[c]
+[
+  {
+    "id": "T201006040634101_6",
+    "sentence_id": 2,
+    "entity": "T201006040634101",
+    "entity_sentences": [
+      "Karlovy Vary 4. června ( ČTK ) - Vesnicí roku 2010 a vítězem osmého ročníku této soutěže se stal v Karlovarském kraji krušnohorský Merklín na Karlovarsku.",
+      " Náleží mu finanční odměna od kraje 50.000 korun , další statisíce pak získá od ministerstva pro místní rozvoj.",
+      " Do soutěže se letos přihlásilo 30 obcí , nejvíce od jejího vzniku.",
+      " Novináře o tom informoval náměstek hejtmana Petr Navrátil.",
+      "Kromě hlavní ceny bylo uděleno hodnotitelskou komisí dalších 11 ocenění.",
+      " K nejúspěšnějším účastníkům soutěže patřila obec Vintířov , které získala hned dvě ceny - za aktivity pro mládež a vedení kroniky.",
+      " Mimo Merklína bylo různým způsobem ohodnoceno celkem devět obcí.",
+      " Například za péči o zeleň a životní prostředí , za společenský život a za přípravu a realizaci projektů s využitím dotací , řekl Navrátil."
+    ],
+    "sentence": " Do soutěže se letos přihlásilo 30 obcí , nejvíce od jejího vzniku.",
+    "context_before": "Karlovy Vary 4. června ( ČTK ) - Vesnicí roku 2010 a vítězem osmého ročníku této soutěže se stal v Karlovarském kraji krušnohorský Merklín na Karlovarsku.  Náleží mu finanční odměna od kraje 50.000 korun , další statisíce pak získá od ministerstva pro místní rozvoj.",
+    "context_after": " Novináře o tom informoval náměstek hejtmana Petr Navrátil. Kromě hlavní ceny bylo uděleno hodnotitelskou komisí dalších 11 ocenění.  K nejúspěšnějším účastníkům soutěže patřila obec Vintířov , které získala hned dvě ceny - za aktivity pro mládež a vedení kroniky.  Mimo Merklína bylo různým způsobem ohodnoceno celkem devět obcí.  Například za péči o zeleň a životní prostředí , za společenský život a za přípravu a realizaci projektů s využitím dotací , řekl Navrátil.",
+    "dictionary": {
+      "ner_blocks": [
+        {
+          "blocks": {
+            "T201006040575001_0": "Ve Zlínském kraji se meziročně zvýšily stavy skotu o 2,8 procenta",
+            "T201006040575001_1": "Zlín 4. června (ČTK) - Ve Zlínském kraji na začátku letošního dubna meziročně vzrostly stavy skotu, a to o 2,8 procenta. Zatímco vloni v dubnu farmáři chovali 57.351 kusů hovězího dobytka včetně telat a býků, v prvním čtvrtletí letošního roku to bylo o 1611 kusů více. V celé zemi stavy skotu klesly o jedno procento, když na začátku dubna zemědělské podniky celkem chovaly 1,363 milionu kosů skotu. Vyplývá to z informací Českého statistického úřadu.",
+            "T201006040575001_2": "Výrazněji než ve Zlínském kraji rostly stavy skotu v meziročním srovnání v prvním čtvrtletí už jen v Karlovarském kraji, kde zemědělci chovali 39.888 kusů dobytka, meziročně o 4,1 procenta více. Nejvýraznější propad naopak statistici zaznamenali na jihu Moravy. Počet skotu v Jihomoravském kraji se meziročně snížil o 7,7 procenta na 61.635 kusů.",
+            "T201006040575001_5": "Z hospodářských zvířat nejvíce v regionu přibylo koz, a to o 73 procent na 602 kusů zvířat. Přibylo i prasat. Těch zemědělské podniky chovaly k začátku dubnu 75.345 kusů. V meziročním srovnání je to o 38,2 procenta více."
+          },
+          "date": "Fri, 04 Jun 2010 13:37:00 GMT",
+          "did": "T201006040575001",
+          "id": "T201006040575001_2",
+          "search_term": "Merklína, Karlovarském kraji",
+          "title": "Ve Zlínském kraji se meziročně zvýšily stavy skotu o 2,8 procenta"
+        }
+      ],
+      "ners": [
+        "Merklína",
+        "Vintířov",
+        "Merklín",
+        "Navrátil",
+        "Karlovarském kraji"
+      ],
+      "semantic_blocks": [
+        {
+          "blocks": {
+            "20000301E02789_0": "Prezident přijme starosty vítězných \"obcí roku 1999\"",
+            "20000301E02789_1": "PRAHA 2. března (ČTK) - Starosty obcí, které zvítězily v regionálních kolech loňského ročníku soutěže Vesnice roku v programu obnovy venkova dnes na Hradě přijme prezident Václav Havel. Vesnicí loňského roku se stala Olešnice z okresu Blansko, která tak porazila 266 dalších obcí, které se o titul ucházely. Na druhém místě skončily Sudoměřice u Bechyně (okres Tábor) a třetí Studnice z Náchodska a Svatý Jan pod Skalou z Berounska.",
+            "20000301E02789_2": "Cílem soutěže, kterou pořádá Spolek pro obnovu vesnice, ministerstvo pro místní rozvoj a Svaz měst a obcí, není nalézt nejkrásnější obec, ale obec schopnou žít harmonicky. Nejlepší obci vybírá komise, která zdůrazňuje duchovní život obce a hospodářské i kulturní aspekty a architekturu.",
+            "20000301E02789_3": "Dnešek je také Dnem malých obcí a v kulturním domě Eden bude za účasti zhruba 500 starostů vyhlášen další ročník soutěže Vesnice roku. Do Edenu by měli přijít i ministři pro místní rozvoj Jaromír Císař a životního prostředí Miloš Kužvart."
+          },
+          "date": "Thu, 02 Mar 2000 03:20:00 GMT",
+          "did": "20000301E02789",
+          "id": "20000301E02789_1",
+          "title": "Prezident přijme starosty vítězných \"obcí roku 1999\""
+        },
+        {
+          "blocks": {
+            "T201006040458501_0": "Primátoři chtějí peníze EU poslat na rozvoj měst a úpravy krajiny",
+            "T201006040458501_1": "Brno 4. června (ČTK) - Dodatečných šest miliard korun dotací, které Česko dostane z Bruselu, by mělo jít na regeneraci měst i vesnic, protipovodňová opatření a zlepšování stavu přírody a krajiny. Na jednání v Brně se na tom dnes dohodli primátoři statutárních měst. Využití peněz v tomto duchu budou prosazovat ve Svazu měst a obcí a předpokládají shodu s vládou, která o penězích rozhodne. Novinářům to dnes řekl primátor Děčína Vladislav Raška (ODS).",
+            "T201006040458501_2": "Peníze navíc dostane ČR díky tomu, že Evropská komise při plánování v roce 2005 podhodnotila růst české ekonomiky v letech 2007 až 2009. Část peněz proto České republice Evropská unie doplatí. O rozdělení peněz do jednotlivých operačních programů rozhodne vláda, primátoři žádají posilu regionálních operačních programů a Operačního programu Životní prostředí. Peníze z doplatku by tam měly být dostupné v letech 2011 až 2013.",
+            "T201006040458501_3": "Například na Děčínsku jsou podle Rašky problémy se sanací rozpadajících se skalních masivů. Na severní a střední Moravě zápasí zase lidé s následky povodní, ale také se sesuvy půdy. Jen na severní Moravě jsou hlášeny z 55 míst, řekl dnes primátor Karviné Tomáš Hanzel (ČSSD). Posláním peněz do regionálních operačních programů, odkud by se financovaly rozvoj a regenerace měst, považují primátoři za prorůstové opatření v době ekonomické krize.",
+            "T201006040458501_4": "Česká republika má v letech 2007 až 2013 možnost čerpat z fondů EU 26,69 miliardy eur (692 miliard Kč). Podle zprávy ministerstva pro místní rozvoj byly k 5. květnu podepsány smlouvy v celkové hodnotě 337,8 miliardy korun. Na počátku května proplatily úřady 123,4 miliardy Kč."
+          },
+          "date": "Fri, 04 Jun 2010 12:17:00 GMT",
+          "did": "T201006040458501",
+          "id": "T201006040458501_1",
+          "title": "Primátoři chtějí peníze EU poslat na rozvoj měst a úpravy krajiny"
+        },
+        {
+          "blocks": {
+            "T201006040458501_0": "Primátoři chtějí peníze EU poslat na rozvoj měst a úpravy krajiny",
+            "T201006040458501_1": "Brno 4. června (ČTK) - Dodatečných šest miliard korun dotací, které Česko dostane z Bruselu, by mělo jít na regeneraci měst i vesnic, protipovodňová opatření a zlepšování stavu přírody a krajiny. Na jednání v Brně se na tom dnes dohodli primátoři statutárních měst. Využití peněz v tomto duchu budou prosazovat ve Svazu měst a obcí a předpokládají shodu s vládou, která o penězích rozhodne. Novinářům to dnes řekl primátor Děčína Vladislav Raška (ODS).",
+            "T201006040458501_2": "Peníze navíc dostane ČR díky tomu, že Evropská komise při plánování v roce 2005 podhodnotila růst české ekonomiky v letech 2007 až 2009. Část peněz proto České republice Evropská unie doplatí. O rozdělení peněz do jednotlivých operačních programů rozhodne vláda, primátoři žádají posilu regionálních operačních programů a Operačního programu Životní prostředí. Peníze z doplatku by tam měly být dostupné v letech 2011 až 2013.",
+            "T201006040458501_3": "Například na Děčínsku jsou podle Rašky problémy se sanací rozpadajících se skalních masivů. Na severní a střední Moravě zápasí zase lidé s následky povodní, ale také se sesuvy půdy. Jen na severní Moravě jsou hlášeny z 55 míst, řekl dnes primátor Karviné Tomáš Hanzel (ČSSD). Posláním peněz do regionálních operačních programů, odkud by se financovaly rozvoj a regenerace měst, považují primátoři za prorůstové opatření v době ekonomické krize.",
+            "T201006040458501_4": "Česká republika má v letech 2007 až 2013 možnost čerpat z fondů EU 26,69 miliardy eur (692 miliard Kč). Podle zprávy ministerstva pro místní rozvoj byly k 5. květnu podepsány smlouvy v celkové hodnotě 337,8 miliardy korun. Na počátku května proplatily úřady 123,4 miliardy Kč."
+          },
+          "date": "Fri, 04 Jun 2010 12:17:00 GMT",
+          "did": "T201006040458501",
+          "id": "T201006040458501_1",
+          "title": "Primátoři chtějí peníze EU poslat na rozvoj měst a úpravy krajiny"
+        },
+        {
+          "blocks": {
+            "T201006040536502_0": "Moravskoslezské toky mohou být už o víkendu mimo povodňové stupně",
+            "T201006040536502_3": "Ostrava 4. června (ČTK) - Hladiny většiny řek v Moravskoslezském kraji nadále klesají. Přestože na některých tocích ještě stále platí povodňové stupně, vodohospodáři očekávají, že během víkendu by se i hladiny těchto toků měly dále snižovat, a dostat se tak mimo stupně povodňové aktivity, řekl dnes ČTK mluvčí Povodí Odry Čestmír Vlček.",
+            "T201006040536502_4": "Druhý povodňový stupeň, pohotovost, platil dnes ve 14:00 už jen na třech místech: na řece Odře v Bartošovicích na Novojičínsku a v Ostravě-Koblově a také na Opavě v Děhylově na Opavsku. V Koblově, kde voda způsobila problémy v lokalitě Žabník, zůstane až do příštího týdne provizorní protipovodňová hráz, řekla ČTK mluvčí ostravského magistrátu Andrea Vojkovská.",
+            "T201006040536502_6": "Noční déšť v Beskydech a okolí, kde během 12 hodin spadlo průměrně 30 milimetrů srážek, průtoky ve většině toků nezvýšil. Hladiny toků od rána stále klesají a na víkend je navíc i příznivá předpověď počasí bez dešťových srážek.",
+            "T201006040536502_8": "Moravskoslezský kraj povodně zasáhly ve dvou vlnách. Nejprve se toky vlivem intenzivních srážek rozvodnily v polovině května, další škody voda páchala v polovině tohoto týdne. V Moravskoslezském kraji je nyní v 19 lokalitách vyhlášen stav nebezpečí. Region navíc už od května trápí také sesuvy půdy způsobené právě povodněmi, kterých je nyní přes 90. Kvůli možným problémům s komáry bylo v regionu vybráno téměř 70 lokalit, kde se provádí postřiky. Další místa mohou kvůli druhé povodňové vlně ještě přibýt. Jen květnové povodně podle prvotních odhadů napáchaly škody za 1,5 miliardy korun."
+          },
+          "date": "Fri, 04 Jun 2010 13:29:00 GMT",
+          "did": "T201006040536502",
+          "id": "T201006040536502_8",
+          "title": "Moravskoslezské toky mohou být už o víkendu mimo povodňové stupně"
+        }
+      ]
+    }
+  }
+]

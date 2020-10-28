@@ -11,13 +11,13 @@ $this->title = 'Anotační Platforma FCheck TAČR';
     <div class="card my-3">
         <div class="card-body">
             <h3 class="card-title">WF0: Nalezení kandidátních vět</h3>
-            <p class="card-text">Cílem úkolu je identifikovat v korpusu ČTK shluky vět, které je možno použít pro úkol WF1</p>
+            <p class="card-text">Cílem úkolu je identifikovat v korpusu ČTK shluky vět, které je možno použít pro úkol Ú1</p>
             <?= Html::a('Ostrá verze', ['candidate/'], ['class' => 'btn btn-primary']) ?>
         </div>
     </div>
     <div class="card my-3">
         <div class="card-body">
-            <h3 class="card-title">WF1: Tvorba výroků</h3>
+            <h3 class="card-title">Ú1: Tvorba výroků</h3>
             <p class="card-text">Cílem úkolu je vygenerovat množství pravdivých a nepravdivých výroků extrakcí z
                 nabízených vět z korpusu tiskových zpráv ČTK.
             <p class="card-text"><strong>Zkušební verze</strong> umožňuje nácvik úkolu na lépe fakticky strukturovaných
@@ -30,9 +30,9 @@ $this->title = 'Anotační Platforma FCheck TAČR';
         </div>
     </div>
 
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-body">
-            <h3 class="card-title">WF2: Anotace faktické správnosti výroků</h3>
+            <h3 class="card-title">Ú2: Anotace faktické správnosti výroků</h3>
             <p>Cílem úkolu je identifikovat důkazy z korpusu tiskových zpráv ČTK, které lze použít k potvrzení nebo
                 vyvrácení jednoduchých faktických výroků.</p>
             <p><strong>Zkušební verze</strong> umožňuje nácvik úkolu na lépe fakticky strukturovaných datech z

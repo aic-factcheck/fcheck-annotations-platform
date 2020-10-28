@@ -5,152 +5,146 @@
 
 /* @var $model ClaimForm */
 
+use app\helpers\Helper;
 use app\models\ClaimForm;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
 
-$this->title = 'Tvorba výroků';
+$this->title = 'Tvorba tvrzení';
+Helper::setEntities($ners = $model->sentence['dictionary']['ners']);
 ?>
 <div class="container">
-    <h1>Claim Generation Task (WF1a)</h1>
+    <h1>Tvorba tvrzení (Ú1a)</h1>
     <?php if ($sandbox) { ?>
         <div>
-            <h4 style="color:red; margin-bottom:0;">Sandbox Environment</h4>
-            <div style="color:red;">Claims you write will be recorded. But will not form part of the final dataset.
-            </div>
+            <h4 style="color:red; margin-bottom:0;">Zkušební verze</h4>
+            <div style="color:red;">Vaše výroky budou uloženy, ale nebudou součástí finálního datasetu.</div>
         </div>
     <?php } ?>
-    <div class="row topmargin">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4>Guidelines</h4>
-                    <p>The objective of this task is to <strong>generate true claims</strong> from this source sentence
-                        that
-                        was extracted from Wikipedia. </p>
+    <div class="alert alert-warning mt-0" role="alert">
+        <h3 class="alert-heading">Pokyny</h3>
+        <p>Cílem úkolu je <strong>vygenerovat pravdivá tvrzení</strong> ze zdrojového bloku ČTK dat.</p>
 
-                    <ul>
-                        <li><strong class="ng-binding">Extract simple factoid claims about <?=$model->sentence['entity']?></strong> given the source sentence
-                        </li>
-                        <li>Use the <strong>source sentence and dictionary</strong> as the basis for your claims.</li>
-                        <li><strong>Reference any entity directly</strong> (pronouns and nominals should not be used).
-                        </li>
-                        <li>Minor variations of names are acceptable (e.g. John F Kennedy, JFK, President Kennedy).</li>
-                        <li><strong>Avoid vague or cautions language</strong> (e.g. might be, may be, could be, is
-                            reported
-                            that)
-                        </li>
-                        <li>Correct capitalisation of entity names should be followed (India rather than india).</li>
-                        <li>Sentences should end with a period.</li>
-                        <li>Numbers can be formatted in any appropriate English format (including as words for smaller
-                            quantities).
-                        </li>
-                        <li>Some of the extracted text might not be accurate. These are still valid candidates for
-                            summary.
-                            It is not your job to fact check the information
-                        </li>
+        <ul>
+            <li><strong">Extrahujte atomická (jednoduchý podmět, jeden přísudek) tvrzení o některé z
+                pojmenovaných entit </strong> ze zdrojového
+                textu.<br/><em>(<?= implode(", ", $ners) ?>)</em></li>
+            <li>Jako základ svého tvrzení použijte zdrojový blok a slovníček.</li>
+            <li><strong>Pojmenované entity uvádějte přímo</strong> (vyhněte se používání zájmen apod.).</li>
+            <li>Drobné záměny jsou přípustné (např.
+                <em>Tomáš Garrigue Masaryk</em> , <em>TGM</em>, <em>Prezident Masaryk</em>).
+            </li>
+            <li><strong>Nepoužívejte vágní nebo opatrné formulace</strong> (např. <em>možná</em>, <em>mohl by</em>, <em>je
+                    uváděno, že</em>, ...)
+            </li>
+            </li>
+            <li>Dodržujte základní pravidla psaní velkých písmen (pište <em>Indie</em> místo <em>indie</em>).</li>
+            <li>Věty končete tečkou.</li>
+            <li>Čísla mohou být zapisována jakýmkoli vhodným českým způsobem (včetně slovního zápisu pro nízké
+                hodnoty).
+            </li>
+            <li>Některé předložené informace mohou být nepřesné, přesto s jejich správností počítejte.
+                Není vašim úkolem je ověřovat.
+            </li>
 
-                    </ul>
+        </ul>
 
-                    <h4>World Knowledge</h4>
+        <h4 class="alert-heading">Vlastní znalosti</h4>
 
-                    <ul>
-                        <li><strong>Do not</strong> incorporate your own knowledge or beliefs.</li>
-                        <li>Additional Knowledge is given to you in the dictionary. This dictionary contains additional
-                            information that may be helpful in making more complex claims. <br>(we prefer you to use the
-                            dictionary because this information can be backed up from Wikipedia)
-                        </li>
-                        <li>If the source sentence is not suitable, leave the box blank to skip.</li>
-                        <li>If a dictionary entry is not suitable or uninformative, ignore it.</li>
-                    </ul>
-
-                </div>
-            </div>
-        </div>
-
+        <ul>
+            <li><strong>Nezapojujte</strong> své vlastní znalosti nebo domněnky o světě.</li>
+            <li>Doplňujicí informace vám jsou předány pomocí <strong>slovníčku (TODO přejmenovat)</strong>,
+                ten obsahuje informace nad rámec původního bloku, které mohou pomoct s vytvořením
+                složitějších tvrzení. (Omezujeme vás pouze na slovníček, abychom byli schopni všechna tvrzení
+                z Ú1 navázat na konkrétní zdroje z ČTK dat)
+            </li>
+            <li>Pokud není zdrojový blok textu použitelný, přeskočte ho.</li>
+            <li>Pokud není znalost ze slovníčku relevantní nebo vhodná, ignorujte ji.</li>
+        </ul>
     </div>
 
-
-    <div class="row topmargin">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <div class="card">
-                <div class="card-body left">
-                    <h4>Generating Claims About</h4>
+    <div class="card bg-light mb-3 zdrojovy-clanek">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5"><h4 class="card-title">Zdrojový článek</h4>
+                    <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
                 </div>
-            </div>
-        </div>
-
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <div class="ebox">
-                <h4><strong class="ng-binding"><?= $model->sentence['entity'] ?></strong></h4>
-            </div>
-        </div>
-    </div>
-
-    <div class="row topmargin">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <div class="card">
-                <div class="card-body left">
-                    <h4>Source Sentence</h4>
-                    <p class="ng-binding">This is the sentence that is used to substantiate your claims
-                        about <?= $model->sentence['entity'] ?></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <article class="sentence ng-binding"><?= $model->sentence['sentence'] ?></article>
-            <hr/>
-            <article class="context ng-binding ng-hide" ng-show="showcontext"><?= $model->sentence['context_before'] ?>
-                <strong><?= $model->sentence['sentence'] ?></strong> <?= $model->sentence['context_after'] ?></article>
-            <a href="javascript:void(0)" ng-hide="showcontext" ng-click="showcontext = !showcontext">Show Context</a>
-            <a href="javascript:void(0)" ng-show="showcontext" ng-click="showcontext = !showcontext" class="ng-hide">Hide
-                Context</a>
-
-        </div>
-
-    </div>
-
-    <div class="row topmargin">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <div class="card">
-                <div class="card-body left">
-                    <h4>Dictionary</h4>
-                    <p>Click the word for a definition. These definitions can be used to support the claims you write or
-                        make the claims more complex by making a deduction using the dictionary definitions</p>
-                    <p>The dictionary comes from the blue links on Wikipedia. This may be empty if the passage from
-                        Wikipedia contains no links.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <div class="ebox">
-                <?php foreach ($model->sentence['dictionary'] as $key => $value) { ?>
-                    <div class="dictionary_item">
-                        <h4><?= $key ?></h4>
-                        <div><?= $value ?></div>
+                <div class="col-md-7">
+                    <div class="card bg-white">
+                        <div class="card-body">
+                            <h5 class="card-title d-inline">Klaus demisi hodlat nepodá </h5>
+                            21.06.2004
+                        </div>
                     </div>
-                <?php } ?>
+                </div>
             </div>
         </div>
     </div>
+    <div class="card bg-light mb-3 zdrojova-veta">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5"><h4 class="card-title">Zdrojová věta</h4>
+                    <p class="card-text">Z této věty a přilehlého bloku textu vycházejte při tvorbě tvrzení o jedné z
+                        jmenných entit.<br/>
+                        <em>(<?= implode(", ", $ners) ?>)</em></p>
+                </div>
+                <div class="col-md-7">
+                    <div class="card bg-white">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <span class="context"><?= Helper::presentText($model->sentence['context_before'], $ners) ?></span>
+                                <strong><?= Helper::presentText($model->sentence['sentence'], $ners) ?></strong>
+                                <span class="context"><?= Helper::presentText($model->sentence['context_after'], $ners) ?></span>
+                            </p>
+                            <?= Helper::expandLink('Zobrazit kontext', '.context', 'Skrýt kontext') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card bg-light mb-3 slovnicek">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5"><h4 class="card-title">Znalostní rámec</h4>
+                    <p class="card-text">Rozklikněte název článku pro zobrazení části, která byla vybrána jako
+                        <strong>relevantní</strong> pro danou zdrojovou větu.</p>
+                    <p class="card-text">Články ve <em>znalostním rámci</em> byly vybrány podle frekvence výskytu
+                        společných pojmenovaných entit, nebo pomocí sémantického vyhledávání vět z původního článku.</p>
+                </div>
+                <div class="col-md-7">
+                    <div class="card bg-white">
+                        <div class="card-body">
+                            <?php $d = $model->sentence['dictionary']; ?>
+                            <h4>Fulltextové vyhledávání</h4>
+                            <?php foreach ($d['ner_blocks'] as $block) {
+                                echo Helper::dictionaryItem($block, $ners);
+                            } ?>
+                            <h4 class="mt-3">Sémantické vyhledávání</h4>
+                            <?php foreach ($d['semantic_blocks'] as $block) {
+                                echo Helper::dictionaryItem($block, $ners);
+                            } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php $form = ActiveForm::begin([
         'id' => 'claim-form',
-        'layout' => 'inline',
     ]); ?>
 
-
-    <div class="row topmargin">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <div class="card">
-                <div class="card-body left">
-                    <h4>True Claims (one per line)</h4>
-                    <p>Aim to spend about 2 minutes generating <strong>2-5</strong> claims from this source sentence</p>
-                    <p>If the source sentence is uninformative, press the skip button</p>
-
-                    <a href="javascript:void(0)" ng-click="show_example = ! show_example">Example</a>
-                    <div ng-show="show_example" class="ng-hide">
+    <div class="card bg-light mb-3 tvrzeni">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5"><h4 class="card-title">Pravdivá tvrzení</h4>
+                    <p>Snažte se strávit přibližně 2 minuty tvorbou <strong>2-5</strong> tvrzení z této zdrojové věty.
+                    </p>
+                    <p>Pokud není zdrojová věta použitelná, stiskněte tlačítko <strong>Přeskočit</strong></p>
+                    <?= Helper::expandLink("Příklad", "#example") ?>
+                    <div id="example">
                         <blockquote>The&nbsp;Amazon River, usually abbreviated to&nbsp;Amazon&nbsp;(US:&nbsp;/ˈæməzɒn/&nbsp;or&nbsp;UK:&nbsp;/ˈæməzən/;&nbsp;Spanish&nbsp;and&nbsp;Portuguese:&nbsp;Amazonas),
                             in&nbsp;South America&nbsp;is the&nbsp;largest river&nbsp;by&nbsp;discharge&nbsp;volume of
                             water
@@ -174,15 +168,14 @@ $this->title = 'Tvorba výroků';
                         </ul>
                     </div>
                 </div>
+                <div class="col-md-7">
+                    <?= $form->field($model, 'claims')->textarea(['placeholder'=>'Sem napište tvrzení, na každý řádek jedno.','rows' => 5, 'class' => 'w-100 form-control'])->label(false) ?>
+                    <?= $form->field($model, 'sentence_json')->hiddenInput(['value' => json_encode($model->sentence)])->label(false) ?>
+                </div>
             </div>
         </div>
-
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <?= $form->field($model, 'claims')->textarea(['autofocus' => true, 'class' => 'w-100 form-control']) ?>
-            <?= $form->field($model, 'sentence_json')->hiddenInput(['value' => json_encode($model->sentence)]) ?>
-        </div>
     </div>
-    <p class="text-right float-right">
+    <p class="text-right">
         <?= Html::submitButton('Odeslat výroky', ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-warning']) ?>
         <?= Html::a('Home', ['site/index'], ['class' => 'btn btn-light']) ?>

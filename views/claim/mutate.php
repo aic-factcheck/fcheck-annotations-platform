@@ -13,8 +13,8 @@ $this->title = 'Tvorba výroků';
 ?>
 <div class="container">
 <div ng-class="{sandbox:testingMode}" class="ng-scope sandbox">
-    <div class="container wf1b">
-        <h1>Claim Modification Task (WF1b)</h1>
+    <div class="container Ú1b">
+        <h1>Claim Modification Task (Ú1b)</h1>
 
         <?php if ($sandbox) { ?>
             <div>
@@ -73,10 +73,10 @@ $this->title = 'Tvorba výroků';
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <article class="sentence ng-binding"><?= $model->claim->sentence['sentence'] ?></article>
                 <hr/>
-                <article class="context ng-binding ng-hide" ng-show="showcontext"><?= $model->claim->sentence['context_before'] ?>
+                <article class="context ng-binding d-none" ng-show="showcontext"><?= $model->claim->sentence['context_before'] ?>
                     <strong><?= $model->claim->sentence['sentence'] ?></strong> <?= $model->claim->sentence['context_after'] ?></article>
                 <a href="javascript:void(0)" ng-hide="showcontext" ng-click="showcontext = !showcontext">Show Context</a>
-                <a href="javascript:void(0)" ng-show="showcontext" ng-click="showcontext = !showcontext" class="ng-hide">Hide
+                <a href="javascript:void(0)" ng-show="showcontext" ng-click="showcontext = !showcontext" class="d-none">Hide
                     Context</a>
 
             </div>

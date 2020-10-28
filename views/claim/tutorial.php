@@ -15,17 +15,17 @@ $this->title = 'Tutoriál';
 <div class="container" ng-show="section1_show">
     <h2>Overview</h2>
     <p>The objective of this task is to generate both true and mutated claims from information extracted from Wikipedia.</p>
-    <p>This task is separated into two screens that will be given back-to-back. The first screen (WF1a) is the claim generation part of the task. The second screen (WF1b) is the mutations to the generated claims.</p>
+    <p>This task is separated into two screens that will be given back-to-back. The first screen (Ú1a) is the claim generation part of the task. The second screen (Ú1b) is the mutations to the generated claims.</p>
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <h3>WF1a</h3>
+            <h3>Ú1a</h3>
             <p>The objective of this task is to generate true claims</p>
             <p>The claims you generate will be based from a <strong>source sentence</strong> that was extracted from Wikipedia.</p>
             <img src="<?=Url::to(['images/wf1a.png'])?>" style="width:100%" />
 
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <h3>WF1b</h3>
+            <h3>Ú1b</h3>
             <p>The objective of this task is to generate modifications to the claims you have just created.</p>
             <p>There are six types of modification. For each claim you write, you will have to generate all six modifications.</p>
             <img src="<?=Url::to(['images/wf1b.png'])?>" style="width:100%" />
@@ -37,7 +37,7 @@ $this->title = 'Tutoriál';
 
 
 <div class="container ng-scope" ng-show="section2_show">
-    <h2>WF1a Claim Generation</h2>
+    <h2>Ú1a Claim Generation</h2>
 
     <div class="row topmargin">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -49,7 +49,7 @@ $this->title = 'Tutoriál';
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="ebox">
                 <p>A claim is a single sentence expressing information (true or mutated) about a single aspect of one target entity.</p>
-                <p>In WF1a, the claims you generate will be true claims based on a sentence given to you from Wikipedia</p>
+                <p>In Ú1a, the claims you generate will be true claims based on a sentence given to you from Wikipedia</p>
 
                 <p>Requirements/Conventions:</p>
                 <ul>
@@ -74,7 +74,7 @@ $this->title = 'Tutoriál';
 
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="ebox">
-                <p>The claims you generate in WF1a may vary in complexity depending on the information available.</p>
+                <p>The claims you generate in Ú1a may vary in complexity depending on the information available.</p>
                 <p>You could use just the source sentence to generate claims. But this will result in simple claims that are not challenging. </p>
                 <p>We introduce a dictionary of terms containing additional knowledge that can be incorporated into your claims and make them more complex.</p>
             </div>
@@ -124,9 +124,9 @@ $this->title = 'Tutoriál';
 
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <article class="sentence ng-binding">It shares land borders with Pakistan to the west; China, Nepal, and Bhutan to the northeast; and Myanmar (Burma) and Bangladesh to the east.</article>
-            <article class="context ng-binding ng-hide" ng-show="showcontext">It is bounded by the Indian Ocean on the south, the Arabian Sea on the southwest, and the Bay of Bengal on the southeast. <strong class="ng-binding">It shares land borders with Pakistan to the west; China, Nepal, and Bhutan to the northeast; and Myanmar (Burma) and Bangladesh to the east.</strong> In the Indian Ocean, India is in the vicinity of Sri Lanka and the Maldives.</article>
+            <article class="context ng-binding d-none" ng-show="showcontext">It is bounded by the Indian Ocean on the south, the Arabian Sea on the southwest, and the Bay of Bengal on the southeast. <strong class="ng-binding">It shares land borders with Pakistan to the west; China, Nepal, and Bhutan to the northeast; and Myanmar (Burma) and Bangladesh to the east.</strong> In the Indian Ocean, India is in the vicinity of Sri Lanka and the Maldives.</article>
             <a href="javascript:void(0)" ng-hide="showcontext" ng-click="toggleContext()">Show Context</a>
-            <a href="javascript:void(0)" ng-show="showcontext" ng-click="toggleContext()" class="ng-hide">Hide Context</a>
+            <a href="javascript:void(0)" ng-show="showcontext" ng-click="toggleContext()" class="d-none">Hide Context</a>
 
         </div>
 
@@ -142,7 +142,7 @@ $this->title = 'Tutoriál';
 
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="ebox">
-                <!-- ngRepeat: (key, value) in dictionary --><div class="dictionary_item ng-scope" ng-repeat="(key, value) in dictionary"><h4><a href="javascript:void(0)" ng-click="show_dictionary_item = ! show_dictionary_item" class="ng-binding">Bangladesh</a></h4> <div ng-show="show_dictionary_item" class="ng-binding ng-hide">Bangladesh (; ;  , , lit. </div></div><!-- end ngRepeat: (key, value) in dictionary --><div class="dictionary_item ng-scope" ng-repeat="(key, value) in dictionary"><h4><a href="javascript:void(0)" ng-click="show_dictionary_item = ! show_dictionary_item" class="ng-binding">Bhutan</a></h4> <div ng-show="show_dictionary_item" class="ng-binding ng-hide">Bhutan  , officially the Kingdom of Bhutan  , is a landlocked country in Asia, and it is the smallest state located entirely within the Himalaya mountain range.</div></div><!-- end ngRepeat: (key, value) in dictionary --><div class="dictionary_item ng-scope" ng-repeat="(key, value) in dictionary"><h4><a href="javascript:void(0)" ng-click="show_dictionary_item = ! show_dictionary_item" class="ng-binding">China</a></h4> <div ng-show="show_dictionary_item" class="ng-binding ng-hide">China, officially the People's Republic of China (PRC), is a unitary sovereign state in East Asia and the world's most populous country, with a population of over 1.381 billion.</div></div><!-- end ngRepeat: (key, value) in dictionary --><div class="dictionary_item ng-scope" ng-repeat="(key, value) in dictionary"><h4><a href="javascript:void(0)" ng-click="show_dictionary_item = ! show_dictionary_item" class="ng-binding">Nepal</a></h4> <div ng-show="show_dictionary_item" class="ng-binding ng-hide">fi</div></div><!-- end ngRepeat: (key, value) in dictionary --><div class="dictionary_item ng-scope" ng-repeat="(key, value) in dictionary"><h4><a href="javascript:void(0)" ng-click="show_dictionary_item = ! show_dictionary_item" class="ng-binding">Pakistan</a></h4> <div ng-show="show_dictionary_item" class="ng-binding ng-hide">Pakistan ( or ; ), officially the Islamic Republic of Pakistan  , is a federal parliamentary republic in South Asia on the crossroads of Central and Western Asia.</div></div><!-- end ngRepeat: (key, value) in dictionary -->
+                <!-- ngRepeat: (key, value) in dictionary --><div class="dictionary_item ng-scope" ng-repeat="(key, value) in dictionary"><h4><a href="javascript:void(0)" ng-click="show_dictionary_item = ! show_dictionary_item" class="ng-binding">Bangladesh</a></h4> <div ng-show="show_dictionary_item" class="ng-binding d-none">Bangladesh (; ;  , , lit. </div></div><!-- end ngRepeat: (key, value) in dictionary --><div class="dictionary_item ng-scope" ng-repeat="(key, value) in dictionary"><h4><a href="javascript:void(0)" ng-click="show_dictionary_item = ! show_dictionary_item" class="ng-binding">Bhutan</a></h4> <div ng-show="show_dictionary_item" class="ng-binding d-none">Bhutan  , officially the Kingdom of Bhutan  , is a landlocked country in Asia, and it is the smallest state located entirely within the Himalaya mountain range.</div></div><!-- end ngRepeat: (key, value) in dictionary --><div class="dictionary_item ng-scope" ng-repeat="(key, value) in dictionary"><h4><a href="javascript:void(0)" ng-click="show_dictionary_item = ! show_dictionary_item" class="ng-binding">China</a></h4> <div ng-show="show_dictionary_item" class="ng-binding d-none">China, officially the People's Republic of China (PRC), is a unitary sovereign state in East Asia and the world's most populous country, with a population of over 1.381 billion.</div></div><!-- end ngRepeat: (key, value) in dictionary --><div class="dictionary_item ng-scope" ng-repeat="(key, value) in dictionary"><h4><a href="javascript:void(0)" ng-click="show_dictionary_item = ! show_dictionary_item" class="ng-binding">Nepal</a></h4> <div ng-show="show_dictionary_item" class="ng-binding d-none">fi</div></div><!-- end ngRepeat: (key, value) in dictionary --><div class="dictionary_item ng-scope" ng-repeat="(key, value) in dictionary"><h4><a href="javascript:void(0)" ng-click="show_dictionary_item = ! show_dictionary_item" class="ng-binding">Pakistan</a></h4> <div ng-show="show_dictionary_item" class="ng-binding d-none">Pakistan ( or ; ), officially the Islamic Republic of Pakistan  , is a federal parliamentary republic in South Asia on the crossroads of Central and Western Asia.</div></div><!-- end ngRepeat: (key, value) in dictionary -->
             </div>
         </div>
     </div>
@@ -153,7 +153,7 @@ $this->title = 'Tutoriál';
                 <h4>True Claims (one per line)</h4>
 
                 <a href="javascript:void(0)" ng-click="show_example = ! show_example">Example</a>
-                <div ng-show="show_example" class="ng-hide">
+                <div ng-show="show_example" class="d-none">
                     <blockquote>The&nbsp;Amazon River, usually abbreviated to&nbsp;Amazon&nbsp;(US:&nbsp;/ˈæməzɒn/&nbsp;or&nbsp;UK:&nbsp;/ˈæməzən/;&nbsp;Spanish&nbsp;and&nbsp;Portuguese:&nbsp;Amazonas), in&nbsp;South America&nbsp;is the&nbsp;largest river&nbsp;by&nbsp;discharge&nbsp;volume of water in the world and according to some authors, the&nbsp;longest in length.</blockquote>
                     <p><strong>Good</strong></p>
                     <ul>

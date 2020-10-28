@@ -55,8 +55,14 @@ class CandidateController extends Controller
 
     public function actionAlt($add = null)
     {
+        $client = new Client();
         if($add != null){
             $add = json_decode($add,true);
+            $add['dictionary'] = $client->createRequest()
+                ->setMethod('GET')
+                ->setUrl('http://localhost:8601/dictionary/'.$add["id"])
+                ->send()
+                ->getData();
             Yii::$app->params['live'][] = $add;
             $fp = fopen('../config/datasets/live.json', 'w');
             fwrite($fp, json_encode(Yii::$app->params['live'],JSON_UNESCAPED_UNICODE));
@@ -66,10 +72,9 @@ class CandidateController extends Controller
             fwrite($fp, json_encode(Yii::$app->params['entities'],JSON_UNESCAPED_UNICODE));
             fclose($fp);
             Yii::$app->session->addFlash("success", "Kandidátní věta byla úspěšně přidána");
-            return $this->redirect(['index']);
+            return $this->redirect(['alt']);
         }
 
-        $client = new Client();
         $response = $client->createRequest()
             ->setMethod('GET')
             ->setUrl('http://localhost:8601/sample')
