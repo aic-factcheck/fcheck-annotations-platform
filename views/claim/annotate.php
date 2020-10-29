@@ -12,10 +12,10 @@ use yii\bootstrap4\Html;
 
 
 $this->title = 'Tvorba tvrzení';
-Helper::setEntities($ners = $model->sentence['dictionary']['ners']);
+Helper::setEntities($ners = $model->candidate->knowledge['ners']);
 ?>
 <div class="container">
-    <h1>Tvorba tvrzení (Ú1a)</h1>
+    <h1>Tvorba tvrzení (Ú<sub>1</sub>a)</h1>
     <?php if ($sandbox) { ?>
         <div>
             <h4 style="color:red; margin-bottom:0;">Zkušební verze</h4>
@@ -30,7 +30,7 @@ Helper::setEntities($ners = $model->sentence['dictionary']['ners']);
             <li><strong">Extrahujte atomická (jednoduchý podmět, jeden přísudek) tvrzení o některé z
                 pojmenovaných entit </strong> ze zdrojového
                 textu.<br/><em>(<?= implode(", ", $ners) ?>)</em></li>
-            <li>Jako základ svého tvrzení použijte zdrojový blok a slovníček.</li>
+            <li>Jako základ svého tvrzení použijte zdrojový blok a znalostní rámec.</li>
             <li><strong>Pojmenované entity uvádějte přímo</strong> (vyhněte se používání zájmen apod.).</li>
             <li>Drobné záměny jsou přípustné (např.
                 <em>Tomáš Garrigue Masaryk</em> , <em>TGM</em>, <em>Prezident Masaryk</em>).
@@ -54,13 +54,13 @@ Helper::setEntities($ners = $model->sentence['dictionary']['ners']);
 
         <ul>
             <li><strong>Nezapojujte</strong> své vlastní znalosti nebo domněnky o světě.</li>
-            <li>Doplňujicí informace vám jsou předány pomocí <strong>slovníčku (TODO přejmenovat)</strong>,
+            <li>Doplňujicí informace vám jsou předány pomocí <strong>znalostním rámci</strong>,
                 ten obsahuje informace nad rámec původního bloku, které mohou pomoct s vytvořením
-                složitějších tvrzení. (Omezujeme vás pouze na slovníček, abychom byli schopni všechna tvrzení
-                z Ú1 navázat na konkrétní zdroje z ČTK dat)
+                složitějších tvrzení. (Omezujeme vás pouze na znalostní rámec, abychom byli schopni všechna tvrzení
+                z Ú<sub>1</sub> navázat na konkrétní zdroje z ČTK dat)
             </li>
             <li>Pokud není zdrojový blok textu použitelný, přeskočte ho.</li>
-            <li>Pokud není znalost ze slovníčku relevantní nebo vhodná, ignorujte ji.</li>
+            <li>Pokud není znalost ze znalostním rámci relevantní nebo vhodná, ignorujte ji.</li>
         </ul>
     </div>
 
@@ -73,8 +73,8 @@ Helper::setEntities($ners = $model->sentence['dictionary']['ners']);
                 <div class="col-md-7">
                     <div class="card bg-white">
                         <div class="card-body">
-                            <h5 class="card-title d-inline">Klaus demisi hodlat nepodá </h5>
-                            21.06.2004
+                            <h5 class="card-title d-inline"><?= $model->candidate->title ?> </h5>
+                            <?= Yii::$app->formatter->asDatetime($model->candidate->date) ?>
                         </div>
                     </div>
                 </div>
@@ -93,9 +93,14 @@ Helper::setEntities($ners = $model->sentence['dictionary']['ners']);
                     <div class="card bg-white">
                         <div class="card-body">
                             <p class="card-text">
-                                <span class="context"><?= Helper::presentText($model->sentence['context_before'], $ners) ?></span>
-                                <strong><?= Helper::presentText($model->sentence['sentence'], $ners) ?></strong>
-                                <span class="context"><?= Helper::presentText($model->sentence['context_after'], $ners) ?></span>
+                                <?php
+                                foreach ($model->candidate->sentences as $i => $sentence) {
+                                    if ($i == $model->candidate->sentence) {
+                                        echo Html::tag("strong", Helper::presentText($sentence));
+                                    } else {
+                                        echo Html::tag("span", Helper::presentText($sentence), ["class" => "context"]);
+                                    }
+                                } ?>
                             </p>
                             <?= Helper::expandLink('Zobrazit kontext', '.context', 'Skrýt kontext') ?>
                         </div>
@@ -116,14 +121,14 @@ Helper::setEntities($ners = $model->sentence['dictionary']['ners']);
                 <div class="col-md-7">
                     <div class="card bg-white">
                         <div class="card-body">
-                            <?php $d = $model->sentence['dictionary']; ?>
+                            <?php $d = $model->candidate->knowledge; ?>
                             <h4>Fulltextové vyhledávání</h4>
                             <?php foreach ($d['ner_blocks'] as $block) {
-                                echo Helper::dictionaryItem($block, $ners);
+                                echo Helper::dictionaryItem($block);
                             } ?>
                             <h4 class="mt-3">Sémantické vyhledávání</h4>
                             <?php foreach ($d['semantic_blocks'] as $block) {
-                                echo Helper::dictionaryItem($block, $ners);
+                                echo Helper::dictionaryItem($block);
                             } ?>
                         </div>
                     </div>
@@ -134,6 +139,7 @@ Helper::setEntities($ners = $model->sentence['dictionary']['ners']);
 
     <?php $form = ActiveForm::begin([
         'id' => 'claim-form',
+        'action' => ['claim/annotate', 'sandbox' => $sandbox, 'candidate' => $model->candidate->id]
     ]); ?>
 
     <div class="card bg-light mb-3 tvrzeni">
@@ -169,8 +175,7 @@ Helper::setEntities($ners = $model->sentence['dictionary']['ners']);
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <?= $form->field($model, 'claims')->textarea(['placeholder'=>'Sem napište tvrzení, na každý řádek jedno.','rows' => 5, 'class' => 'w-100 form-control'])->label(false) ?>
-                    <?= $form->field($model, 'sentence_json')->hiddenInput(['value' => json_encode($model->sentence)])->label(false) ?>
+                    <?= $form->field($model, 'claims')->textarea(['placeholder' => 'Sem napište tvrzení, na každý řádek jedno.', 'rows' => 5, 'class' => 'w-100 form-control'])->label(false) ?>
                 </div>
             </div>
         </div>

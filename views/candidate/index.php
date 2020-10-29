@@ -9,10 +9,10 @@ use yii\helpers\Html;
 $this->title = 'Předvýběr kandidátních vět';
 ?>
 <div class="container">
-    <h1>WF0: <?= $this->title ?></h1>
-    <p>Ke každé větě se přidá, jako kontext, zbytek odstavce, ve kterém byla nalezena, a slovníček pojmů vybudovaný z
+    <h1>Ú<sub>0</sub>: <?= $this->title ?></h1>
+    <p>Ke každé větě se přidá, jako kontext, zbytek odstavce, ve kterém byla nalezena, a znalostní rámec vybudovaný z
         klíčových slov.</p>
-    <h2>Klikněte na větu, která se hodí pro Ú1, nebo <?= Html::a('přeskočte', ['index']) ?> na jiný
+    <h2>Klikněte na větu, která se hodí pro Ú<sub>1</sub>, nebo <?= Html::a('přeskočte', ['index']) ?> na jiný
         vzorek</h2>
     <ul class=" candidate">
         <?php

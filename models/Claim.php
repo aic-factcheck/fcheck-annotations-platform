@@ -20,7 +20,7 @@ use yii\db\ActiveRecord;
  * @property int $labelled Má label?
  * @property int|null $created_at Datum vzniku
  * @property int $updated_at Datum poslední změny
- *
+ * @property Candidate $candidate0
  * @property Claim $mutatedFrom
  * @property Claim[] $claims
  * @property User $user0
@@ -29,6 +29,8 @@ use yii\db\ActiveRecord;
 class Claim extends ActiveRecord
 {
     const MUTATIONS = ["rephrase", "substitute_similar", "substitute_dissimilar", "specific", "general", "negate"];
+    const MUTATION_COLORS = ["rephrase" => "success", "substitute_similar" => "info", "substitute_dissimilar" => "secondary", "specific" => "warning", "general" => "primary", "negate" => "danger"];
+
     /**
      * {@inheritdoc}
      */
@@ -47,7 +49,6 @@ class Claim extends ActiveRecord
     public function afterFind()
     {
         parent::afterFind();
-        $this->sentence = json_decode($this->sentence,true);
     }
 
     /**
@@ -56,14 +57,25 @@ class Claim extends ActiveRecord
     public function rules()
     {
         return [
-            [['user', 'mutated_from', 'sandbox', 'created_at', 'updated_at','labelled'], 'integer'],
+            [['user', 'mutated_from', 'sandbox', 'labelled', 'candidate'], 'integer'],
             [['claim'], 'required'],
-            [['claim','sentence_id', 'sentence'], 'string'],
+            [['claim', 'sentence_id', 'sentence'], 'string'],
             [['mutation_type'], 'string', 'max' => 32],
             [['entity'], 'string', 'max' => 512],
             [['mutated_from'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::className(), 'targetAttribute' => ['mutated_from' => 'id']],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
+            [['candidate'], 'exist', 'skipOnError' => true, 'targetClass' => Candidate::className(), 'targetAttribute' => ['candidate' => 'id']],
         ];
+    }
+
+    /**
+     * Gets query for [[Candidate0]].
+     *
+     * @return ActiveQuery
+     */
+    public function getCandidate0()
+    {
+        return $this->hasOne(Candidate::className(), ['id' => 'candidate']);
     }
 
     /**

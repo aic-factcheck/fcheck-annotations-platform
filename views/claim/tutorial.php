@@ -15,17 +15,17 @@ $this->title = 'Tutoriál';
 <div class="container" ng-show="section1_show">
     <h2>Overview</h2>
     <p>The objective of this task is to generate both true and mutated claims from information extracted from Wikipedia.</p>
-    <p>This task is separated into two screens that will be given back-to-back. The first screen (Ú1a) is the claim generation part of the task. The second screen (Ú1b) is the mutations to the generated claims.</p>
+    <p>This task is separated into two screens that will be given back-to-back. The first screen (Ú<sub>1</sub>a) is the claim generation part of the task. The second screen (Ú<sub>1</sub>b) is the mutations to the generated claims.</p>
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <h3>Ú1a</h3>
+            <h3>Ú<sub>1</sub>a</h3>
             <p>The objective of this task is to generate true claims</p>
             <p>The claims you generate will be based from a <strong>source sentence</strong> that was extracted from Wikipedia.</p>
             <img src="<?=Url::to(['images/wf1a.png'])?>" style="width:100%" />
 
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <h3>Ú1b</h3>
+            <h3>Ú<sub>1</sub>b</h3>
             <p>The objective of this task is to generate modifications to the claims you have just created.</p>
             <p>There are six types of modification. For each claim you write, you will have to generate all six modifications.</p>
             <img src="<?=Url::to(['images/wf1b.png'])?>" style="width:100%" />
@@ -37,7 +37,7 @@ $this->title = 'Tutoriál';
 
 
 <div class="container ng-scope" ng-show="section2_show">
-    <h2>Ú1a Claim Generation</h2>
+    <h2>Ú<sub>1</sub>a Claim Generation</h2>
 
     <div class="row topmargin">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -49,7 +49,7 @@ $this->title = 'Tutoriál';
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="ebox">
                 <p>A claim is a single sentence expressing information (true or mutated) about a single aspect of one target entity.</p>
-                <p>In Ú1a, the claims you generate will be true claims based on a sentence given to you from Wikipedia</p>
+                <p>In Ú<sub>1</sub>a, the claims you generate will be true claims based on a sentence given to you from Wikipedia</p>
 
                 <p>Requirements/Conventions:</p>
                 <ul>
@@ -74,7 +74,7 @@ $this->title = 'Tutoriál';
 
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="ebox">
-                <p>The claims you generate in Ú1a may vary in complexity depending on the information available.</p>
+                <p>The claims you generate in Ú<sub>1</sub>a may vary in complexity depending on the information available.</p>
                 <p>You could use just the source sentence to generate claims. But this will result in simple claims that are not challenging. </p>
                 <p>We introduce a dictionary of terms containing additional knowledge that can be incorporated into your claims and make them more complex.</p>
             </div>

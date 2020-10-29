@@ -20,6 +20,7 @@ $config = [
     'components' => [
         'formatter' => [
             'dateFormat' => 'dd.MM.yyyy',
+            'datetimeFormat' => 'dd.MM.yyyy HH:mm',
         ],
         'request' => [
             'cookieValidationKey' => 'pQQqqqFTB2QrunSr-t9sZv5OwIbKxIww',

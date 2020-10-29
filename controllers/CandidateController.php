@@ -2,8 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\Candidate;
 use app\models\Claim;
 use app\models\LabelForm;
+use yii\helpers\ArrayHelper;
 use yii\httpclient\Client;
 use SQLite3;
 use Yii;
@@ -58,16 +60,18 @@ class CandidateController extends Controller
         $client = new Client();
         if($add != null){
             $add = json_decode($add,true);
-            $add['dictionary'] = $client->createRequest()
+            $knowledge = $client->createRequest()
                 ->setMethod('GET')
-                ->setUrl('http://localhost:8601/dictionary/'.$add["id"])
+                ->setUrl('http://localhost:8601/dictionary/'.$add["entity"])
                 ->send()
                 ->getData();
-            Yii::$app->params['live'][] = $add;
-            $fp = fopen('../config/datasets/live.json', 'w');
-            fwrite($fp, json_encode(Yii::$app->params['live'],JSON_UNESCAPED_UNICODE));
-            fclose($fp);
-            Yii::$app->params['entities'][$add['entity']] = $add['entity_sentences'];
+
+            (new Candidate(ArrayHelper::merge([
+                'knowledge' => $knowledge,
+                'user' => Yii::$app->user->id,
+            ],$add)))->save();
+
+            Yii::$app->params['entities'][$add['entity']] = $add['sentences'];
             $fp = fopen('../config/datasets/entities.json', 'w');
             fwrite($fp, json_encode(Yii::$app->params['entities'],JSON_UNESCAPED_UNICODE));
             fclose($fp);

@@ -163,3 +163,23 @@ tr.dictionary-item:hover th{
 .candidate a{
     color:black;
 }
+.text-block:hover{
+    background-color: #f5f5f5;
+    transition: .2s;
+}
+.text-block a{
+    color:black;
+}
+
+.text-block a:hover{
+    color:black;
+    background-color: rgba(40,167,69,.1);
+    transition: .2s;
+    text-decoration: none;
+}
+.text-block.bg-success{
+    background-color: rgba(40,167,69,.15)!important;
+}
+.text-black{
+    color:black;
+}

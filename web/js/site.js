@@ -60,8 +60,8 @@ $("[data-show]").click(function (e){
     $($(this).data("show")).slideToggle();
     if($(this).data("alt") !== undefined && $(this).data("alt") !== null){
         var tmp = $(this).data("alt");
-        $(this).data("alt",$(this).text());
-        $(this).text(tmp);
+        $(this).data("alt",$(this).html());
+        $(this).html(tmp);
     }
     e.preventDefault();
 });

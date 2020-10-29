@@ -51,9 +51,9 @@ class ClaimController extends Controller
         return $this->render('index');
     }
 
-    public function actionAnnotate($sandbox = false)
+    public function actionAnnotate($sandbox = false, $candidate = false)
     {
-        $model = new ClaimForm($sandbox);
+        $model = new ClaimForm($sandbox,$candidate);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['claim/mutate']);
         }

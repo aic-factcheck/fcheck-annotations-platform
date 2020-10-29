@@ -10,6 +10,7 @@ class Helper
 {
     const SPACE_BEFORE = [",", ".", ":", ";", ")", "]"];
     const SPACE_AFTER = ["[", "("];
+    const SWAP = ["`` " => "„", " ''" => "“"];
     private static $detokenizationMap = null;
     private static $entities = [];
     private static $entityMarks = [];
@@ -50,6 +51,9 @@ class Helper
             }
             foreach (self::SPACE_AFTER as $item) {
                 self::$detokenizationMap[$item . " "] = $item;
+            }
+            foreach (self::SWAP as $key => $value) {
+                self::$detokenizationMap[$key] = $value;
             }
         }
         return strtr($string, self::$detokenizationMap);
