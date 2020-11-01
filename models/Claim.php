@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -12,18 +13,19 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property int|null $user Anotátor
  * @property string $claim Výrok
- * @property int|null $sentence_id ID ČTK věty
- * @property string|null $mutation_type Typ mutace
+ * @property int|null $paragraph Původní odstavec ČTK článku
  * @property int|null $mutated_from Výrok před mutací
- * @property string|null $entity Entita (ČTK článek)
+ * @property string|null $mutation_type Typ mutace
  * @property int $sandbox Je z testovní verze?
  * @property int $labelled Má label?
  * @property int|null $created_at Datum vzniku
- * @property int $updated_at Datum poslední změny
- * @property Candidate $candidate0
+ * @property int|null $updated_at Datum poslední změny
+ *
  * @property Claim $mutatedFrom
  * @property Claim[] $claims
  * @property User $user0
+ * @property Paragraph $paragraph0
+ * @property ClaimKnowledge[] $claimKnowledges
  * @property Label[] $labels
  */
 class Claim extends ActiveRecord
@@ -46,36 +48,20 @@ class Claim extends ActiveRecord
         ];
     }
 
-    public function afterFind()
-    {
-        parent::afterFind();
-    }
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['user', 'mutated_from', 'sandbox', 'labelled', 'candidate'], 'integer'],
+            [['user', 'paragraph', 'mutated_from', 'sandbox', 'labelled', 'created_at', 'updated_at'], 'integer'],
             [['claim'], 'required'],
-            [['claim', 'sentence_id', 'sentence'], 'string'],
+            [['claim'], 'string'],
             [['mutation_type'], 'string', 'max' => 32],
-            [['entity'], 'string', 'max' => 512],
             [['mutated_from'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::className(), 'targetAttribute' => ['mutated_from' => 'id']],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
-            [['candidate'], 'exist', 'skipOnError' => true, 'targetClass' => Candidate::className(), 'targetAttribute' => ['candidate' => 'id']],
+            [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['paragraph' => 'id']],
         ];
-    }
-
-    /**
-     * Gets query for [[Candidate0]].
-     *
-     * @return ActiveQuery
-     */
-    public function getCandidate0()
-    {
-        return $this->hasOne(Candidate::className(), ['id' => 'candidate']);
     }
 
     /**
@@ -87,10 +73,9 @@ class Claim extends ActiveRecord
             'id' => 'ID',
             'user' => 'Anotátor',
             'claim' => 'Výrok',
-            'sentence_id' => 'ID ČTK věty',
-            'mutation_type' => 'Typ mutace',
+            'paragraph' => 'Původní odstavec ČTK článku',
             'mutated_from' => 'Výrok před mutací',
-            'entity' => 'Entita (ČTK článek)',
+            'mutation_type' => 'Typ mutace',
             'sandbox' => 'Je z testovní verze?',
             'labelled' => 'Má label?',
             'created_at' => 'Datum vzniku',
@@ -126,6 +111,26 @@ class Claim extends ActiveRecord
     public function getUser0()
     {
         return $this->hasOne(User::className(), ['id' => 'user']);
+    }
+
+    /**
+     * Gets query for [[Paragraph0]].
+     *
+     * @return ActiveQuery
+     */
+    public function getParagraph0()
+    {
+        return $this->hasOne(Paragraph::className(), ['id' => 'paragraph']);
+    }
+
+    /**
+     * Gets query for [[ClaimKnowledges]].
+     *
+     * @return ActiveQuery
+     */
+    public function getClaimKnowledges()
+    {
+        return $this->hasMany(ClaimKnowledge::className(), ['claim' => 'id']);
     }
 
     /**
