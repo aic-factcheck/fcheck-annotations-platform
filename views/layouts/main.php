@@ -8,6 +8,7 @@ use app\assets\AppAsset;
 use app\models\Candidate;
 use app\models\Claim;
 use app\models\Label;
+use app\models\Paragraph;
 use app\widgets\Alert;
 use kartik\icons\FontAwesomeAsset;
 use yii\bootstrap4\Breadcrumbs;
@@ -55,7 +56,7 @@ AppAsset::register($this);
                     . Html::submitButton(
                         'Logout (' . Yii::$app->user->identity->username .
                         //', dnes: '. Claim::find()->where(['user'=>Yii::$app->user->id])->andWhere(['>=','created_at',strtotime('today')])->count().
-                        ', Ú<sub>0</sub>: ' . Candidate::find()->where(['user' => Yii::$app->user->id])->count() .
+                        ', Ú<sub>0</sub>: ' . Paragraph::find()->where(['candidate_of' => Yii::$app->user->id])->count() .
                         ', Ú<sub>1</sub>: ' . Claim::find()->where(['user' => Yii::$app->user->id])->count() .
                         ', Ú<sub>2</sub>: ' . Label::find()->where(['user' => Yii::$app->user->id])->count() .
                         ')',

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use DateTime;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -18,7 +19,7 @@ use yii\db\ActiveRecord;
  *
  * @property Paragraph[] $paragraphs
  */
-class Article extends ActiveRecord
+class Article extends CtkData
 {
 
     /**
@@ -27,6 +28,21 @@ class Article extends ActiveRecord
     public static function tableName()
     {
         return 'article';
+    }
+
+    public static function fromSample($sample)
+    {
+        if (($result = self::findOne($sample["did"])) == null) {
+            $result = new Article([
+                "id" => $sample["did"],
+                "title" => $sample["title"],
+                "date" => (new DateTime($sample["date"]))->format("Y-m-d h:i:s")]);
+            $result->save();
+            foreach ($sample["blocks"] as $id => $text) {
+                (new Paragraph(["article" => $result->id, "rank" => explode("_", $id)[1], "text" => $text]))->save();
+            }
+        }
+        return $result;
     }
 
     public function behaviors()
@@ -72,6 +88,6 @@ class Article extends ActiveRecord
      */
     public function getParagraphs()
     {
-        return $this->hasMany(Paragraph::class, ['article' => 'id']);
+        return $this->hasMany(Paragraph::class, ['article' => 'id'])->orderBy(["paragraph.rank" => SORT_ASC]);
     }
 }

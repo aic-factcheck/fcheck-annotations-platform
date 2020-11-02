@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $claim Tvrzení
  * @property int $knowledge Znalost (odstavec článku)
- * @property int $semantic Je ze sémantického vyhledávání?
+ * @property string|null $search_term Klíčová slova (NULL při sem.search)
  * @property string $created_at Datum vzniku
  *
  * @property Claim $claim0
@@ -32,10 +32,11 @@ class ClaimKnowledge extends \yii\db\ActiveRecord
     {
         return [
             [['claim', 'knowledge'], 'required'],
-            [['claim', 'knowledge', 'semantic'], 'integer'],
+            [['claim', 'knowledge'], 'integer'],
             [['created_at'], 'safe'],
-            [['claim'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::class, 'targetAttribute' => ['claim' => 'id']],
-            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['knowledge' => 'id']],
+            [['search_term'], 'string', 'max' => 512],
+            [['claim'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::className(), 'targetAttribute' => ['claim' => 'id']],
+            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['knowledge' => 'id']],
         ];
     }
 
@@ -47,7 +48,7 @@ class ClaimKnowledge extends \yii\db\ActiveRecord
         return [
             'claim' => 'Tvrzení',
             'knowledge' => 'Znalost (odstavec článku)',
-            'semantic' => 'Je ze sémantického vyhledávání?',
+            'search_term' => 'Klíčová slova (NULL při sem.search)',
             'created_at' => 'Datum vzniku',
         ];
     }
@@ -59,7 +60,7 @@ class ClaimKnowledge extends \yii\db\ActiveRecord
      */
     public function getClaim0()
     {
-        return $this->hasOne(Claim::class, ['id' => 'claim']);
+        return $this->hasOne(Claim::className(), ['id' => 'claim']);
     }
 
     /**
@@ -69,6 +70,6 @@ class ClaimKnowledge extends \yii\db\ActiveRecord
      */
     public function getKnowledge0()
     {
-        return $this->hasOne(Paragraph::class, ['id' => 'knowledge']);
+        return $this->hasOne(Paragraph::className(), ['id' => 'knowledge']);
     }
 }

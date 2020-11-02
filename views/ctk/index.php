@@ -2,13 +2,27 @@
 
 /* @var $this yii\web\View */
 
-/* @var $data array */
+/* @var $article Article */
+
+/* @var $target int */
 
 use app\helpers\Helper;
+use app\models\Article;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = 'Předvýběr kandidátních vět';
+$baseUrl = Url::to(['ctk/nominate','paragraph'=>'']);
+$this->registerJs(<<<JS
+$(".paragraph-selector").click(function() {
+    var request = $.ajax({
+      url: '$baseUrl'+$(this).data('id'),
+      method: "GET"
+    });
+    location.reload();
+})
+JS
+);
 ?>
 <div class="container">
     <h1>Ú<sub>0</sub>: <?= $this->title ?></h1>
@@ -36,9 +50,9 @@ $this->title = 'Předvýběr kandidátních vět';
 
     <div class="card bg-light mb-3 zdrojovy-clanek">
         <div class="card-body">
-            <h4><?= Helper::detokenize($data['title']) ?>
+            <h4><?= $article->get('title') ?>
                 <span class="float-right">
-                    <span class="badge badge-info"><?= Yii::$app->formatter->asDatetime($data['date']) ?></span>
+                    <span class="badge badge-info"><?= Yii::$app->formatter->asDatetime($article->date) ?></span>
                     <a href="<?= Url::current() ?>"
                        class="btn btn-warning btn-sm font-weight-bold">Přeskočit &raquo;</a>
                 </span>
@@ -46,31 +60,12 @@ $this->title = 'Předvýběr kandidátních vět';
             <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
             <br/>
             <?php
-            foreach ($data['blocks'] as $id => $block) {
+            foreach ($article->paragraphs as $paragraph) {
                 ?>
-                <div class="card bg-white mb-2">
-                    <div class="card-body text-block <?= $id == $data['id'] ? "bg-success" : '' ?>"><?php
-                        $par_lines = explode(' .', $block);
-                        $lines = [];
-                        foreach ($par_lines as $line) {
-                            if (strlen($line) > 1) {
-                                $lines[] = $line . " .";
-                            }
-                        }
-                        $i = 0;
-                        foreach ($lines as $line) {
-                            $sentence = [
-                                "entity" => $id,
-                                "sentence" => $i++,
-                                "context" => $data["blocks"],
-                                "sentences" => $lines,
-                                "title" => $data['title'],
-                                "date" => $data['date']
-                            ];
-                            echo Html::a(Helper::detokenize($line), ['alt', 'add' => json_encode($sentence)]);
-                        }
-                        $sents = explode(" .", $block);
-                        ?></div>
+                <div class="card bg-white mb-2 paragraph-selector" data-id="<?= $paragraph->id ?>">
+                    <div class="card-body text-block <?= $paragraph->rank == $target ? "bg-success" : '' ?>">
+                        <?= $paragraph->get('text') ?>
+                    </div>
                 </div>
                 <?php
             }

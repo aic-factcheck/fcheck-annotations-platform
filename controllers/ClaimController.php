@@ -41,19 +41,10 @@ class ClaimController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
 
-    public function actionAnnotate($sandbox = false, $candidate = false)
+    public function actionAnnotate($sandbox = false, $paragraph = false)
     {
-        $model = new ClaimForm($sandbox,$candidate);
+        $model = new ClaimForm($sandbox, $paragraph);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['claim/mutate']);
         }
@@ -62,14 +53,17 @@ class ClaimController extends Controller
 
     public function actionMutate($sandbox = false)
     {
-        if (!Yii::$app->session->has('claims') || count(Yii::$app->session->get('claims')) == 0)
+        if (!Yii::$app->session->has('claims') || count(Yii::$app->session->get('claims')) == 0) {
             return $this->redirect(['claim/annotate', 'sandbox' => $sandbox]);
+        }
         $model = new MutateForm();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['claim/mutate', 'sandbox' => $sandbox]);
         }
-        return $this->render('mutate', ['model'=>$model, 'sandbox' => $sandbox]);
+        return $this->render('mutate', ['model' => $model, 'sandbox' => $sandbox]);
     }
+
+
 
     /**
      * Displays homepage.

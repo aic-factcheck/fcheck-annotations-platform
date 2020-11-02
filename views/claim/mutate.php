@@ -13,7 +13,7 @@ use yii\bootstrap4\Html;
 
 
 $this->title = 'Tvorba výroků';
-Helper::setEntities($ners = $model->claim->candidate0->knowledge['ners']);
+Helper::setEntities($ners = $model->claim->paragraph0->ners);
 ?>
 <div class="container">
     <div ng-class="{sandbox:testingMode}" class="ng-scope sandbox">
@@ -63,19 +63,20 @@ Helper::setEntities($ners = $model->claim->candidate0->knowledge['ners']);
                         <div class="col-md-7">
                             <div class="card bg-white">
                                 <div class="card-body">
-                                    <h5 class="card-title d-inline"><?= $model->claim->candidate0->title ?> </h5>
-                                    <?= Yii::$app->formatter->asDatetime($model->claim->candidate0->date) ?>
+                                    <h5 class="card-title d-inline"><?= $model->claim->paragraph0->article0->get('title') ?> </h5>
+                                    <?= Yii::$app->formatter->asDatetime($model->claim->paragraph0->article0->date) ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="card bg-light mb-3 zdrojova-veta">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-5"><h4 class="card-title">Zdrojová věta</h4>
-                            <p class="card-text">Z této věty a přilehlého bloku textu vycházejte při tvorbě tvrzení o
+                        <div class="col-md-5"><h4 class="card-title">Zdrojový odstavec</h4>
+                            <p class="card-text">Z tohoto odstavce a příslušného článku vycházejte při tvorbě tvrzení o
                                 jedné z
                                 jmenných entit.<br/>
                                 <em>(<?= implode(", ", $ners) ?>)</em></p>
@@ -83,16 +84,14 @@ Helper::setEntities($ners = $model->claim->candidate0->knowledge['ners']);
                         <div class="col-md-7">
                             <div class="card bg-white">
                                 <div class="card-body">
-                                    <p class="card-text">
-                                        <?php
-                                        foreach ($model->claim->candidate0->sentences as $i => $sentence) {
-                                            if ($i == $model->claim->candidate0->sentence) {
-                                                echo Html::tag("strong", Helper::presentText($sentence));
-                                            } else {
-                                                echo Html::tag("span", Helper::presentText($sentence), ["class" => "context"]);
-                                            }
-                                        } ?>
-                                    </p>
+                                    <?php
+                                    foreach ($model->claim->paragraph0->article0->paragraphs as $paragraph) {
+                                        if ($paragraph->id == $model->claim->paragraph0->id) {
+                                            echo Html::tag('p', Html::tag("strong", $paragraph->get('text')));
+                                        } else {
+                                            echo Html::tag("p", $paragraph->get('text'), ["class" => "context"]);
+                                        }
+                                    } ?>
                                     <?= Helper::expandLink('Zobrazit kontext', '.context', 'Skrýt kontext') ?>
                                 </div>
                             </div>
@@ -114,14 +113,8 @@ Helper::setEntities($ners = $model->claim->candidate0->knowledge['ners']);
                         <div class="col-md-7">
                             <div class="card bg-white">
                                 <div class="card-body">
-                                    <?php $d = $model->claim->candidate0->knowledge; ?>
-                                    <h4>Fulltextové vyhledávání</h4>
-                                    <?php foreach ($d['ner_blocks'] as $block) {
-                                        echo Helper::dictionaryItem($block);
-                                    } ?>
-                                    <h4 class="mt-3">Sémantické vyhledávání</h4>
-                                    <?php foreach ($d['semantic_blocks'] as $block) {
-                                        echo Helper::dictionaryItem($block);
+                                    <?php foreach ($model->claim->paragraph0->knowledge as $paragraph) {
+                                        echo Helper::dictionaryItem($paragraph);
                                     } ?>
                                 </div>
                             </div>
@@ -129,6 +122,7 @@ Helper::setEntities($ners = $model->claim->candidate0->knowledge['ners']);
                     </div>
                 </div>
             </div>
+
 
             <div class="card bg-primary text-white mb-3 zdrojovy-vyrok">
                 <div class="card-body">
@@ -166,10 +160,10 @@ Helper::setEntities($ners = $model->claim->candidate0->knowledge['ners']);
                         <?php foreach (Claim::MUTATION_COLORS as $mutation => $color) {
                             ?>
                             <div class="col-md-6 py-3">
-                                <div class="card bg-<?=$color?> text-white">
+                                <div class="card bg-<?= $color ?> text-white">
                                     <div class="card-body">
-                                        <h5 ><?= $mutation ?> </h5>
-                                        <?= $form->field($model, "mutations[$mutation]")->textarea(['class' => 'w-100 form-control','rows'=>3, 'placeholder'=>"Výroky vytvořené obměnou $mutation"])->label(false) ?>
+                                        <h5><?= $mutation ?> </h5>
+                                        <?= $form->field($model, "mutations[$mutation]")->textarea(['class' => 'w-100 form-control', 'rows' => 3, 'placeholder' => "Výroky vytvořené obměnou $mutation"])->label(false) ?>
                                     </div>
                                 </div>
                             </div>

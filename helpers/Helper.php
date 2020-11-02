@@ -4,11 +4,12 @@
 namespace app\helpers;
 
 
+use app\models\Paragraph;
 use yii\helpers\Html;
 
 class Helper
 {
-    const SPACE_BEFORE = [",", ".", ":", ";", ")", "]"];
+    const SPACE_BEFORE = [",", ".", ":", ";", ")", "]", "!", "?"];
     const SPACE_AFTER = ["[", "("];
     const SWAP = ["`` " => "„", " ''" => "“"];
     private static $detokenizationMap = null;
@@ -24,17 +25,25 @@ class Helper
         self::$entities = $entities;
     }
 
-    public static function dictionaryItem($item = [])
+    /**
+     * @param $knowledge Paragraph
+     * @return string
+     */
+    public static function dictionaryItem($knowledge)
     {
-        if (array_key_exists($item['id'], self::$printedItems)) return '';
-        self::$printedItems[$item['id']] = true;
         $content = "";
-        foreach ($item['blocks'] as $key => $block) {
-            $content .= Html::tag('p', self::presentText($block), ['class' => $key == $item['id'] ? 'p-active' : "p-$item[id]"]);
+        $article = $knowledge->article0;
+        foreach ($article->paragraphs as $paragraph) {
+            if ($paragraph->rank == 0) continue;
+            $content .= Html::tag('p', $paragraph->get('text'), ['class' => $paragraph->id == $knowledge->id ? 'p-active' : "p-$knowledge->id"]);
         }
-        $title = self::presentText($item["title"]);
-        return Html::tag("h6", self::expandLink("+ " . $title, ".$item[id]", " − " . $title)) .
-            Html::tag("div", $content . self::expandLink("Více", ".p-$item[id]", "Méně"), ["class" => $item["id"]]);
+        return Html::tag("h6", self::expandLink("+ " . $article->get('title'), ".$knowledge->id", " − " . $article->get('title'))) .
+            Html::tag("div", $content . self::expandLink("Více", ".p-$knowledge->id", "Méně"), ["class" => $knowledge->id]);
+    }
+
+    public static function expandLink($text, $target, $alt = "Skrýt")
+    {
+        return Html::a($text, "#", ['data' => ['show' => $target, 'alt' => $alt]]);
     }
 
     public static function presentText($text)
@@ -62,10 +71,5 @@ class Helper
     public static function highlightEntities($text)
     {
         return strtr($text, self::$entityMarks);
-    }
-
-    public static function expandLink($text, $target, $alt = "Skrýt")
-    {
-        return Html::a($text, "#", ['data' => ['show' => $target, 'alt' => $alt]]);
     }
 }

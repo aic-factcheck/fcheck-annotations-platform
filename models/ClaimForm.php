@@ -9,20 +9,21 @@ use yii\db\Expression;
 /**
  * LoginForm is the model behind the login form.
  *
- * @property Candidate $candidate
+ * @property Paragraph $paragraph
  *
  */
 class ClaimForm extends Model
 {
     public $claims;
-    public $candidate;
+    public $paragraph;
     public $sandbox;
 
-    public function __construct($sandbox = false, $candidate = false)
+    public function __construct($sandbox = false, $paragraph = false)
     {
         parent::__construct();
         $this->sandbox = $sandbox;
-        $this->candidate = $candidate ? Candidate::findOne(['id' => $candidate]) : Candidate::find()
+        $this->paragraph = $paragraph ? Paragraph::findOne(['id' => $paragraph]) : Paragraph::find()
+            ->where(['IS NOT', 'candidate_of', null])
             ->orderBy(new Expression('rand()'))
             ->one();
     }
@@ -52,12 +53,10 @@ class ClaimForm extends Model
             foreach (explode("\n", $this->claims) as $claim_) {
                 if (strlen(trim($claim_))) {
                     $claim = new Claim([
-                        'sentence_id' => $this->candidate->sentence,
-                        'entity' => $this->candidate->entity,
+                        'paragraph' => $this->paragraph->id,
                         'claim' => $claim_,
                         'sandbox' => $this->sandbox,
                         'labelled' => 0,
-                        'candidate' => $this->candidate->id,
                         'user' => Yii::$app->user->id
                     ]);
                     if ($claim->save(false)) {

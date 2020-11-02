@@ -41,9 +41,7 @@ class MutateForm extends Model
             foreach (Claim::MUTATIONS as $mutation){
                 foreach (explode("\n", $this->mutations[$mutation]) as $claim_) {
                     $claim = new Claim([
-                        'sentence_id' => $this->claim->sentence_id,
-                        'candidate' => $this->claim->candidate,
-                        'entity' => $this->claim->entity,
+                        'paragraph' => $this->claim->paragraph,
                         'claim' => $claim_,
                         'mutation_type' => $mutation,
                         'mutated_from' => $this->claim->id,
@@ -56,6 +54,7 @@ class MutateForm extends Model
                 }
             }
 
+            Yii::$app->session->set('mutations',  $result);
             Yii::$app->session->set('claims',  array_slice(Yii::$app->session->get('claims'), 1));
             return true;
         }

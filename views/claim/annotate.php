@@ -12,7 +12,7 @@ use yii\bootstrap4\Html;
 
 
 $this->title = 'Tvorba tvrzení';
-Helper::setEntities($ners = $model->candidate->knowledge['ners']);
+Helper::setEntities($ners = $model->paragraph->ners);
 ?>
 <div class="container">
     <h1>Tvorba tvrzení (Ú<sub>1</sub>a)</h1>
@@ -73,35 +73,34 @@ Helper::setEntities($ners = $model->candidate->knowledge['ners']);
                 <div class="col-md-7">
                     <div class="card bg-white">
                         <div class="card-body">
-                            <h5 class="card-title d-inline"><?= $model->candidate->title ?> </h5>
-                            <?= Yii::$app->formatter->asDatetime($model->candidate->date) ?>
+                            <h5 class="card-title d-inline"><?= $model->paragraph->article0->get('title') ?> </h5>
+                            <?= Yii::$app->formatter->asDatetime($model->paragraph->article0->date) ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="card bg-light mb-3 zdrojova-veta">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-5"><h4 class="card-title">Zdrojová věta</h4>
-                    <p class="card-text">Z této věty a přilehlého bloku textu vycházejte při tvorbě tvrzení o jedné z
+                <div class="col-md-5"><h4 class="card-title">Zdrojový odstavec</h4>
+                    <p class="card-text">Z tohoto odstavce a příslušného článku vycházejte při tvorbě tvrzení o jedné z
                         jmenných entit.<br/>
                         <em>(<?= implode(", ", $ners) ?>)</em></p>
                 </div>
                 <div class="col-md-7">
                     <div class="card bg-white">
                         <div class="card-body">
-                            <p class="card-text">
                                 <?php
-                                foreach ($model->candidate->sentences as $i => $sentence) {
-                                    if ($i == $model->candidate->sentence) {
-                                        echo Html::tag("strong", Helper::presentText($sentence));
+                                foreach ($model->paragraph->article0->paragraphs as $paragraph) {
+                                    if ($paragraph->id == $model->paragraph->id) {
+                                        echo Html::tag('p',Html::tag("strong", $paragraph->get('text')));
                                     } else {
-                                        echo Html::tag("span", Helper::presentText($sentence), ["class" => "context"]);
+                                        echo Html::tag("p", $paragraph->get('text'), ["class" => "context"]);
                                     }
                                 } ?>
-                            </p>
                             <?= Helper::expandLink('Zobrazit kontext', '.context', 'Skrýt kontext') ?>
                         </div>
                     </div>
@@ -121,14 +120,8 @@ Helper::setEntities($ners = $model->candidate->knowledge['ners']);
                 <div class="col-md-7">
                     <div class="card bg-white">
                         <div class="card-body">
-                            <?php $d = $model->candidate->knowledge; ?>
-                            <h4>Fulltextové vyhledávání</h4>
-                            <?php foreach ($d['ner_blocks'] as $block) {
-                                echo Helper::dictionaryItem($block);
-                            } ?>
-                            <h4 class="mt-3">Sémantické vyhledávání</h4>
-                            <?php foreach ($d['semantic_blocks'] as $block) {
-                                echo Helper::dictionaryItem($block);
+                            <?php foreach ($model->paragraph->knowledge as $paragraph) {
+                                echo Helper::dictionaryItem($paragraph);
                             } ?>
                         </div>
                     </div>
@@ -139,7 +132,7 @@ Helper::setEntities($ners = $model->candidate->knowledge['ners']);
 
     <?php $form = ActiveForm::begin([
         'id' => 'claim-form',
-        'action' => ['claim/annotate', 'sandbox' => $sandbox, 'candidate' => $model->candidate->id]
+        'action' => ['claim/annotate', 'sandbox' => $sandbox, 'paragraph' => $model->paragraph->id]
     ]); ?>
 
     <div class="card bg-light mb-3 tvrzeni">
