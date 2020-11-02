@@ -35,8 +35,8 @@ class Evidence extends \yii\db\ActiveRecord
             [['label', 'paragraph'], 'integer'],
             [['created_at'], 'safe'],
             [['label', 'paragraph'], 'unique', 'targetAttribute' => ['label', 'paragraph']],
-            [['label'], 'exist', 'skipOnError' => true, 'targetClass' => Label::className(), 'targetAttribute' => ['label' => 'id']],
-            [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['paragraph' => 'id']],
+            [['label'], 'exist', 'skipOnError' => true, 'targetClass' => Label::class, 'targetAttribute' => ['label' => 'id']],
+            [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['paragraph' => 'id']],
         ];
     }
 
@@ -59,7 +59,7 @@ class Evidence extends \yii\db\ActiveRecord
      */
     public function getLabel0()
     {
-        return $this->hasOne(Label::className(), ['id' => 'label']);
+        return $this->hasOne(Label::class, ['id' => 'label']);
     }
 
     /**
@@ -69,6 +69,6 @@ class Evidence extends \yii\db\ActiveRecord
      */
     public function getParagraph0()
     {
-        return $this->hasOne(Paragraph::className(), ['id' => 'paragraph']);
+        return $this->hasOne(Paragraph::class, ['id' => 'paragraph']);
     }
 }

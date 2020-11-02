@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "claim".
@@ -32,6 +33,7 @@ class Claim extends ActiveRecord
 {
     const MUTATIONS = ["rephrase", "substitute_similar", "substitute_dissimilar", "specific", "general", "negate"];
     const MUTATION_COLORS = ["rephrase" => "success", "substitute_similar" => "info", "substitute_dissimilar" => "secondary", "specific" => "warning", "general" => "primary", "negate" => "danger"];
+    private $_knowledge = null;
 
     /**
      * {@inheritdoc}
@@ -58,9 +60,9 @@ class Claim extends ActiveRecord
             [['claim'], 'required'],
             [['claim'], 'string'],
             [['mutation_type'], 'string', 'max' => 32],
-            [['mutated_from'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::className(), 'targetAttribute' => ['mutated_from' => 'id']],
-            [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
-            [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['paragraph' => 'id']],
+            [['mutated_from'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::class, 'targetAttribute' => ['mutated_from' => 'id']],
+            [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user' => 'id']],
+            [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['paragraph' => 'id']],
         ];
     }
 
@@ -90,7 +92,7 @@ class Claim extends ActiveRecord
      */
     public function getMutatedFrom()
     {
-        return $this->hasOne(Claim::className(), ['id' => 'mutated_from']);
+        return $this->hasOne(Claim::class, ['id' => 'mutated_from']);
     }
 
     /**
@@ -100,7 +102,7 @@ class Claim extends ActiveRecord
      */
     public function getClaims()
     {
-        return $this->hasMany(Claim::className(), ['mutated_from' => 'id']);
+        return $this->hasMany(Claim::class, ['mutated_from' => 'id']);
     }
 
     /**
@@ -110,7 +112,7 @@ class Claim extends ActiveRecord
      */
     public function getUser0()
     {
-        return $this->hasOne(User::className(), ['id' => 'user']);
+        return $this->hasOne(User::class, ['id' => 'user']);
     }
 
     /**
@@ -120,7 +122,7 @@ class Claim extends ActiveRecord
      */
     public function getParagraph0()
     {
-        return $this->hasOne(Paragraph::className(), ['id' => 'paragraph']);
+        return $this->hasOne(Paragraph::class, ['id' => 'paragraph']);
     }
 
     /**
@@ -130,7 +132,7 @@ class Claim extends ActiveRecord
      */
     public function getClaimKnowledges()
     {
-        return $this->hasMany(ClaimKnowledge::className(), ['claim' => 'id']);
+        return $this->hasMany(ClaimKnowledge::class, ['claim' => 'id']);
     }
 
     /**
@@ -140,6 +142,23 @@ class Claim extends ActiveRecord
      */
     public function getLabels()
     {
-        return $this->hasMany(Label::className(), ['claim' => 'id']);
+        return $this->hasMany(Label::class, ['claim' => 'id']);
+    }
+
+    public function getClaimKnowledge()
+    {
+        return $this->hasMany(Paragraph::class, ['id' => 'knowledge'])
+            ->viaTable('claim_knowledge', ['claim' => 'id']);
+    }
+
+    public function getKnowledge()
+    {
+        if ($this->_knowledge == null) {
+            $this->_knowledge = [];
+            foreach (ArrayHelper::merge($this->claimKnowledge, $this->paragraph0->knowledge) as $paragraph) {
+                $this->_knowledge[$paragraph->id] = $paragraph;
+            }
+        }
+        return $this->_knowledge;
     }
 }

@@ -72,6 +72,6 @@ class Article extends ActiveRecord
      */
     public function getParagraphs()
     {
-        return $this->hasMany(Paragraph::className(), ['article' => 'id']);
+        return $this->hasMany(Paragraph::class, ['article' => 'id']);
     }
 }

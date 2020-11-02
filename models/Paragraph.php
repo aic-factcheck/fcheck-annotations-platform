@@ -50,8 +50,8 @@ class Paragraph extends \yii\db\ActiveRecord
             [['rank', 'candidate_of', 'created_at', 'updated_at'], 'integer'],
             [['text', 'ners'], 'string'],
             [['article'], 'string', 'max' => 64],
-            [['article'], 'exist', 'skipOnError' => true, 'targetClass' => Article::className(), 'targetAttribute' => ['article' => 'id']],
-            [['candidate_of'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['candidate_of' => 'id']],
+            [['article'], 'exist', 'skipOnError' => true, 'targetClass' => Article::class, 'targetAttribute' => ['article' => 'id']],
+            [['candidate_of'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['candidate_of' => 'id']],
         ];
     }
 
@@ -79,7 +79,7 @@ class Paragraph extends \yii\db\ActiveRecord
      */
     public function getClaimKnowledges()
     {
-        return $this->hasMany(ClaimKnowledge::className(), ['knowledge' => 'id']);
+        return $this->hasMany(ClaimKnowledge::class, ['knowledge' => 'id']);
     }
 
     /**
@@ -89,7 +89,7 @@ class Paragraph extends \yii\db\ActiveRecord
      */
     public function getEvidences()
     {
-        return $this->hasMany(Evidence::className(), ['paragraph' => 'id']);
+        return $this->hasMany(Evidence::class, ['paragraph' => 'id']);
     }
 
     /**
@@ -99,7 +99,7 @@ class Paragraph extends \yii\db\ActiveRecord
      */
     public function getLabels()
     {
-        return $this->hasMany(Label::className(), ['id' => 'label'])->viaTable('evidence', ['paragraph' => 'id']);
+        return $this->hasMany(Label::class, ['id' => 'label'])->viaTable('evidence', ['paragraph' => 'id']);
     }
 
     /**
@@ -109,7 +109,7 @@ class Paragraph extends \yii\db\ActiveRecord
      */
     public function getArticle0()
     {
-        return $this->hasOne(Article::className(), ['id' => 'article']);
+        return $this->hasOne(Article::class, ['id' => 'article']);
     }
 
     /**
@@ -119,7 +119,7 @@ class Paragraph extends \yii\db\ActiveRecord
      */
     public function getCandidateOf()
     {
-        return $this->hasOne(User::className(), ['id' => 'candidate_of']);
+        return $this->hasOne(User::class, ['id' => 'candidate_of']);
     }
 
     /**
@@ -129,11 +129,11 @@ class Paragraph extends \yii\db\ActiveRecord
      */
     public function getParagraphKnowledges()
     {
-        return $this->hasMany(ParagraphKnowledge::className(), ['paragraph' => 'id']);
+        return $this->hasMany(ParagraphKnowledge::class, ['paragraph' => 'id']);
     }
 
     public function getKnowledge() {
-        return $this->hasMany(Paragraph::className(), ['id' => 'knowledge'])
+        return $this->hasMany(Paragraph::class, ['id' => 'knowledge'])
             ->viaTable('paragraph_knowledge', ['paragraph' => 'id']);
     }
 }

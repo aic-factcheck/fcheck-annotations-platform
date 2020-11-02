@@ -35,8 +35,8 @@ class ParagraphKnowledge extends \yii\db\ActiveRecord
             [['paragraph', 'knowledge', 'semantic'], 'integer'],
             [['created_at'], 'safe'],
             [['paragraph', 'knowledge', 'semantic'], 'unique', 'targetAttribute' => ['paragraph', 'knowledge', 'semantic']],
-            [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['paragraph' => 'id']],
-            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['knowledge' => 'id']],
+            [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['paragraph' => 'id']],
+            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['knowledge' => 'id']],
         ];
     }
 
@@ -60,7 +60,7 @@ class ParagraphKnowledge extends \yii\db\ActiveRecord
      */
     public function getParagraph0()
     {
-        return $this->hasOne(Paragraph::className(), ['id' => 'paragraph']);
+        return $this->hasOne(Paragraph::class, ['id' => 'paragraph']);
     }
 
     /**
@@ -70,6 +70,6 @@ class ParagraphKnowledge extends \yii\db\ActiveRecord
      */
     public function getKnowledge0()
     {
-        return $this->hasOne(Paragraph::className(), ['id' => 'knowledge']);
+        return $this->hasOne(Paragraph::class, ['id' => 'knowledge']);
     }
 }

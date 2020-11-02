@@ -49,8 +49,8 @@ class Label extends ActiveRecord
             [['claim'], 'required'],
             [['label', 'evidence'], 'string'],
             ['label', 'in', 'range' => self::LABELS],
-            [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
-            [['claim'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::className(), 'targetAttribute' => ['claim' => 'id']],
+            [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user' => 'id']],
+            [['claim'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::class, 'targetAttribute' => ['claim' => 'id']],
         ];
     }
 
@@ -79,7 +79,7 @@ class Label extends ActiveRecord
      */
     public function getUser0()
     {
-        return $this->hasOne(User::className(), ['id' => 'user']);
+        return $this->hasOne(User::class, ['id' => 'user']);
     }
 
     /**
@@ -89,6 +89,6 @@ class Label extends ActiveRecord
      */
     public function getClaim0()
     {
-        return $this->hasOne(Claim::className(), ['id' => 'claim']);
+        return $this->hasOne(Claim::class, ['id' => 'claim']);
     }
 }

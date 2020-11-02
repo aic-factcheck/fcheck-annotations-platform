@@ -34,8 +34,8 @@ class ClaimKnowledge extends \yii\db\ActiveRecord
             [['claim', 'knowledge'], 'required'],
             [['claim', 'knowledge', 'semantic'], 'integer'],
             [['created_at'], 'safe'],
-            [['claim'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::className(), 'targetAttribute' => ['claim' => 'id']],
-            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['knowledge' => 'id']],
+            [['claim'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::class, 'targetAttribute' => ['claim' => 'id']],
+            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['knowledge' => 'id']],
         ];
     }
 
@@ -59,7 +59,7 @@ class ClaimKnowledge extends \yii\db\ActiveRecord
      */
     public function getClaim0()
     {
-        return $this->hasOne(Claim::className(), ['id' => 'claim']);
+        return $this->hasOne(Claim::class, ['id' => 'claim']);
     }
 
     /**
@@ -69,6 +69,6 @@ class ClaimKnowledge extends \yii\db\ActiveRecord
      */
     public function getKnowledge0()
     {
-        return $this->hasOne(Paragraph::className(), ['id' => 'knowledge']);
+        return $this->hasOne(Paragraph::class, ['id' => 'knowledge']);
     }
 }
