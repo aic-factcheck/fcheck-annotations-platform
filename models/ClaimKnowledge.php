@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "claim_knowledge".
@@ -25,6 +26,18 @@ class ClaimKnowledge extends \yii\db\ActiveRecord
         return 'claim_knowledge';
     }
 
+
+    public static function fromDictionary($claim, $dictionary)
+    {
+        foreach (ArrayHelper::merge($dictionary["semantic_blocks"], $dictionary["ner_blocks"]) as $sample) {
+            Article::fromSample($sample);
+            (new ClaimKnowledge([
+                "claim" => $claim->id,
+                "knowledge" => Paragraph::findByCtkId($sample["id"])->id,
+                "search_term" => array_key_exists("search_term", $sample) ? $sample["search_term"] : ''
+            ]))->save();
+        }
+    }
     /**
      * {@inheritdoc}
      */

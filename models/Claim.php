@@ -43,6 +43,24 @@ class Claim extends ActiveRecord
         return 'claim';
     }
 
+    public function afterFind()
+    {
+        if ($this->ners !== null) {
+            $this->ners = explode(",", $this->ners);
+        }else{
+            $this->ners = [];
+        }
+        return parent::afterFind();
+    }
+
+    public function beforeValidate()
+    {
+        if (is_array($this->ners)) {
+            $this->ners = implode(",", $this->ners);
+        }
+        return parent::beforeValidate();
+    }
+
     public function behaviors()
     {
         return [
@@ -58,7 +76,7 @@ class Claim extends ActiveRecord
         return [
             [['user', 'paragraph', 'mutated_from', 'sandbox', 'labelled', 'created_at', 'updated_at'], 'integer'],
             [['claim'], 'required'],
-            [['claim'], 'string'],
+            [['claim', 'ners'], 'string'],
             [['mutation_type'], 'string', 'max' => 32],
             [['mutated_from'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::class, 'targetAttribute' => ['mutated_from' => 'id']],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user' => 'id']],

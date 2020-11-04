@@ -47,6 +47,7 @@ class LabelController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', "Anotace úspěšně uložena.");
             return $this->redirect(['index', 'sandbox' => $sandbox, 'oracle' => $oracle,]);
+
         }
         return $this->render('index', ['model' => $model]);
     }

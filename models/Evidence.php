@@ -4,18 +4,21 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "evidence".
  *
  * @property int $label
  * @property int $paragraph
+ * @property int $group
  * @property string $created_at
  *
  * @property Label $label0
  * @property Paragraph $paragraph0
  */
-class Evidence extends \yii\db\ActiveRecord
+class Evidence extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -31,12 +34,12 @@ class Evidence extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['label', 'paragraph'], 'required'],
-            [['label', 'paragraph'], 'integer'],
+            [['label', 'paragraph', 'group'], 'required'],
+            [['label', 'paragraph', 'group'], 'integer'],
             [['created_at'], 'safe'],
             [['label', 'paragraph'], 'unique', 'targetAttribute' => ['label', 'paragraph']],
-            [['label'], 'exist', 'skipOnError' => true, 'targetClass' => Label::class, 'targetAttribute' => ['label' => 'id']],
-            [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['paragraph' => 'id']],
+            [['label'], 'exist', 'skipOnError' => true, 'targetClass' => Label::className(), 'targetAttribute' => ['label' => 'id']],
+            [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['paragraph' => 'id']],
         ];
     }
 
@@ -48,6 +51,7 @@ class Evidence extends \yii\db\ActiveRecord
         return [
             'label' => 'Label',
             'paragraph' => 'Paragraph',
+            'group' => 'Group',
             'created_at' => 'Created At',
         ];
     }
@@ -55,20 +59,20 @@ class Evidence extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Label0]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getLabel0()
     {
-        return $this->hasOne(Label::class, ['id' => 'label']);
+        return $this->hasOne(Label::className(), ['id' => 'label']);
     }
 
     /**
      * Gets query for [[Paragraph0]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getParagraph0()
     {
-        return $this->hasOne(Paragraph::class, ['id' => 'paragraph']);
+        return $this->hasOne(Paragraph::className(), ['id' => 'paragraph']);
     }
 }

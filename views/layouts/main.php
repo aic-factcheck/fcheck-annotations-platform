@@ -84,6 +84,15 @@ AppAsset::register($this);
     </footer>
 
     <?php $this->endBody() ?>
+
+    <?php if (Yii::$app->session->has('mutations')) {
+        echo '<script type="text/javascript">';
+        foreach (Yii::$app->session->get('mutations') as $mutation) {
+            echo "$.ajax({url:'" . Url::to(['ctk/augment-knowledge', 'claim' => $mutation]) . "',method: 'GET'});";
+        }
+        echo '</script>';
+        Yii::$app->session->remove('mutations');
+    } ?>
     </body>
     </html>
 <?php $this->endPage() ?>

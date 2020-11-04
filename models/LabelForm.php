@@ -5,12 +5,13 @@ namespace app\models;
 use app\helpers\Entity;
 use Yii;
 use yii\base\Model;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * LoginForm is the model behind the login form.
  *
  * @property User|null $user This property is read-only.
- *
+ * @property Claim $claim
  */
 class LabelForm extends Model
 {
@@ -29,6 +30,10 @@ class LabelForm extends Model
         $this->claim = $claim;
     }
 
+    public function behaviors()
+    {
+        return [TimestampBehavior::class,];
+    }
 
     /**
      * @return array the validation rules.
@@ -45,19 +50,24 @@ class LabelForm extends Model
     public function save()
     {
         $this->claim->labelled = true;
-        return $this->validate() && (new Label([
+
+        if ($this->validate()) {
+            if (($label = new Label([
                 'claim' => $this->claim->id,
                 'label' => Yii::$app->request->post('label'),
                 'user' => Yii::$app->user->id,
                 'sandbox' => $this->sandbox,
                 'flag' => $this->flag,
                 'oracle' => $this->oracle,
-                'evidence' => json_encode(Yii::$app->request->post('evidence'),JSON_UNESCAPED_UNICODE)
-            ]))->save() && $this->claim->save(false,['labelled']);
-    }
-
-    public function getEntitySentences()
-    {
-        return Entity::get($this->claim->sentence["entity"]);
+            ]))->save()) {
+                foreach (Yii::$app->request->post("evidence") as $group => $evidenceList) {
+                    foreach ($evidenceList as $paragraph) {
+                        (new Evidence(['label' => $label->id, 'paragraph' => $paragraph, 'group' => $group]))->save();
+                    }
+                }
+                return $this->claim->save(false, ['labelled']);
+            }
+        }
+        return false;
     }
 }

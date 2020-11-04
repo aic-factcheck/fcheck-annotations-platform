@@ -12,7 +12,7 @@ function bindAll() {
     $(".evidence").change(function () {
         $(".btn-success,.btn-danger").removeAttr('disabled');
         if ($(this).parent().is(":last-child")) {
-            $('#evidence tr td:last-child,#evidence tr th:last-child').each(function () {
+            $('#evidence tr:not([data-show]) td:last-child,#evidence tr:not([data-show])  th:last-child').each(function () {
                 var clone = $(this).clone().html('');
                 if (clone.is('th')) {
                     if ($(this).parent().hasClass("table-primary")) {
@@ -23,7 +23,7 @@ function bindAll() {
                 } else {
                     var $checkbox = $(this).find('input[type=checkbox]').clone().prop('checked', false);
                     var name = $checkbox.attr('name').split('[');
-                    $checkbox.attr('name', name[0] + '[' + (parseInt(name[1]) + 1) + '][' + name[2]);
+                    $checkbox.attr('name', name[0] + '[' + (parseInt(name[1]) + 1) + '][]');
                     clone.append($checkbox);
                 }
                 $(this).parent().append(clone);

@@ -12,7 +12,7 @@ $this->title = 'Anotační Platforma FCheck TAČR';
         <div class="card-body">
             <h3 class="card-title">Ú<sub>0</sub>: Nalezení kandidátních vět</h3>
             <p class="card-text">Cílem úkolu je identifikovat v korpusu ČTK shluky vět, které je možno použít pro úkol Ú<sub>1</sub></p>
-            <?= Html::a('Ostrá verze', ['candidate/alt'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Ostrá verze', ['ctk/index'], ['class' => 'btn btn-primary']) ?>
         </div>
     </div>
     <div class="card my-3">

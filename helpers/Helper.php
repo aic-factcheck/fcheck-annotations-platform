@@ -13,7 +13,7 @@ class Helper
     const SPACE_AFTER = ["[", "("];
     const SWAP = ["`` " => "„", " ''" => "“"];
     private static $detokenizationMap = null;
-    private static $entities = [];
+    public static $entities = [];
     private static $entityMarks = [];
     private static $printedItems = [];
 

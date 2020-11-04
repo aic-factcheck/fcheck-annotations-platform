@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Article;
 use app\models\Claim;
+use app\models\ClaimKnowledge;
 use app\models\Paragraph;
 use app\models\ParagraphKnowledge;
 use yii\helpers\ArrayHelper;
@@ -60,15 +61,13 @@ class CtkController extends Controller
         $claim = Claim::findOne($claim);
         $q = urlencode($claim->claim);
         $paragraph = $claim->paragraph0;
-        die("http://localhost:8601/dictionary/{$paragraph->article}_{$paragraph->rank}?q=$q");
         $dictionary = (new Client())->createRequest()
             ->setMethod('GET')
             ->setUrl("http://localhost:8601/dictionary/{$paragraph->article}_{$paragraph->rank}?q=$q")
             ->send()
             ->getData();
-        ParagraphKnowledge::fromDictionary($paragraph, $dictionary);
-        $paragraph->ners = $dictionary['ners'];
-        $paragraph->candidate_of = Yii::$app->user->id;
-        return $paragraph->save();
+        ClaimKnowledge::fromDictionary($claim, $dictionary);
+        $claim->ners = $dictionary['ners'];
+        return $claim->save();
     }
 }
