@@ -122,7 +122,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
             <div class="card bg-primary text-white mb-3 zdrojovy-vyrok">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-5"><h4 class="card-title">Obměňujete výrok</h4></div>
+                        <div class="col-md-5"><h4 class="card-title">Originální výrok</h4></div>
                         <div class="col-md-7">
                             <div class="card bg-white text-black">
                                 <div class="card-body">
@@ -146,8 +146,15 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                             <p>Vygenerujte <strong>pravdivé i nepravdivé</strong> mutace.</p>
                             <p>Všechna fakta by měla užívat a odkazovat se na jakoukoliv entitu přímo (tzn. zájména by neměla být používána).</p>
                             <p>Mutace, které vygenerujete, <strong>by měly být <u>objektivní</u> a
-                                    <u>ověřitelné</u> pomocí veřejně dostupných informací a všeobecných znalostí.</strong></p>
+                                <u>ověřitelné</u> pomocí veřejně dostupných informací a všeobecných znalostí.</strong></p>
                             <p>Pokud není možné vygenerovat mutaci, nechejte box prázdný.</p>
+
+                            <p><strong>Parafráze</strong>: Změňte formulaci výroku nebo parafrázujte tak, aby smysl a pravdivost zůstaly nezměněny. <strong>Parafrázovaný výrok musí vyplývat z původního a také naopak.</strong> .</p>
+                            <p><strong>Nahrazení podobnou entitou nebo vztahem</strong>: Nahraďte entitu, vztah nebo obojí podobnou entitou či vztahem. <strong>Vyhněte se parafrázování původního tvrzení. Z nového tvrzení by neměl plynout původní výrok.</strong></p>
+                            <p><strong>Nahrazení odlišnou entitou nebo vztahem</strong>: Nahraďte entitu, vztah nebo obojí odlišnou entitou či vztahem. <strong>Vyhněte se parafrázování původního tvrzení. Z nového tvrzení by neměl plynout původní výrok.</strong></p>
+                            <p><strong>Zúžení</strong>: Změňte formulaci tak, aby byl nový výrok určitější - aby z nového výroku plynul také výrok původní.</p>
+                            <p><strong>Zobecnění</strong>: Změňte formulaci tak, aby byl nový výrok méně určitější - aby z originálního výroku plynul i výrok nový.</p>
+                            <p><strong>Negace</strong>: Vytvořte negaci originálního výroku. Pokuste se vyvarovat jednoduché negaci pomocí přidání záporu.</p>
                         </div>
                         <?php foreach (Claim::MUTATION_COLORS as $mutation => $color) {
                             ?>
