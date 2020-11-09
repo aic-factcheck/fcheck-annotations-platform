@@ -31,8 +31,8 @@ use yii\helpers\ArrayHelper;
  */
 class Claim extends ActiveRecord
 {
-    const MUTATIONS = ["rephrase", "substitute_similar", "substitute_dissimilar", "specific", "general", "negate"];
-    const MUTATION_COLORS = ["rephrase" => "success", "substitute_similar" => "info", "substitute_dissimilar" => "secondary", "specific" => "warning", "general" => "primary", "negate" => "danger"];
+    const MUTATIONS = ["Parafráze", "Nahrazení podobnou entitou nebo vztahem", "Nahrazení odlišnou entitou nebo vztahem", "Zúžení", "Zobecnění", "Negace"];
+    const MUTATION_COLORS = ["Parafráze" => "success", "Nahrazení podobnou entitou nebo vztahem" => "info", "Nahrazení odlišnou entitou nebo vztahem" => "secondary", "Zúžení" => "warning", "Zobecnění" => "primary", "Negace" => "danger"];
     private $_knowledge = null;
 
     /**
