@@ -54,7 +54,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
 
         <ul>
             <li><strong>Nezapojujte</strong> své vlastní znalosti nebo domněnky o světě.</li>
-            <li>Doplňujicí informace vám jsou předány pomocí <strong>znalostním rámci</strong>,
+            <li>Doplňujicí informace vám jsou předány pomocí <strong>znalostního rámce</strong>,
                 ten obsahuje informace nad rámec původního bloku, které mohou pomoct s vytvořením
                 složitějších tvrzení. (Omezujeme vás pouze na znalostní rámec, abychom byli schopni všechna tvrzení
                 z Ú<sub>1</sub> navázat na konkrétní zdroje z ČTK dat)
@@ -139,7 +139,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
         <div class="card-body">
             <div class="row">
                 <div class="col-md-5"><h4 class="card-title">Pravdivá tvrzení</h4>
-                    <p>Snažte se strávit přibližně 2 minuty tvorbou <strong>2-5</strong> tvrzení z této zdrojové věty.
+                    <p>Snažte se strávit přibližně 2 minuty tvorbou <strong>1-5</strong> tvrzení z této zdrojové věty.
                     </p>
                     <p>Pokud není zdrojová věta použitelná, stiskněte tlačítko <strong>Přeskočit</strong></p>
                     <?= Helper::expandLink("Příklad", "#example") ?>
