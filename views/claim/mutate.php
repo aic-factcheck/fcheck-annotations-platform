@@ -31,25 +31,20 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
 
             <div class="alert alert-warning mt-0" role="alert">
                 <h3 class="alert-heading">Pokyny</h3>
-                <p>The objective of this task is to <strong>generate modifications to claims</strong>. The modifications
-                    can be either <strong>true or false</strong>. You will be given specific instructions about the
-                    types of modifications to make.</p>
+                <p>Cílem tohoto úkolu je <strong>vygenerovat mutace či modifikace výroků</strong>. Mutace mohou být <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů mutací budou uvedeny dále.</p>
                 <ul>
-                    <li>Use the <strong>original claims</strong> and the dictionary as the basis for your modifications
-                        to facts about <strong class="ng-binding"></strong></li>
-                    <li>Reference any entity directly (i.e. pronouns and nominals should not be used).</li>
-                    <li>Minor variations of names are acceptable (e.g. John F Kennedy, JFK, President Kennedy).</li>
-                    <li><strong>Avoid</strong> vague or cautions language (e.g. might be, may be, could be, is reported
-                        that)
+                    <li>Použijte <strong>originální tvrzení</strong> a poskytnuté související články jako základ pro vaše mutace.<strong class="ng-binding"></strong></li>
+                    <li>Na každou entitu se odkazujte přímo (tzn. zájména by neměla být užívána).</li>
+                    <li>Mírné variace jmen a názvů jsou přijatelné (např. John F Kennedy, JFK, President Kennedy).</li>
+                    <li><strong>Vyvarujte se</strong> vágního, neurčitého a příliš opatrného jazyka (např. mohlo by, asi, snad, pravděpodobně atd.)
                     </li>
-                    <li>Correct capitalisation of entity names should be followed (India, not india).</li>
-                    <li>Sentences should end with a period.</li>
-                    <li>Numbers can be formatted in any appropriate English format (including as words for smaller
-                        quantities).
+                    <li>Dodržujte správné psaní velkých počátečních písmen u názvů (např. Indie a nikoliv indie).</li>
+                    <li>Věty ukončujte tečkou.</li>
+                    <li>Čísla mohou být uváděna v libovolném korektním formátu (pro menší čísla lze i slovy).
                     </li>
+                    <li>Další informace jsou poskytnuty ve formě souvisejících článků, které by měly umožnit tvořit složitější a na vícero článcích závislé tvrzení.</li>
                     <!--<li>Additional world knowledge is given to the you in the form of a dictionary. This allows for more complex claims to be generated in a structured manner with information that can be backed up from Wikipedia</li>-->
-                    <li>Some of the extracted text might not be accurate. These are still valid candidates for summary.
-                        It is not your job to fact check the information
+                    <li>Některé z poskytnutých textů nemusejí být přesné či pravdivé. I přes to jsou to validní kandidáti - vašim úkolem není ověřovat danou informaci.
                     </li>
                 </ul>
             </div>
@@ -146,16 +141,13 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                     <div class="row">
                         <div class="col-md-12">
                             <h4 class="card-title">Obměny tvrzení</h4>
-                            <p>Aim to spend about <strong>1 minute</strong> generating each claim. </p>
-                            <p>You <strong>are allowed to incorporate your own world knowledge</strong> in making these
-                                modifications and misinformation.</p>
-                            <p>Generate both <strong>true and false</strong> modifications</p>
-                            <p>All facts should reference any entity directly (i.e. pronouns and nominals should not be
-                                used).</p>
-                            <p>The mutations you produce <strong>should be <u>objective</u> (i.e. not subjective) and
-                                    <u>verifiable</u> using information/knowledge that would be publicly
-                                    available</strong></p>
-                            <p>If it is not possible to generate facts or misinformation, leave the box blank.</p>
+                            <p>Cílem je strávit maximálně okolo <strong>1 minuty</strong> při generování každé mutace výroku. </p>
+                            <p>Při vytváření mutací <strong>můžete zahrnout vlastní znalosti o světě</strong>.</p>
+                            <p>Vygenerujte <strong>pravdivé i nepravdivé</strong> mutace.</p>
+                            <p>Všechna fakta by měla užívat a odkazovat se na jakoukoliv entitu přímo (tzn. zájména by neměla být používána).</p>
+                            <p>Mutace, které vygenerujete, <strong>by měly být <u>objektivní</u> a
+                                    <u>ověřitelné</u> pomocí veřejně dostupných informací a všeobecných znalostí.</strong></p>
+                            <p>Pokud není možné vygenerovat mutaci, nechejte box prázdný.</p>
                         </div>
                         <?php foreach (Claim::MUTATION_COLORS as $mutation => $color) {
                             ?>
