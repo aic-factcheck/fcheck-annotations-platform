@@ -60,6 +60,9 @@ class LabelForm extends Model
                 'flag' => $this->flag,
                 'oracle' => $this->oracle,
             ]))->save()) {
+                if (Yii::$app->request->post("evidence") == null) {
+                    return true;
+                }
                 foreach (Yii::$app->request->post("evidence") as $group => $evidenceList) {
                     foreach ($evidenceList as $paragraph) {
                         (new Evidence(['label' => $label->id, 'paragraph' => $paragraph, 'group' => $group]))->save();

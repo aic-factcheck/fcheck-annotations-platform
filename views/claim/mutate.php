@@ -12,13 +12,13 @@ use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
 
-$this->title = 'Tvorba výroků';
+$this->title = 'Tvorba tvrzení';
 Helper::setEntities($ners = $model->claim->paragraph0->ners);
 ?>
 <div class="container">
-    <div ng-class="{sandbox:testingMode}" class="ng-scope sandbox">
+    <div class="ng-scope sandbox">
         <div class="container Ú<sub>1</sub>b">
-            <h1>Mutace výroků (Ú<sub>1</sub>b)</h1>
+            <h1>Mutace tvrzení (Ú<sub>1</sub>b)</h1>
 
             <?php if ($sandbox) { ?>
                 <div>
@@ -31,20 +31,27 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
 
             <div class="alert alert-warning mt-0" role="alert">
                 <h3 class="alert-heading">Pokyny</h3>
-                <p>Cílem tohoto úkolu je <strong>vygenerovat mutace či modifikace výroků</strong>. Mutace mohou být <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů mutací budou uvedeny dále.</p>
+                <p>Cílem tohoto úkolu je <strong>vygenerovat mutace či modifikace tvrzení</strong>. Mutace mohou být
+                    <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů mutací budou uvedeny
+                    dále.</p>
                 <ul>
-                    <li>Použijte <strong>originální tvrzení</strong> a poskytnuté související články jako základ pro vaše mutace.<strong class="ng-binding"></strong></li>
+                    <li>Použijte <strong>původní tvrzení</strong> a poskytnuté související články jako základ pro vaše
+                        mutace.<strong class="ng-binding"></strong></li>
                     <li>Na každou entitu se odkazujte přímo (tzn. zájména by neměla být užívána).</li>
                     <li>Mírné variace jmen a názvů jsou přijatelné (např. John F Kennedy, JFK, President Kennedy).</li>
-                    <li><strong>Vyvarujte se</strong> vágního, neurčitého a příliš opatrného jazyka (např. mohlo by, asi, snad, pravděpodobně atd.)
+                    <li><strong>Vyvarujte se</strong> vágního, neurčitého a příliš opatrného jazyka (např. mohlo by,
+                        asi, snad, pravděpodobně atd.)
                     </li>
                     <li>Dodržujte správné psaní velkých počátečních písmen u názvů (např. Indie a nikoliv indie).</li>
                     <li>Věty ukončujte tečkou.</li>
                     <li>Čísla mohou být uváděna v libovolném korektním formátu (pro menší čísla lze i slovy).
                     </li>
-                    <li>Další informace jsou poskytnuty ve formě souvisejících článků, které by měly umožnit tvořit složitější a na vícero článcích závislé tvrzení.</li>
+                    <li>Další informace jsou poskytnuty ve formě souvisejících článků, které by měly umožnit tvořit
+                        složitější a na vícero článcích závislé tvrzení.
+                    </li>
                     <!--<li>Additional world knowledge is given to the you in the form of a dictionary. This allows for more complex claims to be generated in a structured manner with information that can be backed up from Wikipedia</li>-->
-                    <li>Některé z poskytnutých textů nemusejí být přesné či pravdivé. I přes to jsou to validní kandidáti - vašim úkolem není ověřovat danou informaci.
+                    <li>Některé z poskytnutých textů nemusejí být přesné či pravdivé. Přesto jsou to validní kandidáti -
+                        vašim úkolem není ověřovat danou informaci.
                     </li>
                 </ul>
             </div>
@@ -122,7 +129,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
             <div class="card bg-primary text-white mb-3 zdrojovy-vyrok">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-5"><h4 class="card-title">Originální výrok</h4></div>
+                        <div class="col-md-5"><h4 class="card-title">Původní tvrzení</h4></div>
                         <div class="col-md-7">
                             <div class="card bg-white text-black">
                                 <div class="card-body">
@@ -141,28 +148,28 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                     <div class="row">
                         <div class="col-md-12">
                             <h4 class="card-title">Obměny tvrzení</h4>
-                            <p>Cílem je strávit maximálně okolo <strong>1 minuty</strong> při generování každé mutace výroku. </p>
-                            <p>Při vytváření mutací <strong>můžete zahrnout vlastní znalosti o světě</strong>.</p>
-                            <p>Vygenerujte <strong>pravdivé i nepravdivé</strong> mutace.</p>
-                            <p>Všechna fakta by měla užívat a odkazovat se na jakoukoliv entitu přímo (tzn. zájména by neměla být používána).</p>
-                            <p>Mutace, které vygenerujete, <strong>by měly být <u>objektivní</u> a
-                                <u>ověřitelné</u> pomocí veřejně dostupných informací a všeobecných znalostí.</strong></p>
-                            <p>Pokud není možné vygenerovat mutaci, nechejte box prázdný.</p>
-
-                            <p><strong>Parafráze</strong>: Změňte formulaci výroku nebo parafrázujte tak, aby smysl a pravdivost zůstaly nezměněny. <strong>Parafrázovaný výrok musí vyplývat z původního a také naopak.</strong> .</p>
-                            <p><strong>Nahrazení podobnou entitou nebo vztahem</strong>: Nahraďte entitu, vztah nebo obojí podobnou entitou či vztahem. <strong>Vyhněte se parafrázování původního tvrzení. Z nového tvrzení by neměl plynout původní výrok.</strong></p>
-                            <p><strong>Nahrazení odlišnou entitou nebo vztahem</strong>: Nahraďte entitu, vztah nebo obojí odlišnou entitou či vztahem. <strong>Vyhněte se parafrázování původního tvrzení. Z nového tvrzení by neměl plynout původní výrok.</strong></p>
-                            <p><strong>Zúžení</strong>: Změňte formulaci tak, aby byl nový výrok určitější - aby z nového výroku plynul také výrok původní.</p>
-                            <p><strong>Zobecnění</strong>: Změňte formulaci tak, aby byl nový výrok méně určitější - aby z originálního výroku plynul i výrok nový.</p>
-                            <p><strong>Negace</strong>: Vytvořte negaci originálního výroku. Pokuste se vyvarovat jednoduché negaci pomocí přidání záporu.</p>
+                            <ul>
+                                <li>Cílem je strávit okolo <strong>1 minuty</strong> při generování každé mutace tvrzení.
+                                </li>
+                                <li>Při vytváření mutací <strong>můžete zahrnout vlastní znalosti o světě</strong>.</li>
+                                <li>Vygenerujte <strong>pravdivé i nepravdivé</strong> mutace.</li>
+                                <li>Všechna fakta by měla užívat a odkazovat se na jakoukoliv entitu přímo (tzn. zájména
+                                    by neměla být používána).
+                                </li>
+                                <li>Mutace, které vygenerujete, by měly být <strong>objektivní</strong> a <strong>ověřitelné</strong>
+                                    pomocí veřejně dostupných informací a všeobecných znalostí.
+                                </li>
+                                <li>Pokud není možné vygenerovat mutaci, nechejte box prázdný.</li>
+                            </ul>
                         </div>
                         <?php foreach (Claim::MUTATION_COLORS as $mutation => $color) {
                             ?>
                             <div class="col-md-6 py-3">
                                 <div class="card bg-<?= $color ?> text-white">
                                     <div class="card-body">
-                                        <h5><?= $mutation ?> </h5>
-                                        <?= $form->field($model, "mutations[$mutation]")->textarea(['class' => 'w-100 form-control', 'rows' => 3, 'placeholder' => "Výroky vytvořené obměnou $mutation"])->label(false) ?>
+                                        <h5><?= Claim::MUTATION_NAMES[$mutation] ?> </h5>
+                                        <p><?= Claim::MUTATION_DESCRIPTIONS[$mutation] ?> </p>
+                                        <?= $form->field($model, "mutations[$mutation]")->textarea(['class' => 'w-100 form-control', 'rows' => 3, 'placeholder' => "Tvrzení vytvořené obměnou \"" . Claim::MUTATION_NAMES[$mutation] . "\""])->label(false) ?>
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +182,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
 
 
             <p class="text-right">
-                <?= Html::submitButton('Odeslat výroky', ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton('Odeslat tvrzení', ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-warning']) ?>
                 <?= Html::a('Home', ['site/index'], ['class' => 'btn btn-light']) ?>
             </p>

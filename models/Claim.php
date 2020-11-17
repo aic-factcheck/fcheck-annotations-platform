@@ -31,8 +31,26 @@ use yii\helpers\ArrayHelper;
  */
 class Claim extends ActiveRecord
 {
-    const MUTATIONS = ["Parafráze", "Nahrazení podobnou entitou nebo vztahem", "Nahrazení odlišnou entitou nebo vztahem", "Zúžení", "Zobecnění", "Negace"];
-    const MUTATION_COLORS = ["Parafráze" => "success", "Nahrazení podobnou entitou nebo vztahem" => "info", "Nahrazení odlišnou entitou nebo vztahem" => "secondary", "Zúžení" => "warning", "Zobecnění" => "primary", "Negace" => "danger"];
+    const MUTATIONS = ["rephrase", "substitute_similar", "substitute_dissimilar", "specific", "general", "negate"];
+    const MUTATION_COLORS = ["rephrase" => "success", "substitute_similar" => "info", "substitute_dissimilar" => "secondary", "specific" => "warning", "general" => "primary", "negate" => "danger"];
+    const MUTATION_NAMES = [
+        "rephrase" => "Parafráze",
+        "substitute_similar" => "Nahrazení podobnou entitou nebo vztahem",
+        "substitute_dissimilar" => "Nahrazení odlišnou entitou nebo vztahem",
+        "specific" => "Zúžení",
+        "general" => "Zobecnění",
+        "negate" => "Negace",
+    ];
+
+    const MUTATION_DESCRIPTIONS = [
+        "rephrase" => "Změňte formulaci tvrzení nebo parafrázujte tak, aby smysl a pravdivost zůstaly nezměněny. <strong>Parafrázované tvrzení musí vyplývat z původního a také naopak.</strong> .",
+        "substitute_similar" => "Nahraďte entitu, vztah nebo obojí podobnou entitou či vztahem. <strong>Vyhněte se parafrázování původního tvrzení. Z nového tvrzení by nemělo plynout původní tvrzení.</strong>",
+        "substitute_dissimilar" => "Nahraďte entitu, vztah nebo obojí odlišnou entitou či vztahem. <strong>Vyhněte se parafrázování původního tvrzení. Z nového tvrzení by nemělo plynout původní tvrzení.</strong>",
+        "specific" => "Změňte formulaci tak, aby byl nové tvrzení určitější - aby z nového tvrzení plynul také tvrzení původní.",
+        "general" => "Změňte formulaci tak, aby byl nové tvrzení méně určitější - aby z původního tvrzení plynul i tvrzení nový.",
+        "negate" => "Vytvořte negaci původního tvrzení. Pokuste se vyvarovat jednoduché negaci pomocí přidání záporu.",
+    ];
+
     private $_knowledge = null;
 
     /**
@@ -47,7 +65,7 @@ class Claim extends ActiveRecord
     {
         if ($this->ners !== null) {
             $this->ners = explode(",", $this->ners);
-        }else{
+        } else {
             $this->ners = [];
         }
         return parent::afterFind();

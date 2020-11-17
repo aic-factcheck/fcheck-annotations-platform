@@ -93,14 +93,14 @@ Helper::setEntities($ners = $model->paragraph->ners);
                 <div class="col-md-7">
                     <div class="card bg-white">
                         <div class="card-body">
-                                <?php
-                                foreach ($model->paragraph->article0->paragraphs as $paragraph) {
-                                    if ($paragraph->id == $model->paragraph->id) {
-                                        echo Html::tag('p',Html::tag("strong", $paragraph->get('text')));
-                                    } else {
-                                        echo Html::tag("p", $paragraph->get('text'), ["class" => "context"]);
-                                    }
-                                } ?>
+                            <?php
+                            foreach ($model->paragraph->article0->paragraphs as $paragraph) {
+                                if ($paragraph->id == $model->paragraph->id) {
+                                    echo Html::tag('p', Html::tag("strong", $paragraph->get('text')));
+                                } else {
+                                    echo Html::tag("p", $paragraph->get('text'), ["class" => "context"]);
+                                }
+                            } ?>
                             <?= Helper::expandLink('Zobrazit kontext', '.context', 'Skrýt kontext') ?>
                         </div>
                     </div>
@@ -139,8 +139,8 @@ Helper::setEntities($ners = $model->paragraph->ners);
         <div class="card-body">
             <div class="row">
                 <div class="col-md-5"><h4 class="card-title">Pravdivá tvrzení</h4>
-                    <p>Snažte se strávit přibližně 2 minuty tvorbou <strong>1-5</strong> tvrzení z této zdrojové věty.
-                    </p>
+                    <p>Snažte se strávit přibližně 2 minuty tvorbou <strong>1-5</strong> tvrzení z této zdrojové věty.</p>
+                    <p>Výsledná tvrzení oddělte koncem řádku (↵).</p>
                     <p>Pokud není zdrojová věta použitelná, stiskněte tlačítko <strong>Přeskočit</strong></p>
                     <?= Helper::expandLink("Příklad", "#example") ?>
                     <div id="example">
@@ -168,7 +168,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <?= $form->field($model, 'claims')->textarea(['placeholder' => 'Sem napište tvrzení, na každý řádek jedno.', 'rows' => 5, 'class' => 'w-100 form-control'])->label(false) ?>
+                    <?= $form->field($model, 'claims')->textarea(['placeholder' => 'Sem napište tvrzení, na každý řádek jedno.', 'rows' => 7, 'class' => 'w-100 form-control'])->label(false) ?>
                 </div>
             </div>
         </div>
