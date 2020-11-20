@@ -2,11 +2,15 @@
 
 namespace app\controllers;
 
+use app\models\Claim;
+use app\models\ClaimKnowledge;
 use app\models\LoginForm;
+use app\models\TimeSpent;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\httpclient\Client;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -79,8 +83,9 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post()) ) {
+            if($model->login()) return $this->goBack();
+            Yii::$app->session->addFlash("danger","Zadané SIDOS ID není v systému");
         }
 
         return $this->render('login', [
@@ -100,6 +105,10 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    public function actionTimer($time, $route)
+    {
+        return (new TimeSpent(['user' => Yii::$app->user->id, 'time' => $time, 'route' => $route]))->save();
+    }
 
     public function actionSite()
     {

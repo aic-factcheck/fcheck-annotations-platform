@@ -21,22 +21,14 @@ class User extends ActiveRecord implements IdentityInterface
         return 'user';
     }
 
-    public static function generate($name = null)
+    public static function generate($name = null, $note = '')
     {
         $security = new Security();
         $user = new User(['auth_key' => $security->generateRandomString(), 'password' => $security->generateRandomString()]);
-        if (strlen($name) == 0) {
-            $user->generateUniqueName();
-        }else{
-            $user->username = $name;
-        }
+        $user->username = $name;
+        $user->note = $note;
         $user->save();
         return $user;
-    }
-
-    public function login()
-    {
-        return Yii::$app->user->login($this, 3600 * 24 * 30);
     }
 
     /**
@@ -53,6 +45,11 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return null;
+    }
+
+    public function login()
+    {
+        return Yii::$app->user->login($this, 3600 * 24 * 30);
     }
 
     public function generateUniqueName()
@@ -85,7 +82,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'password'], 'required'],
-            [['username', 'password'], 'string', 'max' => 64],
+            [['username', 'password', 'note'], 'string', 'max' => 64],
             [['username'], 'unique'],
             [['password'], 'string', 'min' => 6],
             [['auth_key'], 'string', 'max' => 32],

@@ -84,15 +84,33 @@ AppAsset::register($this);
     </footer>
 
     <?php $this->endBody() ?>
+    <script type="text/javascript">
+        <?php if (!Yii::$app->user->isGuest) {?>
+        $(document).ready(function () {
+            var start = new Date();
 
-    <?php if (Yii::$app->session->has('mutations')) {
-        echo '<script type="text/javascript">';
-        foreach (Yii::$app->session->get('mutations') as $mutation) {
-            echo "$.ajax({url:'" . Url::to(['ctk/augment-knowledge', 'claim' => $mutation]) . "',method: 'GET'});";
+            $(window).on("beforeunload", function () {
+                $.ajax({
+                    url: '<?=Url::to(['site/timer'])?>',
+                    type: 'GET',
+                    data: {
+                        time: new Date() - start,
+                        route: '<?=Yii::$app->controller->action->uniqueId?>'
+                    }
+                });
+            });
+        });
+        <?php
         }
-        echo '</script>';
-        Yii::$app->session->remove('mutations');
-    } ?>
+        ?>
+        <?php if (Yii::$app->session->has('mutations')) {
+            foreach (Yii::$app->session->get('mutations') as $mutation) {
+                echo "$.ajax({url:'" . Url::to(['ctk/augment-knowledge', 'claim' => $mutation]) . "',method: 'GET'});";
+            }
+            Yii::$app->session->remove('mutations');
+        } ?>
+    </script>
+
     </body>
     </html>
 <?php $this->endPage() ?>

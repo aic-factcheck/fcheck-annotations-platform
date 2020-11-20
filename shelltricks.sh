@@ -38,6 +38,6 @@ export kw_model="${FDIR}/index/ctk_filtered-tfidf-ngram=2-hash=16777216-tokenize
 export sem_embeddings="${FDIR}/emb/embedded_pages_mbert_finetuned_best_ict_1.3_finetuned_ORDERED_BY_ID_NFC"
 export sem_model="/mnt/data/factcheck/ict_pretrained_models/sentence-transformers/mbert_finetuned_best_ict_1.3"
 export sem_faiss_index="PCA384,Flat"
-export excludekw="souhrn;sport;kolo;fotbal;hokej;Volejbal;Atletika;LyĹľovĂˇnĂ­;Cyklistika;Tenis;stolnĂ­ tenis;OlympijskĂ©;AVĂŤZO;TABULKA;UPOZORNÄšNĂŤ;PROTEXT;DenĂ­k"
+export excludekw="souhrn;sport;kolo;fotbal;hokej;Volejbal;Atletika;Lyžování;Cyklistika;Tenis;stolní tenis;Olympijské;Avízo;TABULKA;UPOZORNĚNÍ;PROTEXT;Deník"
 export PYTHONPATH=src:$PYTHONPATH
 nohup python src/app_claimgen/rest_claimgen.py --ner_model ${ner_model} --db_name ${db_name} --kw_model ${kw_model} --sem_model ${sem_model} --sem_embeddings ${sem_embeddings} --sem_faiss_index ${sem_faiss_index} --excludekw "${excludekw}"
