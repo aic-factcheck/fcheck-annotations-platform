@@ -10,7 +10,6 @@ use app\models\Claim;
 use app\models\Label;
 use app\models\Paragraph;
 use app\widgets\Alert;
-use kartik\icons\FontAwesomeAsset;
 use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
@@ -18,7 +17,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 
-FontAwesomeAsset::register($this);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
