@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Claim;
+use app\models\Label;
 use app\models\LabelForm;
 use Yii;
 use yii\db\Expression;
@@ -29,16 +30,27 @@ class LabelController extends Controller
     public function actionIndex($sandbox = false, $oracle = false, $claim = null)
     {
         if ($claim == null) {
+            $traversed = [];
+            do {
+                $claim = Claim::find()
+                    ->where(['sandbox' => $sandbox])
+                    ->andWhere(['not in', 'id', $traversed])
+                    ->andWhere([$oracle ? '=' : '<>', 'user', Yii::$app->user->id])
+                    ->orderBy(new Expression('rand()'))
+                    ->one();
+                if ($claim == null) {
+                    Yii::$app->session->addFlash("info", "V současnosti v sekci <strong>" . ($oracle ? 'vlastní' : 'cizí') . " tvrzení</strong> není co anotovat. 😟 " .
+                        ($oracle ? "Výroky nejprve vytvořte v Ú1!" : "Počkejte než ostatní vytvoří výroky v Ú1."));
+                    return $this->goHome();
+                }
+                $traversed[] = $claim = $claim->getPrimaryKey();
+            } while (Label::find()->where(['claim' => $claim, 'user' => Yii::$app->user->id])->exists());
+
             return $this->redirect([
                 'index',
                 'sandbox' => $sandbox,
                 'oracle' => $oracle,
-                'claim' =>
-                    Claim::find()
-                        ->where(['labelled' => $oracle, 'sandbox' => $sandbox])
-                        ->orderBy(new Expression('rand()'))
-                        ->one()
-                        ->getPrimaryKey()
+                'claim' => $claim
             ]);
         }
 

@@ -22,10 +22,15 @@ class ClaimForm extends Model
     {
         parent::__construct();
         $this->sandbox = $sandbox;
-        $this->paragraph = $paragraph ? Paragraph::findOne(['id' => $paragraph]) : Paragraph::find()
-            ->where(['IS NOT', 'candidate_of', null])
-            ->orderBy(new Expression('rand()'))
-            ->one();
+        $traversed = [];
+        do {
+            $this->paragraph = $paragraph ? Paragraph::findOne(['id' => $paragraph]) : Paragraph::find()
+                ->where(['IS NOT', 'candidate_of', null])
+                ->andWhere(['not in', 'id', $traversed])
+                ->orderBy(new Expression('rand()'))
+                ->one();
+            $traversed[] = $this->paragraph->id;
+        } while (Claim::find()->where(['paragraph' => $this->paragraph->id, 'user' => Yii::$app->user->id])->exists());
     }
 
 
