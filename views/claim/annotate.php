@@ -27,7 +27,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
         <p>Cílem úkolu je <strong>vygenerovat pravdivá tvrzení</strong> ze zdrojového bloku ČTK dat.</p>
 
         <ul>
-            <li><strong">Extrahujte atomická (jednoduchý podmět, jeden přísudek) tvrzení o některé z
+            <li><strong">Extrahujte "atomická" (jednoduchá, dále nedělitelná) tvrzení o některé z
                 pojmenovaných entit </strong> ze zdrojového
                 textu.<br/><em>(<?= implode(", ", $ners) ?>)</em></li>
             <li>Jako základ svého tvrzení použijte zdrojový blok a znalostní rámec.</li>
@@ -37,7 +37,6 @@ Helper::setEntities($ners = $model->paragraph->ners);
             </li>
             <li><strong>Nepoužívejte vágní nebo opatrné formulace</strong> (např. <em>možná</em>, <em>mohl by</em>, <em>je
                     uváděno, že</em>, ...)
-            </li>
             </li>
             <li>Dodržujte základní pravidla psaní velkých písmen (pište <em>Indie</em> místo <em>indie</em>).</li>
             <li>Věty končete tečkou.</li>
@@ -139,7 +138,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
         <div class="card-body">
             <div class="row">
                 <div class="col-md-5"><h4 class="card-title">Pravdivá tvrzení</h4>
-                    <p>Snažte se strávit přibližně 2 minuty tvorbou <strong>1-5</strong> tvrzení z této zdrojové věty.</p>
+                    <p>Snažte se strávit přibližně 2 minuty tvorbou <strong>1-5</strong> tvrzení z tohoto zdrojového odstavce.</p>
                     <p>Výsledná tvrzení oddělte koncem řádku (↵).</p>
                     <p>Pokud není zdrojová věta použitelná, stiskněte tlačítko <strong>Přeskočit</strong></p>
                     <?= Helper::expandLink("Příklad", "#example") ?>

@@ -47,14 +47,14 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav ml-auto'],
             'items' => [
-                ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' => 'Domů', 'url' => ['/site/index']],
                 Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Přihlásit', 'url' => ['/site/login']]
                 ) : (
                     '<li>'
                     . Html::beginForm(['/site/logout'], 'post')
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username .
+                        'Odhlásit (' . Yii::$app->user->identity->username .
                         //', dnes: '. Claim::find()->where(['user'=>Yii::$app->user->id])->andWhere(['>=','created_at',strtotime('today')])->count().
                         ', Ú<sub>0</sub>: ' . Paragraph::find()->where(['candidate_of' => Yii::$app->user->id])->count() .
                         ', Ú<sub>1</sub>: ' . Claim::find()->where(['user' => Yii::$app->user->id])->count() .

@@ -5,6 +5,7 @@ namespace app\helpers;
 
 
 use app\models\Paragraph;
+use Yii;
 use yii\helpers\Html;
 
 class Helper
@@ -12,14 +13,15 @@ class Helper
     const SPACE_BEFORE = [",", ".", ":", ";", ")", "]", "!", "?"];
     const SPACE_AFTER = ["[", "("];
     const SWAP = ["`` " => "„", " ''" => "“"];
-    private static $detokenizationMap = null;
     public static $entities = [];
+    private static $detokenizationMap = null;
     private static $entityMarks = [];
     private static $printedItems = [];
 
     public static function setEntities($entities)
     {
         foreach ($entities as $entity) {
+            if(strlen($entity))
             self::$entityMarks[$entity] = Html::tag('mark', $entity);
         }
         self::$entities = $entities;
@@ -37,7 +39,9 @@ class Helper
             if ($paragraph->rank == 0) continue;
             $content .= Html::tag('p', $paragraph->get('text'), ['class' => $paragraph->id == $knowledge->id ? 'p-active' : "p-$knowledge->id"]);
         }
-        return Html::tag("h6", self::expandLink("+ " . $article->get('title'), ".$knowledge->id", " − " . $article->get('title'))) .
+        $h6Text = $article->get('title') . ' ' .
+            Html::tag('small', Yii::$app->formatter->asDatetime($article->date),['class'=>'badge badge-secondary ']);
+        return Html::tag("h6", self::expandLink("+ " . $h6Text, ".$knowledge->id", " − " . $h6Text)) .
             Html::tag("div", $content . self::expandLink("Více", ".p-$knowledge->id", "Méně"), ["class" => $knowledge->id]);
     }
 
