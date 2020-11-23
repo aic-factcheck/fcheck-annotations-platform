@@ -31,17 +31,19 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
 
             <div class="alert alert-warning mt-0" role="alert">
                 <h3 class="alert-heading">Pokyny</h3>
-                <p>Cílem tohoto úkolu je <strong>vygenerovat mutace či modifikace tvrzení</strong>. Mutace mohou být
-                    <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů mutací budou uvedeny
+                <p>Cílem tohoto úkolu je <strong>vygenerovat mutace či obměny tvrzení</strong>. Mutace mohou být
+                    <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů obměn jsou uvedeny
                     dále.</p>
                 <ul>
-                    <li>Použijte <strong>původní tvrzení</strong> a poskytnuté související články jako základ pro vaše
-                        mutace.<strong class="ng-binding"></strong></li>
+                    <li>Použijte <strong>původní tvrzení</strong> a poskytnuté související články jako základ pro jednotlivé
+                        obměny.<strong class="ng-binding"></strong></li>
                     <li>Na každou entitu se odkazujte přímo (tzn. zájména by neměla být užívána).</li>
-                    <li>Mírné variace jmen a názvů jsou přijatelné (např. John F Kennedy, JFK, President Kennedy).</li>
+                    <li>Mírné variace jmen a názvů jsou přijatelné (např. John F Kennedy, JFK, prezident Kennedy).</li>
                     <li><strong>Vyvarujte se</strong> vágního, neurčitého a příliš opatrného jazyka (např. mohlo by,
                         asi, snad, pravděpodobně atd.)
                     </li>
+                    <li>Při vytváření obměn <strong>můžete zahrnout vlastní znalosti o světě</strong>.</li>
+                    <li>Obměny, které vymyslíte, by měly být <strong>objektivní</strong> a <strong>ověřitelné</strong> pomocí veřejně dostupných informací a všeobecných znalostí.</li>
                     <li>Dodržujte správné psaní velkých počátečních písmen u názvů (např. Indie a nikoliv indie).</li>
                     <li>Věty ukončujte tečkou.</li>
                     <li>Čísla mohou být uváděna v libovolném korektním formátu (pro menší čísla lze i slovy).
@@ -51,7 +53,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                     </li>
                     <!--<li>Additional world knowledge is given to the you in the form of a dictionary. This allows for more complex claims to be generated in a structured manner with information that can be backed up from Wikipedia</li>-->
                     <li>Některé z poskytnutých textů nemusejí být přesné či pravdivé. Přesto jsou to validní kandidáti -
-                        vašim úkolem není ověřovat danou informaci.
+                        v této fázi není vašim úkolem ověřovat danou informaci.
                     </li>
                 </ul>
             </div>
@@ -149,17 +151,9 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                         <div class="col-md-12">
                             <h4 class="card-title">Obměny tvrzení</h4>
                             <ul>
-                                <li>Cílem je strávit okolo <strong>1 minuty</strong> při generování každé mutace tvrzení.
+                                <li>Cílem je strávit okolo <strong>1 minuty</strong> při generování každé obměny tvrzení.
                                 </li>
-                                <li>Při vytváření mutací <strong>můžete zahrnout vlastní znalosti o světě</strong>.</li>
-                                <li>Vygenerujte <strong>pravdivé i nepravdivé</strong> mutace.</li>
-                                <li>Všechna fakta by měla užívat a odkazovat se na jakoukoliv entitu přímo (tzn. zájména
-                                    by neměla být používána).
-                                </li>
-                                <li>Mutace, které vygenerujete, by měly být <strong>objektivní</strong> a <strong>ověřitelné</strong>
-                                    pomocí veřejně dostupných informací a všeobecných znalostí.
-                                </li>
-                                <li>Pokud není možné vygenerovat mutaci, nechejte box prázdný.</li>
+                                <li>Pokud není možné obměnu vygenerovat, nechejte textové pole prázdné.</li>
                             </ul>
                         </div>
                         <?php foreach (Claim::MUTATION_COLORS as $mutation => $color) {
