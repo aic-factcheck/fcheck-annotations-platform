@@ -27,8 +27,8 @@ Helper::setEntities($ners = $model->paragraph->ners);
         <p>Cílem úkolu je <strong>vygenerovat pravdivá tvrzení</strong> ze zdrojového bloku ČTK dat.</p>
 
         <ul>
-            <li><strong">Extrahujte "atomická" (jednoduchá, dále nedělitelná) tvrzení o některé z
-                pojmenovaných entit </strong> ze zdrojového
+            <li><strong">Extrahujte "atomická" (jednoduchá, dále nedělitelná) tvrzení týkající se některé (některých) 
+                pojmenovaných entitit</strong> ze zdrojového
                 textu.<br/><em>(<?= implode(", ", $ners) ?>)</em></li>
             <li>Jako základ svého tvrzení použijte zdrojový blok a znalostní rámec.</li>
             <li><strong>Pojmenované entity uvádějte přímo</strong> (vyhněte se používání zájmen apod.).</li>
