@@ -198,3 +198,6 @@ tr.dictionary-item:hover th{
 [data-show]{
     cursor:pointer;
 }
+.p-active{
+    font-weight: 500;
+}

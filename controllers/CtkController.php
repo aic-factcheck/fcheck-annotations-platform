@@ -16,6 +16,8 @@ use yii\web\Controller;
 
 class CtkController extends Controller
 {
+    const API_CONFIG = "nerlimit=2&k=2&npts=2";
+
     public function behaviors()
     {
         return [
@@ -47,7 +49,7 @@ class CtkController extends Controller
         $paragraph = Paragraph::findOne($paragraph);
         $dictionary = (new Client())->createRequest()
             ->setMethod('GET')
-            ->setUrl('http://localhost:8601/dictionary/' . $paragraph->article . '_' . $paragraph->rank)
+            ->setUrl("http://localhost:8601/dictionary/" . $paragraph->article . '_' . $paragraph->rank . "?" . self::API_CONFIG)
             ->send()
             ->getData();
         ParagraphKnowledge::fromDictionary($paragraph, $dictionary);
@@ -63,7 +65,7 @@ class CtkController extends Controller
         $paragraph = $claim->paragraph0;
         $dictionary = (new Client())->createRequest()
             ->setMethod('GET')
-            ->setUrl("http://localhost:8601/dictionary/{$paragraph->article}_{$paragraph->rank}?q=$q")
+            ->setUrl("http://localhost:8601/dictionary/{$paragraph->article}_{$paragraph->rank}?q=$q&" . self::API_CONFIG)
             ->send()
             ->getData();
         ClaimKnowledge::fromDictionary($claim, $dictionary);
