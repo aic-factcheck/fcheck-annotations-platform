@@ -40,7 +40,7 @@ $this->title = 'Anotace výroků';
     </div>
     <table class="table table-striped" id="evidence">
         <tr class="table-primary">
-            <th class="text-right">Článek: <?= $model->claim->paragraph0->article0->get('title') ?></th>
+            <th class="text-right">Článek: <?= $model->claim->paragraph0->article0->get('title').' '. \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($model->claim->paragraph0->article0->date),['class'=>'badge badge-secondary ']) ?></th>
             <th class="px-0 text-center">Důkaz#1</th>
         </tr>
         <?php $i = 0;
@@ -54,7 +54,7 @@ $this->title = 'Anotace výroků';
         <?php } ?>
         <?php foreach ($model->claim->knowledge as $paragraph) { ?>
             <tr class="table-info dictionary-item">
-                <th class="text-right">Znalostní rámec: <?= $paragraph->article0->get('title') ?></th>
+                <th class="text-right">Znalostní rámec: <?= $paragraph->article0->get('title') .' '. \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($paragraph->article0->date),['class'=>'badge badge-secondary '])?></th>
                 <th class="text-center"><i class="fas fa-caret-down"></i><i class="fas fa-caret-up d-none"></i></th>
             </tr>
             <?php $i = 0;
@@ -311,6 +311,15 @@ $this->title = 'Anotace výroků';
                         <br>
                         Zvolte, pokud zobrazený článek a znalostní rámec neobsahují informace dostatečné pro potvrzení
                         nebo vyvrácení výroku. <br>Tento výrok nebude přidělen dalším anotátorům.
+                    </p>
+                    <p class="ng-scope">
+                        <?=Html::textInput("condition",null,['placeholder'=>'Tvrzení s chybějící znalostí'])?><br>
+                        <?= Html::submitButton('<i class="far fa-question-circle"></i> Podmíněně potvrdit', ['class' => 'btn btn-info', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
+                        <?= Html::submitButton('<i class="far fa-question-circle"></i> Podmíněně vyvrátit', ['class' => 'btn btn-info', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
+                        <br>
+                        Zvolte, pokud zobrazený článek a znalostní rámec neobsahují informace dostatečné pro potvrzení
+                        nebo vyvrácení výroku, ale znáte tvrzení, které, je-li pravdivé, várok potvrzuje, nebo vyvrací.
+                        <br>Tento výrok nebude přidělen dalším anotátorům.
                     </p>
                     <hr class="ng-scope">
                     <p class="ng-scope">
