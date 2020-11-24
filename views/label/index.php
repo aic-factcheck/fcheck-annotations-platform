@@ -99,7 +99,7 @@ $this->title = 'Anotace výroků';
                         <li>Projděte si odstavce výchozího článku a zatrhněte ty (a pouze ony), které vám umožní tvrzení potvrdit či vyvrátit.</li>
                         <li>Skupina takto označených odstavců tvoří <em>důkaz</em>.</li>
                         <li>Pokud odstavce původního článku neobsahují dostatek informací k vytvoření důkazu, rozbalte a případně zatrhněte vhodné odstavce <em>znalostního rámce</em> níže na stránce.</li>
-                        <li>Pokud nejsou dostatečné ani výchozí odstavce znalostního rámce, můžete znalostní rámec rozšířit odkazem <strong>Zobrazit kontext</strong>.
+                        <li>Pokud nejsou dostatečné ani výchozí odstavce znalostního rámce, můžete znalostní rámec rozšířit kliknutím na odkazy <strong>Zobrazit kontext</strong>.
                         <li>Při úvahách nad platností tvrzení používejte <em>zdravý rozum</em>.</li>
                         <li>Jediným zdrojem informací pro anotaci výroku smí být výchozí článek a texty znalostního rámce. S výjimkou podmíněného potvrzení či vyvrácení (viz níže) <em>je jakékoliv použítí vlastních znalostí zakázáno.</em></li>
                         <li>Texty znalostního rámce vznikly dříve, než text výchozího článku. Platnost tvrzení se tak dokazuje k datu vydání výchozího článku.</li>
@@ -109,15 +109,15 @@ $this->title = 'Anotace výroků';
                             <ul>
                                 <li>Pokud výchozí článek ani znalostní rámec neobsahují dostatek informací, zvolte <strong>Nedostatek informací</strong>.</li>
                                 <li>Pokud jste si, i přes nedostatek informací, jistí pravdivostí či nepravdivostí výroku, můžete místo <strong>Nedostatek informací</strong> zvolit volbu <strong>Podmíněně potvrdit</strong> nebo <strong>Podmíněně potvrdit</strong>. 
-                                    Do příslušného pole <strong>Doplňující tvrzení</strong> pak nezapomeňte musíte vložit text. Interpretace <em>doplňujcího tvrzení</em> je následující: pokud bude ukázána jeho platnost, bude automatcky potvrzeno či vyvráceno i původní tvrzení. 
+                                    Do příslušného pole <strong>Doplňující tvrzení</strong> pak nezapomeňte vložit text. Interpretace <em>doplňujcího tvrzení</em> je následující: pokud bude ukázána jeho platnost, bude automatcky potvrzeno či vyvráceno i původní tvrzení. 
                                     Pozor: doplňující tvrzení nesmí být parafrází původního tvrzení!</li>
-                                <li>V případě nejasného čí chybného tvrzení zvolte <strong>Výrok je nejasný, nesmyslný nebo nelze dokázat</strong> nebo <strong>Výrok obsahuje překlep nebo drobnou chybu</strong>.</li>
+                                <li>V případě nejasného čí chybného tvrzení zvolte <strong>Výrok je nejasný nebo nesmyslný</strong> nebo <strong>Výrok obsahuje překlep nebo drobnou chybu</strong>.</li>
                             </ul>
                         </li>
                     </ol>
 
                     <h4 class="topmargin ng-scope">Příklady</h4>
-                    <p class="ng-scope">Podmíněně potvrzené tvrzení</p>
+                    <h5 class="ng-scope">Podmíněně potvrzené tvrzení</h5>
                     <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> "Sněžka je nejvyšší horou Krkonoš."<br>
                         Nabízené odstavce nejsou pro důkaz tohoto tvrzení dostatečné. Obsahují pouze následující informaci: "Sněžka je nejvyšší horou České republiky."<br>
@@ -125,43 +125,48 @@ $this->title = 'Anotace výroků';
                         <strong>Doplňující tvrzení</strong>: "Krkonoše jsou nejvyšší pohoří Česka." a zvolte <strong>Podmíněně potvrdit</strong>.  
                     </div>
 
-                    <p class="ng-scope">ASI UZ poreseno nahore TODO CASOVE "paradoxy,"" platnost v cas napsani clanku? - asi pouze pokud je tam i casove urceni.</p>
-                    <div class="ebox ng-scope">
-                        <strong>Tvrzení: </strong> "Dvojčata jsou nejvyššími budovami v New Yorku."<br>
-                        <strong>Supported: </strong> He is one of the best-selling music artists of all time, having
-                        sold more than 150 million records worldwide.
-                    </div>
+                    <h5 class="ng-scope">Časování sloves</h5>
+                    <p class="ng-scope">Časování sloves, které nemá vliv na význam ignorujte.</p>
 
-                    <p class="ng-scope">TODO The difference in verb tenses that do not affect the meaning should be ignored.</p>
                     <div class="ebox ng-scope">
-                        <strong>Claim: </strong> Frank Sinatra is a musician<br>
-                        <strong>Supported: </strong> He is one of the best-selling music artists of all time, having
-                        sold more than 150 million records worldwide.
+                        <strong>Tvrzení: </strong> Frank Sinatra je muzikant.<br>
+                        <strong>Potvrzeno: </strong> ... Je jedním z nejprodávanějších hudebníků na světě, prodal více než 150 milionů nosičů.
                     </div>
 
                     <div class="ebox ng-scope">
-                        <strong>Claim: </strong> Frank Sinatra is a musician <br>
-                        <strong>Supported: </strong> Francis Albert Sinatra (/sɪˈnɑːtrə/; Italian: [siˈnaːtra]; December
-                        12, 1915 – May 14, 1998) was an American singer
+                        <strong>Tvrzení: </strong> Frank Sinatra je muzikant. <br>
+                        <strong>Potvrzeno: </strong> Francis Albert Sinatra (12. prosince 1915 - 14. května 1998) byl americký zpěvák.
                     </div>
 
-                    <p class="ng-scope">Pokud existuje více stejně pojmenovaných entit (například osob, míst), stačí pro potvrzení platnost tvrzení alespoň u jedné z nich. 
-                        Pro vyvrácení nesmí navíc existovat žádná entita, pro kterou by bylo tvrzení pravdivé.</p>
+                    <h5 class="ng-scope">Entity stejného jména</h5>
+                    <p class="ng-scope">Pokud existuje více stejně pojmenovaných entit (například osob nebo míst), a chybí jejich další určení, stačí pro potvrzení platnost tvrzení alespoň pro jednu z nich. 
+                        Pro vyvrácení nesmí navíc existovat žádná jiná entita stejného jména, pro kterou by bylo tvrzení pravdivé.</p>
+                    
+                    <div class="ebox ng-scope">
+                        <strong>Tvrzení: </strong> Antonín Dvořák byl malíř.<br>
+                        <strong>Potvrzeno: </strong> Méně známý Antonín Dvořák (narozen 16. prosince 1817 v Němčicích, zemřel 26. dubna 1881 v Praze), byl český malíř a fotograf.
+                    </div>
 
-                    <p class="ng-scope">TODO Prohlášení osoby automaticky nedokazuje tvrzení. CO TREBA TISKOVY MLUVCI MINISTERSTVA. Mozna nesmi existovat protikladna zprava?</p>
+                    <div class="ebox ng-scope">
+                        <strong>Tvrzení: </strong> Antonín Leopold Dvořák byl malíř.<br>
+                        <strong>Vyvráceno: </strong> V tomto případě se jedná o známého hudebního skladatele. 
+                        Ve znalostním rámci nenajdeme zmínky o tom, že by se významně věnoval malbě (v tomto specifickém případě nenajdeme ve skutečnosti žádné zmínky o tom, že by maloval).
+                    </div>
+
+                    <h5 class="ng-scope">Prohlášení</h5>
+                    <p class="ng-scope">Prohlášení osoby automaticky nedokazuje tvrzení. Zveřejnění plánů rovněž nemusí být automaticky potvrzením platnosti plánovaného. 
+                        V těchto případech je třeba vyjít z kontextu a použít zdravého rozumu. 
+                        Na opačných stranách spektra tak může být např. citace spekulující soukromé osoby v kontrastu s mluvčím na tiskové konferenci statistického úřadu.</p>
                     
                     <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> Donald Trump byl podruhé zvolen prezidentem.<br>
-                        <strong>Nedostatek informací: </strong> Donald Trump se na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou presidentskou pozici.
+                        <strong>Nedostatek informací</strong> pro znalostní rámec: "Donald Trump na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou prezidentskou pozici."
                     </div>
 
                     <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> Donald Trump prohlásil, že byl podruhé zvolen prezidentem.<br>
-                        <strong>Potvrzeno: </strong> Donald Trump se na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou presidentskou pozici.
+                        <strong>Potvrzeno</strong>pro znalostní rámec: "Donald Trump na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou prezidentskou pozici."
                     </div>
-
-                    <p class="ng-scope">TODO Podobně plány nejsou automaticky potvrzením platnosti plánovaného.</p>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
