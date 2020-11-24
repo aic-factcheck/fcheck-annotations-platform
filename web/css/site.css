@@ -207,3 +207,6 @@ tr.dictionary-item:hover th{
 .fw-500{
     font-weight: 500;
 }
+.nav-link.text-black{
+    color: black!important;
+}

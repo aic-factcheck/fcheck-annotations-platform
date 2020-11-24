@@ -47,12 +47,14 @@ AppAsset::register($this);
             'items' => [
                 Yii::$app->user->isGuest ? '' :
                     Html::tag('li',
-                        //'<strong class="fw-500">Ú<sub>0</sub></strong>: ' . Paragraph::find()->where(['candidate_of' => Yii::$app->user->id])->count() .
-                        '<strong class="fw-500">Ú<sub>1</sub>a</strong>: ' . Claim::find()->where(['user' => Yii::$app->user->id])->andWhere(['IS', 'mutation_type', null])->count() .
-                        ',&nbsp;&nbsp;&nbsp;<strong class="fw-500">Ú<sub>1</sub>b</strong>: ' . Claim::find()->where(['user' => Yii::$app->user->id])->andWhere(['IS NOT', 'mutation_type', null])->count() .
-                        '<br/><strong class="fw-500">Ú<sub>2</sub>a</strong>: ' . Label::find()->where(['user' => Yii::$app->user->id, 'oracle' => true])->count() .
-                        ',&nbsp;&nbsp;&nbsp;<strong class="fw-500">Ú<sub>2</sub>b</strong>: ' . Label::find()->where(['user' => Yii::$app->user->id, 'oracle' => false])->count(),
-                        ['class' => 'mr-2 text-center']
+                        Html::tag('span',
+                            //'<strong class="fw-500">Ú<sub>0</sub></strong>: ' . Paragraph::find()->where(['candidate_of' => Yii::$app->user->id])->count() .
+                            '<strong class="fw-500">Ú<sub>1</sub>a</strong>: ' . Claim::find()->where(['user' => Yii::$app->user->id])->andWhere(['IS', 'mutation_type', null])->count() .
+                            ', <strong class="fw-500">Ú<sub>1</sub>b</strong>: ' . Claim::find()->where(['user' => Yii::$app->user->id])->andWhere(['IS NOT', 'mutation_type', null])->count() .
+                            ', <strong class="fw-500">Ú<sub>2</sub>a</strong>: ' . Label::find()->where(['user' => Yii::$app->user->id, 'oracle' => true])->count() .
+                            ', <strong class="fw-500">Ú<sub>2</sub>b</strong>: ' . Label::find()->where(['user' => Yii::$app->user->id, 'oracle' => false])->count()
+                            , ['class' => ' text-black nav-link ']),
+                        ['class' => 'text-center nav-item text-black']
                     ),
                 ['label' => 'Domů', 'url' => ['/site/index']],
                 Yii::$app->user->isGuest ? (

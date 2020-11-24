@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property int|null $user Anotátor
  * @property int $claim Výrok
  * @property string|null $label Label
+ * @property string|null $condition Label
  * @property int $sandbox Je label ze zkušební v.?
  * @property int $oracle Je label oracle anotací?
  * @property int $flag Byl nahlášen?
@@ -50,7 +51,7 @@ class Label extends ActiveRecord
         return [
             [['user', 'claim', 'sandbox', 'oracle', 'flag', 'created_at', 'updated_at'], 'integer'],
             [['claim'], 'required'],
-            [['label'], 'string'],
+            [['label','condition'], 'string'],
             ['label', 'in', 'range' => self::LABELS],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
             [['claim'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::className(), 'targetAttribute' => ['claim' => 'id']],
@@ -65,6 +66,7 @@ class Label extends ActiveRecord
         return [
             'id' => 'ID',
             'user' => 'Anotátor',
+            'condition' => 'Doplňující tvrzení',
             'claim' => 'Výrok',
             'label' => 'Label',
             'sandbox' => 'Je label ze zkušební v.?',

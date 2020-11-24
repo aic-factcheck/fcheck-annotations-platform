@@ -19,6 +19,7 @@ class LabelForm extends Model
     public $flag;
     public $load;
     public $label;
+    public $condition;
     public $sandbox;
     public $oracle;
 
@@ -43,6 +44,7 @@ class LabelForm extends Model
         return [
             // username and password are both required
             [['flag', 'load'], 'integer'],
+            [['condition'], 'string'],
         ];
     }
 
@@ -56,6 +58,7 @@ class LabelForm extends Model
                 'claim' => $this->claim->id,
                 'label' => Yii::$app->request->post('label'),
                 'user' => Yii::$app->user->id,
+                'condition' => $this->condition,
                 'sandbox' => $this->sandbox,
                 'flag' => $this->flag,
                 'oracle' => $this->oracle,

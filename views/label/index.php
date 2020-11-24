@@ -177,5 +177,59 @@ $this->title = 'Anotace výroků';
             </div>
         </div>
     </div>
+    <div class="modal fade" id="skip" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+         aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Možnosti přeskočení výroku</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="ng-scope">
+                        <?= Html::submitButton('<i class="far fa-question-circle"></i> Nedostatek informací', ['class' => 'btn btn-info', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
+                        <br>
+                        Zvolte, pokud zobrazený článek a znalostní rámec neobsahují informace dostatečné pro potvrzení
+                        nebo vyvrácení výroku. <br>Tento výrok nebude přidělen dalším anotátorům.
+                    </p>
+                    <hr class="ng-scope">
+                    <p class="ng-scope">
+                        <?= Html::submitButton('<i class="far fa-frown"></i> Nepřeji si anotovat tento výrok', ['class' => 'btn btn-light',]) ?>
+                        <br>
+                        Systém ho přiřadí ostatním anotátorům.
+                    </p>
+                    <hr class="ng-scope">
+                    <p class="ng-scope">
+                        <?= Html::submitButton('<i class="fas fa-flag"></i> Výrok je nejasný nebo nesmyslný', ['class' => 'btn btn-warning autoflag',]) ?>
+                        <br>
+                        Výrok bude nahlášen ke kontrole, zda splňuje pokyny z Ú<sub>1</sub>.
+                    </p>
+                    <hr class="ng-scope">
+                    <p class="ng-scope">
+                        <?= Html::submitButton('<i class="fas fa-flag"></i> Výrok obsahuje překlep nebo drobnou chybu', ['class' => 'btn btn-warning autoflag',]) ?>
+                        <br>
+                        Výrok bude zkontrolován a opraven.
+                    </p>
+
+                    <hr/>
+                    <h6>Podmíněná anotace</h6>
+                    <p class="ng-scope">
+                        Zvolte, pokud zobrazený článek a znalostní rámec neobsahují informace dostatečné pro potvrzení
+                        nebo vyvrácení výroku, ale znáte tvrzení, které, je-li pravdivé, výrok potvrzuje, nebo vyvrací.
+                        <br>Tento výrok plánujeme přidělit anotátorům v rámcí dalšího sběru dat.
+                        <?= $form->field($model, 'condition')->textInput()->label('Doplňující tvrzení')->hint('Jeho dodatečné potvrzení povede k potvrzení/vyvrácení původního výroku.') ?>
+                    </p>
+                    <?= Html::submitButton('<i class="fas fa-check"></i> Podmíněně potvrdit', ['class' => 'btn btn-success', 'value' => 'SUPPORTS', 'name' => 'label']) ?>
+                    <?= Html::submitButton('<i class="fas fa-times"></i> Podmíněně vyvrátit', ['class' => 'btn btn-danger', 'value' => 'REFUTES', 'name' => 'label']) ?>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php ActiveForm::end(); ?>

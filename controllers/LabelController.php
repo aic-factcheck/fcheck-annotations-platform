@@ -34,6 +34,7 @@ class LabelController extends Controller
             do {
                 $claim = Claim::find()
                     ->where(['sandbox' => $sandbox])
+                    ->andWhere(['is not', 'mutation_type', null])
                     ->andWhere(['not in', 'id', $traversed])
                     ->andWhere([$oracle ? '=' : '<>', 'user', Yii::$app->user->id])
                     ->orderBy(new Expression('rand()'))
