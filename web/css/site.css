@@ -204,3 +204,6 @@ tr.dictionary-item:hover th{
 .card.text-white a{
     color: white;
 }
+.fw-500{
+    font-weight: 500;
+}

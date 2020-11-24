@@ -131,17 +131,13 @@ $this->title = 'Anotace výroků';
                     <p class="ng-scope">Časování sloves, které nemá vliv na význam ignorujte.</p>
 
                     <p class="ng-scope">
-                    <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> Frank Sinatra je muzikant.<br>
                         <strong>Potvrzeno: </strong> ... Je jedním z nejprodávanějších hudebníků na světě, prodal více než 150 milionů nosičů.
-                    </div>
                     </p>
                     
                     <p class="ng-scope">
-                    <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> Frank Sinatra je muzikant. <br>
                         <strong>Potvrzeno: </strong> Francis Albert Sinatra (12. prosince 1915 - 14. května 1998) byl americký zpěvák.
-                    </div>
                     </p>
 
                     <h5 class="ng-scope">Entity stejného jména</h5>
@@ -149,18 +145,14 @@ $this->title = 'Anotace výroků';
                         Pro vyvrácení nesmí navíc existovat žádná jiná entita stejného jména, pro kterou by bylo tvrzení pravdivé.</p>
                     
                     <p class="ng-scope">
-                    <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> Antonín Dvořák byl malíř.<br>
                         <strong>Potvrzeno: </strong> Méně známý Antonín Dvořák (narozen 16. prosince 1817 v Němčicích, zemřel 26. dubna 1881 v Praze), byl český malíř a fotograf.
-                    </div>
                     </p>
                     
                     <p class="ng-scope">
-                    <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> Antonín Leopold Dvořák byl malíř.<br>
                         <strong>Vyvráceno: </strong> V tomto případě se jedná o známého hudebního skladatele. 
                         Ve znalostním rámci nenajdeme zmínky o tom, že by se významně věnoval malbě (v tomto specifickém případě nenajdeme ve skutečnosti žádné zmínky o tom, že by maloval).
-                    </div>
                     </p>
 
                     <h5 class="ng-scope">Prohlášení</h5>
@@ -169,18 +161,14 @@ $this->title = 'Anotace výroků';
                         Na opačných stranách spektra tak může být např. citace spekulující soukromé osoby v kontrastu s mluvčím na tiskové konferenci statistického úřadu.</p>
                     
                     <p class="ng-scope">
-                    <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> Donald Trump byl podruhé zvolen prezidentem.<br>
                         <strong>Nedostatek informací</strong> pro znalostní rámec: "Donald Trump na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou prezidentskou pozici." 
                         Pozn.: znalostní rámec v tomto případě bude s vysokou pravděpodobností obsahovat i protikladné informace.
-                    </div>
                     </p>
                     
                     <p class="ng-scope">
-                    <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> Donald Trump prohlásil, že byl podruhé zvolen prezidentem.<br>
                         <strong>Potvrzeno</strong>pro znalostní rámec: "Donald Trump na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou prezidentskou pozici."
-                    </div>
                     </p>
                 </div>
                 <div class="modal-footer">
