@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\CtkApi;
 use app\models\Article;
 use app\models\Claim;
 use app\models\ClaimKnowledge;
@@ -17,6 +18,13 @@ use yii\web\Controller;
 class CtkController extends Controller
 {
     const API_CONFIG = "nerlimit=2&k=2&npts=2";
+    private $_ctkApi;
+
+    public function beforeAction($action)
+    {
+        $this->_ctkApi = new CtkApi();
+        return parent::beforeAction($action);
+    }
 
     public function behaviors()
     {
@@ -35,23 +43,14 @@ class CtkController extends Controller
 
     public function actionIndex()
     {
-        $client = new Client();
-        $sample = $client->createRequest()
-            ->setMethod('GET')
-            ->setUrl('http://localhost:8601/sample')
-            ->send()
-            ->getData();
+        $sample = $this->_ctkApi->getSample();
         return $this->render('index', ['article' => Article::fromSample($sample), "target" => (int)explode("_", $sample["id"])[1]]);
     }
 
     public function actionNominate($paragraph)
     {
         $paragraph = Paragraph::findOne($paragraph);
-        $dictionary = (new Client())->createRequest()
-            ->setMethod('GET')
-            ->setUrl("http://localhost:8601/dictionary/" . $paragraph->article . '_' . $paragraph->rank . "?" . self::API_CONFIG)
-            ->send()
-            ->getData();
+        $dictionary = $this->_ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank);
         ParagraphKnowledge::fromDictionary($paragraph, $dictionary);
         $paragraph->ners = $dictionary['ners'];
         $paragraph->candidate_of = Yii::$app->user->id;
@@ -61,13 +60,8 @@ class CtkController extends Controller
     public function actionAugmentKnowledge($claim)
     {
         $claim = Claim::findOne($claim);
-        $q = urlencode($claim->claim);
         $paragraph = $claim->paragraph0;
-        $dictionary = (new Client())->createRequest()
-            ->setMethod('GET')
-            ->setUrl("http://localhost:8601/dictionary/{$paragraph->article}_{$paragraph->rank}?q=$q&" . self::API_CONFIG)
-            ->send()
-            ->getData();
+        $dictionary = $this->_ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $claim->claim]);
         ClaimKnowledge::fromDictionary($claim, $dictionary);
         $claim->ners = $dictionary['ners'];
         return $claim->save();
