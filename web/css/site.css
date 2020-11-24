@@ -201,3 +201,6 @@ tr.dictionary-item:hover th{
 .p-active{
     font-weight: 500;
 }
+.card.text-white a{
+    color: white;
+}

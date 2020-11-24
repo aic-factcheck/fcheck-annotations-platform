@@ -35,7 +35,8 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                     <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů obměn jsou uvedeny
                     dále.</p>
                 <ul>
-                    <li>Použijte <strong>původní tvrzení</strong> a poskytnuté související články jako základ pro jednotlivé
+                    <li>Použijte <strong>původní tvrzení</strong> a poskytnuté související články jako základ pro
+                        jednotlivé
                         obměny.<strong class="ng-binding"></strong></li>
                     <li>Na každou entitu se odkazujte přímo (tzn. zájmena by neměla být užívána).</li>
                     <li>Mírné variace jmen a názvů jsou přijatelné (např. John F Kennedy, JFK, prezident Kennedy).</li>
@@ -43,7 +44,9 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                         asi, snad, pravděpodobně atd.)
                     </li>
                     <li>Při vytváření obměn <strong>můžete zahrnout vlastní znalosti o světě</strong>.</li>
-                    <li>Obměny, které vymyslíte, by měly být <strong>objektivní</strong> a <strong>ověřitelné</strong> pomocí veřejně dostupných informací a všeobecných znalostí.</li>
+                    <li>Obměny, které vymyslíte, by měly být <strong>objektivní</strong> a <strong>ověřitelné</strong>
+                        pomocí veřejně dostupných informací a všeobecných znalostí.
+                    </li>
                     <li>Dodržujte správné psaní velkých počátečních písmen u názvů (např. Indie a nikoliv indie).</li>
                     <li>Věty ukončujte tečkou.</li>
                     <li>Čísla mohou být uváděna v libovolném korektním formátu (pro menší čísla lze i slovy).
@@ -151,7 +154,8 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                         <div class="col-md-12">
                             <h4 class="card-title">Obměny tvrzení</h4>
                             <ul>
-                                <li>Cílem je strávit okolo <strong>1 minuty</strong> při generování každé obměny tvrzení.
+                                <li>Cílem je strávit okolo <strong>1 minuty</strong> při generování každé obměny
+                                    tvrzení.
                                 </li>
                                 <li>Pokud není možné obměnu vygenerovat, nechejte textové pole prázdné.</li>
                             </ul>
@@ -164,6 +168,15 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                                         <h5><?= Claim::MUTATION_NAMES[$mutation] ?> </h5>
                                         <p><?= Claim::MUTATION_DESCRIPTIONS[$mutation] ?> </p>
                                         <?= $form->field($model, "mutations[$mutation]")->textarea(['class' => 'w-100 form-control', 'rows' => 3, 'placeholder' => "Tvrzení vytvořené obměnou \"" . Claim::MUTATION_NAMES[$mutation] . "\""])->label(false) ?>
+                                        <?= \yii\helpers\Html::tag("h6", Helper::expandLink("Zobrazit názorný příklad <i class=\"fas fa-eye-dropper\"></i>", ".$mutation-example", "Skrýt příklad <i class=\"fas fa-eye-dropper\"></i>"), ["class" => "text-right"]) ?>
+                                        <div class="<?= $mutation ?>-example">
+                                            <p><strong>Původní výrok:</strong>
+                                                <?= Claim::MUTATION_EXAMPLES[$mutation][Claim::FROM] ?></p>
+                                            <p><strong>Obměna:</strong>
+                                                <?= Claim::MUTATION_EXAMPLES[$mutation][Claim::TO] ?></p>
+                                            <p><em><strong>Vysvětlení</strong>
+                                                <?= Claim::MUTATION_EXAMPLES[$mutation][Claim::BECAUSE] ?></em></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
