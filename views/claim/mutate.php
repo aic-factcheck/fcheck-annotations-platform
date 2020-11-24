@@ -37,7 +37,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                 <ul>
                     <li>Použijte <strong>původní tvrzení</strong> a poskytnuté související články jako základ pro jednotlivé
                         obměny.<strong class="ng-binding"></strong></li>
-                    <li>Na každou entitu se odkazujte přímo (tzn. zájména by neměla být užívána).</li>
+                    <li>Na každou entitu se odkazujte přímo (tzn. zájmena by neměla být užívána).</li>
                     <li>Mírné variace jmen a názvů jsou přijatelné (např. John F Kennedy, JFK, prezident Kennedy).</li>
                     <li><strong>Vyvarujte se</strong> vágního, neurčitého a příliš opatrného jazyka (např. mohlo by,
                         asi, snad, pravděpodobně atd.)
@@ -48,8 +48,8 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                     <li>Věty ukončujte tečkou.</li>
                     <li>Čísla mohou být uváděna v libovolném korektním formátu (pro menší čísla lze i slovy).
                     </li>
-                    <li>Další informace jsou poskytnuty ve formě souvisejících článků, které by měly umožnit tvořit
-                        složitější a na vícero článcích závislé tvrzení.
+                    <li>Další informace jsou poskytnuty ve formě <em>znalostního rámce</em>, který by měl umožnit tvořit
+                        složitější a na více článcích závislá tvrzení.
                     </li>
                     <!--<li>Additional world knowledge is given to the you in the form of a dictionary. This allows for more complex claims to be generated in a structured manner with information that can be backed up from Wikipedia</li>-->
                     <li>Některé z poskytnutých textů nemusejí být přesné či pravdivé. Přesto jsou to validní kandidáti -
