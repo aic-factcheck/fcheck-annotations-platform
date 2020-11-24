@@ -20,10 +20,10 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css?2020-11-24',
+        'css/site.css?2020-11-24-2',
     ];
     public $js = [
-        'js/site.js?2020-11-24',
+        'js/site.js?2020-11-24-2',
     ];
 
     public $depends = [
