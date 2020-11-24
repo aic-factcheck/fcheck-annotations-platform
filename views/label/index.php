@@ -99,25 +99,33 @@ $this->title = 'Anotace výroků';
                         <li>Projděte si odstavce výchozího článku a zatrhněte ty (a pouze ony), které vám umožní tvrzení potvrdit či vyvrátit.</li>
                         <li>Skupina takto označených odstavců tvoří <em>důkaz</em>.</li>
                         <li>Pokud odstavce původního článku neobsahují dostatek informací k vytvoření důkazu, rozbalte a případně zatrhněte vhodné odstavce <em>znalostního rámce</em> níže na stránce.</li>
-                        <li>Pokud nejsou vhodné ani výchozí odstavce znalostního rámce, můžete znalostní rámec rozšířit odkazem <strong>Zobrazit kontext</strong>.
-                        <li>Při úvahách nad platností tvrzení používejte <strong>zdravý rozum</strong>.</li>
-                        <li>Jediným zdrojem informací pro anotaci výroku smí být výchozí článek a texty znalostního rámce. S výjimkou podmíněného potvrzení či vyvrácení (viz níže) <em>je jakékoliv použítí vlastních znalostí je zakázáno.</em></li>
+                        <li>Pokud nejsou dostatečné ani výchozí odstavce znalostního rámce, můžete znalostní rámec rozšířit odkazem <strong>Zobrazit kontext</strong>.
+                        <li>Při úvahách nad platností tvrzení používejte <em>zdravý rozum</em>.</li>
+                        <li>Jediným zdrojem informací pro anotaci výroku smí být výchozí článek a texty znalostního rámce. S výjimkou podmíněného potvrzení či vyvrácení (viz níže) <em>je jakékoliv použítí vlastních znalostí zakázáno.</em></li>
                         <li>Texty znalostního rámce vznikly dříve, než text výchozího článku. Platnost tvrzení se tak dokazuje k datu vydání výchozího článku.</li>
                         <li>Důkazů, tedy minimálních skupin odstavců, které potvrzují, či vyvracejí tvrzení můžete zadat více - při zatržení odstavce je automaticky přidán nový sloupec.</li>
                         <li>Pro rozhodnutí anotace zmáčkněte tlačítko <strong>Potvrdit</strong>, <strong>Vyvrátit</strong>, či <strong>Preskočit</strong>.</li>
                         <li>V případě volby <strong>Preskočit</strong> máte více možností:
                             <ul>
-                                <li>Pokud výchozí článek a znalostní rámec neobsahují dostatek informací, zvolte <strong>Nedostatek informací.</strong></li>
-                                <li>PRIDAT INFO O PODMINENE ANOTACI, sem muze vstoupit external knowledge</li>
-                                <li>Význam posledních dvou tlačítek je zřejmý: <strong>Výrok je nejasný, nesmyslný nebo nelze dokázat.</strong>, <strong>Výrok obsahuje překlep nebo drobnou chybu.</strong></li>
+                                <li>Pokud výchozí článek ani znalostní rámec neobsahují dostatek informací, zvolte <strong>Nedostatek informací</strong>.</li>
+                                <li>Pokud jste si, i přes nedostatek informací, jistí pravdivostí či nepravdivostí výroku, můžete místo <strong>Nedostatek informací</strong> zvolit volbu <strong>Podmíněně potvrdit</strong> nebo <strong>Podmíněně potvrdit</strong>. 
+                                    Do příslušného pole <strong>Doplňující tvrzení</strong> pak nezapomeňte musíte vložit text. Interpretace <em>doplňujcího tvrzení</em> je následující: pokud bude ukázána jeho platnost, bude automatcky potvrzeno či vyvráceno i původní tvrzení. 
+                                    Pozor: doplňující tvrzení nesmí být parafrází původního tvrzení!</li>
+                                <li>V případě nejasného čí chybného tvrzení zvolte <strong>Výrok je nejasný, nesmyslný nebo nelze dokázat</strong> nebo <strong>Výrok obsahuje překlep nebo drobnou chybu</strong>.</li>
                             </ul>
                         </li>
-                        <li>TODO CASOVE paradoxy, platnost v cas napsani clanku? - asi pouze pokud je tam i casove urceni. "Dvojčata jsou nejvyššími budovami v New Yorku."</li>
                     </ol>
 
-
                     <h4 class="topmargin ng-scope">Příklady</h4>
-                    <p class="ng-scope">TODO CASOVE "paradoxy,"" platnost v cas napsani clanku? - asi pouze pokud je tam i casove urceni.</p>
+                    <p class="ng-scope">Podmíněně potvrzené tvrzení</p>
+                    <div class="ebox ng-scope">
+                        <strong>Tvrzení: </strong> "Sněžka je nejvyšší horou Krkonoš."<br>
+                        Nabízené odstavce nejsou pro důkaz tohoto tvrzení dostatečné. Obsahují pouze následující informaci: "Sněžka je nejvyšší horou České republiky."<br>
+                        Jste přesvědčen/a o platnosti původního tvrzení (neúplnost znalostního rámce mužete přisuzovat nedokonalosti metody jíž je vytvářen). Poto zadejte:<br>
+                        <strong>Doplňující tvrzení</strong>: "Krkonoše jsou nejvyšší pohoří Česka." a zvolte <strong>Podmíněně potvrdit</strong>.  
+                    </div>
+
+                    <p class="ng-scope">ASI UZ poreseno nahore TODO CASOVE "paradoxy,"" platnost v cas napsani clanku? - asi pouze pokud je tam i casove urceni.</p>
                     <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> "Dvojčata jsou nejvyššími budovami v New Yorku."<br>
                         <strong>Supported: </strong> He is one of the best-selling music artists of all time, having
@@ -140,7 +148,19 @@ $this->title = 'Anotace výroků';
                     <p class="ng-scope">Pokud existuje více stejně pojmenovaných entit (například osob, míst), stačí pro potvrzení platnost tvrzení alespoň u jedné z nich. 
                         Pro vyvrácení nesmí navíc existovat žádná entita, pro kterou by bylo tvrzení pravdivé.</p>
 
-                    <p class="ng-scope">TODO Prohlášení osob (Trump prohlasil, ze byl zvolen prezidentem).</p>
+                    <p class="ng-scope">TODO Prohlášení osoby automaticky nedokazuje tvrzení. CO TREBA TISKOVY MLUVCI MINISTERSTVA. Mozna nesmi existovat protikladna zprava?</p>
+                    
+                    <div class="ebox ng-scope">
+                        <strong>Tvrzení: </strong> Donald Trump byl podruhé zvolen prezidentem.<br>
+                        <strong>Nedostatek informací: </strong> Donald Trump se na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou presidentskou pozici.
+                    </div>
+
+                    <div class="ebox ng-scope">
+                        <strong>Tvrzení: </strong> Donald Trump prohlásil, že byl podruhé zvolen prezidentem.<br>
+                        <strong>Potvrzeno: </strong> Donald Trump se na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou presidentskou pozici.
+                    </div>
+
+                    <p class="ng-scope">TODO Podobně plány nejsou automaticky potvrzením platnosti plánovaného.</p>
 
                 </div>
                 <div class="modal-footer">
@@ -167,13 +187,13 @@ $this->title = 'Anotace výroků';
                         nebo vyvrácení výroku. <br>Tento výrok nebude přidělen dalším anotátorům.
                     </p>
                     <p class="ng-scope">
-                        <?=Html::textInput("condition",null,['placeholder'=>'Tvrzení s chybějící znalostí'])?><br>
+                        <?=Html::textInput("condition",null,['placeholder'=>'Doplňující tvrzení. Jeho dodatečné potvrzení povede k potvrzení/vyvrácení původního výroku.'])?><br>
                         <?= Html::submitButton('<i class="far fa-question-circle"></i> Podmíněně potvrdit', ['class' => 'btn btn-info', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
                         <?= Html::submitButton('<i class="far fa-question-circle"></i> Podmíněně vyvrátit', ['class' => 'btn btn-info', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
                         <br>
                         Zvolte, pokud zobrazený článek a znalostní rámec neobsahují informace dostatečné pro potvrzení
-                        nebo vyvrácení výroku, ale znáte tvrzení, které, je-li pravdivé, várok potvrzuje, nebo vyvrací.
-                        <br>Tento výrok nebude přidělen dalším anotátorům.
+                        nebo vyvrácení výroku, ale znáte tvrzení, které, je-li pravdivé, výrok potvrzuje, nebo vyvrací.
+                        <br>Tento výrok plánujeme přidělit anotátorům v rámcí dalšího sběru dat.
                     </p>
                     <hr class="ng-scope">
                     <p class="ng-scope">
