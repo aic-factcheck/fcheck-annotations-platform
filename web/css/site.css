@@ -198,7 +198,7 @@ tr.dictionary-item:hover th{
 [data-show]{
     cursor:pointer;
 }
-.p-active{
+.p-active,.text-strong{
     font-weight: 500;
 }
 .card.text-white a{
