@@ -39,9 +39,9 @@ class UserController extends Controller
      * @param string $message the message to be echoed.
      * @return int Exit code
      */
-    public function actionMake($email, $password)
+    public function actionMake($name, $note = '')
     {
-        echo (new User(["username" => $email, "password" => $password]))->save();
+        User::generate($name, $note);
         return ExitCode::OK;
     }
 
