@@ -51,6 +51,15 @@ class Claim extends ActiveRecord
         "negate" => "Vytvořte negaci původního tvrzení. <strong>Vyvarujte se negace pomocí jednoduchého přidání záporu.</strong>",
     ];
 
+    const MUTATION_EXAMPLES = [
+        "rephrase" => ["Barack Obama navštívil Velkou Británii", "Prezident Obama navštívil místa ve Spojeném království.", "Věty mají stejný význam."],
+        "substitute_similar" => ["Barack Obama navštívil Velkou Británii", "Barack Obama navštívil Francii", "Velká Británie a Francie jsou země."],
+        "substitute_dissimilar" => ["Barack Obama navštívil Velkou Británii", "Barack Obama se zůčastnil večeře korespondentů v Bílém domě.", "Návštěva země a oficiální večeře jsou dva různé typy událostí."],
+        "specific" => ["Barack Obama navštívil Velkou Británii", "Barack Obama podnikl státní návštěvu Londýna.", "Londýn je ve Velké Británii. Jestli jej Obama navštívil, musel navštívit i Velkou Británii."],
+        "general" => ["Barack Obama navštívil evropskou zemi.", "Velká Británie je v Evropě. Jestli Obama navštívil Velkou Británii, musel navštívit evropskou zemi."],
+        "negate" => ["Barack Obama navštívil Velkou Británii.", "Obama při svých cestách vynechal Velkou Británii.", "Negace: Velkou Británii nemohl navštívit, když ji vynechal."],
+    ];
+
     private $_knowledge = null;
 
     /**
