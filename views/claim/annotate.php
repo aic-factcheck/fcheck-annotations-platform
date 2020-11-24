@@ -36,7 +36,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
                 <em>Tomáš Garrigue Masaryk</em> , <em>TGM</em>, <em>Prezident Masaryk</em>).
             </li>
             <li><strong>Nepoužívejte vágní nebo opatrné formulace</strong> (např. <em>možná</em>, <em>mohl by</em>, <em>je
-                    uváděno, že</em>, ...)
+                    uváděno, že</em>, ...) <strong>s výjimkou řádového zaokrouhlení čísel</strong> (<em>desítky, stovky,...</em>)
             </li>
             <li>Dodržujte základní pravidla psaní velkých písmen (pište <em>Indie</em> místo <em>indie</em>).</li>
             <li>Věty končete tečkou.</li>
