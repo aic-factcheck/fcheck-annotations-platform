@@ -203,7 +203,7 @@ $this->title = 'Anotace výroků';
                     </p>
                     <hr class="ng-scope">
                     <p class="ng-scope">
-                        <?= Html::submitButton('<i class="fas fa-flag"></i> Výrok je nejasný, nesmyslný nebo nelze dokázat', ['class' => 'btn btn-warning autoflag',]) ?>
+                        <?= Html::submitButton('<i class="fas fa-flag"></i> Výrok je nejasný nebo nesmyslný', ['class' => 'btn btn-warning autoflag',]) ?>
                         <br>
                         Výrok bude nahlášen ke kontrole, zda splňuje pokyny z Ú<sub>1</sub>.
                     </p>
