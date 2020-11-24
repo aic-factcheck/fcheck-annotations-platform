@@ -121,7 +121,7 @@ $this->title = 'Anotace výroků';
                     <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> "Sněžka je nejvyšší horou Krkonoš."<br>
                         Nabízené odstavce nejsou pro důkaz tohoto tvrzení dostatečné. Obsahují pouze následující informaci: "Sněžka je nejvyšší horou České republiky."<br>
-                        Jste přesvědčen/a o platnosti původního tvrzení (neúplnost znalostního rámce mužete přisuzovat nedokonalosti metody jíž je vytvářen). Poto zadejte:<br>
+                        Jste přesvědčen/a o platnosti původního tvrzení (neúplnost znalostního rámce mužete přisuzovat nedokonalosti metody, jíž je vytvářen). Proto zadejte:<br>
                         <strong>Doplňující tvrzení</strong>: "Krkonoše jsou nejvyšší pohoří Česka." a zvolte <strong>Podmíněně potvrdit</strong>.  
                     </div>
 
@@ -160,66 +160,14 @@ $this->title = 'Anotace výroků';
                     
                     <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> Donald Trump byl podruhé zvolen prezidentem.<br>
-                        <strong>Nedostatek informací</strong> pro znalostní rámec: "Donald Trump na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou prezidentskou pozici."
+                        <strong>Nedostatek informací</strong> pro znalostní rámec: "Donald Trump na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou prezidentskou pozici." 
+                        Pozn.: znalostní rámec v tomto případě bude s vysokou pravděpodobností obsahovat i protikladné informace.
                     </div>
 
                     <div class="ebox ng-scope">
                         <strong>Tvrzení: </strong> Donald Trump prohlásil, že byl podruhé zvolen prezidentem.<br>
                         <strong>Potvrzeno</strong>pro znalostní rámec: "Donald Trump na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou prezidentskou pozici."
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="skip" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Možnosti přeskočení výroku</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="ng-scope">
-                        <?= Html::submitButton('<i class="far fa-question-circle"></i> Nedostatek informací', ['class' => 'btn btn-info', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
-                        <br>
-                        Zvolte, pokud zobrazený článek a znalostní rámec neobsahují informace dostatečné pro potvrzení
-                        nebo vyvrácení výroku. <br>Tento výrok nebude přidělen dalším anotátorům.
-                    </p>
-                    <p class="ng-scope">
-                        <?=Html::textInput("condition",null,['placeholder'=>'Doplňující tvrzení. Jeho dodatečné potvrzení povede k potvrzení/vyvrácení původního výroku.'])?><br>
-                        <?= Html::submitButton('<i class="far fa-question-circle"></i> Podmíněně potvrdit', ['class' => 'btn btn-info', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
-                        <?= Html::submitButton('<i class="far fa-question-circle"></i> Podmíněně vyvrátit', ['class' => 'btn btn-info', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
-                        <br>
-                        Zvolte, pokud zobrazený článek a znalostní rámec neobsahují informace dostatečné pro potvrzení
-                        nebo vyvrácení výroku, ale znáte tvrzení, které, je-li pravdivé, výrok potvrzuje, nebo vyvrací.
-                        <br>Tento výrok plánujeme přidělit anotátorům v rámcí dalšího sběru dat.
-                    </p>
-                    <hr class="ng-scope">
-                    <p class="ng-scope">
-                        <?= Html::submitButton('<i class="far fa-frown"></i> Nepřeji si anotovat tento výrok', ['class' => 'btn btn-light',]) ?>
-                        <br>
-                        Systém ho přiřadí ostatním anotátorům.
-                    </p>
-                    <hr class="ng-scope">
-                    <p class="ng-scope">
-                        <?= Html::submitButton('<i class="fas fa-flag"></i> Výrok je nejasný nebo nesmyslný', ['class' => 'btn btn-warning autoflag',]) ?>
-                        <br>
-                        Výrok bude nahlášen ke kontrole, zda splňuje pokyny z Ú<sub>1</sub>.
-                    </p>
-                    <hr class="ng-scope">
-                    <p class="ng-scope">
-                        <?= Html::submitButton('<i class="fas fa-flag"></i> Výrok obsahuje překlep nebo drobnou chybu', ['class' => 'btn btn-warning autoflag',]) ?>
-                        <br>
-                        Výrok bude zkontrolován a opraven.
-                    </p>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
