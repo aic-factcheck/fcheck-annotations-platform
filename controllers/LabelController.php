@@ -47,7 +47,7 @@ class LabelController extends Controller
                 $traversed[] = $claim = $claim->getPrimaryKey();
             } while (Label::find()
                 ->where(['claim' => $claim, 'user' => Yii::$app->user->id])
-                ->orWhere(['flag' => 1, 'user' => Yii::$app->user->id])
+                ->orWhere(['flag' => 1, 'claim' => $claim])
                 ->exists());
 
             return $this->redirect([
