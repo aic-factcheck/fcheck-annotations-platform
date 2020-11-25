@@ -155,7 +155,7 @@ $this->title = 'Anotace výroků';
                     </p>
 
                     <h5 class="ng-scope">Prohlášení</h5>
-                    <p class="ng-scope">Prohlášení osoby automaticky nedokazuje tvrzení. Zveřejnění plánů rovněž nemusí být automaticky potvrzením platnosti plánovaných činností. 
+                    <p class="ng-scope">Prohlášení osoby automaticky nedokazuje tvrzení. Zveřejnění plánů rovněž automaticky nepotvrzuje, že cíle těchto plánů byly dosaženy. 
                         V těchto případech je třeba vyjít z kontextu a použít zdravého rozumu. 
                         Na opačných stranách spektra tak může být např. citace spekulující soukromé osoby v kontrastu s mluvčím na tiskové konferenci statistického úřadu.</p>
                     
