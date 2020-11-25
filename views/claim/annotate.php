@@ -112,9 +112,9 @@ Helper::setEntities($ners = $model->paragraph->ners);
             <div class="row">
                 <div class="col-md-5"><h4 class="card-title">Znalostní rámec</h4>
                     <p class="card-text">Rozklikněte název článku pro zobrazení části, která byla vybrána jako
-                        <strong>relevantní</strong> pro danou zdrojovou větu.</p>
+                        <strong>relevantní</strong> pro daný zdrojový odstavec.</p>
                     <p class="card-text">Články ve <em>znalostním rámci</em> byly vybrány podle frekvence výskytu
-                        společných pojmenovaných entit, nebo pomocí sémantického vyhledávání vět z původního článku.</p>
+                        společných pojmenovaných entit (jména osob, obcí, firem apod.), nebo pomocí sémantického vyhledávání odstavců z původního článku.</p>
                 </div>
                 <div class="col-md-7">
                     <div class="card bg-white">
@@ -140,7 +140,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
                 <div class="col-md-5"><h4 class="card-title">Pravdivá tvrzení</h4>
                     <p>Snažte se strávit přibližně 2 minuty tvorbou <strong>1-5</strong> tvrzení z tohoto zdrojového odstavce.</p>
                     <p>Výsledná tvrzení oddělte koncem řádku (↵).</p>
-                    <p>Pokud není zdrojová věta použitelná, stiskněte tlačítko <strong>Přeskočit</strong></p>
+                    <p>Pokud není zdrojový odstavec použitelný, stiskněte tlačítko <strong>Přeskočit</strong></p>
                     <?= Helper::expandLink("Příklad", "#example") ?>
                     <div id="example">
                         <blockquote>The&nbsp;Amazon River, usually abbreviated to&nbsp;Amazon&nbsp;(US:&nbsp;/ˈæməzɒn/&nbsp;or&nbsp;UK:&nbsp;/ˈæməzən/;&nbsp;Spanish&nbsp;and&nbsp;Portuguese:&nbsp;Amazonas),
@@ -173,7 +173,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
         </div>
     </div>
     <p class="text-right">
-        <?= Html::submitButton('Odeslat výroky', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Odeslat tvrzení', ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-warning']) ?>
         <?= Html::a('Home', ['site/index'], ['class' => 'btn btn-light']) ?>
     </p>
