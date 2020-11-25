@@ -72,6 +72,16 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionTutorial($t = 0)
+    {
+        return $this->render('tutorial', ['t' => $t]);
+    }
+
+    /**
      * Login action.
      *
      * @return Response|string
@@ -83,9 +93,9 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) ) {
-            if($model->login()) return $this->goBack();
-            Yii::$app->session->addFlash("danger","Zadané SIDOS ID není v systému");
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->login()) return $this->goBack();
+            Yii::$app->session->addFlash("danger", "Zadané SIDOS ID není v systému");
         }
 
         return $this->render('login', [
