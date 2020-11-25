@@ -109,7 +109,7 @@ $this->title = 'Anotace výroků';
                             <ul>
                                 <li>Pokud výchozí článek ani znalostní rámec neobsahují dostatek informací, zvolte <strong>Nedostatek informací</strong>.</li>
                                 <li>Pokud jste si, i přes nedostatek informací, jistí pravdivostí či nepravdivostí výroku, můžete místo <strong>Nedostatek informací</strong> zvolit volbu <strong>Podmíněně potvrdit</strong> nebo <strong>Podmíněně vyvrátit</strong>. 
-                                    Do příslušného pole <strong>Doplňující tvrzení</strong> pak nezapomeňte vložit text. Interpretace <em>doplňujcího tvrzení</em> je následující: pokud bude ukázána jeho platnost, bude automatcky potvrzeno či vyvráceno i původní tvrzení. 
+                                    Do příslušného pole <strong>Doplňující tvrzení</strong> pak musíte vložit text. Interpretace <em>doplňujcího tvrzení</em> je následující: pokud bude ukázána jeho platnost, bude automatcky potvrzeno či vyvráceno i původní tvrzení. 
                                     Pozor: doplňující tvrzení nesmí být parafrází původního tvrzení!</li>
                                 <li>V případě nejasného čí chybného tvrzení zvolte <strong>Výrok je nejasný nebo nesmyslný</strong> nebo <strong>Výrok obsahuje překlep nebo drobnou chybu</strong>.</li>
                             </ul>
@@ -131,13 +131,13 @@ $this->title = 'Anotace výroků';
                     <p class="ng-scope">Časování sloves, které nemá vliv na význam ignorujte.</p>
 
                     <p class="ng-scope">
-                        <strong>Tvrzení: </strong> Frank Sinatra je muzikant.<br>
-                        <strong>Potvrzeno: </strong> ... Je jedním z nejprodávanějších hudebníků na světě, prodal více než 150 milionů nosičů.
+                        <strong>Tvrzení: </strong> "Frank Sinatra je muzikant."<br>
+                        <strong>Potvrzeno</strong> pro: "... Je jedním z nejprodávanějších hudebníků na světě, prodal více než 150 milionů nosičů."
                     </p>
                     
                     <p class="ng-scope">
-                        <strong>Tvrzení: </strong> Frank Sinatra je muzikant. <br>
-                        <strong>Potvrzeno: </strong> Francis Albert Sinatra (12. prosince 1915 - 14. května 1998) byl americký zpěvák.
+                        <strong>Tvrzení: </strong> "Frank Sinatra je muzikant." <br>
+                        <strong>Potvrzeno</strong> pro: "Francis Albert Sinatra (12. prosince 1915 - 14. května 1998) byl americký zpěvák."
                     </p>
 
                     <h5 class="ng-scope">Entity stejného jména</h5>
@@ -145,14 +145,14 @@ $this->title = 'Anotace výroků';
                         Pro vyvrácení nesmí navíc existovat žádná jiná entita stejného jména, pro kterou by bylo tvrzení pravdivé.</p>
                     
                     <p class="ng-scope">
-                        <strong>Tvrzení: </strong> Antonín Dvořák byl malíř.<br>
-                        <strong>Potvrzeno: </strong> Méně známý Antonín Dvořák (narozen 16. prosince 1817 v Němčicích, zemřel 26. dubna 1881 v Praze), byl český malíř a fotograf.
+                        <strong>Tvrzení: </strong> "Antonín Dvořák byl malíř."<br>
+                        <strong>Potvrzeno</strong> pro: "Méně známý Antonín Dvořák (narozen 16. prosince 1817 v Němčicích, zemřel 26. dubna 1881 v Praze), byl český malíř a fotograf."
                     </p>
                     
                     <p class="ng-scope">
-                        <strong>Tvrzení: </strong> Antonín Leopold Dvořák byl malíř.<br>
-                        <strong>Vyvráceno: </strong> V tomto případě se jedná o známého hudebního skladatele. 
-                        Ve znalostním rámci nenajdeme zmínky o tom, že by se významně věnoval malbě (v tomto specifickém případě nenajdeme ve skutečnosti žádné zmínky o tom, že by maloval).
+                        <strong>Tvrzení: </strong> "Antonín Leopold Dvořák byl malíř."<br>
+                        <strong>Vyvráceno</strong> - v tomto případě se jedná o známého hudebního skladatele. 
+                        Ve zdojovém článku ani znalostním rámci nenajdeme zmínky o tom, že by se významně věnoval malbě (v tomto specifickém případě nenajdeme ve skutečnosti žádné zmínky o tom, že by maloval).
                     </p>
 
                     <h5 class="ng-scope">Prohlášení</h5>
@@ -161,14 +161,14 @@ $this->title = 'Anotace výroků';
                         Na opačných stranách spektra tak může být např. citace spekulující soukromé osoby v kontrastu s mluvčím na tiskové konferenci statistického úřadu.</p>
                     
                     <p class="ng-scope">
-                        <strong>Tvrzení: </strong> Donald Trump byl podruhé zvolen prezidentem.<br>
-                        <strong>Nedostatek informací</strong> pro znalostní rámec: "Donald Trump na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou prezidentskou pozici." 
+                        <strong>Tvrzení: </strong> "Donald Trump byl podruhé zvolen prezidentem."<br>
+                        <strong>Nedostatek informací</strong> pro: "Donald Trump před prohlásil, že u voleb obhájil svou prezidentskou pozici." 
                         Pozn.: znalostní rámec v tomto případě bude s vysokou pravděpodobností obsahovat i protikladné informace.
                     </p>
                     
                     <p class="ng-scope">
-                        <strong>Tvrzení: </strong> Donald Trump prohlásil, že byl podruhé zvolen prezidentem.<br>
-                        <strong>Potvrzeno</strong>pro znalostní rámec: "Donald Trump na čtvrteční tiskové konferenci prohlásil, že u voleb obhájil svou prezidentskou pozici."
+                        <strong>Tvrzení: </strong> "Donald Trump prohlásil, že byl podruhé zvolen prezidentem."<br>
+                        <strong>Potvrzeno</strong>pro: "Donald Trump prohlásil, že u voleb obhájil svou prezidentskou pozici."
                     </p>
                 </div>
                 <div class="modal-footer">
