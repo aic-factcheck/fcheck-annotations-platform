@@ -96,9 +96,9 @@ $this->title = 'Anotace tvrzení';
 
                     <ol class="gul ng-scope">
                         <li>Přečtěte si tvrzení a pokuste se mu porozumět.</li>
-                        <li>Projděte si odstavce výchozího článku a zatrhněte ty (a pouze ony), které vám umožní tvrzení potvrdit, či vyvrátit.</li>
+                        <li>Projděte si odstavce výchozího článku a zatrhněte ty, které vám umožní tvrzení potvrdit, či vyvrátit.</li>
                         <li>Skupina takto označených odstavců tvoří <em>důkaz</em>.</li>
-                        <li>Důkaz musí potvrdit, či vyvrátit všechny informace vyplývající z tvrzení.</li>
+                        <li>Důkaz tvoří minimální počet odstavců, které potvrzují nebo vyvrací všechny informace vyplývající z tvrzení.</li>
                         <li>Pokud odstavce původního článku neobsahují dostatek informací k vytvoření důkazu, rozbalte a případně zatrhněte vhodné odstavce <em>znalostního rámce</em> níže na stránce.</li>
                         <li>Pokud nejsou dostatečné ani výchozí odstavce znalostního rámce, můžete znalostní rámec rozšířit kliknutím na odkazy <strong>Zobrazit kontext</strong>.
                         <li>Při úvahách nad platností tvrzení používejte <em>zdravý rozum</em>.</li>
