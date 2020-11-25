@@ -30,7 +30,8 @@
     "ext-pdo": "*",
     "ext-json": "*",
     "ext-sqlite3": "*",
-    "yiisoft/yii2-httpclient": "^2.0"
+    "yiisoft/yii2-httpclient": "^2.0",
+    "dilden/yii2-feedback-widget": "dev-master"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41b60a71fced822ac4aebd9067ccf68f",
+    "content-hash": "67ae5d764c2f172c468cc931522f0229",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -207,6 +207,54 @@
                 "source": "https://github.com/lipis/flag-icon-css/tree/3.5.0"
             },
             "time": "2020-06-10T11:53:19+00:00"
+        },
+        {
+            "name": "dilden/yii2-feedback-widget",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dilden/Yii2-Feedback-Widget.git",
+                "reference": "cc5c50f8fbe0d5ac48b1c8a595c138b954a57cee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dilden/Yii2-Feedback-Widget/zipball/cc5c50f8fbe0d5ac48b1c8a595c138b954a57cee",
+                "reference": "cc5c50f8fbe0d5ac48b1c8a595c138b954a57cee",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "default-branch": true,
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "dilden\\feedbackwidget\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Dylan Hildenbrand",
+                    "email": "dylan.hildenbrand@gmail.com"
+                }
+            ],
+            "description": "This Yii2 extension is intended to enable live feedback from users on a Yii2 web app by acting as a wrapper for the ivoviz/feedback plugin.",
+            "keywords": [
+                "extension",
+                "feedback",
+                "widget",
+                "wrapper",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/Dilden/Yii2-Feedback-Widget/issues",
+                "source": "https://github.com/Dilden/Yii2-Feedback-Widget/tree/master"
+            },
+            "time": "2016-01-17T23:43:55+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -5788,7 +5836,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kartik-v/yii2-grid": 20
+        "kartik-v/yii2-grid": 20,
+        "dilden/yii2-feedback-widget": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -93,13 +93,30 @@ AppAsset::register($this);
         <?php if (!Yii::$app->user->isGuest) {?>
         $(document).ready(function () {
             var start = new Date();
+            var addend = 0;
+
+            $(window).on("blur focus", function (e) {
+                var prevType = $(this).data("prevType");
+                if (prevType != e.type) {
+                    switch (e.type) {
+                        case "blur":
+                            addend += new Date() - start;
+                            break;
+                        case "focus":
+                            start = new Date();
+                            break;
+                    }
+                }
+
+                $(this).data("prevType", e.type);
+            });
 
             $(window).on("beforeunload", function () {
                 $.ajax({
                     url: '<?=Url::to(['site/timer'])?>',
                     type: 'GET',
                     data: {
-                        time: new Date() - start,
+                        time: new Date() - start + addend,
                         route: '<?=Yii::$app->controller->action->uniqueId?>'
                     }
                 });
