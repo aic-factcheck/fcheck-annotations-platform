@@ -27,9 +27,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
         <p>Cílem úkolu je <strong>vygenerovat pravdivá tvrzení</strong> ze zdrojového odstavce ČTK dat.</p>
 
         <ul>
-            <li><strong">Extrahujte "atomická" (jednoduchá, dále nedělitelná) tvrzení týkající se některé (některých) 
-                pojmenovaných entitit</strong> ze zdrojového
-                textu.<br/><em>(<?= implode(", ", $ners) ?>)</em></li>
+            <li>Extrahujte jednoduchá (dále nedělitelná) tvrzení týkající se některých pojmenovaných entitit ze zdrojového textu.<br/><em>(<?= implode(", ", $ners) ?>)</em></li>
             <li>Jako základ svého tvrzení použijte zdrojový odstavec a znalostní rámec.</li>
             <li><strong>Pojmenované entity uvádějte přímo</strong> (vyhněte se používání zájmen apod.).</li>
             <li>Drobné záměny jsou přípustné (např.
@@ -53,13 +51,9 @@ Helper::setEntities($ners = $model->paragraph->ners);
 
         <ul>
             <li><strong>Nezapojujte</strong> své vlastní znalosti nebo domněnky o světě.</li>
-            <li>Doplňujicí informace vám jsou předány pomocí <strong>znalostního rámce</strong>,
-                ten obsahuje informace nad rámec původního odstavce, které mohou pomoct s vytvořením
-                složitějších tvrzení. (Omezujeme vás pouze na znalostní rámec, abychom byli schopni všechna tvrzení
-                z Ú<sub>1</sub> navázat na konkrétní zdroje z ČTK dat)
-            </li>
+            <li>Doplňující informace vám jsou předány pomocí znalostního rámce. Ten obsahuje informace nad rámec původního odstavce, které mohou pomoct s vytvořením složitějších tvrzení. (Omezujeme vás pouze na znalostní rámec, abychom byli schopni všechna tvrzení z Ú<sub>1</sub> navázat na konkrétní zdroje z ČTK dat.)</li>
             <li>Pokud není zdrojový odstavec textu použitelný, přeskočte ho.</li>
-            <li>Pokud není znalost ze znalostním rámci relevantní nebo vhodná, ignorujte ji.</li>
+            <li>Pokud není znalost ve znalostním rámci relevantní nebo vhodná, ignorujte ji.</li>
         </ul>
     </div>
 
@@ -86,7 +80,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
             <div class="row">
                 <div class="col-md-5"><h4 class="card-title">Zdrojový odstavec</h4>
                     <p class="card-text">Z tohoto odstavce a příslušného článku vycházejte při tvorbě tvrzení o jedné z
-                        jmenných entit.<br/>
+                        pojmenovaných entit.<br/>
                         <em>(<?= implode(", ", $ners) ?>)</em></p>
                 </div>
                 <div class="col-md-7">
@@ -138,7 +132,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
         <div class="card-body">
             <div class="row">
                 <div class="col-md-5"><h4 class="card-title">Pravdivá tvrzení</h4>
-                    <p>Snažte se strávit přibližně 2 minuty tvorbou <strong>1-5</strong> tvrzení z tohoto zdrojového odstavce.</p>
+                    <p>Snažte se strávit přibližně 2 minuty tvorbou <strong>1 až 5</strong> tvrzení z tohoto zdrojového odstavce.</p>
                     <p>Výsledná tvrzení oddělte koncem řádku (↵).</p>
                     <p>Pokud není zdrojový odstavec použitelný, stiskněte tlačítko <strong>Přeskočit</strong></p>
                     <?= Helper::expandLink("Příklad", "#example") ?>
