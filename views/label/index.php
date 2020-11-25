@@ -141,8 +141,7 @@ $this->title = 'Anotace výroků';
                     </p>
 
                     <h5 class="ng-scope">Entity stejného jména</h5>
-                    <p class="ng-scope">Pokud existuje více stejně pojmenovaných entit (například osob nebo míst), a chybí jejich další určení, stačí pro potvrzení platnost tvrzení alespoň pro jednu z nich. 
-                        Pro vyvrácení nesmí navíc existovat žádná jiná entita stejného jména, pro kterou by bylo tvrzení pravdivé.</p>
+                    <p class="ng-scope">Pokud existuje více stejně pojmenovaných entit (například osob nebo míst), a chybí jejich další určení, stačí pro potvrzení platnost tvrzení alespoň pro jednu z nich.</p>
                     
                     <p class="ng-scope">
                         <strong>Tvrzení: </strong> "Antonín Dvořák byl malíř."<br>
@@ -156,13 +155,13 @@ $this->title = 'Anotace výroků';
                     </p>
 
                     <h5 class="ng-scope">Prohlášení</h5>
-                    <p class="ng-scope">Prohlášení osoby automaticky nedokazuje tvrzení. Zveřejnění plánů rovněž nemusí být automaticky potvrzením platnosti plánovaného. 
+                    <p class="ng-scope">Prohlášení osoby automaticky nedokazuje tvrzení. Zveřejnění plánů rovněž nemusí být automaticky potvrzením platnosti plánovaných činností. 
                         V těchto případech je třeba vyjít z kontextu a použít zdravého rozumu. 
                         Na opačných stranách spektra tak může být např. citace spekulující soukromé osoby v kontrastu s mluvčím na tiskové konferenci statistického úřadu.</p>
                     
                     <p class="ng-scope">
                         <strong>Tvrzení: </strong> "Donald Trump byl podruhé zvolen prezidentem."<br>
-                        <strong>Nedostatek informací</strong> pro: "Donald Trump před prohlásil, že u voleb obhájil svou prezidentskou pozici." 
+                        <strong>Nedostatek informací</strong> pro: "Donald Trump prohlásil, že u voleb obhájil svou prezidentskou pozici." 
                         Pozn.: znalostní rámec v tomto případě bude s vysokou pravděpodobností obsahovat i protikladné informace.
                     </p>
                     
