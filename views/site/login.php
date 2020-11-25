@@ -13,7 +13,7 @@ $this->title = 'Login';
 <div class="site-login container">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Prosíme, zadejte svůj e-mail pro přihlášení:</p>
+    <p>Prosíme, zadejte své SIDOS ID pro přihlášení:</p>
     <div class="row">
         <div class="col-lg-7">
             <?php $form = ActiveForm::begin([
