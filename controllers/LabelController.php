@@ -45,7 +45,10 @@ class LabelController extends Controller
                     return $this->goHome();
                 }
                 $traversed[] = $claim = $claim->getPrimaryKey();
-            } while (Label::find()->where(['claim' => $claim, 'user' => Yii::$app->user->id])->exists());
+            } while (Label::find()
+                ->where(['claim' => $claim, 'user' => Yii::$app->user->id])
+                ->orWhere(['flag' => 1, 'user' => Yii::$app->user->id])
+                ->exists());
 
             return $this->redirect([
                 'index',
