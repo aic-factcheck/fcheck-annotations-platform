@@ -210,3 +210,14 @@ tr.dictionary-item:hover th{
 .nav-link.text-black{
     color: black!important;
 }
+
+.feedback-logo{
+    width: 100%!important;
+}
+.feedback-next-btn{
+    width: auto!important;
+}
+.feedback-btn-gray,.feedback-btn-blue{
+    font-size: 13px!important;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif!important;
+}

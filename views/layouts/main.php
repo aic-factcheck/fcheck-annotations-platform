@@ -10,6 +10,7 @@ use app\models\Claim;
 use app\models\Label;
 use app\models\Paragraph;
 use app\widgets\Alert;
+use app\widgets\Feedback;
 use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
@@ -81,7 +82,7 @@ AppAsset::register($this);
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
-    <?= \dilden\feedbackwidget\DildenFeedback::widget(['ajaxURL' => 'pinneapple/feedback', 'highlightElement' => 0,]); ?>
+    <?= Feedback::widget(['ajaxURL' => 'pinneapple/feedback', 'highlightElement' => 0,]); ?>
     <footer class="footer">
         <div class="container">
             <p class="pull-left">&copy; AICenter <?= date('Y') ?></p>

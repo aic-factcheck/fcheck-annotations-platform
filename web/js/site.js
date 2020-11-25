@@ -43,7 +43,7 @@ function bindAll() {
 }
 
 $(".autoflag").click(function (e) {
-    $("#flag").get(0).prop('checked', true);
+    $("#flag").val(1);
 });
 bindAll();
 $(document).on("keypress", '#label-form', function (e) {
