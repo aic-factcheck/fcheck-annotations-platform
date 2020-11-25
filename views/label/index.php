@@ -108,7 +108,7 @@ $this->title = 'Anotace výroků';
                         <li>V případě volby <strong>Preskočit</strong> máte více možností:
                             <ul>
                                 <li>Pokud výchozí článek ani znalostní rámec neobsahují dostatek informací, zvolte <strong>Nedostatek informací</strong>.</li>
-                                <li>Pokud jste si, i přes nedostatek informací, jistí pravdivostí či nepravdivostí výroku, můžete místo <strong>Nedostatek informací</strong> zvolit volbu <strong>Podmíněně potvrdit</strong> nebo <strong>Podmíněně potvrdit</strong>. 
+                                <li>Pokud jste si, i přes nedostatek informací, jistí pravdivostí či nepravdivostí výroku, můžete místo <strong>Nedostatek informací</strong> zvolit volbu <strong>Podmíněně potvrdit</strong> nebo <strong>Podmíněně vyvrátit</strong>. 
                                     Do příslušného pole <strong>Doplňující tvrzení</strong> pak nezapomeňte vložit text. Interpretace <em>doplňujcího tvrzení</em> je následující: pokud bude ukázána jeho platnost, bude automatcky potvrzeno či vyvráceno i původní tvrzení. 
                                     Pozor: doplňující tvrzení nesmí být parafrází původního tvrzení!</li>
                                 <li>V případě nejasného čí chybného tvrzení zvolte <strong>Výrok je nejasný nebo nesmyslný</strong> nebo <strong>Výrok obsahuje překlep nebo drobnou chybu</strong>.</li>
