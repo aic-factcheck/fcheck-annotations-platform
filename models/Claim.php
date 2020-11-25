@@ -43,10 +43,10 @@ class Claim extends ActiveRecord
     ];
 
     const MUTATION_DESCRIPTIONS = [
-        "rephrase" => "Změňte formulaci tvrzení nebo parafrázujte tak, aby smysl a pravdivost zůstaly nezměněny. <strong>Parafrázované tvrzení musí vyplývat z původního a také naopak.</strong>",
+        "rephrase" => "Přeformulujte nebo parafrázujte tvrzení, aniž byste změnili jeho smysl nebo pravdivost. <strong>Parafrázované tvrzení musí vyplývat z původního a také naopak.</strong>",
         "substitute_similar" => "Nahraďte entitu, vztah nebo obojí podobnou entitou či vztahem. <strong>Vyhněte se parafrázování původního tvrzení. Z nového tvrzení by nemělo plynout původní tvrzení.</strong>",
         "substitute_dissimilar" => "Nahraďte entitu, vztah nebo obojí odlišnou entitou či vztahem. <strong>Vyhněte se parafrázování původního tvrzení. Z nového tvrzení by nemělo plynout původní tvrzení.</strong>",
-        "specific" => "Změňte formulaci tak, aby bylo nové tvrzení více specifické. Z nového tvrzení by mělo plynout původní tvrzení. Například entitu \"Velká Británie\" nahradíte entitou \"Londýn\".",
+        "specific" => "Změňte formulaci tak, aby bylo nové tvrzení specifičtější. Z nového tvrzení by mělo plynout původní tvrzení. Například entitu \"Velká Británie\" nahradíte entitou \"Londýn\".",
         "general" => "Změňte formulaci tak, aby bylo nové tvrzení obecnější. Z původního tvrzení by mělo plynout vaše nové tvrzení.",
         "negate" => "Vytvořte negaci původního tvrzení. <strong>Vyvarujte se negace pomocí jednoduchého přidání záporu.</strong>",
     ];
