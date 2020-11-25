@@ -8,14 +8,14 @@ $this->title = 'Anotační Platforma FCheck TAČR';
 
 ?>
 <div class="container">
-    <div class="card my-3">
+    <!--div class="card my-3">
         <div class="card-body">
             <h3 class="card-title">Ú<sub>0</sub>: Předvýběr zdrojových odstavců</h3>
             <p class="card-text">Cílem úkolu je identifikovat v korpusu ČTK odstavce, které je možno použít jako základ pro extrakci tvrzení v úkolu Ú<sub>1</sub>.</p>
             <p class="card-text"><strong>Úkol není povinný</strong> pro studenty FSV UK 🙂. Byl vypracován týmem AIC. Dobrovolníci mohou vyzkoušet.</p>
             <?= Html::a('<i class="fas fa-highlighter"></i> Vybírat odstavce', ['ctk/index'], ['class' => 'btn btn-primary']) ?>
         </div>
-    </div>
+    </div-->
     <div class="card my-3">
         <div class="card-body">
             <h3 class="card-title">Ú<sub>1</sub>: Tvorba tvrzení</h3>

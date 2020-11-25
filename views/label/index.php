@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $sandbox bool */
+/* @var $oracle bool */
 
 /* @var $model LabelForm */
 
@@ -20,14 +21,7 @@ $this->title = 'Anotace tvrzení';
 ]); ?>
 
     <div class="container-fluid">
-        <h1>Anotace správnosti tvrzení (Ú<sub>2</sub>)</h1>
-        <?php if ($model->sandbox) { ?>
-            <div>
-                <h4 style="color:red; margin-bottom:0;">Sandbox Environment</h4>
-                <div style="color:red;">Claims you write will be recorded. But will not form part of the final dataset.
-                </div>
-            </div>
-        <?php } ?>
+        <h1>Anotace správnosti <?=$oracle?'vlastního':'cizího'?> tvrzení (Ú<sub>2</sub><?=$oracle?'a':'b'?>)</h1>
         <h2 class="float-left mb-3 claim">Tvrzení: <strong><?= $model->claim->claim ?></strong></h2>
         <p class="text-right float-right">
             <?= Html::activeHiddenInput($model, 'load', ['value' => true]); ?>
