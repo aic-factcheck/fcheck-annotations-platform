@@ -12,7 +12,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
 Helper::setEntities(\yii\helpers\ArrayHelper::merge($model->claim->ners,$model->claim->paragraph0->ners));
-$this->title = 'Anotace výroků';
+$this->title = 'Anotace tvrzení';
 //die(json_encode(Helper::$entities));
 ?>
 <?php $form = ActiveForm::begin([
@@ -20,7 +20,7 @@ $this->title = 'Anotace výroků';
 ]); ?>
 
     <div class="container-fluid">
-        <h1>Anotace správnosti výroku (Ú<sub>2</sub>)</h1>
+        <h1>Anotace správnosti tvrzení (Ú<sub>2</sub>)</h1>
         <?php if ($model->sandbox) { ?>
             <div>
                 <h4 style="color:red; margin-bottom:0;">Sandbox Environment</h4>
@@ -28,7 +28,7 @@ $this->title = 'Anotace výroků';
                 </div>
             </div>
         <?php } ?>
-        <h2 class="float-left mb-3 claim">Výrok: <strong><?= $model->claim->claim ?></strong></h2>
+        <h2 class="float-left mb-3 claim">Tvrzení: <strong><?= $model->claim->claim ?></strong></h2>
         <p class="text-right float-right">
             <?= Html::activeHiddenInput($model, 'load', ['value' => true]); ?>
             <?= Html::activeCheckbox($model, 'flag', ['label' => '<i class="fas fa-flag"></i> Nahlásit', 'id' => 'flag']); ?>
@@ -101,17 +101,17 @@ $this->title = 'Anotace výroků';
                         <li>Pokud odstavce původního článku neobsahují dostatek informací k vytvoření důkazu, rozbalte a případně zatrhněte vhodné odstavce <em>znalostního rámce</em> níže na stránce.</li>
                         <li>Pokud nejsou dostatečné ani výchozí odstavce znalostního rámce, můžete znalostní rámec rozšířit kliknutím na odkazy <strong>Zobrazit kontext</strong>.
                         <li>Při úvahách nad platností tvrzení používejte <em>zdravý rozum</em>.</li>
-                        <li>Jediným zdrojem informací pro anotaci výroku smí být výchozí článek a texty znalostního rámce. S výjimkou podmíněného potvrzení či vyvrácení (viz níže) <em>je jakékoliv použítí vlastních znalostí zakázáno.</em></li>
+                        <li>Jediným zdrojem informací pro anotaci tvrzení smí být zdrojový článek a texty znalostního rámce. S výjimkou podmíněného potvrzení či vyvrácení (viz níže) <em>je jakékoliv použítí vlastních znalostí zakázáno.</em></li>
                         <li>Texty znalostního rámce vznikly dříve, než text výchozího článku. Platnost tvrzení se tak dokazuje k datu vydání výchozího článku.</li>
                         <li>Důkazů, tedy minimálních skupin odstavců, které potvrzují, či vyvracejí tvrzení můžete zadat více - při zatržení odstavce je automaticky přidán nový sloupec.</li>
                         <li>Pro rozhodnutí anotace zmáčkněte tlačítko <strong>Potvrdit</strong>, <strong>Vyvrátit</strong>, či <strong>Preskočit</strong>.</li>
                         <li>V případě volby <strong>Preskočit</strong> máte více možností:
                             <ul>
                                 <li>Pokud výchozí článek ani znalostní rámec neobsahují dostatek informací, zvolte <strong>Nedostatek informací</strong>.</li>
-                                <li>Pokud jste si, i přes nedostatek informací, jistí pravdivostí či nepravdivostí výroku, můžete místo <strong>Nedostatek informací</strong> zvolit volbu <strong>Podmíněně potvrdit</strong> nebo <strong>Podmíněně vyvrátit</strong>. 
+                                <li>Pokud jste si, i přes nedostatek informací, jistí pravdivostí či nepravdivostí tvrzení, můžete místo <strong>Nedostatek informací</strong> zvolit volbu <strong>Podmíněně potvrdit</strong> nebo <strong>Podmíněně vyvrátit</strong>. 
                                     Do příslušného pole <strong>Doplňující tvrzení</strong> pak musíte vložit text. Interpretace <em>doplňujcího tvrzení</em> je následující: pokud bude ukázána jeho platnost, bude automatcky potvrzeno či vyvráceno i původní tvrzení. 
                                     Pozor: doplňující tvrzení nesmí být parafrází původního tvrzení!</li>
-                                <li>V případě nejasného čí chybného tvrzení zvolte <strong>Výrok je nejasný nebo nesmyslný</strong> nebo <strong>Výrok obsahuje překlep nebo drobnou chybu</strong>.</li>
+                                <li>V případě nejasného čí chybného tvrzení zvolte <strong>Tvrzení je nejasný nebo nesmyslný</strong> nebo <strong>Tvrzení obsahuje překlep nebo drobnou chybu</strong>.</li>
                             </ul>
                         </li>
                     </ol>
@@ -181,7 +181,7 @@ $this->title = 'Anotace výroků';
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Možnosti přeskočení výroku</h5>
+                    <h5 class="modal-title" id="exampleModalLabel2">Možnosti přeskočení tvrzení</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -191,25 +191,25 @@ $this->title = 'Anotace výroků';
                         <?= Html::submitButton('<i class="far fa-question-circle"></i> Nedostatek informací', ['class' => 'btn btn-info', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
                         <br>
                         Zvolte, pokud zobrazený článek a znalostní rámec neobsahují informace dostatečné pro potvrzení
-                        nebo vyvrácení výroku. <br>Tento výrok nebude přidělen dalším anotátorům.
+                        nebo vyvrácení tvrzení. <br>Tento tvrzení nebude přidělen dalším anotátorům.
                     </p>
                     <hr class="ng-scope">
                     <p class="ng-scope">
-                        <?= Html::submitButton('<i class="far fa-frown"></i> Nepřeji si anotovat tento výrok', ['class' => 'btn btn-light',]) ?>
+                        <?= Html::submitButton('<i class="far fa-frown"></i> Nepřeji si anotovat toto tvrzení', ['class' => 'btn btn-light',]) ?>
                         <br>
                         Systém ho přiřadí ostatním anotátorům.
                     </p>
                     <hr class="ng-scope">
                     <p class="ng-scope">
-                        <?= Html::submitButton('<i class="fas fa-flag"></i> Výrok je nejasný nebo nesmyslný', ['class' => 'btn btn-warning autoflag',]) ?>
+                        <?= Html::submitButton('<i class="fas fa-flag"></i> Tvrzení je nejasné nebo nesmyslné', ['class' => 'btn btn-warning autoflag',]) ?>
                         <br>
-                        Výrok bude nahlášen ke kontrole, zda splňuje pokyny z Ú<sub>1</sub>.
+                        Tvrzení bude nahlášeno ke kontrole, zda splňuje pokyny z Ú<sub>1</sub>.
                     </p>
                     <hr class="ng-scope">
                     <p class="ng-scope">
-                        <?= Html::submitButton('<i class="fas fa-flag"></i> Výrok obsahuje překlep nebo drobnou chybu', ['class' => 'btn btn-warning autoflag',]) ?>
+                        <?= Html::submitButton('<i class="fas fa-flag"></i> Tvrzení obsahuje překlep nebo drobnou chybu', ['class' => 'btn btn-warning autoflag',]) ?>
                         <br>
-                        Výrok bude zkontrolován a opraven.
+                        Tvrzení bude zkontrolováno a opraveno.
                     </p>
 
                     <hr/>
