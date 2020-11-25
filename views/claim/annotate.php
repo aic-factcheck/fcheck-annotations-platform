@@ -24,13 +24,13 @@ Helper::setEntities($ners = $model->paragraph->ners);
     <?php } ?>
     <div class="alert alert-warning mt-0" role="alert">
         <h3 class="alert-heading">Pokyny</h3>
-        <p>Cílem úkolu je <strong>vygenerovat pravdivá tvrzení</strong> ze zdrojového bloku ČTK dat.</p>
+        <p>Cílem úkolu je <strong>vygenerovat pravdivá tvrzení</strong> ze zdrojového odstavce ČTK dat.</p>
 
         <ul>
             <li><strong">Extrahujte "atomická" (jednoduchá, dále nedělitelná) tvrzení týkající se některé (některých) 
                 pojmenovaných entitit</strong> ze zdrojového
                 textu.<br/><em>(<?= implode(", ", $ners) ?>)</em></li>
-            <li>Jako základ svého tvrzení použijte zdrojový blok a znalostní rámec.</li>
+            <li>Jako základ svého tvrzení použijte zdrojový odstavec a znalostní rámec.</li>
             <li><strong>Pojmenované entity uvádějte přímo</strong> (vyhněte se používání zájmen apod.).</li>
             <li>Drobné záměny jsou přípustné (např.
                 <em>Tomáš Garrigue Masaryk</em> , <em>TGM</em>, <em>Prezident Masaryk</em>).
@@ -54,11 +54,11 @@ Helper::setEntities($ners = $model->paragraph->ners);
         <ul>
             <li><strong>Nezapojujte</strong> své vlastní znalosti nebo domněnky o světě.</li>
             <li>Doplňujicí informace vám jsou předány pomocí <strong>znalostního rámce</strong>,
-                ten obsahuje informace nad rámec původního bloku, které mohou pomoct s vytvořením
+                ten obsahuje informace nad rámec původního odstavce, které mohou pomoct s vytvořením
                 složitějších tvrzení. (Omezujeme vás pouze na znalostní rámec, abychom byli schopni všechna tvrzení
                 z Ú<sub>1</sub> navázat na konkrétní zdroje z ČTK dat)
             </li>
-            <li>Pokud není zdrojový blok textu použitelný, přeskočte ho.</li>
+            <li>Pokud není zdrojový odstavec textu použitelný, přeskočte ho.</li>
             <li>Pokud není znalost ze znalostním rámci relevantní nebo vhodná, ignorujte ji.</li>
         </ul>
     </div>
