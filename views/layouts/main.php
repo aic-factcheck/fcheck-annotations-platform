@@ -81,7 +81,7 @@ AppAsset::register($this);
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
-
+    <?= \dilden\feedbackwidget\DildenFeedback::widget(['ajaxURL' => 'pinneapple/feedback', 'highlightElement' => 0,]); ?>
     <footer class="footer">
         <div class="container">
             <p class="pull-left">&copy; AICenter <?= date('Y') ?></p>

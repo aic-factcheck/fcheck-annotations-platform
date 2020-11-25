@@ -47,6 +47,25 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'encryption' => 'tls',
+                'streamOptions' => [
+                    'ssl' => [
+                        'allow_self_signed' => true,
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                    ],
+                ],
+                'host' => 'smtp.bertik.net',
+                'port' => '587',
+                'username' => 'svobodova@bertik.net',
+                'password' => '4q9IZfi24O',
+            ]
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
