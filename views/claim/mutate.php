@@ -51,8 +51,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                     <li>Věty ukončujte tečkou.</li>
                     <li>Čísla mohou být uváděna v libovolném korektním formátu (pro menší čísla lze i slovy).
                     </li>
-                    <li>Další informace jsou poskytnuty ve formě <em>znalostního rámce</em>, který by měl umožnit tvořit
-                        složitější a na více článcích závislá tvrzení.
+                    <li>Další informace jsou poskytnuty ve formě <em>znalostního rámce</em>, který by měl umožnit tvořit složitější tvrzení závislá na více článcích.
                     </li>
                     <!--<li>Additional world knowledge is given to the you in the form of a dictionary. This allows for more complex claims to be generated in a structured manner with information that can be backed up from Wikipedia</li>-->
                     <li>Některé z poskytnutých textů nemusejí být přesné či pravdivé. Přesto jsou to validní kandidáti -
