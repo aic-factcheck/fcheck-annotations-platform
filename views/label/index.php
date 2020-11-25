@@ -192,8 +192,8 @@ $this->title = 'Anotace tvrzení';
                     <p class="ng-scope">
                         <?= Html::submitButton('<i class="far fa-question-circle"></i> Nedostatek informací', ['class' => 'btn btn-info', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
                         <br>
-                        Zvolte, pokud zobrazený článek a znalostní rámec neobsahují informace dostatečné pro potvrzení
-                        nebo vyvrácení tvrzení. <br>Tento tvrzení nebude přidělen dalším anotátorům.
+                        Zvolte, pokud zobrazený článek ani znalostní rámec neobsahují dostatek informací pro potvrzení, 
+                        nebo vyvrácení tvrzení. <br>Toto tvrzení nebude přidělen dalším anotátorům.
                     </p>
                     <hr class="ng-scope">
                     <!--
