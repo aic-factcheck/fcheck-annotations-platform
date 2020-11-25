@@ -167,7 +167,7 @@ $this->title = 'Anotace tvrzení';
                     
                     <p class="ng-scope">
                         <strong>Tvrzení: </strong> "Donald Trump prohlásil, že byl podruhé zvolen prezidentem."<br>
-                        <strong>Potvrzeno</strong>pro: "Donald Trump prohlásil, že u voleb obhájil svou prezidentskou pozici."
+                        <strong>Potvrzeno</strong> pro: "Donald Trump prohlásil, že u voleb obhájil svou prezidentskou pozici."
                     </p>
                 </div>
                 <div class="modal-footer">
