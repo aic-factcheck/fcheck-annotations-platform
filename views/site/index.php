@@ -24,7 +24,7 @@ $this->title = 'Anotační Platforma FCheck TAČR';
             <p class="card-text"> Po skončení jednodušše zavřete okno prohlížeče. 👏</p>
 
             <?= Html::a('<i class="fab fa-youtube"></i> Tutoriál', ['claim/tutorial'], ['class' => 'btn btn-light disabled', 'disabled' => true]) ?>
-            <?= Html::a('<i class="fas fa-asterisk"></i> Začít tvořit výroky', ['claim/annotate', 'sandbox' => false], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('<i class="fas fa-asterisk"></i> Začít tvořit tvrzení', ['claim/annotate', 'sandbox' => false], ['class' => 'btn btn-primary']) ?>
         </div>
     </div>
 
