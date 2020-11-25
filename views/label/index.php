@@ -194,11 +194,13 @@ $this->title = 'Anotace tvrzení';
                         nebo vyvrácení tvrzení. <br>Tento tvrzení nebude přidělen dalším anotátorům.
                     </p>
                     <hr class="ng-scope">
+                    <!--
                     <p class="ng-scope">
                         <?= Html::submitButton('<i class="far fa-frown"></i> Nepřeji si anotovat toto tvrzení', ['class' => 'btn btn-light',]) ?>
                         <br>
                         Systém ho přiřadí ostatním anotátorům.
                     </p>
+                    -->
                     <hr class="ng-scope">
                     <p class="ng-scope">
                         <?= Html::submitButton('<i class="fas fa-flag"></i> Tvrzení je nejasné nebo nesmyslné', ['class' => 'btn btn-warning autoflag',]) ?>
