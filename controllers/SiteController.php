@@ -80,6 +80,15 @@ class SiteController extends Controller
     {
         return $this->render('tutorial', ['t' => $t]);
     }
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionStats()
+    {
+        return $this->render('stats');
+    }
 
     /**
      * Login action.
