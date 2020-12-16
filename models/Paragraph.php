@@ -170,4 +170,9 @@ class Paragraph extends CtkData
         return $this->hasMany(Paragraph::class, ['id' => 'knowledge'])
             ->viaTable('paragraph_knowledge', ['paragraph' => 'id']);
     }
+
+    public function getCtkId()
+    {
+        return $this->article . '_' . $this->rank;
+    }
 }

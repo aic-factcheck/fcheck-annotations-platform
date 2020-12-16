@@ -21,7 +21,7 @@ $this->title = 'Plnění';
                     '</strong><sub>/5</sub>&nbsp;&nbsp;&nbsp;Ú<sub>1</sub>b: <strong class="fw-500">' . ($u1b = Claim::find()->where(['user' => $user->id])->andWhere(['IS NOT', 'mutation_type', null])->count()) .
                     '</strong><sub>/15</sub>&nbsp;&nbsp;&nbsp;Ú<sub>2</sub>a: <strong class="fw-500">' . ($u2a = Label::find()->where(['user' => $user->id, 'oracle' => true])->count()) .
                     '</strong><sub>/5</sub>&nbsp;&nbsp;&nbsp;Ú<sub>2</sub>b</strong>: <strong class="fw-500">' . ($u2b = Label::find()->where(['user' => $user->id, 'oracle' => false])->count()) . '</strong><sub>/15</sub> '
-                    . ($u1a >= 5&&$u1b>=15 && $u2a >=5 && $u2b>=15 ? '<i class="fas fa-check text-success"></i>': '<i class="fas text-danger fa-times"></i>'), ['class' => ' text-black nav-link ']),
+                    . ($u1a >= 5 && $u1b >= 15 && $u2a >= 5 && $u2b >= 15 ? '<i class="fas fa-check text-success"></i>' : '<i class="fas text-danger fa-times"></i>'), ['class' => ' text-black nav-link ']),
                 ['class' => 'text-left nav-item text-black']
             );
         } ?></ul>
