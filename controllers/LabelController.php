@@ -72,6 +72,14 @@ class LabelController extends Controller
 
     public function actionClean()
     {
+        if (isset($_POST['delete'])) {
+            foreach (Label::find()->where(['id' => $_POST['delete']])->all() as $label) {
+                $label->deleted = 1;
+                $label->save();
+            }
+            Yii::$app->session->addFlash('success', 'Označené anotace byly smazány.');
+            return $this->refresh();
+        }
         $labels = [];
         $c = [];
         foreach (Label::find()->all() as $label) {
@@ -117,12 +125,16 @@ class LabelController extends Controller
             if ($label !== null) {
                 $evidences = [];
                 foreach ($label->evidences as $evidence) {
-                    if (!array_key_exists($evidence->group, $evidences)) {
+                    if (!array_key_exists($evidence->group, $evidences))
                         $evidences[$evidence->group] = [];
-                    }
                     $evidences[$evidence->group][] = [
-                        $label->id, ($evidence->group * 1000000 + $label->id), $label->claim0->paragraph0->getCtkId(), 0];
+                        $label->id,
+                        ($evidence->group * 1000000 + $label->id),
+                        $label->claim0->paragraph0->getCtkId(),
+                        0
+                    ];
                 }
+                $evidences = array_values($evidences);
                 $response .= json_encode([
                         "id" => $id,
                         "verifiable" => ($label->label == "NOT ENOUGH INFO" ? "NOT VERIFIABLE" : "VERIFIABLE"),
