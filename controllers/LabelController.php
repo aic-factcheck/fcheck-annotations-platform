@@ -70,6 +70,32 @@ class LabelController extends Controller
         return $this->render('index', ['model' => $model, 'oracle' => $oracle]);
     }
 
+    public function actionClean()
+    {
+        $labels = [];
+        $c = [];
+        foreach (Label::find()->all() as $label) {
+            if ($label->condition != null) {
+                $label->label = "NOT ENOUGH INFO";
+            }
+            if ($label->label != null) {
+                if (array_key_exists($label->claim, $labels)) {
+                    $labels[$label->claim][] = $label;
+                    if ($labels[$label->claim][0]->label != $label->label) {
+                        $c[] = $label->claim;
+                    }
+                } else {
+                    $labels[$label->claim] = [$label];
+                }
+            }
+        }
+        $result = [];
+        foreach ($c as $conflict) {
+            $result[] = $labels[$conflict];
+        }
+        return $this->render("clean", ["conflicts" => $result]);
+    }
+
     public function actionJsonl()
     {
         Yii::$app->response->format = Response::FORMAT_RAW;
@@ -89,7 +115,6 @@ class LabelController extends Controller
         $response = "";
         foreach ($labels as $id => $label) {
             if ($label !== null) {
-                //{"id": 75397, "verifiable": "VERIFIABLE", "label": "SUPPORTS", "claim": "Nikolaj Costny.", "evidence": [[[92206, 104971, "Nikolaj_Coster-Waldau", 7], [92206, 104971, "Fox_Broadcasting_Company", 0]]]}
                 $evidences = [];
                 foreach ($label->evidences as $evidence) {
                     if (!array_key_exists($evidence->group, $evidences)) {
