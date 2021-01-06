@@ -7,12 +7,29 @@ use app\models\Label;
 use app\models\User;
 use dosamigos\chartjs\ChartJs;
 use yii\bootstrap4\Html;
+use yii\helpers\Url;
 use yii\web\JsExpression;
 
 $this->title = 'Statistiky';
-
-
+$fsvOnly = "WHERE `user` >= '9' AND `user` <= '73'";
+$contradictions = <<<SQL
+SELECT SUM(c) FROM (SELECT COUNT(DISTINCT `label`)>1 as c FROM `label` group by claim) as A
+SQL;
+$labels = <<<SQL
+SELECT SUM(c) FROM (SELECT COUNT(DISTINCT `label`)>=0 as c FROM `label` $fsvOnly group by claim) as A
+SQL;
+$contradictions1 = <<<SQL
+SELECT SUM(c) FROM (SELECT COUNT(DISTINCT `label`)>1 as c FROM `label` group by claim) as A
+SQL;
+$labels1 = <<<SQL
+SELECT SUM(c) FROM (SELECT COUNT(DISTINCT `label`)>=0 as c FROM `label` $fsvOnly group by claim) as A
+SQL;
+$contradictions = Yii::$app->db->createCommand($contradictions)->queryScalar();
+$contradictions1 = Yii::$app->db->createCommand($contradictions1)->queryScalar();
+$labels = Yii::$app->db->createCommand($labels)->queryScalar();
+$labels1 = Yii::$app->db->createCommand($labels1)->queryScalar();
 $hiscore = [];
+$fsv = ['between', 'user', 9, 73];
 foreach (User::find()->all() as $user) {
     $u = [$user,
         Claim::find()->where(['user' => $user->id,])->andWhere(['IS', 'mutation_type', null])->count(),
@@ -62,11 +79,91 @@ while ($day < $tomorrow) {
     $day += 86400;
 }
 
-
+$a = [[], []];
 ?>
 <div class="container">
     <h1 class="mb-3"><?= $this->title ?></h1>
+    <div class="row mb-5">
+        <div class="col-lg-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Celkové počty anotací</h5>
+                    <table class="table table-striped">
+                        <tr>
+                            <th></th>
+                            <th>∑<sub>FSV</sub></th>
+                            <th>∑</th>
+                        </tr>
+                        <tr>
+                            <th>Ú1a - Extrahovaná tvrzení</th>
+                            <td><?= $a[0][] = Claim::find()->where($fsv)->andWhere(['IS', 'mutation_type', null])->count() ?></td>
+                            <td><?= $a[1][] = Claim::find()->andWhere(['IS', 'mutation_type', null])->count() ?></td>
+                        </tr>
+                        <tr>
+                            <th>Ú1b - Odvozená tvrzení</th>
+                            <td><?= $a[0][] = Claim::find()->where($fsv)->andWhere(['IS NOT', 'mutation_type', null])->count() ?></td>
+                            <td><?= $a[1][] = Claim::find()->andWhere(['IS NOT', 'mutation_type', null])->count() ?></td>
+                        </tr>
+                        <tr>
+                            <th>Ú2a - Referenční anotace</th>
+                            <td><?= $a[0][] = Label::find()->where($fsv)->andWhere(['=', 'oracle', true])->count() ?></td>
+                            <td><?= $a[1][] = Label::find()->andWhere(['=', 'oracle', true])->count() ?></td>
+                        </tr>
+                        <tr>
+                            <th>Ú2b - Anotace výroků</th>
+                            <td><?= $a[0][] = Label::find()->where($fsv)->andWhere(['=', 'oracle', false])->count() ?></td>
+                            <td><?= $a[1][] = Label::find()->andWhere(['=', 'oracle', false])->count() ?></td>
+                        </tr>
+                        <tr>
+                            <th>∑<sub>Všechny úkoly</sub></th>
+                            <td><?= array_sum($a[0]) ?></td>
+                            <td><?= array_sum($a[1]) ?></td>
+                        </tr>
+                        <tr>
+                            <th>Anotovaná tvrzení</th>
+                            <td><?= $labels1 ?></td>
+                            <td><?= $labels ?></td>
+                        </tr>
+                        <tr>
+                            <th>Rozpory anotací</th>
+                            <td><?= $contradictions1 ?></td>
+                            <td><?= $contradictions ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <img src="<?= Url::to(['/images/nakres.png']) ?>" style="width:100%">
+        </div>
+    </div>
     <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Nejaktivnější anotátoři</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">dle počtu splněných úkolů</h6>
+                    <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+                    <table class="table table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th>Uživatel</th>
+                            <th>Ú<sub>1</sub>a</th>
+                            <th>Ú<sub>1</sub>b</th>
+                            <th>Ú<sub>2</sub>a</th>
+                            <th>Ú<sub>2</sub>b</th>
+                            <th>∑</th>
+                        </tr>
+                        <?php
+                        foreach ($h as $k => $u) {
+                            $k++;
+                            echo "<tr><th>$k</th><th>$u[0]</th><td>$u[1]</td><td>$u[2]</td><td>$u[3]</td><td>$u[4]</td><th>$u[5]</th></tr>";
+                        }
+                        ?>
+                    </table>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
@@ -121,32 +218,7 @@ while ($day < $tomorrow) {
                 </div>
             </div>
         </div>
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Nejaktivnější anotátoři</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">dle počtu splněných úkolů</h6>
-                    <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
-                    <table class="table table-striped">
-                        <tr>
-                            <th>#</th>
-                            <th>Uživatel</th>
-                            <th>Ú<sub>1</sub>a</th>
-                            <th>Ú<sub>1</sub>b</th>
-                            <th>Ú<sub>2</sub>a</th>
-                            <th>Ú<sub>2</sub>b</th>
-                            <th>∑</th>
-                        </tr>
-                        <?php
-                        foreach ($h as $k => $u) {
-                            $k++;
-                            echo "<tr><th>$k</th><th>$u[0]</th><td>$u[1]</td><td>$u[2]</td><td>$u[3]</td><td>$u[4]</td><th>$u[5]</th></tr>";
-                        }
-                        ?>
-                    </table>
-                </div>
-            </div>
-        </div>
+
         <div class="col-lg-12 my-4">
             <div class="card">
                 <div class="card-body">
