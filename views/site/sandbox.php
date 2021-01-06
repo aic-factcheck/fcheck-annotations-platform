@@ -85,9 +85,6 @@ $a = [[], []];
     <h1 class="mb-3"><?= $this->title ?></h1>
     <div class="row mb-5">
         <div class="col-lg-5">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Celkové počty anotací</h5>
                     <table class="table table-striped">
                         <tr>
                             <th></th>
@@ -116,8 +113,8 @@ $a = [[], []];
                         </tr>
                         <tr>
                             <th>∑<sub>Všechny úkoly</sub></th>
-                            <td><?= array_sum($a[0]) ?></td>
-                            <td><?= array_sum($a[1]) ?></td>
+                            <th><?= array_sum($a[0]) ?></th>
+                            <th><?= array_sum($a[1]) ?></th>
                         </tr>
                         <tr>
                             <th>Anotovaná tvrzení</th>
@@ -130,8 +127,6 @@ $a = [[], []];
                             <td><?= $contradictions ?></td>
                         </tr>
                     </table>
-                </div>
-            </div>
         </div>
         <div class="col-lg-7">
             <img src="<?= Url::to(['/images/nakres.png']) ?>" style="width:100%">
