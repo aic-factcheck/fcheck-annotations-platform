@@ -138,32 +138,6 @@ $a = [[], []];
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Nejaktivnější anotátoři</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">dle počtu splněných úkolů</h6>
-                    <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
-                    <table class="table table-striped">
-                        <tr>
-                            <th>#</th>
-                            <th>Uživatel</th>
-                            <th>Ú<sub>1</sub>a</th>
-                            <th>Ú<sub>1</sub>b</th>
-                            <th>Ú<sub>2</sub>a</th>
-                            <th>Ú<sub>2</sub>b</th>
-                            <th>∑</th>
-                        </tr>
-                        <?php
-                        foreach ($h as $k => $u) {
-                            $k++;
-                            echo "<tr><th>$k</th><th>$u[0]</th><td>$u[1]</td><td>$u[2]</td><td>$u[3]</td><td>$u[4]</td><th>$u[5]</th></tr>";
-                        }
-                        ?>
-                    </table>
-                </div>
-            </div>
-        </div>
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
@@ -215,6 +189,32 @@ $a = [[], []];
                                 ]
                             ],
                         ]) ?></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Nejaktivnější anotátoři</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">dle počtu splněných úkolů</h6>
+                    <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+                    <table class="table table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th>Uživatel</th>
+                            <th>Ú<sub>1</sub>a</th>
+                            <th>Ú<sub>1</sub>b</th>
+                            <th>Ú<sub>2</sub>a</th>
+                            <th>Ú<sub>2</sub>b</th>
+                            <th>∑</th>
+                        </tr>
+                        <?php
+                        foreach ($h as $k => $u) {
+                            $k++;
+                            echo "<tr><th>$k</th><th>$u[0]</th><td>$u[1]</td><td>$u[2]</td><td>$u[3]</td><td>$u[4]</td><th>$u[5]</th></tr>";
+                        }
+                        ?>
+                    </table>
                 </div>
             </div>
         </div>
