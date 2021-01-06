@@ -30,6 +30,7 @@ use yii\db\ActiveRecord;
 class Label extends ActiveRecord
 {
     const LABELS = ["SUPPORTS", "REFUTES", "NOT ENOUGH INFO"];
+    public $cnt;
 
     /**
      * {@inheritdoc}

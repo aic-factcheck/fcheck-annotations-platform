@@ -31,7 +31,9 @@
     "ext-json": "*",
     "ext-sqlite3": "*",
     "yiisoft/yii2-httpclient": "^2.0",
-    "dilden/yii2-feedback-widget": "dev-master"
+    "dilden/yii2-feedback-widget": "dev-master",
+    "bower-asset/chart-js": "^2.9",
+    "2amigos/yii2-chartjs-widget": "~2.0"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

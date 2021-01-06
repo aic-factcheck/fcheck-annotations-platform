@@ -89,6 +89,15 @@ class SiteController extends Controller
     {
         return $this->render('stats');
     }
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionStatistics()
+    {
+        return $this->render('sandbox');
+    }
 
     /**
      * Login action.
