@@ -33,6 +33,7 @@
     "yiisoft/yii2-httpclient": "^2.0",
     "dilden/yii2-feedback-widget": "dev-master",
     "bower-asset/chart-js": "^2.9",
+    "matomo/matomo": "*",
     "2amigos/yii2-chartjs-widget": "~2.0"
   },
   "require-dev": {
