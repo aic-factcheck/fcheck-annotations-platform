@@ -205,6 +205,13 @@ class Claim extends ActiveRecord
                 $this->_knowledge[$paragraph->id] = $paragraph;
             }
         }
-        return shuffle($this->_knowledge);
+        $keys = array_keys($this->_knowledge);
+        shuffle($keys);
+        $shuffled = [];
+        foreach ($keys as $key)
+        {
+            $shuffled[$key] = $this->_knowledge[$key];
+        }
+        return $shuffled;
     }
 }
