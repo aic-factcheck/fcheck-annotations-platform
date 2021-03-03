@@ -205,6 +205,6 @@ class Claim extends ActiveRecord
                 $this->_knowledge[$paragraph->id] = $paragraph;
             }
         }
-        return $this->_knowledge;
+        return shuffle($this->_knowledge);
     }
 }

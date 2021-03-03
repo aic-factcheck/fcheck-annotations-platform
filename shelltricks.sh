@@ -30,6 +30,7 @@ ssh -N -L ${port}:${node}:${port} ${user}@147.32.83.248
 Use a Browser on your local machine to go to:
 localhost:${port}  (prefix w/ https:// if using password)
 "
+cd /var/www/html/git
 conda activate ctk
 export FDIR=/mnt/data/factcheck/CTK/par4
 export ner_model="/mnt/data/factcheck/ufal/ner/czech-cnec2.0-140304-no_numbers.ner"
@@ -40,4 +41,4 @@ export sem_model="/mnt/data/factcheck/ict_pretrained_models/sentence-transformer
 export sem_faiss_index="PCA384,Flat"
 export excludekw="souhrn;sport;kolo;fotbal;hokej;Volejbal;Atletika;Lyžování;Cyklistika;Tenis;stolní tenis;Olympijské;Avízo;TABULKA;UPOZORNĚNÍ;PROTEXT;Deník"
 export PYTHONPATH=src:$PYTHONPATH
-nohup python src/app_claimgen/rest_claimgen.py --ner_model ${ner_model} --db_name ${db_name} --kw_model ${kw_model} --sem_model ${sem_model} --sem_embeddings ${sem_embeddings} --sem_faiss_index ${sem_faiss_index} --excludekw "${excludekw}"
+nohup python src/app_claimgen/rest_claimgen.py --ner_model ${ner_model} --db_name ${db_name} --kw_model ${kw_model} --sem_model ${sem_model} --sem_embeddings ${sem_embeddings} --sem_faiss_index ${sem_faiss_index} --excludekw "${excludekw}" &
