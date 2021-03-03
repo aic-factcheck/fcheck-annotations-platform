@@ -153,4 +153,13 @@ class User extends ActiveRecord implements IdentityInterface
         return "$this->username ($this->note)";
     }
 
+    public function getLastUnmutatedClaim()
+    {
+        foreach (Claim::find()->where(['user' => $this->id, 'mutated_from' => null])->orderBy(['id' => SORT_DESC])->all() as $claim) {
+            if (!Claim::find()->where(['mutated_from' => $claim->id])->exists()) {
+                return $claim;
+            }
+        }
+        return null;
+    }
 }

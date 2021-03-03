@@ -55,7 +55,7 @@ class ClaimForm extends Model
     {
         if ($this->validate()) {
             $result = [];
-            foreach (explode("\n", $this->claims) as $claim_) {
+            foreach (array_reverse(explode("\n", $this->claims)) as $claim_) {
                 if (strlen(trim($claim_))) {
                     $claim = new Claim([
                         'paragraph' => $this->paragraph->id,
@@ -69,7 +69,6 @@ class ClaimForm extends Model
                     }
                 }
             }
-            Yii::$app->session->set('claims', $result);
             return true;
         }
         return false;

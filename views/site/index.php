@@ -20,14 +20,24 @@ $this->title = 'Anotační Platforma FCheck TAČR';
         <div class="card-body">
             <h3 class="card-title">Ú<sub>1</sub>: Tvorba tvrzení</h3>
             <p class="card-text">Cílem úkolu je vytvořit množství pravdivých a nepravdivých tvrzení extrakcí z
-                nabízených vět z korpusu tiskových zpráv ČTK.
-            <p class="card-text"> Po skončení jednodušše zavřete okno prohlížeče. 👏</p>
+                nabízených vět z korpusu tiskových zpráv ČTK.</p>
+                <!--p class="card-text"> Po skončení jednodušše zavřete okno prohlížeče. 👏</p-->
 
-            <?= Html::a('<i class="fab fa-youtube"></i> Tutoriál', ['site/tutorial', 't' => 0], ['class' => 'btn btn-success', 'disabled' => true]) ?>
-            <?= Html::a('<i class="fas fa-asterisk"></i> Začít tvořit tvrzení', ['claim/annotate', 'sandbox' => false], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('<i class="fab fa-youtube"></i> Tutoriál', ['site/tutorial', 't' => 0], ['class' => 'btn btn-success', 'disabled' => true]) ?>
+                <?= Html::a('<i class="fas fa-asterisk"></i> Začít tvořit tvrzení', ['claim/annotate', 'sandbox' => false], ['class' => 'btn btn-primary']) ?>
         </div>
     </div>
+    <?php if (Yii::$app->user->identity->getLastUnmutatedClaim() != null) { ?>
+        <div class="card bg-warning mb-3">
+            <div class="card-body">
+                <h3 class="card-title">Ú<sub>1</sub>b: Mutace tvrzení</h3>
+                <p class="card-text">☝️ V systému "visí" Vaše tvrzení z <strong>Ú<sub>1</sub>a</strong> bez mutace, pokud
+                    můžete, podívejte se na ně.</p>
 
+                <?= Html::a('<i class="fas fa-dice"></i> Mutovat tvrzení', ['claim/mutate', 'sandbox' => false], ['class' => 'btn btn-dark']) ?>
+            </div>
+        </div>
+    <?php } ?>
     <div class="card mb-3">
         <div class="card-body">
             <h3 class="card-title">Ú<sub>2</sub>: Anotace faktické správnosti tvrzení</h3>

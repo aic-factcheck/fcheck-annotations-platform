@@ -53,10 +53,12 @@ class ClaimController extends Controller
 
     public function actionMutate($sandbox = false)
     {
-        if (!Yii::$app->session->has('claims') || count(Yii::$app->session->get('claims')) == 0) {
+
+        $model = new MutateForm();
+        if ($model->claim == null){
+            Yii::$app->session->addFlash("success", "Mutace všech Vašich tvrzení byly vyplněny 😊 Nyní se můžete pustit do tvorby dalších!");
             return $this->redirect(['claim/annotate', 'sandbox' => $sandbox]);
         }
-        $model = new MutateForm();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['claim/mutate', 'sandbox' => $sandbox]);
         }
