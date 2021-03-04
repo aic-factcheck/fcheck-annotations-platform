@@ -9,7 +9,7 @@ use yii\httpclient\Client;
 
 class CtkApi
 {
-    const CONFIG = ["nerlimit" => 2, "k" => 2, "npts" => 2];
+    const CONFIG = ["nerlimit" => 2, "k" => 2, "npts" => 2, "older" => 1];
     private $_client;
 
     public function __construct()

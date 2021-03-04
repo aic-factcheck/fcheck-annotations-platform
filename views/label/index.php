@@ -60,6 +60,9 @@ $this->title = 'Anotace tvrzení';
                             <li>Před první anotací si, prosím,
                                 přečtěte <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info btn-sm', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
                             </li>
+                            <li>
+                                <strong>Pozor na nevýlučnost tvrzení s důkazy</strong>, zejména u anotací typu <strong>vyvrátit</strong>. Např. důkaz "v Písku se staví kino" nevyvrací tvrzení "v Pisku se staví divadlo".
+                            </li>
                             <li>Pokud důkazy samy o sobě nestačí, <strong>prosíme, uveďte chybějící informace jako
                                     podmínku anotace</strong>:<br/>
                                 <?= $form->field($model, 'condition')->textInput(['placeholder' => 'Podmínka anotace - Sem můžete napsat informaci chybějící k úplnosti důkazu.'])->label(false)->hint('Např. "Lidé narození 12. srpna jsou ve znamení lva." nebo "Rakousko je v Evropě.".') ?>
