@@ -70,7 +70,7 @@ $this->title = 'Anotace tvrzení';
                         <div class="table-responsive">
                             <table class="table table-striped mb-0" id="evidence">
                                 <tr class=" table-primary">
-                                    <th class="text-right">
+                                    <th class="text-left">
                                         Zdrojový
                                         článek: <?= $model->claim->paragraph0->article0->get('title') . ' ' . \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($model->claim->paragraph0->article0->date), ['class' => 'badge badge-secondary ']) ?></th>
                                     <th class="px-0 text-center">Důkaz#1</th>
@@ -78,7 +78,7 @@ $this->title = 'Anotace tvrzení';
                                 <?php $i = 0;
                                 foreach ($model->claim->paragraph0->article0->paragraphs as $paragraph) { ?>
                                     <tr>
-                                        <td class="text-right"><?= $paragraph->get('text') ?></td>
+                                        <td class="text-left"><?= $paragraph->get('text') ?></td>
                                         <td class="text-center checkcell">
                                             <?= Html::checkbox("evidence[0][]", false, ["class" => "evidence", "value" => $paragraph->id]) ?>
                                         </td>
@@ -86,7 +86,7 @@ $this->title = 'Anotace tvrzení';
                                 <?php } ?>
                                 <?php foreach ($model->claim->knowledge as $paragraph) { ?>
                                     <tr class="table-info dictionary-item bg-info">
-                                        <th class="text-right">Znalostní
+                                        <th class="text-left">Znalostní
                                             rámec: <?= $paragraph->article0->get('title') . ' ' . \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($paragraph->article0->date), ['class' => 'badge badge-secondary ']) ?></th>
                                         <th class="text-center"><i class="fas fa-caret-down"></i><i
                                                     class="fas fa-caret-up d-none"></i></th>
@@ -94,7 +94,7 @@ $this->title = 'Anotace tvrzení';
                                     <?php $i = 0;
                                     foreach ($paragraph->article0->paragraphs as $paragraph_) { ?>
                                         <tr class="d-none <?= $paragraph_->id != $paragraph->id ? "$paragraph->id-context" : 'text-strong' ?>">
-                                            <td class="text-right"><?= $paragraph_->get('text') ?></td>
+                                            <td class="text-left"><?= $paragraph_->get('text') ?></td>
                                             <td class="text-center checkcell">
                                                 <?= Html::checkbox("evidence[0][]", false, ["class" => "evidence", "value" => $paragraph_->id]) ?>
                                             </td>
