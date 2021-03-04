@@ -17,6 +17,7 @@ class LabelForm extends Model
 {
     public $claim;
     public $flag;
+    public $flag_reason;
     public $load;
     public $label;
     public $condition;
@@ -44,7 +45,7 @@ class LabelForm extends Model
         return [
             // username and password are both required
             [['flag', 'load'], 'integer'],
-            [['condition'], 'string'],
+            [['condition', 'flag_reason'], 'string'],
         ];
     }
 
@@ -63,15 +64,17 @@ class LabelForm extends Model
                 'flag' => $this->flag,
                 'oracle' => $this->oracle,
             ]))->save()) {
-                if (Yii::$app->request->post("evidence") == null) {
-                    return true;
+                if ($this->flag) {
+                    $this->claim->deleted = 1;
+                    $this->claim->comment = "Flag (" . Yii::$app->user->id . "): " . $this->flag_reason;
                 }
-                foreach (Yii::$app->request->post("evidence") as $group => $evidenceList) {
-                    foreach ($evidenceList as $paragraph) {
-                        (new Evidence(['label' => $label->id, 'paragraph' => $paragraph, 'group' => $group]))->save();
+                if (Yii::$app->request->post("evidence") != null)
+                    foreach (Yii::$app->request->post("evidence") as $group => $evidenceList) {
+                        foreach ($evidenceList as $paragraph) {
+                            (new Evidence(['label' => $label->id, 'paragraph' => $paragraph, 'group' => $group]))->save();
+                        }
                     }
-                }
-                return $this->claim->save(false, ['labelled']);
+                return $this->claim->save(false, ['labelled', 'deleted', 'comment']);
             }
         }
         return false;

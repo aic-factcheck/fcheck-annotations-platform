@@ -17,7 +17,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
 ?>
 <div class="container">
     <div class="ng-scope sandbox">
-        <div class="container Ú<sub>1</sub>b">
+        <div class="container u1b">
             <h1>Mutace tvrzení (Ú<sub>1</sub>b)</h1>
 
             <?php if ($sandbox) { ?>
@@ -130,20 +130,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
             </div>
 
 
-            <div class="card bg-primary text-white mb-3 zdrojovy-vyrok">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-5"><h4 class="card-title">Původní tvrzení</h4></div>
-                        <div class="col-md-7">
-                            <div class="card bg-white text-black">
-                                <div class="card-body">
-                                    <h5 class="card-title d-inline"><?= $model->claim->claim ?> </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <?php $form = ActiveForm::begin([
                 'id' => 'mutate-form',
             ]); ?>

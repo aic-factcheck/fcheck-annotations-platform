@@ -22,6 +22,7 @@ use yii\helpers\ArrayHelper;
  * @property int|null $created_at Datum vzniku
  * @property int|null $updated_at Datum poslední změny
  * @property int $deleted Byl smazán?
+ * @property string $comment Důvod smazání
  *
  * @property Claim $mutatedFrom
  * @property Claim[] $claims
@@ -110,7 +111,7 @@ class Claim extends ActiveRecord
         return [
             [['user', 'paragraph', 'mutated_from', 'sandbox', 'labelled', 'created_at', 'updated_at', 'deleted'], 'integer'],
             [['claim'], 'required'],
-            [['claim', 'ners'], 'string'],
+            [['claim', 'ners', 'comment'], 'string'],
             [['mutation_type'], 'string', 'max' => 32],
             [['mutated_from'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::class, 'targetAttribute' => ['mutated_from' => 'id']],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user' => 'id']],
@@ -135,6 +136,7 @@ class Claim extends ActiveRecord
             'created_at' => 'Datum vzniku',
             'updated_at' => 'Datum poslední změny',
             'deleted' => 'Byl smazán?',
+            'comment' => 'Důvod smazání',
         ];
     }
 

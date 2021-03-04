@@ -21,58 +21,105 @@ $this->title = 'Anotace tvrzení';
     'id' => 'label-form',
 ]); ?>
 
-    <div class="container-fluid">
+    <div class="container">
         <h1>Anotace správnosti <?= $oracle ? 'vlastního' : 'cizího' ?> tvrzení (Ú<sub>2</sub><?= $oracle ? 'a' : 'b' ?>)
         </h1>
-        <h2 class="float-left mb-3 claim">Tvrzení: <strong><?= $model->claim->claim ?></strong></h2>
-        <p class="text-right float-right">
+        <div class="card bg-primary text-white mb-3 zdrojovy-vyrok">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3"><h4 class="card-title">Tvrzení</h4></div>
+                    <div class="col-md-9">
+                        <div class="card bg-white text-black">
+                            <div class="card-body">
+                                <h5 class="card-title d-inline"><?= $model->claim->claim ?> </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="text-right text-right">
             <?= Html::submitButton('<i class="fas fa-check"></i> Potvrdit', ['name' => 'label', 'value' => 'SUPPORTS', 'class' => 'btn btn-success', 'disabled' => true]) ?>
             <?= Html::submitButton('<i class="fas fa-times"></i> Vyvrátit', ['name' => 'label', 'value' => 'REFUTES', 'class' => 'btn btn-danger', 'disabled' => true]) ?>
-            <?= Html::button('<i class="fas fa-forward"></i> Přeskočit (otevře menu)', ['class' => 'btn btn-light', 'data' => ['toggle' => 'modal', 'target' => '#skip']]) ?>
+            <?= Html::submitButton('<i class="far fa-question-circle"></i> Nedostatek informací', ['class' => 'btn btn-secondary', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
+            <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['label/index', 'sandbox' => 0, 'oracle' => $oracle], ['class' => 'btn btn-light', /*'data' => ['toggle' => 'modal', 'target' => '#skip']*/]) ?>
+            <?= Html::button('<i class="fas fa-flag"></i> Nahlásit chybu', ['class' => 'btn btn-warning', 'data' => ['toggle' => 'modal', 'target' => '#skip']]) ?>
             <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
         </p>
     </div>
-    <table class="table table-striped" id="evidence">
-        <tr class="table-primary">
-            <th class="text-right">
-                Článek: <?= $model->claim->paragraph0->article0->get('title') . ' ' . \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($model->claim->paragraph0->article0->date), ['class' => 'badge badge-secondary ']) ?></th>
-            <th class="px-0 text-center">Důkaz#1</th>
-        </tr>
-        <?php $i = 0;
-        foreach ($model->claim->paragraph0->article0->paragraphs as $paragraph) { ?>
-            <tr>
-                <td class="text-right"><?= $paragraph->get('text') ?></td>
-                <td class="text-center checkcell">
-                    <?= Html::checkbox("evidence[0][]", false, ["class" => "evidence", "value" => $paragraph->id]) ?>
-                </td>
-            </tr>
-        <?php } ?>
-        <?php foreach ($model->claim->knowledge as $paragraph) { ?>
-            <tr class="table-info dictionary-item">
-                <th class="text-right">Znalostní
-                    rámec: <?= $paragraph->article0->get('title') . ' ' . \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($paragraph->article0->date), ['class' => 'badge badge-secondary ']) ?></th>
-                <th class="text-center"><i class="fas fa-caret-down"></i><i class="fas fa-caret-up d-none"></i></th>
-            </tr>
-            <?php $i = 0;
-            foreach ($paragraph->article0->paragraphs as $paragraph_) { ?>
-                <tr class="d-none <?= $paragraph_->id != $paragraph->id ? "$paragraph->id-context" : 'text-strong' ?>">
-                    <td class="text-right"><?= $paragraph_->get('text') ?></td>
-                    <td class="text-center checkcell">
-                        <?= Html::checkbox("evidence[0][]", false, ["class" => "evidence", "value" => $paragraph_->id]) ?>
-                    </td>
-                </tr>
-            <?php } ?>
-            <tr class="d-none" data-show=".<?= $paragraph->id ?>-context"
-                data-alt='<td class="text-right font-weight-bold">Skrýt kontext &laquo;</td><td colspan="999"></td>'>
-                <td class="text-right font-weight-bold expand-context">Zobrazit kontext &raquo;</td>
-                <td colspan="999"></td>
-            </tr>
-        <?php } ?>
-        <tr class=" dictionary-item d-none"></tr>
-    </table>
+    <div class="container">
+        <div class="card bg-light mb-3">
+            <div class="card-body w-100">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="card-title">Důkazy potvrzující/vyvracející tvrzení</h4>
+                        <ul>
+                            <li>Cílem je strávit okolo <strong>3 minut</strong> hledáním odstavců, které dokazují
+                                správnost Vaší anotace.
+                            </li>
+                            <li>Před první anotací si, prosím,
+                                přečtěte <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info btn-sm', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
+                            </li>
+                            <li>Pokud důkazy samy o sobě nestačí, <strong>prosíme, uveďte chybějící informace jako
+                                    podmínku anotace</strong>:<br/>
+                                <?= $form->field($model, 'condition')->textInput(['placeholder' => 'Podmínka anotace - Sem můžete napsat informaci chybějící k úplnosti důkazu.'])->label(false)->hint('Např. "Lidé narození 12. srpna jsou ve znamení lva." nebo "Rakousko je v Evropě.".') ?>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="table table-striped mb-0" id="evidence">
+                                <tr class=" table-primary">
+                                    <th class="text-right">
+                                        Zdrojový
+                                        článek: <?= $model->claim->paragraph0->article0->get('title') . ' ' . \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($model->claim->paragraph0->article0->date), ['class' => 'badge badge-secondary ']) ?></th>
+                                    <th class="px-0 text-center">Důkaz#1</th>
+                                </tr>
+                                <?php $i = 0;
+                                foreach ($model->claim->paragraph0->article0->paragraphs as $paragraph) { ?>
+                                    <tr>
+                                        <td class="text-right"><?= $paragraph->get('text') ?></td>
+                                        <td class="text-center checkcell">
+                                            <?= Html::checkbox("evidence[0][]", false, ["class" => "evidence", "value" => $paragraph->id]) ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                                <?php foreach ($model->claim->knowledge as $paragraph) { ?>
+                                    <tr class="table-info dictionary-item bg-info">
+                                        <th class="text-right">Znalostní
+                                            rámec: <?= $paragraph->article0->get('title') . ' ' . \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($paragraph->article0->date), ['class' => 'badge badge-secondary ']) ?></th>
+                                        <th class="text-center"><i class="fas fa-caret-down"></i><i
+                                                    class="fas fa-caret-up d-none"></i></th>
+                                    </tr>
+                                    <?php $i = 0;
+                                    foreach ($paragraph->article0->paragraphs as $paragraph_) { ?>
+                                        <tr class="d-none <?= $paragraph_->id != $paragraph->id ? "$paragraph->id-context" : 'text-strong' ?>">
+                                            <td class="text-right"><?= $paragraph_->get('text') ?></td>
+                                            <td class="text-center checkcell">
+                                                <?= Html::checkbox("evidence[0][]", false, ["class" => "evidence", "value" => $paragraph_->id]) ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                    <tr class="d-none" data-show=".<?= $paragraph->id ?>-context"
+                                        data-alt='<td class="text-right font-weight-bold">Skrýt kontext &laquo;</td><td colspan="999"></td>'>
+                                        <td class="text-right font-weight-bold expand-context">Zobrazit kontext
+                                            &raquo;
+                                        </td>
+                                        <td colspan="999"></td>
+                                    </tr>
+                                <?php } ?>
+                                <tr class=" dictionary-item d-none"></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
 
-    <div class="container-fluid">
-        <p class="text-right">
+        <p class="text">
+            <?= Html::submitButton('<i class="far fa-question-circle"></i> Nedostatek informací', ['class' => 'btn btn-warning', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
             <?= Html::submitButton('<i class="fas fa-check"></i> Potvrdit', ['name' => 'label', 'value' => 'SUPPORTS', 'class' => 'btn btn-success', 'disabled' => true]) ?>
             <?= Html::submitButton('<i class="fas fa-times"></i> Vyvrátit', ['name' => 'label', 'value' => 'REFUTES', 'class' => 'btn btn-danger', 'disabled' => true]) ?>
             <?= Html::button('<i class="fas fa-forward"></i> Přeskočit (otevře menu)', ['class' => 'btn btn-light', 'data' => ['toggle' => 'modal', 'target' => '#skip']]) ?>
@@ -220,53 +267,20 @@ $this->title = 'Anotace tvrzení';
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Možnosti přeskočení tvrzení</h5>
+                    <h5 class="modal-title" id="exampleModalLabel2">Nahlásit chybu</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <p>
+                        Tvrzení bude nahlášeno ke kontrole, zda splňuje pokyny z Ú<sub>1</sub> a nebude dočasně přístupné dalším anotacím. Prosíme, přidejte poznámku, proč jste se pro nahlášení rozhodli.
+                    </p>
                     <?= $form->field($model, 'flag')->hiddenInput(['value' => 0, 'id' => 'flag'])->label(false); ?>
-
-                    <p class="ng-scope">
-                        <?= Html::submitButton('<i class="far fa-question-circle"></i> Nedostatek informací', ['class' => 'btn btn-info', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
-                        <br>
-                        Zvolte, pokud zobrazený článek ani znalostní rámec neobsahují dostatek informací pro potvrzení,
-                        nebo vyvrácení tvrzení. <br>Toto tvrzení nebude přiděleno dalším anotátorům.
-                    </p>
-                    <!--
-                    <p class="ng-scope">
-                        <?= Html::submitButton('<i class="far fa-frown"></i> Nepřeji si anotovat toto tvrzení', ['class' => 'btn btn-light',]) ?>
-                        <br>
-                        Systém ho přiřadí ostatním anotátorům.
-                    </p>
-                    -->
-                    <hr class="ng-scope">
-                    <p class="ng-scope">
-                        <?= Html::submitButton('<i class="fas fa-flag"></i> Tvrzení je nejasné nebo nesmyslné', ['class' => 'btn btn-warning autoflag',]) ?>
-                        <br>
-                        Tvrzení bude nahlášeno ke kontrole, zda splňuje pokyny z Ú<sub>1</sub>.
-                    </p>
-                    <hr class="ng-scope">
-                    <p class="ng-scope">
-                        <?= Html::submitButton('<i class="fas fa-flag"></i> Tvrzení obsahuje překlep nebo drobnou chybu', ['class' => 'btn btn-warning autoflag',]) ?>
-                        <br>
-                        Tvrzení bude zkontrolováno a opraveno.
-                    </p>
-
-                    <hr/>
-                    <h6>Podmíněná anotace</h6>
-                    <p class="ng-scope">
-                        Zvolte, pokud zobrazený článek a znalostní rámec neobsahují informace dostatečné pro potvrzení
-                        nebo vyvrácení výroku, ale znáte tvrzení, které, je-li pravdivé, výrok potvrzuje, nebo vyvrací.
-                        <br>Tento výrok plánujeme přidělit anotátorům v rámcí dalšího sběru dat.
-                        <?= $form->field($model, 'condition')->textInput()->label('Doplňující tvrzení')->hint('Jeho dodatečné potvrzení povede k potvrzení/vyvrácení původního výroku.') ?>
-                    </p>
-                    <?= Html::submitButton('<i class="fas fa-check"></i> Podmíněně potvrdit', ['class' => 'btn btn-success', 'value' => 'SUPPORTS', 'name' => 'label']) ?>
-                    <?= Html::submitButton('<i class="fas fa-times"></i> Podmíněně vyvrátit', ['class' => 'btn btn-danger', 'value' => 'REFUTES', 'name' => 'label']) ?>
-
+                    <?= $form->field($model, 'flag_reason')->textarea()->label('Důvod k nahlášení')->hint('Např. "překlep", "nesmysl", "nejde o faktické tvrzení",...'); ?>
                 </div>
                 <div class="modal-footer">
+                    <?= Html::submitButton('<i class="fas fa-flag"></i> Nahlásit chybu', ['class' => 'btn btn-warning autoflag',]) ?>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
                 </div>
             </div>
