@@ -49,7 +49,7 @@ $this->title = 'Anotace tvrzení';
     </div>
     <div class="container">
         <div class="card bg-light mb-3">
-            <div class="card-body w-100">
+            <div class="card-body w-100 pb-1">
                 <div class="row">
                     <div class="col-md-12">
                         <h4 class="card-title">Důkazy potvrzující/vyvracející tvrzení</h4>
@@ -117,12 +117,12 @@ $this->title = 'Anotace tvrzení';
         </div>
     </div>
     <div class="container">
-
-        <p class="text">
-            <?= Html::submitButton('<i class="far fa-question-circle"></i> Nedostatek informací', ['class' => 'btn btn-warning', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
+        <p class="text-right text-right">
             <?= Html::submitButton('<i class="fas fa-check"></i> Potvrdit', ['name' => 'label', 'value' => 'SUPPORTS', 'class' => 'btn btn-success', 'disabled' => true]) ?>
             <?= Html::submitButton('<i class="fas fa-times"></i> Vyvrátit', ['name' => 'label', 'value' => 'REFUTES', 'class' => 'btn btn-danger', 'disabled' => true]) ?>
-            <?= Html::button('<i class="fas fa-forward"></i> Přeskočit (otevře menu)', ['class' => 'btn btn-light', 'data' => ['toggle' => 'modal', 'target' => '#skip']]) ?>
+            <?= Html::submitButton('<i class="far fa-question-circle"></i> Nedostatek informací', ['class' => 'btn btn-secondary', 'value' => 'NOT ENOUGH INFO', 'name' => 'label']) ?>
+            <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['label/index', 'sandbox' => 0, 'oracle' => $oracle], ['class' => 'btn btn-light', /*'data' => ['toggle' => 'modal', 'target' => '#skip']*/]) ?>
+            <?= Html::button('<i class="fas fa-flag"></i> Nahlásit chybu', ['class' => 'btn btn-warning', 'data' => ['toggle' => 'modal', 'target' => '#skip']]) ?>
             <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
         </p>
     </div>
