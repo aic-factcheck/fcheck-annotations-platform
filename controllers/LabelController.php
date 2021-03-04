@@ -84,7 +84,7 @@ class LabelController extends Controller
         $c = [];
         foreach (Label::find()->all() as $label) {
             if ($label->condition != null) {
-                $label->label = "NOT ENOUGH INFO";
+                //$label->label = "NOT ENOUGH INFO";
             }
             if ($label->label != null) {
                 if (array_key_exists($label->claim, $labels)) {
