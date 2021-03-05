@@ -221,3 +221,6 @@ tr.dictionary-item:hover th{
     font-size: 13px!important;
     font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif!important;
 }
+.podminka .form-group{
+    margin-bottom: 0;
+}

@@ -65,9 +65,18 @@ $this->title = 'Anotace tvrzení';
                             </li>
                             <li>Pokud důkazy samy o sobě nestačí, <strong>prosíme, uveďte chybějící informace jako
                                     podmínku anotace</strong>:<br/>
-                                <?= $form->field($model, 'condition')->textInput(['placeholder' => 'Podmínka anotace - Sem můžete napsat informaci chybějící k úplnosti důkazu.'])->label(false)->hint('Např. "Lidé narození 12. srpna jsou ve znamení lva." nebo "Rakousko je v Evropě.".') ?>
-                            </li>
+                                </li>
                         </ul>
+                    </div>
+                    <div class="card bg-default mb-3 podminka w-100">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3"><h5 class="card-title">Podmínka anotace</h5></div>
+                                <div class="col-md-9">
+                                    <?= $form->field($model, 'condition')->textInput(['placeholder' => ' Sem můžete napsat informaci chybějící k úplnosti důkazu.'])->label(false)->hint('Např. "Lidé narození 12. srpna jsou ve znamení lva." nebo "Rakousko je v Evropě.".') ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card">
                         <div class="table-responsive">
