@@ -48,36 +48,40 @@ $this->title = 'Anotace tvrzení';
         </p>
     </div>
     <div class="container">
-        <div class="card bg-light mb-3">
-            <div class="card-body w-100 pb-1">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 class="card-title">Důkazy potvrzující/vyvracející tvrzení</h4>
-                        <ul>
-                            <li>Cílem je strávit okolo <strong>3 minut</strong> hledáním odstavců, které dokazují
-                                správnost Vaší anotace.
-                            </li>
-                            <li>Před první anotací si, prosím,
-                                přečtěte <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info btn-sm', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
-                            </li>
-                            <li>
-                                <strong>Pozor na nevýlučnost tvrzení s důkazy</strong>, zejména u anotací typu <strong>vyvrátit</strong>. Např. důkaz "v Písku se staví kino" nevyvrací tvrzení "v Pisku se staví divadlo".
-                            </li>
-                            <li>Pokud důkazy samy o sobě nestačí, <strong>prosíme, uveďte chybějící informace jako
-                                    podmínku anotace</strong>:<br/>
-                                </li>
-                        </ul>
-                    </div>
-                    <div class="card bg-default mb-3 podminka w-100">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3"><h5 class="card-title">Podmínka anotace</h5></div>
-                                <div class="col-md-9">
-                                    <?= $form->field($model, 'condition')->textInput(['placeholder' => ' Sem můžete napsat informaci chybějící k úplnosti důkazu.'])->label(false)->hint('Např. "Lidé narození 12. srpna jsou ve znamení lva." nebo "Rakousko je v Evropě.".') ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="alert  mt-3 alert-warning alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Zlatá pravidla anotace</h4>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul>
+                <li>Před první anotací si, prosím,
+                    přečtěte <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info btn-sm', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
+                </li>
+                <li>
+                    Pozor na <strong>nevýlučnost jevů</strong>, zejména u anotací typu <strong>vyvrátit</strong>.
+                    <em>Např. "v Písku se staví kino" nevyvrací "v Pisku se staví divadlo"</em>.
+                </li>
+                <li>Pokud důkazy samy o sobě nestačí, <strong>prosíme, uveďte chybějící informace jako
+                        podmínku anotace</strong> <i class="fas fa-arrow-down"></i> <br/>
+                </li>
+            </ul>
+        </div>
+
+    <div class="card bg-default mb-3 podminka w-100">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3"><h5 class="card-title">Podmínka anotace</h5></div>
+                <div class="col-md-9">
+                    <?= $form->field($model, 'condition')->textInput(['placeholder' => ' Sem můžete napsat informaci chybějící k úplnosti důkazu.'])->label(false)->hint('Např. "Lidé narození 12. srpna jsou ve znamení lva." nebo "Rakousko je v Evropě.".') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card bg-light mb-3">
+        <div class="card-body w-100">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="card-title">Důkazy potvrzující/vyvracející tvrzení</h4>
                     <div class="card">
                         <div class="table-responsive">
                             <table class="table table-striped mb-0" id="evidence">
@@ -128,7 +132,6 @@ $this->title = 'Anotace tvrzení';
             </div>
         </div>
     </div>
-    <div class="container">
         <p class="text-right text-right">
             <?= Html::submitButton('<i class="fas fa-check"></i> Potvrdit', ['name' => 'label', 'value' => 'SUPPORTS', 'class' => 'btn btn-success', 'disabled' => true]) ?>
             <?= Html::submitButton('<i class="fas fa-times"></i> Vyvrátit', ['name' => 'label', 'value' => 'REFUTES', 'class' => 'btn btn-danger', 'disabled' => true]) ?>
@@ -143,7 +146,7 @@ $this->title = 'Anotace tvrzení';
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pokyny</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-info"></i> Pokyny</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -286,7 +289,8 @@ $this->title = 'Anotace tvrzení';
                 </div>
                 <div class="modal-body">
                     <p>
-                        Tvrzení bude nahlášeno ke kontrole, zda splňuje pokyny z Ú<sub>1</sub> a nebude dočasně přístupné dalším anotacím. Prosíme, přidejte poznámku, proč jste se pro nahlášení rozhodli.
+                        Tvrzení bude nahlášeno ke kontrole, zda splňuje pokyny z Ú<sub>1</sub> a nebude dočasně
+                        přístupné dalším anotacím. Prosíme, přidejte poznámku, proč jste se pro nahlášení rozhodli.
                     </p>
                     <?= $form->field($model, 'flag')->hiddenInput(['value' => 0, 'id' => 'flag'])->label(false); ?>
                     <?= $form->field($model, 'flag_reason')->textarea()->label('Důvod k nahlášení')->hint('Např. "překlep", "nesmysl", "nejde o faktické tvrzení",...'); ?>

@@ -22,38 +22,20 @@ Helper::setEntities($ners = $model->paragraph->ners);
             <div style="color:red;">Vaše výroky budou uloženy, ale nebudou součástí finálního datasetu.</div>
         </div>
     <?php } ?>
-    <div class="alert alert-warning mt-0" role="alert">
-        <h3 class="alert-heading">Pokyny</h3>
-        <p>Cílem úkolu je <strong>vygenerovat pravdivá tvrzení</strong> ze zdrojového odstavce ČTK dat.</p>
-
+    <div class="alert  mt-3 alert-warning alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">Zlatá pravidla extrakce tvrzení</h4>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
         <ul>
-            <li>Extrahujte jednoduchá (dále nedělitelná) tvrzení týkající se některých pojmenovaných entitit ze zdrojového textu.<br/><em>(<?= implode(", ", $ners) ?>)</em></li>
-            <li>Jako základ svého tvrzení použijte zdrojový odstavec a znalostní rámec.</li>
-            <li><strong>Pojmenované entity uvádějte přímo</strong> (vyhněte se používání zájmen apod.).</li>
-            <li>Drobné záměny jsou přípustné (např.
-                <em>Tomáš Garrigue Masaryk</em> , <em>TGM</em>, <em>Prezident Masaryk</em>).
+            <li>Před prvním tvrzením si, prosím,
+                přečtěte <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info btn-sm', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
             </li>
-            <li><strong>Nepoužívejte vágní nebo opatrné formulace</strong> (např. <em>možná</em>, <em>mohl by</em>, <em>je
-                    uváděno, že</em>, ...) <strong>s výjimkou řádového zaokrouhlení čísel</strong> (<em>desítky, stovky,...</em>)
+            <li>
+                Tvořte <strong>jednoduchá pravdivá tvrzení</strong> vycházející ze <strong>zdrojového odstavce</strong>, která <strong>má smysl fact-checkovat</strong>.
             </li>
-            <li>Dodržujte základní pravidla psaní velkých písmen (pište <em>Indie</em> místo <em>indie</em>).</li>
-            <li>Věty končete tečkou.</li>
-            <li>Čísla mohou být zapisována jakýmkoli vhodným českým způsobem (včetně slovního zápisu pro nízké
-                hodnoty).
+            <li>Pokud to zdrojový odstavec neumožňuje, nebo se Vám zdá nezajímavý, nebojte se ho  <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-warning btn-sm']) ?>
             </li>
-            <li>Některé předložené informace mohou být nepřesné, přesto s jejich správností počítejte.
-                Není vašim úkolem je ověřovat.
-            </li>
-
-        </ul>
-
-        <h4 class="alert-heading">Vlastní znalosti</h4>
-
-        <ul>
-            <li><strong>Nezapojujte</strong> své vlastní znalosti nebo domněnky o světě.</li>
-            <li>Doplňující informace vám jsou předány pomocí znalostního rámce. Ten obsahuje informace nad rámec původního odstavce, které mohou pomoct s vytvořením složitějších tvrzení. (Omezujeme vás pouze na znalostní rámec, abychom byli schopni všechna tvrzení z Ú<sub>1</sub> navázat na konkrétní zdroje z ČTK dat.)</li>
-            <li>Pokud není zdrojový odstavec textu použitelný, přeskočte ho.</li>
-            <li>Pokud není znalost ve znalostním rámci relevantní nebo vhodná, ignorujte ji.</li>
         </ul>
     </div>
 
@@ -168,9 +150,59 @@ Helper::setEntities($ners = $model->paragraph->ners);
     </div>
     <p class="text-right">
         <?= Html::submitButton('Odeslat tvrzení', ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a('Home', ['site/index'], ['class' => 'btn btn-light']) ?>
+        <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
+        <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-warning']) ?>
     </p>
+
+    <div class="modal fade" id="guidelines" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-info"></i> Pokyny</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Cílem úkolu je <strong>vygenerovat pravdivá tvrzení</strong> ze zdrojového odstavce ČTK dat.</p>
+
+                    <ul>
+                        <li>Extrahujte jednoduchá (dále nedělitelná) tvrzení týkající se některých pojmenovaných entitit ze zdrojového textu.<br/><em>(<?= implode(", ", $ners) ?>)</em></li>
+                        <li>Jako základ svého tvrzení použijte zdrojový odstavec a znalostní rámec.</li>
+                        <li><strong>Pojmenované entity uvádějte přímo</strong> (vyhněte se používání zájmen apod.).</li>
+                        <li>Drobné záměny jsou přípustné (např.
+                            <em>Tomáš Garrigue Masaryk</em> , <em>TGM</em>, <em>Prezident Masaryk</em>).
+                        </li>
+                        <li><strong>Nepoužívejte vágní nebo opatrné formulace</strong> (např. <em>možná</em>, <em>mohl by</em>, <em>je
+                                uváděno, že</em>, ...) <strong>s výjimkou řádového zaokrouhlení čísel</strong> (<em>desítky, stovky,...</em>)
+                        </li>
+                        <li>Dodržujte základní pravidla psaní velkých písmen (pište <em>Indie</em> místo <em>indie</em>).</li>
+                        <li>Věty končete tečkou.</li>
+                        <li>Čísla mohou být zapisována jakýmkoli vhodným českým způsobem (včetně slovního zápisu pro nízké
+                            hodnoty).
+                        </li>
+                        <li>Některé předložené informace mohou být nepřesné, přesto s jejich správností počítejte.
+                            Není vašim úkolem je ověřovat.
+                        </li>
+
+                    </ul>
+
+                    <h4 class="alert-heading">Vlastní znalosti</h4>
+
+                    <ul>
+                        <li><strong>Nezapojujte</strong> své vlastní znalosti nebo domněnky o světě.</li>
+                        <li>Doplňující informace vám jsou předány pomocí znalostního rámce. Ten obsahuje informace nad rámec původního odstavce, které mohou pomoct s vytvořením složitějších tvrzení. (Omezujeme vás pouze na znalostní rámec, abychom byli schopni všechna tvrzení z Ú<sub>1</sub> navázat na konkrétní zdroje z ČTK dat.)</li>
+                        <li>Pokud není zdrojový odstavec textu použitelný, přeskočte ho.</li>
+                        <li>Pokud není znalost ve znalostním rámci relevantní nebo vhodná, ignorujte ji.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php ActiveForm::end(); ?>
     <div class="navigation_actions">
         &nbsp;

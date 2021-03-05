@@ -29,36 +29,70 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                 </div>
             <?php } ?>
 
-            <div class="alert alert-warning mt-0" role="alert">
-                <h3 class="alert-heading">Pokyny</h3>
-                <p>Cílem tohoto úkolu je <strong>vygenerovat mutace či obměny tvrzení</strong>. Mutace mohou být
-                    <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů obměn jsou uvedeny
-                    dále.</p>
+            <div class="alert  mt-3 alert-warning alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">Zlatá pravidla mutace tvrzení</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 <ul>
-                    <li>Použijte <strong>původní tvrzení</strong> a poskytnuté související články jako základ pro
-                        jednotlivé
-                        obměny.<strong class="ng-binding"></strong></li>
-                    <li>Na každou entitu se odkazujte přímo (tzn. zájmena by neměla být užívána).</li>
-                    <li>Mírné variace jmen a názvů jsou přijatelné (např. John F Kennedy, JFK, prezident Kennedy).</li>
-                    <li><strong>Vyvarujte se</strong> vágního, neurčitého a příliš opatrného jazyka (např. mohlo by,
-                        asi, snad, pravděpodobně atd.)
+                    <li>Před prvním tvrzením si, prosím,
+                        přečtěte <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info btn-sm', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
                     </li>
-                    <li>Při vytváření obměn <strong>můžete zahrnout vlastní znalosti o světě</strong>.</li>
-                    <li>Obměny, které vymyslíte, by měly být <strong>objektivní</strong> a <strong>ověřitelné</strong>
-                        pomocí veřejně dostupných informací a všeobecných znalostí.
+                    <li>
+                        <i class="fas fa-exclamation"></i> Tvořte <strong>jen taková tvrzení</strong>, která <strong>má smysl fact-checkovat</strong>.
                     </li>
-                    <li>Dodržujte správné psaní velkých počátečních písmen u názvů (např. Indie a nikoliv indie).</li>
-                    <li>Věty ukončujte tečkou.</li>
-                    <li>Čísla mohou být uváděna v libovolném korektním formátu (pro menší čísla lze i slovy).
-                    </li>
-                    <li>Další informace jsou poskytnuty ve formě <em>znalostního rámce</em>, který by měl umožnit tvořit složitější tvrzení závislá na více článcích.
-                    </li>
-                    <!--<li>Additional world knowledge is given to the you in the form of a dictionary. This allows for more complex claims to be generated in a structured manner with information that can be backed up from Wikipedia</li>-->
-                    <li>Některé z poskytnutých textů nemusejí být přesné či pravdivé. Přesto jsou to validní kandidáti -
-                        v této fázi není vašim úkolem ověřovat danou informaci.
+                    <li>
+                        Není tedy třeba využít všech 6 způsobů obměny tvrzení, stačí zhruba <strong>3</strong>, klidně i pouze <strong>1</strong>.
                     </li>
                 </ul>
             </div>
+            <div class="modal fade" id="guidelines" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-info"></i> Pokyny</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Cílem tohoto úkolu je <strong>vygenerovat mutace či obměny tvrzení</strong>. Mutace mohou být
+                                <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů obměn jsou uvedeny
+                                dále.</p>
+                            <ul>
+                                <li>Použijte <strong>původní tvrzení</strong> a poskytnuté související články jako základ pro
+                                    jednotlivé
+                                    obměny.<strong class="ng-binding"></strong></li>
+                                <li>Na každou entitu se odkazujte přímo (tzn. zájmena by neměla být užívána).</li>
+                                <li>Mírné variace jmen a názvů jsou přijatelné (např. John F Kennedy, JFK, prezident Kennedy).</li>
+                                <li><strong>Vyvarujte se</strong> vágního, neurčitého a příliš opatrného jazyka (např. mohlo by,
+                                    asi, snad, pravděpodobně atd.)
+                                </li>
+                                <li>Při vytváření obměn <strong>můžete zahrnout vlastní znalosti o světě</strong>.</li>
+                                <li>Obměny, které vymyslíte, by měly být <strong>objektivní</strong> a <strong>ověřitelné</strong>
+                                    pomocí veřejně dostupných informací a všeobecných znalostí.
+                                </li>
+                                <li>Dodržujte správné psaní velkých počátečních písmen u názvů (např. Indie a nikoliv indie).</li>
+                                <li>Věty ukončujte tečkou.</li>
+                                <li>Čísla mohou být uváděna v libovolném korektním formátu (pro menší čísla lze i slovy).
+                                </li>
+                                <li>Další informace jsou poskytnuty ve formě <em>znalostního rámce</em>, který by měl umožnit tvořit složitější tvrzení závislá na více článcích.
+                                </li>
+                                <!--<li>Additional world knowledge is given to the you in the form of a dictionary. This allows for more complex claims to be generated in a structured manner with information that can be backed up from Wikipedia</li>-->
+                                <li>Některé z poskytnutých textů nemusejí být přesné či pravdivé. Přesto jsou to validní kandidáti -
+                                    v této fázi není vašim úkolem ověřovat danou informaci.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
             <div class="card bg-light mb-3 zdrojovy-clanek">
                 <div class="card-body">
@@ -189,8 +223,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
 
             <p class="text-right">
                 <?= Html::submitButton('Odeslat tvrzení', ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-warning']) ?>
-                <?= Html::a('Home', ['site/index'], ['class' => 'btn btn-light']) ?>
+                <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
             </p>
             <?php ActiveForm::end(); ?>
             <div class="navigation_actions">
