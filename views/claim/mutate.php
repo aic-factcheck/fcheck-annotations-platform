@@ -222,8 +222,8 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
 
 
             <p class="text-right">
-                <?= Html::submitButton('Odeslat tvrzení', ['class' => 'btn btn-primary']) ?>
                 <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
+                <?= Html::submitButton('<i class="fas fa-clipboard-check"></i> Odeslat tvrzení', ['class' => 'btn btn-primary']) ?>
             </p>
             <?php ActiveForm::end(); ?>
             <div class="navigation_actions">

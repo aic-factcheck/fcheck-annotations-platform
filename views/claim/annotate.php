@@ -149,9 +149,9 @@ Helper::setEntities($ners = $model->paragraph->ners);
         </div>
     </div>
     <p class="text-right">
-        <?= Html::submitButton('Odeslat tvrzení', ['class' => 'btn btn-primary']) ?>
         <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
         <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-warning']) ?>
+        <?= Html::submitButton('<i class="fas fa-clipboard-check"></i> Odeslat tvrzení', ['class' => 'btn btn-primary']) ?>
     </p>
 
     <div class="modal fade" id="guidelines" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
