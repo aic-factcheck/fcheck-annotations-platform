@@ -34,7 +34,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
             <li>
                 Tvořte <strong>jednoduchá pravdivá tvrzení</strong> vycházející ze <strong>zdrojového odstavce</strong>, která <strong>má smysl ověřovat</strong>.
             </li>
-            <li>Pokud to zdrojový odstavec neumožňuje, nebo se Vám zdá nezajímavý, nebojte se ho  <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-default btn-sm']) ?>
+            <li>Pokud to zdrojový odstavec neumožňuje, nebo se Vám zdá nezajímavý, nebojte se ho  <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-secondary btn-sm']) ?>
             </li>
         </ul>
     </div>
@@ -150,7 +150,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
     </div>
     <p class="text-right">
         <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
-        <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-default']) ?>
+        <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-secondary']) ?>
         <?= Html::submitButton('<i class="fas fa-clipboard-check"></i> Odeslat tvrzení', ['class' => 'btn btn-primary']) ?>
     </p>
 
@@ -168,7 +168,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
                     <p>Cílem úkolu je <strong>vytvořit pravdivá tvrzení</strong> ze zdrojového odstavce ČTK dat.</p>
 
                     <ul>
-                        <li><strong>Každé vaše tvrzení by mělo být potenciálně zajímavé pro ověřování.</strong> Pokud vás pro daný zdrojový odstavec žádné rozumné tvrzení nenapadne, raději zvolte <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-default btn-sm']) ?>.</li>
+                        <li><strong>Každé vaše tvrzení by mělo být potenciálně zajímavé pro ověřování.</strong> Pokud vás pro daný zdrojový odstavec žádné rozumné tvrzení nenapadne, raději zvolte <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-secondary btn-sm']) ?>.</li>
                         <li>Extrahujte jednoduchá (dále nedělitelná) tvrzení týkající se některých pojmenovaných entitit ze zdrojového textu.<br/><em>(<?= implode(", ", $ners) ?>)</em></li>
                         <li>Jako základ svého tvrzení použijte zdrojový odstavec a případně i <em>znalostní rámec</em> (viy níže).</li>
                         <li><strong>Pojmenované entity uvádějte přímo</strong> (vyhněte se používání zájmen apod.).</li>
