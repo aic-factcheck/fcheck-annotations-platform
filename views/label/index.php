@@ -170,16 +170,13 @@ $this->title = 'Anotace tvrzení';
                             rozšířit kliknutím na odkazy <strong>Zobrazit kontext</strong>.
                         <li>Při úvahách nad platností tvrzení používejte <em>zdravý rozum</em>.</li>
                         <LI>Správnost výroků dokazujte vždy k datu vydání <em>zdrojového článku</em>:
-                            <strong><?= Yii::$app->formatter->asDate($model->claim->paragraph0->article0->date) ?></strong>.
+                            <strong><i class="fas fa-history"></i> <?= Yii::$app->formatter->asDate($model->claim->paragraph0->article0->date) ?></strong>.
                             Tedy relativní určení času ("včera", "letos",...) a v čase pomíjivé jevy ("nejteplejší
                             léto",...) fact-checkujte z pohledu tohoto dne.
                         </LI>
                         <li>Jediným zdrojem informací pro anotaci tvrzení smí být zdrojový článek a texty znalostního
                             rámce. S výjimkou podmíněného potvrzení či vyvrácení (viz níže) <em>je jakékoliv použítí
                                 vlastních znalostí zakázáno.</em></li>
-                        <li>Texty znalostního rámce vznikly dříve, než text výchozího článku. Platnost tvrzení se tak
-                            dokazuje k datu vydání výchozího článku.
-                        </li>
                         <li>Důkazů, tedy minimálních skupin odstavců, které potvrzují, či vyvracejí tvrzení můžete zadat
                             více - při zatržení odstavce je automaticky přidán nový sloupec.
                         </li>
@@ -188,10 +185,10 @@ $this->title = 'Anotace tvrzení';
                             <strong class="badge badge-danger"><i class="fas fa-times"></i> Vyvrátit</strong>, nebo
                             <strong class="badge badge-dark"><i class="far fa-question-circle"></i> Nedostatek informací</strong>.
                         </li>
-                        <li>Pro volbu odlišného tvrzení k anotaci zvolte
+                        <li>Pro změnu tvrzení vybraného k anotaci zvolte
                             <strong class="badge badge-default"> <i class="fas fa-forward"></i> Přeskočit</strong>, nové tvrzení Vám bude přiřazeno náhodně.
                         </li>
-                        <li>Pokud ve tvrzení spatřujete <strong>překlep</strong>, <strong>gramatickou chybu</strong>, nebo <strong>porušení zásad tvorby výroku</strong>, prosím, využijte možnost 
+                        <li>Pokud ve tvrzení spatřujete <strong>překlep</strong>, <strong>gramatickou chybu</strong>, nebo <strong>porušení zásad tvorby výroku</strong>, prosím, využijte možnost
                             <strong class="badge badge-warning"><i class="far fa-flag"></i> Nahlásit chybu</strong> - tvrzení bude vyřazeno z anotací a odesláno k našemu přehodnocení/opravě.</li>
                         <!--li>V případě volby <strong>Preskočit</strong> máte více možností:
                             <ul>
