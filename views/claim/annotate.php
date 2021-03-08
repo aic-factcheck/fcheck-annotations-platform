@@ -34,7 +34,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
             <li>
                 Tvořte <strong>jednoduchá pravdivá tvrzení</strong> vycházející ze <strong>zdrojového odstavce</strong>, která <strong>má smysl fact-checkovat</strong>.
             </li>
-            <li>Pokud to zdrojový odstavec neumožňuje, nebo se Vám zdá nezajímavý, nebojte se ho  <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-warning btn-sm']) ?>
+            <li>Pokud to zdrojový odstavec neumožňuje, nebo se Vám zdá nezajímavý, nebojte se ho  <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-default btn-sm']) ?>
             </li>
         </ul>
     </div>
@@ -150,7 +150,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
     </div>
     <p class="text-right">
         <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
-        <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-default']) ?>
         <?= Html::submitButton('<i class="fas fa-clipboard-check"></i> Odeslat tvrzení', ['class' => 'btn btn-primary']) ?>
     </p>
 
