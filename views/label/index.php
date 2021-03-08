@@ -191,7 +191,7 @@ $this->title = 'Anotace tvrzení';
                         <li>Pro volbu odlišného tvrzení k anotaci zvolte
                             <strong class="badge badge-default"> <i class="fas fa-forward"></i> Přeskočit</strong>, nové tvrzení Vám bude přiřazeno náhodně.
                         </li>
-                        <li>Pokud ve tvrzení spatřujete <strong>překlep</strong>, <strong>gramatickou chybu</strong>, nebo <strong>porušení zásad tvorby výroku</strong>, prosím, využijte možnost <strong class="badge badge-danger"><i class="fas fa-times"></i> Vyvrátit</strong>, nebo
+                        <li>Pokud ve tvrzení spatřujete <strong>překlep</strong>, <strong>gramatickou chybu</strong>, nebo <strong>porušení zásad tvorby výroku</strong>, prosím, využijte možnost 
                             <strong class="badge badge-warning"><i class="far fa-flag"></i> Nahlásit chybu</strong> - tvrzení bude vyřazeno z anotací a odesláno k našemu přehodnocení/opravě.</li>
                         <!--li>V případě volby <strong>Preskočit</strong> máte více možností:
                             <ul>
