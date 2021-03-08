@@ -58,6 +58,7 @@ AppAsset::register($this);
                         ['class' => 'text-center nav-item text-black']
                     ),
                 ['label' => 'Domů', 'url' => ['/site/index']],
+                ['label' => 'Statistiky', 'url' => ['/site/statistics']],
                 Yii::$app->user->isGuest ? (
                 ['label' => 'Přihlásit', 'url' => ['/site/login']]
                 ) : (
