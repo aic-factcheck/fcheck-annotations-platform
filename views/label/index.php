@@ -169,6 +169,7 @@ $this->title = 'Anotace tvrzení';
                         <li>Pokud nejsou dostatečné ani výchozí odstavce znalostního rámce, můžete znalostní rámec
                             rozšířit kliknutím na odkazy <strong>Zobrazit kontext</strong>.
                         <li>Při úvahách nad platností tvrzení používejte <em>zdravý rozum</em>.</li>
+                        <LI>Správnost výroků dokazujte vždy k datu vydání <em>zdrojového článku</em>: <strong><?=Yii::$app->formatter->asDate($model->claim->paragraph0->article0->date)?></strong>. Tedy relativní určení času ("včera", "letos",...) a v čase pomíjivé jevy ("nejteplejší léto",...) fact-checkujte z pohledu tohoto dne.</LI>
                         <li>Jediným zdrojem informací pro anotaci tvrzení smí být zdrojový článek a texty znalostního
                             rámce. S výjimkou podmíněného potvrzení či vyvrácení (viz níže) <em>je jakékoliv použítí
                                 vlastních znalostí zakázáno.</em></li>
