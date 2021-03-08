@@ -39,7 +39,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                         přečtěte <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info btn-sm', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
                     </li>
                     <li>
-                        <i class="fas fa-exclamation"></i> Tvořte <strong>jen taková tvrzení</strong>, která <strong>má smysl fact-checkovat</strong>.
+                        <i class="fas fa-exclamation"></i> Tvořte <strong>jen taková tvrzení</strong>, která <strong>má smysl ověřovat</strong>.
                     </li>
                     <li>
                         Není tedy třeba využít všech 6 způsobů obměny tvrzení, stačí zhruba <strong>3</strong>, klidně i pouze <strong>1</strong>.
@@ -61,6 +61,8 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                                 <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů obměn jsou uvedeny
                                 dále.</p>
                             <ul>
+                                <li><strong>Tvořte jen taková tvrzení, která má smysl ověřovat.</strong></li>
+                                <li>Není tedy třeba využít všech 6 způsobů obměny tvrzení, stačí zhruba <strong>3</strong>, klidně i pouze <strong>1</strong>.</li>
                                 <li>Použijte <strong>původní tvrzení</strong> a poskytnuté související články jako základ pro
                                     jednotlivé
                                     obměny.<strong class="ng-binding"></strong></li>
