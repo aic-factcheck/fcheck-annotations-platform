@@ -53,7 +53,6 @@ class ClaimController extends Controller
 
     public function actionMutate($sandbox = false)
     {
-
         $model = new MutateForm();
         if ($model->claim == null){
             Yii::$app->session->addFlash("success", "Mutace všech Vašich tvrzení byly vyplněny 😊 Nyní se můžete pustit do tvorby dalších!");

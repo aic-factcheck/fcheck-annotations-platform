@@ -67,71 +67,71 @@ $this->title = 'Anotace tvrzení';
             </ul>
         </div>
 
-    <div class="card bg-default mb-3 podminka w-100">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-3"><h5 class="card-title">Podmínka anotace</h5></div>
-                <div class="col-md-9">
-                    <?= $form->field($model, 'condition')->textInput(['placeholder' => ' Sem můžete napsat informaci chybějící k úplnosti důkazu.'])->label(false)->hint('Např. "Lidé narození 12. srpna jsou ve znamení lva." nebo "Rakousko je v Evropě.".') ?>
+        <div class="card bg-default mb-3 podminka w-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3"><h5 class="card-title">Podmínka anotace</h5></div>
+                    <div class="col-md-9">
+                        <?= $form->field($model, 'condition')->textInput(['placeholder' => ' Sem můžete napsat informaci chybějící k úplnosti důkazu.'])->label(false)->hint('Např. "Lidé narození 12. srpna jsou ve znamení lva." nebo "Rakousko je v Evropě.".') ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card bg-light mb-3">
-        <div class="card-body w-100">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 class="card-title">Důkazy potvrzující/vyvracející tvrzení</h4>
-                    <div class="card">
-                        <div class="table-responsive">
-                            <table class="table table-striped mb-0" id="evidence">
-                                <tr class=" table-primary">
-                                    <th class="text-left">
-                                        Zdrojový
-                                        článek: <?= $model->claim->paragraph0->article0->get('title') . ' ' . \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($model->claim->paragraph0->article0->date), ['class' => 'badge badge-secondary ']) ?></th>
-                                    <th class="px-0 text-center">Důkaz#1</th>
-                                </tr>
-                                <?php $i = 0;
-                                foreach ($model->claim->paragraph0->article0->paragraphs as $paragraph) { ?>
-                                    <tr>
-                                        <td class="text-left"><?= $paragraph->get('text') ?></td>
-                                        <td class="text-center checkcell">
-                                            <?= Html::checkbox("evidence[0][]", false, ["class" => "evidence", "value" => $paragraph->id]) ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                                <?php foreach ($model->claim->knowledge as $paragraph) { ?>
-                                    <tr class="table-info dictionary-item bg-info">
-                                        <th class="text-left">Znalostní
-                                            rámec: <?= $paragraph->article0->get('title') . ' ' . \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($paragraph->article0->date), ['class' => 'badge badge-secondary ']) ?></th>
-                                        <th class="text-center"><i class="fas fa-caret-down"></i><i
-                                                    class="fas fa-caret-up d-none"></i></th>
+        <div class="card bg-light mb-3">
+            <div class="card-body w-100">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="card-title">Důkazy potvrzující/vyvracející tvrzení</h4>
+                        <div class="card">
+                            <div class="table-responsive">
+                                <table class="table table-striped mb-0" id="evidence">
+                                    <tr class=" table-primary">
+                                        <th class="text-left">
+                                            Zdrojový
+                                            článek: <?= $model->claim->paragraph0->article0->get('title') . ' ' . \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($model->claim->paragraph0->article0->date), ['class' => 'badge badge-secondary ']) ?></th>
+                                        <th class="px-0 text-center">Důkaz#1</th>
                                     </tr>
                                     <?php $i = 0;
-                                    foreach ($paragraph->article0->paragraphs as $paragraph_) { ?>
-                                        <tr class="d-none <?= $paragraph_->id != $paragraph->id ? "$paragraph->id-context" : 'text-strong' ?>">
-                                            <td class="text-left"><?= $paragraph_->get('text') ?></td>
+                                    foreach ($model->claim->paragraph0->article0->paragraphs as $paragraph) { ?>
+                                        <tr>
+                                            <td class="text-left"><?= $paragraph->get('text') ?></td>
                                             <td class="text-center checkcell">
-                                                <?= Html::checkbox("evidence[0][]", false, ["class" => "evidence", "value" => $paragraph_->id]) ?>
+                                                <?= Html::checkbox("evidence[0][]", false, ["class" => "evidence", "value" => $paragraph->id]) ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
-                                    <tr class="d-none" data-show=".<?= $paragraph->id ?>-context"
-                                        data-alt='<td class="text-right font-weight-bold">Skrýt kontext &laquo;</td><td colspan="999"></td>'>
-                                        <td class="text-right font-weight-bold expand-context">Zobrazit kontext
-                                            &raquo;
-                                        </td>
-                                        <td colspan="999"></td>
-                                    </tr>
-                                <?php } ?>
-                                <tr class=" dictionary-item d-none"></tr>
-                            </table>
+                                    <?php foreach ($model->claim->knowledge as $paragraph) { ?>
+                                        <tr class="table-info dictionary-item bg-info">
+                                            <th class="text-left">Znalostní
+                                                rámec: <?= $paragraph->article0->get('title') . ' ' . \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($paragraph->article0->date), ['class' => 'badge badge-secondary ']) ?></th>
+                                            <th class="text-center"><i class="fas fa-caret-down"></i><i
+                                                        class="fas fa-caret-up d-none"></i></th>
+                                        </tr>
+                                        <?php $i = 0;
+                                        foreach ($paragraph->article0->paragraphs as $paragraph_) { ?>
+                                            <tr class="d-none <?= $paragraph_->id != $paragraph->id ? "$paragraph->id-context" : 'text-strong' ?>">
+                                                <td class="text-left"><?= $paragraph_->get('text') ?></td>
+                                                <td class="text-center checkcell">
+                                                    <?= Html::checkbox("evidence[0][]", false, ["class" => "evidence", "value" => $paragraph_->id]) ?>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                        <tr class="d-none" data-show=".<?= $paragraph->id ?>-context"
+                                            data-alt='<td class="text-right font-weight-bold">Skrýt kontext &laquo;</td><td colspan="999"></td>'>
+                                            <td class="text-right font-weight-bold expand-context">Zobrazit kontext
+                                                &raquo;
+                                            </td>
+                                            <td colspan="999"></td>
+                                        </tr>
+                                    <?php } ?>
+                                    <tr class=" dictionary-item d-none"></tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
         <p class="text-right text-right">
             <?= Html::submitButton('<i class="fas fa-check"></i> Potvrdit', ['name' => 'label', 'value' => 'SUPPORTS', 'class' => 'btn btn-success', 'disabled' => true]) ?>
             <?= Html::submitButton('<i class="fas fa-times"></i> Vyvrátit', ['name' => 'label', 'value' => 'REFUTES', 'class' => 'btn btn-danger', 'disabled' => true]) ?>
@@ -169,7 +169,11 @@ $this->title = 'Anotace tvrzení';
                         <li>Pokud nejsou dostatečné ani výchozí odstavce znalostního rámce, můžete znalostní rámec
                             rozšířit kliknutím na odkazy <strong>Zobrazit kontext</strong>.
                         <li>Při úvahách nad platností tvrzení používejte <em>zdravý rozum</em>.</li>
-                        <LI>Správnost výroků dokazujte vždy k datu vydání <em>zdrojového článku</em>: <strong><?=Yii::$app->formatter->asDate($model->claim->paragraph0->article0->date)?></strong>. Tedy relativní určení času ("včera", "letos",...) a v čase pomíjivé jevy ("nejteplejší léto",...) fact-checkujte z pohledu tohoto dne.</LI>
+                        <LI>Správnost výroků dokazujte vždy k datu vydání <em>zdrojového článku</em>:
+                            <strong><?= Yii::$app->formatter->asDate($model->claim->paragraph0->article0->date) ?></strong>.
+                            Tedy relativní určení času ("včera", "letos",...) a v čase pomíjivé jevy ("nejteplejší
+                            léto",...) fact-checkujte z pohledu tohoto dne.
+                        </LI>
                         <li>Jediným zdrojem informací pro anotaci tvrzení smí být zdrojový článek a texty znalostního
                             rámce. S výjimkou podmíněného potvrzení či vyvrácení (viz níže) <em>je jakékoliv použítí
                                 vlastních znalostí zakázáno.</em></li>
@@ -179,10 +183,17 @@ $this->title = 'Anotace tvrzení';
                         <li>Důkazů, tedy minimálních skupin odstavců, které potvrzují, či vyvracejí tvrzení můžete zadat
                             více - při zatržení odstavce je automaticky přidán nový sloupec.
                         </li>
-                        <li>Pro rozhodnutí anotace zmáčkněte tlačítko <strong>Potvrdit</strong>,
-                            <strong>Vyvrátit</strong>, či <strong>Preskočit</strong>.
+                        <li>Pro rozhodnutí anotace zmáčkněte tlačítko
+                            <strong class="badge badge-success"> <i class="fas fa-check"></i> Potvrdit</strong>,
+                            <strong class="badge badge-danger"><i class="fas fa-times"></i> Vyvrátit</strong>, nebo
+                            <strong class="badge badge-dark"><i class="far fa-question-circle"></i> Nedostatek informací</strong>.
                         </li>
-                        <li>V případě volby <strong>Preskočit</strong> máte více možností:
+                        <li>Pro volbu odlišného tvrzení k anotaci zvolte
+                            <strong class="badge badge-default"> <i class="fas fa-forward"></i> Přeskočit</strong>, nové tvrzení Vám bude přiřazeno náhodně.
+                        </li>
+                        <li>Pokud ve tvrzení spatřujete <strong>překlep</strong>, <strong>gramatickou chybu</strong>, nebo <strong>porušení zásad tvorby výroku</strong>, prosím, využijte možnost <strong class="badge badge-danger"><i class="fas fa-times"></i> Vyvrátit</strong>, nebo
+                            <strong class="badge badge-warning"><i class="far fa-flag"></i> Nahlásit chybu</strong> - tvrzení bude vyřazeno z anotací a odesláno k našemu přehodnocení/opravě.</li>
+                        <!--li>V případě volby <strong>Preskočit</strong> máte více možností:
                             <ul>
                                 <li>Pokud výchozí článek ani znalostní rámec neobsahují dostatek informací, zvolte
                                     <strong>Nedostatek informací</strong>.
@@ -200,7 +211,7 @@ $this->title = 'Anotace tvrzení';
                                         chybu</strong>.
                                 </li>
                             </ul>
-                        </li>
+                        </li-->
                     </ol>
 
                     <h4 class="topmargin ng-scope">Příklady</h4>
