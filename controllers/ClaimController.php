@@ -55,7 +55,7 @@ class ClaimController extends Controller
     {
         $model = new MutateForm();
         if ($model->claim == null){
-            Yii::$app->session->addFlash("success", "Mutace všech Vašich tvrzení byly vyplněny 😊 Nyní se můžete pustit do tvorby dalších!");
+            Yii::$app->session->addFlash("success", "Obměny všech Vašich tvrzení byly vyplněny 😊 Nyní se můžete pustit do tvorby dalších!");
             return $this->redirect(['claim/annotate', 'sandbox' => $sandbox]);
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

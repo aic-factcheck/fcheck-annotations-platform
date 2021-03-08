@@ -18,7 +18,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
 <div class="container">
     <div class="ng-scope sandbox">
         <div class="container u1b">
-            <h1>Mutace tvrzení (Ú<sub>1</sub>b)</h1>
+            <h1>Obměny tvrzení (Ú<sub>1</sub>b)</h1>
 
             <?php if ($sandbox) { ?>
                 <div>
@@ -30,7 +30,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
             <?php } ?>
 
             <div class="alert  mt-3 alert-warning alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">Zlatá pravidla mutace tvrzení</h4>
+                <h4 class="alert-heading">Zlatá pravidla obměn tvrzení</h4>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -57,7 +57,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Cílem tohoto úkolu je <strong>vygenerovat mutace či obměny tvrzení</strong>. Mutace mohou být
+                            <p>Cílem tohoto úkolu je <strong>vygenerovat obměny tvrzení</strong>. Obměny mohou být
                                 <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů obměn jsou uvedeny
                                 dále.</p>
                             <ul>

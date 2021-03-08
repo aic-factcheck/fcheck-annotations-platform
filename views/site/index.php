@@ -30,11 +30,11 @@ $this->title = 'Anotační Platforma FCheck TAČR';
     <?php if (Yii::$app->user->identity->getLastUnmutatedClaim() != null) { ?>
         <div class="card bg-warning mb-3">
             <div class="card-body">
-                <h3 class="card-title">Ú<sub>1</sub>b: Mutace tvrzení</h3>
-                <p class="card-text">☝️ V systému "visí" Vaše tvrzení z <strong>Ú<sub>1</sub>a</strong> bez mutace, pokud
+                <h3 class="card-title">Ú<sub>1</sub>b: Obměny tvrzení</h3>
+                <p class="card-text">☝️ V systému "visí" Vaše tvrzení z <strong>Ú<sub>1</sub>a</strong> bez obměn, pokud
                     můžete, podívejte se na ně.</p>
 
-                <?= Html::a('<i class="fas fa-dice"></i> Mutovat tvrzení', ['claim/mutate', 'sandbox' => false], ['class' => 'btn btn-dark']) ?>
+                <?= Html::a('<i class="fas fa-dice"></i> Zadat obměny tvrzení', ['claim/mutate', 'sandbox' => false], ['class' => 'btn btn-dark']) ?>
             </div>
         </div>
     <?php } ?>

@@ -130,7 +130,7 @@ class Claim extends ActiveRecord
             'claim' => 'Výrok',
             'paragraph' => 'Původní odstavec ČTK článku',
             'mutated_from' => 'Výrok před mutací',
-            'mutation_type' => 'Typ mutace',
+            'mutation_type' => 'Typ obměny',
             'sandbox' => 'Je z testovní verze?',
             'labelled' => 'Má label?',
             'created_at' => 'Datum vzniku',
