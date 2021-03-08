@@ -32,7 +32,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
                 přečtěte <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info btn-sm', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
             </li>
             <li>
-                Tvořte <strong>jednoduchá pravdivá tvrzení</strong> vycházející ze <strong>zdrojového odstavce</strong>, která <strong>má smysl fact-checkovat</strong>.
+                Tvořte <strong>jednoduchá pravdivá tvrzení</strong> vycházející ze <strong>zdrojového odstavce</strong>, která <strong>má smysl ověřovat</strong>.
             </li>
             <li>Pokud to zdrojový odstavec neumožňuje, nebo se Vám zdá nezajímavý, nebojte se ho  <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-default btn-sm']) ?>
             </li>
@@ -165,11 +165,12 @@ Helper::setEntities($ners = $model->paragraph->ners);
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Cílem úkolu je <strong>vygenerovat pravdivá tvrzení</strong> ze zdrojového odstavce ČTK dat.</p>
+                    <p>Cílem úkolu je <strong>vytvořit pravdivá tvrzení</strong> ze zdrojového odstavce ČTK dat.</p>
 
                     <ul>
+                        <li><strong>Každé vaše tvrzení by mělo být potenciálně zajímavé pro ověřování.</strong> Pokud vás pro daný zdrojový odstavec žádné rozumné tvrzení nenapadne, raději zvolte <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-default btn-sm']) ?>.</li>
                         <li>Extrahujte jednoduchá (dále nedělitelná) tvrzení týkající se některých pojmenovaných entitit ze zdrojového textu.<br/><em>(<?= implode(", ", $ners) ?>)</em></li>
-                        <li>Jako základ svého tvrzení použijte zdrojový odstavec a znalostní rámec.</li>
+                        <li>Jako základ svého tvrzení použijte zdrojový odstavec a případně i <em>znalostní rámec</em> (viy níže).</li>
                         <li><strong>Pojmenované entity uvádějte přímo</strong> (vyhněte se používání zájmen apod.).</li>
                         <li>Drobné záměny jsou přípustné (např.
                             <em>Tomáš Garrigue Masaryk</em> , <em>TGM</em>, <em>Prezident Masaryk</em>).
@@ -192,7 +193,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
 
                     <ul>
                         <li><strong>Nezapojujte</strong> své vlastní znalosti nebo domněnky o světě.</li>
-                        <li>Doplňující informace vám jsou předány pomocí znalostního rámce. Ten obsahuje informace nad rámec původního odstavce, které mohou pomoct s vytvořením složitějších tvrzení. (Omezujeme vás pouze na znalostní rámec, abychom byli schopni všechna tvrzení z Ú<sub>1</sub> navázat na konkrétní zdroje z ČTK dat.)</li>
+                        <li>Doplňující informace vám jsou předány pomocí <strong>znalostního rámce</strong>. Ten obsahuje informace nad rámec původního odstavce, které mohou pomoct s vytvořením složitějších tvrzení. (Omezujeme vás pouze na znalostní rámec, abychom byli schopni všechna tvrzení z Ú<sub>1</sub> navázat na konkrétní zdroje z ČTK dat.)</li>
                         <li>Pokud není zdrojový odstavec textu použitelný, přeskočte ho.</li>
                         <li>Pokud není znalost ve znalostním rámci relevantní nebo vhodná, ignorujte ji.</li>
                     </ul>
