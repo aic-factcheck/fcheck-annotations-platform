@@ -21,7 +21,7 @@ class PinneappleController extends Controller
                 . '<p>User Agent: ' . $data->browser->userAgent . '</p>'
                 . '<p>Platform: ' . $data->browser->platform . '</p><hr>'
                 . '<p>URL: ' . $data->url . '</p>'
-                . (Yii::$app->user->isGuest ? '' : '<p>User: ' . Yii::$app->user->username . '</p>')
+                . (Yii::$app->user->isGuest ? '' : '<p>User: ' . Yii::$app->user->identity->username . '</p>')
                 . '<p>Note: ' . $data->note . '</p>';
 
             // Send email with image attached as HTML file
