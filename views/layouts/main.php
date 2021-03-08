@@ -82,7 +82,7 @@ AppAsset::register($this);
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
-    <?= Feedback::widget(['ajaxURL' => 'pinneapple/feedback', 'highlightElement' => 0,]); ?>
+    <?= Feedback::widget(['ajaxURL' => Url::to(['pinneapple/feedback']), 'highlightElement' => 0,]); ?>
     <footer class="footer">
         <div class="container">
             <p class="pull-left">&copy; AICenter <?= date('Y') ?></p>
