@@ -46,7 +46,7 @@ $this->title = 'Anotační Platforma FCheck TAČR';
             <p><strong>Anotace vlastních tvrzení</strong> slouží jako <em>referenční anotace</em>. Doporučujeme se jí
                 věnovat ve chvíli, kdy máte svá tvrzení v živé paměti po Ú1. </p>
 
-            <?= Html::a('<i class="fab fa-youtube"></i> Tutoriál', ['site/tutorial', 't' => 560], ['class' => 'btn btn-success', 'disabled' => true]) ?>
+            <?= Html::a('<i class="fab fa-youtube"></i> Tutoriál', ['site/tutorial', 't' => 884], ['class' => 'btn btn-success', 'disabled' => true]) ?>
             <?= Html::a('<i class="fas fa-balance-scale-left"></i> Anotovat vlastní tvrzení', ['label/', 'sandbox' => 0, 'oracle' => 1], ['class' => 'btn btn-warning']) ?>
             <?= Html::a('<i class="fas fa-balance-scale-right"></i> Anotovat cizí tvrzení', ['label/', 'sandbox' => 0, 'oracle' => 0], ['class' => 'btn btn-primary']) ?>
         </div>
