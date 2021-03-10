@@ -1,0 +1,1 @@
+UPDATE `claim` c SET `labels`=(SELECT COUNT(*) FROM label l where l.claim = c.id) WHERE 1;

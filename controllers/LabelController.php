@@ -35,11 +35,12 @@ class LabelController extends Controller
             $traversed = [];
             do {
                 $claim = Claim::find()
+                    ->alias('c')
                     ->where(['sandbox' => $sandbox])
                     ->andWhere(['is not', 'mutation_type', null])
                     ->andWhere(['not in', 'id', $traversed])
                     ->andWhere([$oracle ? '=' : '<>', 'user', Yii::$app->user->id])
-                    ->orderBy(new Expression('rand()'))
+                    ->orderBy(new Expression('(rand() + (c.id > 2275) + ((SELECT COUNT(*) FROM label l where l.claim = c.id and l.user != c.user)<2)) desc'))
                     ->one();
                 if ($claim == null) {
                     Yii::$app->session->addFlash("info", "V současnosti v sekci <strong>" . ($oracle ? 'vlastní' : 'cizí') . " tvrzení</strong> není co anotovat. 😟 " .
@@ -51,7 +52,6 @@ class LabelController extends Controller
                 ->where(['claim' => $claim, 'user' => Yii::$app->user->id])
                 ->orWhere(['flag' => 1, 'claim' => $claim])
                 ->exists());
-
             return $this->redirect([
                 'index',
                 'sandbox' => $sandbox,
