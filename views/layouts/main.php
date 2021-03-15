@@ -49,6 +49,13 @@ AppAsset::register($this);
                 Yii::$app->user->isGuest ? '' :
                     Html::tag('li',
                         Html::tag('span',
+                            '<span class="badge badge-warning"><i class="fas fa-hourglass-half"></i> 17.3. 12:00</span>'
+                            , ['class' => ' text-black nav-link ']),
+                        ['class' => 'text-center nav-item text-black']
+                    ),
+                Yii::$app->user->isGuest ? '' :
+                    Html::tag('li',
+                        Html::tag('span',
                             //'<strong class="fw-500">Ú<sub>0</sub></strong>: ' . Paragraph::find()->where(['candidate_of' => Yii::$app->user->id])->count() .
                             'Ú<sub>1</sub>a<strong class="fw-500">: ' . Claim::find()->where(['user' => Yii::$app->user->id])->andWhere(['IS', 'mutation_type', null])->count() .
                             '</strong><sub>/3</sub>&nbsp;&nbsp;&nbsp;Ú<sub>1</sub>b: <strong class="fw-500">' . Claim::find()->where(['user' => Yii::$app->user->id])->andWhere(['IS NOT', 'mutation_type', null])->count() .
