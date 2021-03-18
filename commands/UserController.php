@@ -53,39 +53,60 @@ class UserController extends Controller
     public function actionImport()
     {
         $tsv = <<<TSV
-85313177	Benešová Stanislava, Bc.
-48854178	Dědečková Kristina
-86332812	Dorňáková Tereza, Bc.
-13047605	Dvořáček Vojtěch
-75351707	Dvořák Vilém, Bc.
-51971672	Dvořáková Barbora, Bc.
-37456756	Dziuba Daryna, Bc.
-17677897	Fujáček Jakub, Bc.
-35516642	Haber Josef, Bc.
-41487643	Hegedüš Tomáš, Bc.
-88704782	Holíková Hana
-57836041	Jarolímková Zuzana, Bc.
-77574862	Klézl Tomáš, Bc.
-94392405	Kloučková Rozálie, Bc.
-33797702	Luu Danh Tiep, Bc.
-55976794	Malá Markéta, Bc.
-58476193	Málek Albert, Bc.
-53463847	Martincová Kateřina
-79902378	Motyčka Jakub
-61598486	Mudrová Nikol, Bc.
-83361723	Nechvátal Lukáš, Bc.
-64853773	Oravová Tereza
-66387363	Penkov Radoslav, Bc.
-48347238	Podolka Tadeáš, Bc.
-79941444	Samaras Alexandros OUT
-57243509	Slivková Nela, Bc.
-18676417	Spirit Martin
-56385050	Šedinová Michaela
-48349445	Šedivý Tomáš, Bc.
-71907735	Šimek Jan, Bc.
-64658425	Vraná Kateřina, Bc.
-99319190	Zítko Tomáš, Bc.
-31805190	Zlámal Ondřej, Bc.
+32975305	Adámek Matyáš
+45822531	Balcárková Eliška
+60001074	Bočková Jana
+49551263	Černík Bartoloměj
+51652075	Doubravová Zuzana
+52933130	Fantyš Petr
+31430294	Foglová Adéla
+17072217	Gastová Tereza
+54004524	Hojný Vojtěch
+38318690	Holubová Jitka
+31776024	Hron Marek
+82427524	Kaňka Josef
+80425231	Karban Filip
+83584611	Klečka Jiří
+24486565	Kratochvílová Vanda
+39278191	Křivánek Adam
+54187918	Kuchařová Anna
+88897345	Liška Lukáš Josef
+13922940	Mach Ondřej
+14522351	Machová Anna, Mgr.
+14609814	Malá Helena
+95194049	Mathauser Petr
+37382890	Nováková Klára
+52147778	Pančochářová Natálie
+29033870	Panovská Alena
+59472508	Pepř Tadeáš
+35168178	Potužník Marek Jiří
+87564626	Schubertová Karolína, Bc.
+11323004	Spálenská Alena
+16886578	Stein Dominik
+65366023	Sůsa Richard
+60762270	Svoboda Štěpán
+11802550	Šimek Pavel
+41206586	Tománek Dominik
+58511707	Vokřál Jiří
+70024969	Weidenthaler Adam
+51860231	Zavřel Marek
+39406744	Barták Lukáš
+64044886	Blažková Karolína
+50228080	Czyž Josef
+79252936	Černá Adéla
+51622934	Harciníková Alena
+85990483	Hodina Stanislav
+10179060	Horáková Adéla
+82895495	Hübsch Dan
+97399177	Levíčková Žaneta
+75588160	Louženský Jan
+52938185	Plešková Markéta
+52591686	Portešová Anna
+14254729	Slavíková Kristýna
+10196519	Sýkorová Sandra
+11588622	Šafová Julie
+69183418	Šimečková Karolína
+54398576	Zajíc František
 TSV;
 
         foreach (explode("\n", $tsv) as $line) {

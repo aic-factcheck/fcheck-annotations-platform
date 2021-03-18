@@ -46,13 +46,13 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav ml-auto'],
             'items' => [
-                Yii::$app->user->isGuest ? '' :
+                /*Yii::$app->user->isGuest ? '' :
                     Html::tag('li',
                         Html::tag('span',
                             '<span class="badge badge-warning"><i class="fas fa-hourglass-half"></i> 17.3. 12:00</span>'
                             , ['class' => ' text-black nav-link ']),
                         ['class' => 'text-center nav-item text-black']
-                    ),
+                    ),*/
                 Yii::$app->user->isGuest ? '' :
                     Html::tag('li',
                         Html::tag('span',
