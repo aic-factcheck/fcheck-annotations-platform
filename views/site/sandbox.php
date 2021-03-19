@@ -61,7 +61,7 @@ foreach ($annotations as $annotation) {
 
 $activity = [];
 $avg_labels = [];
-$tomorrow = strtotime((new DateTime('2020-12-12'))->format('Y-m-d'));
+$tomorrow = strtotime((new DateTime('2021-03-20'))->format('Y-m-d'));
 $day = $dayOne = strtotime('2020-11-17');
 while ($day < $tomorrow) {
     $activity[date('d.m.Y', $day)] = [
