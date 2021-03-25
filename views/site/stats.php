@@ -15,7 +15,7 @@ $this->title = 'Plnění';
         <?php foreach (User::find()->where(['>=','id',77])->all() as $user) {
             $quotas = [3, 7, 7, 35];
             for ($i = 0; $i < 3; $i++) {
-                $quotas[$i] *= $user->getCoef();
+                $quotas[$i] *= Yii::$app->user->isGuest?1:$user->getCoef();
             }
             if ($user->note == null) continue;
             echo Html::tag('li',
