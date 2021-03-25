@@ -14,8 +14,8 @@ $this->title = 'Plnění';
     <ul>
         <?php foreach (User::find()->where(['>=','id',77])->all() as $user) {
             $quotas = [3, 7, 7, 35];
-            for ($i = 0; $i < 3; $i++) {
-                $quotas[$i] *= Yii::$app->user->isGuest?1:$user->getCoef();
+            for ($i = 0; $i <= 3; $i++) {
+                $quotas[$i] = $quotas[$i]*(Yii::$app->user->isGuest?1:$user->getCoef());
             }
             if ($user->note == null) continue;
             echo Html::tag('li',
@@ -26,7 +26,7 @@ $this->title = 'Plnění';
                     '</strong><sub>/' . $quotas[1] . '</sub>&nbsp;&nbsp;&nbsp;Ú<sub>2</sub>a: <strong class="fw-500">' . ($u2a = Label::find()->where(['user' => $user->id, 'oracle' => true])->count()) .
                     '</strong><sub>/' . $quotas[2] . '</sub>&nbsp;&nbsp;&nbsp;Ú<sub>2</sub>b</strong>: <strong class="fw-500">' . ($u2b = Label::find()->where(['user' => $user->id, 'oracle' => false])->count()) .
                     '</strong><sub>/' . $quotas[3] . '</sub> '
-                    . ($u1a >= 3 && $u1b >= 7 && $u2a >= 7 && $u2b >= 35 ? '<i class="fas fa-check text-success"></i>' : '<i class="fas text-danger fa-times"></i>'), ['class' => ' text-black nav-link ']),
+                    . ($u1a >= $quotas[0] && $u1b >= $quotas[1] && $u2a >= $quotas[2] && $u2b >= $quotas[3] ? '<i class="fas fa-check text-success"></i>' : '<i class="fas text-danger fa-times"></i>'), ['class' => ' text-black nav-link ']),
                 ['class' => 'text-left nav-item text-black']
             );
         } ?></ul>

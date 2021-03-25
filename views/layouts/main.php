@@ -44,8 +44,8 @@ AppAsset::register($this);
             ],
         ]);
         $quotas = [3, 7, 7, 35];
-        for ($i = 0; $i < 3; $i++) {
-            $quotas[$i] *=  Yii::$app->user->isGuest?1:Yii::$app->user->identity->getCoef();
+        for ($i = 0; $i <= 3; $i++) {
+            $quotas[$i] =  $quotas[$i] * (Yii::$app->user->isGuest?1:Yii::$app->user->identity->getCoef());
         }
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav ml-auto'],
