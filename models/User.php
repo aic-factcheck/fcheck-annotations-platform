@@ -162,4 +162,8 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return null;
     }
+
+    public function getCoef(){
+        return 1 + (in_array($this->id,[137,136,119]));
+    }
 }

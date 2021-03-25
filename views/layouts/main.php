@@ -43,6 +43,10 @@ AppAsset::register($this);
                 'class' => 'navbar-expand-lg navbar-light bg-light mb-3',
             ],
         ]);
+        $quotas = [3, 7, 7, 35];
+        for ($i = 0; $i < 3; $i++) {
+            $quotas[$i] *= Yii::$app->user->identity->getCoef();
+        }
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav ml-auto'],
             'items' => [
@@ -58,9 +62,10 @@ AppAsset::register($this);
                         Html::tag('span',
                             //'<strong class="fw-500">Ú<sub>0</sub></strong>: ' . Paragraph::find()->where(['candidate_of' => Yii::$app->user->id])->count() .
                             'Ú<sub>1</sub>a<strong class="fw-500">: ' . Claim::find()->where(['user' => Yii::$app->user->id])->andWhere(['IS', 'mutation_type', null])->count() .
-                            '</strong><sub>/3</sub>&nbsp;&nbsp;&nbsp;Ú<sub>1</sub>b: <strong class="fw-500">' . Claim::find()->where(['user' => Yii::$app->user->id])->andWhere(['IS NOT', 'mutation_type', null])->count() .
-                            '</strong><sub>/7</sub>&nbsp;&nbsp;&nbsp;Ú<sub>2</sub>a: <strong class="fw-500">' . Label::find()->where(['user' => Yii::$app->user->id, 'oracle' => true])->count() .
-                            '</strong><sub>/7</sub>&nbsp;&nbsp;&nbsp;Ú<sub>2</sub>b</strong>: <strong class="fw-500">' . Label::find()->where(['user' => Yii::$app->user->id, 'oracle' => false])->count().'</strong><sub>/35</sub>'
+                            '</strong><sub>/' . $quotas[0] . '</sub>&nbsp;&nbsp;&nbsp;Ú<sub>1</sub>b: <strong class="fw-500">' . Claim::find()->where(['user' => Yii::$app->user->id])->andWhere(['IS NOT', 'mutation_type', null])->count() .
+                            '</strong><sub>/' . $quotas[1] . '</sub>&nbsp;&nbsp;&nbsp;Ú<sub>2</sub>a: <strong class="fw-500">' . Label::find()->where(['user' => Yii::$app->user->id, 'oracle' => true])->count() .
+                            '</strong><sub>/' . $quotas[2] . '</sub>&nbsp;&nbsp;&nbsp;Ú<sub>2</sub>b</strong>: <strong class="fw-500">' . Label::find()->where(['user' => Yii::$app->user->id, 'oracle' => false])->count() .
+                            '</strong><sub>/' . $quotas[3] . '</sub>'
                             , ['class' => ' text-black nav-link ']),
                         ['class' => 'text-center nav-item text-black']
                     ),
