@@ -40,7 +40,7 @@ class LabelController extends Controller
                     ->andWhere(['is not', 'mutation_type', null])
                     ->andWhere(['not in', 'id', $traversed])
                     ->andWhere([$oracle ? '=' : '<>', 'user', Yii::$app->user->id])
-                    ->orderBy(new Expression('(rand() + (c.id > 2275) + ((SELECT COUNT(*) FROM label l where l.claim = c.id and l.user != c.user)<1)) desc'))
+                    ->orderBy(new Expression('(rand() + (c.id > 2275) + ((SELECT COUNT(*) FROM label l where l.claim = c.id)<1)) desc'))
                     ->one();
                 if ($claim == null) {
                     Yii::$app->session->addFlash("info", "V současnosti v sekci <strong>" . ($oracle ? 'vlastní' : 'cizí') . " tvrzení</strong> není co anotovat. 😟 " .
