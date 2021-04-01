@@ -29,12 +29,12 @@ class LabelController extends Controller
         ];
     }
 
-    public function actionIndex($sandbox = false, $oracle = false, $claim = null, $unanotated = false)
+    public function actionIndex($sandbox = false, $oracle = false, $claim = null, $unannotated = false)
     {
         if ($claim == null) {
             $traversed = [];
             do {
-                $expr = '(rand() + (c.id > 2275) + ' . ($unanotated ? 1000 : 1) . '*((SELECT COUNT(*) FROM label l where l.claim = c.id)<1)) desc';
+                $expr = '(rand() + (c.id > 2275) + ' . ($unannotated ? 1000 : 1) . '*((SELECT COUNT(*) FROM label l where l.claim = c.id)<1)) desc';
                 $claim = Claim::find()
                     ->alias('c')
                     ->where(['sandbox' => $sandbox])
