@@ -57,7 +57,8 @@ class LabelController extends Controller
                 'index',
                 'sandbox' => $sandbox,
                 'oracle' => $oracle,
-                'claim' => $claim
+                'claim' => $claim,
+                'unannotated' => $unannotated,
             ]);
         }
 
@@ -65,7 +66,7 @@ class LabelController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', "Anotace úspěšně uložena.");
-            return $this->redirect(['index', 'sandbox' => $sandbox, 'oracle' => $oracle,]);
+            return $this->redirect(['index', 'sandbox' => $sandbox, 'oracle' => $oracle, 'unannotated' => $unannotated,]);
 
         }
         return $this->render('index', ['model' => $model, 'oracle' => $oracle]);
