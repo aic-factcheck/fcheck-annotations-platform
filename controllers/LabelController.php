@@ -37,7 +37,7 @@ class LabelController extends Controller
                 $expr = '(rand() + (c.id > 2275) + ' . ($unannotated ? 1000 : 1) . '*((SELECT COUNT(*) FROM label l where l.claim = c.id)<1)) desc';
                 $claim = Claim::find()
                     ->alias('c')
-                    ->where(['sandbox' => $sandbox])
+                    ->andWhere(['sandbox' => $sandbox])
                     ->andWhere(['is not', 'mutation_type', null])
                     ->andWhere(['not in', 'id', $traversed])
                     ->andWhere([$oracle ? '=' : '<>', 'user', Yii::$app->user->id])
