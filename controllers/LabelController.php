@@ -100,6 +100,7 @@ class LabelController extends Controller
             }
         }
         $result = [];
+        $c = array_unique($c);
         foreach ($c as $conflict) {
             $result[] = $labels[$conflict];
         }
