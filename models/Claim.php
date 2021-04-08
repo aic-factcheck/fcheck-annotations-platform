@@ -222,4 +222,25 @@ class Claim extends ActiveRecord
         }
         return $shuffled;
     }
+
+    public function getEvidenceSets()
+    {
+        $result = [];
+        foreach ($this->labels as $label) {
+            foreach ($label->evidences as $evidence) {
+                if (!array_key_exists($label->id . '_' . $evidence->group, $result)) {
+                    $result[$label->id . '_' . $evidence->group] = [];
+                }
+                $result[$label->id . '_' . $evidence->group][] = $evidence->paragraph0;
+            }
+        }
+        return array_unique(array_values($result));
+    }
+
+    public function getAnnotation(){
+        if(count($this->labels)==0){
+            return null;
+        }
+        return $this->labels[0]->label;
+    }
 }
