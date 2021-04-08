@@ -24,6 +24,10 @@ class LabelController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    [
+                        'actions' => ['export'],
+                        'allow' => true,
+                    ],
                 ],
             ],
         ];
