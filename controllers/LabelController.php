@@ -158,7 +158,7 @@ class LabelController extends Controller
             $anot = $claim->getAnnotation();
             if ($anot != null) {
                 $response .= json_encode(["id" => $claim->id, "claim" => $claim->claim,
-                    "label"=>$claim->getAnnotation(), "evidence" => $claim->getEvidenceSets()])."\n";
+                    "label"=>$claim->getAnnotation(), "evidence" => $claim->getEvidenceSets()], JSON_UNESCAPED_UNICODE)."\n";
             }
         }
 

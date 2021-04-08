@@ -223,7 +223,7 @@ class Claim extends ActiveRecord
         return $shuffled;
     }
 
-    public function getEvidenceSets()
+    public function getEvidenceSets($param = 'ctkId')
     {
         $result = [];
         foreach ($this->labels as $label) {
@@ -231,10 +231,11 @@ class Claim extends ActiveRecord
                 if (!array_key_exists($label->id . '_' . $evidence->group, $result)) {
                     $result[$label->id . '_' . $evidence->group] = [];
                 }
-                $result[$label->id . '_' . $evidence->group][] = $evidence->paragraph0;
+                $result[$label->id . '_' . $evidence->group][] = $evidence->paragraph0->{$param};
             }
         }
-        return array_unique(array_values($result));
+
+        return array_unique(array_values($result),SORT_REGULAR);
     }
 
     public function getAnnotation(){
