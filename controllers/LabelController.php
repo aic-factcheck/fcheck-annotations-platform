@@ -154,11 +154,11 @@ class LabelController extends Controller
         return $response;
     }
 
-    public function actionExport($rand = false, $evidenceFormat = 'ctkId')
+    public function actionExport($shuffle = false, $evidenceFormat = 'ctkId')
     {
         $response = "";
         Yii::$app->response->format = Response::FORMAT_RAW;
-        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->orderBy(new Expression('rand()*'.intval($rand)))->all() as $claim) {
+        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->orderBy(new Expression('rand()*'.intval($shuffle)))->all() as $claim) {
             $anot = $claim->getAnnotation();
             if ($anot != null) {
                 $response .= json_encode(["id" => $claim->id, "claim" => $claim->claim,
