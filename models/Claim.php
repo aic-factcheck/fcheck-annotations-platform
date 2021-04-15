@@ -231,7 +231,7 @@ class Claim extends ActiveRecord
         foreach ($this->labels as $label) {
             $e = $label->evidences;
             if ($simulate_nei_evidence && $label->label == "NOT ENOUGH INFO" && count($e) == 0) {
-                $result[] = Helper::detokenize($label->claim0->paragraph0->{$param});
+                $result[] = [Helper::detokenize($label->claim0->paragraph0->{$param})];
             } else {
                 foreach ($e as $evidence) {
                     if (!array_key_exists($label->id . '_' . $evidence->group, $result)) {
