@@ -58,7 +58,7 @@ class Helper
     public static function detokenize($string)
     {
         if (self::$detokenizationMap == null) {
-            self::$detokenizationMap = [];
+            self::$detokenizationMap = ["\r"=>""];
             foreach (self::SPACE_BEFORE as $item) {
                 self::$detokenizationMap[" " . $item] = $item;
             }
@@ -69,7 +69,7 @@ class Helper
                 self::$detokenizationMap[$key] = $value;
             }
         }
-        return strtr($string, self::$detokenizationMap);
+        return trim(strtr($string, self::$detokenizationMap));
     }
 
     public static function highlightEntities($text)

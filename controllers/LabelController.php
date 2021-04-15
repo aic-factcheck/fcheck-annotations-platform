@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\Helper;
 use app\models\Claim;
 use app\models\Evidence;
 use app\models\Label;
@@ -161,8 +162,8 @@ class LabelController extends Controller
         foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->orderBy(new Expression('rand()*'.intval($shuffle)))->all() as $claim) {
             $anot = $claim->getAnnotation();
             if ($anot != null) {
-                $response .= json_encode(["id" => $claim->id, "claim" => $claim->claim,
-                        "label" => $claim->getAnnotation(), "evidence" => $claim->getEvidenceSets($evidenceFormat)], JSON_UNESCAPED_UNICODE) . "\n";
+                $response .= json_encode(["id" => $claim->id, "claim" => Helper::detokenize($claim->claim),
+                        "label" => $claim->getAnnotation(), "evidence" => array_values($claim->getEvidenceSets($evidenceFormat))], JSON_UNESCAPED_UNICODE) . "\n";
             }
         }
 

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\helpers\Helper;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -223,23 +224,30 @@ class Claim extends ActiveRecord
         return $shuffled;
     }
 
-    public function getEvidenceSets($param = 'ctkId')
+    public function getEvidenceSets($param = 'ctkId', $simulate_nei_evidence=true)
     {
         $result = [];
+
         foreach ($this->labels as $label) {
-            foreach ($label->evidences as $evidence) {
-                if (!array_key_exists($label->id . '_' . $evidence->group, $result)) {
-                    $result[$label->id . '_' . $evidence->group] = [];
+            $e = $label->evidences;
+            if ($simulate_nei_evidence && $label->label == "NOT ENOUGH INFO" && count($e) == 0) {
+                $result[] = Helper::detokenize($label->claim0->paragraph0->{$param});
+            } else {
+                foreach ($e as $evidence) {
+                    if (!array_key_exists($label->id . '_' . $evidence->group, $result)) {
+                        $result[$label->id . '_' . $evidence->group] = [];
+                    }
+                    $result[$label->id . '_' . $evidence->group][] =  Helper::detokenize($evidence->paragraph0->{$param});
                 }
-                $result[$label->id . '_' . $evidence->group][] = $evidence->paragraph0->{$param};
             }
         }
 
-        return array_unique(array_values($result),SORT_REGULAR);
+        return array_unique(array_values($result), SORT_REGULAR);
     }
 
-    public function getAnnotation(){
-        if(count($this->labels)==0){
+    public function getAnnotation()
+    {
+        if (count($this->labels) == 0) {
             return null;
         }
         return $this->labels[0]->label;
