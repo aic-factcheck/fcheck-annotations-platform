@@ -33,6 +33,6 @@ $this->title = 'Login';
         </div>
     </div>
 
-    <p>nebo přejděte na platformu Doccano (od před <strong>3. 5. 2021</strong>):<?=Html::a('<i class="fas fa-sign-out-alt"></i> Přejít na platformu Doccano',['doccano/index'],['class'=>'btn btn-success'])?>
+    <p>nebo přejděte na platformu Doccano (od <strong>3. 5. 2021</strong>):<?=Html::a('<i class="fas fa-sign-out-alt"></i> Přejít na platformu Doccano',['doccano/index'],['class'=>'btn btn-success'])?>
     </p>
 </div>
