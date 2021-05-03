@@ -157,17 +157,21 @@ class LabelController extends Controller
 
     public function actionExport($shuffle = false, $evidenceFormat = 'ctkId')
     {
+        $ctr = ["SUPPORTS" => 0, "REFUTES" => 0, "NOT ENOUGH INFO" => 0];
         $response = "";
         Yii::$app->response->format = Response::FORMAT_RAW;
-        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->orderBy(new Expression('rand()*'.intval($shuffle)))->all() as $claim) {
-            $anot = $claim->getAnnotation();
-            if ($anot != null) {
-                $response .= json_encode(["id" => $claim->id, "claim" => Helper::detokenize($claim->claim),
-                        "label" => $claim->getAnnotation(), "evidence" => array_values($claim->getEvidenceSets($evidenceFormat))], JSON_UNESCAPED_UNICODE) . "\n";
+        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->orderBy(new Expression('rand()*' . intval($shuffle)))->all() as $claim) {
+            $labels = $claim->getEvidenceSets($evidenceFormat);
+            foreach ($labels as $label => $evidenceSets) {
+                if (!empty($evidenceSets) and $label!=null) {
+                    $ctr[$label] += count($evidenceSets);
+                    $response .= json_encode(["id" => $claim->id, "label" => $label, "claim" => Helper::detokenize($claim->claim),
+                            "evidence" => array_values($evidenceSets)], JSON_UNESCAPED_UNICODE) . "\n";
+                }
             }
         }
 
-        return $response;
+        return json_encode($ctr)."\n".$response;
     }
 
 }

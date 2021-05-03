@@ -224,25 +224,37 @@ class Claim extends ActiveRecord
         return $shuffled;
     }
 
-    public function getEvidenceSets($param = 'ctkId', $simulate_nei_evidence=true)
+    public function getEvidenceSets($param = 'ctkId', $simulate_nei_evidence = true, $condition = "double")
     {
-        $result = [];
+        $result = ["SUPPORTS" => [], "REFUTES" => [], "NOT ENOUGH INFO" => []];
 
         foreach ($this->labels as $label) {
             $e = $label->evidences;
             if ($simulate_nei_evidence && $label->label == "NOT ENOUGH INFO" && count($e) == 0) {
-                $result[] = [Helper::detokenize($label->claim0->paragraph0->{$param})];
+                $result[$label->label][] = [Helper::detokenize($label->claim0->paragraph0->{$param})];
+                $k = $label->claim0->getKnowledge();
+                $result[$label->label][] = [array_shift($k)->{$param}];
             } else {
+                $dispatch_condition = $condition == "double" && !empty($label->condition) /*&& $param = 'text'*/;
                 foreach ($e as $evidence) {
                     if (!array_key_exists($label->id . '_' . $evidence->group, $result)) {
-                        $result[$label->id . '_' . $evidence->group] = [];
+                        $result[$label->label][$label->id . '_' . $evidence->group] = [];
+                        if($dispatch_condition){
+                            $result[$label->label][$label->id . '_' . $evidence->group] = [$label->condition];
+                            $result["NOT ENOUGH INFO"][$label->id . '_' . $evidence->group] = [];
+                        }
                     }
-                    $result[$label->id . '_' . $evidence->group][] =  Helper::detokenize($evidence->paragraph0->{$param});
+                    $result[$label->label][$label->id . '_' . $evidence->group][] = Helper::detokenize($evidence->paragraph0->{$param});
+                    if($dispatch_condition){
+                        $result["NOT ENOUGH INFO"][$label->id . '_' . $evidence->group][] = Helper::detokenize($evidence->paragraph0->{$param});
+                    }
                 }
             }
         }
-
-        return array_unique(array_values($result), SORT_REGULAR);
+        foreach ($result as $key => $value) {
+            $result[$key] = array_unique(array_values($value), SORT_REGULAR);
+        }
+        return $result;
     }
 
     public function getAnnotation()
