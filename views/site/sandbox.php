@@ -231,23 +231,23 @@ $a = [[], []];
                             'labels' => array_keys($activity),
                             'datasets' => [[
                                 'type' => 'bar',
-                                'label' => 'ú1a',
+                                'label' => 'claim extraction',
                                 'backgroundColor' => '#28a745',
                                 'data' => array_column($activity, 0)
                             ], [
-                                'type' => 'bar',
-                                'label' => 'ú1b',
+                                'type' => 'claims ',
+                                'label' => 'claim mutation',
                                 'backgroundColor' =>
                                     '#dc3545',
                                 'data' => array_column($activity, 1)
                             ], [
                                 'type' => 'bar',
-                                'label' => 'ú2a',
+                                'label' => 'self-verification',
                                 'backgroundColor' => '#17a2b8',
                                 'data' => array_column($activity, 2)
                             ], [
                                 'type' => 'bar',
-                                'label' => 'ú2b',
+                                'label' => 'other\'s claim verification',
                                 'backgroundColor' => '#007bff',
                                 'data' => array_column($activity, 3)
                             ],
