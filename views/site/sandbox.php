@@ -74,7 +74,8 @@ while ($day < $tomorrow) {
         $annot = [];
         foreach (Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS NOT', 'mutation_type', null])->all()
                  as $claim) {
-            $annot[] = Label::find()->where(['claim' => $claim->id])->count();
+            $waveEnd = ($day < strtotime('2020-12-13')?strtotime('2020-12-13') : ($day < strtotime('2021-03-20')? strtotime('2021-03-20') : strtotime('tomorrow')));
+            $annot[] = Label::find()->where(['claim' => $claim->id])->andWhere(['<=','created_at',$waveEnd])->count();
         }
         $avg_labels[] = count($annot) ? (array_sum($annot) / count($annot)) : 0;
     }
