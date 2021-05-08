@@ -122,7 +122,7 @@ class LabelController extends Controller
                     $labels[$label->claim] = null;
                 } else {
                     $labels[$label->claim] = $label;
-                    if ($label->condition != null) {
+                    if (!empty($label->condition)) {
                         $label->label = "NOT ENOUGH INFO";
                     }
                 }

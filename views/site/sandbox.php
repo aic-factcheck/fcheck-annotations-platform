@@ -64,18 +64,20 @@ $avg_labels = [];
 $tomorrow = strtotime((new DateTime('tomorrow'))->format('Y-m-d'));
 $day = $dayOne = strtotime('2020-11-17');
 while ($day < $tomorrow) {
-    $activity[date('d.m.Y', $day)] = [
-        Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS', 'mutation_type', null])->count(),
-        Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS NOT', 'mutation_type', null])->count(),
-        Label::find()->where(['oracle' => true])->andWhere(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->count(),
-        Label::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['oracle' => false])->count()
-    ];
-    $annot = [];
-    foreach (Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS NOT', 'mutation_type', null])->all()
-             as $claim) {
-        $annot[] = Label::find()->where(['claim' => $claim->id])->count();
+    if(!(($day > strtotime('2020-12-12') && $day < strtotime('2021-03-01'))|| $day>strtotime('2021-04-10'))) {
+        $activity[date('d.m.Y', $day)] = [
+            Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS', 'mutation_type', null])->count(),
+            Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS NOT', 'mutation_type', null])->count(),
+            Label::find()->where(['oracle' => true])->andWhere(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->count(),
+            Label::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['oracle' => false])->count()
+        ];
+        $annot = [];
+        foreach (Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS NOT', 'mutation_type', null])->all()
+                 as $claim) {
+            $annot[] = Label::find()->where(['claim' => $claim->id])->count();
+        }
+        $avg_labels[] = count($annot) ? (array_sum($annot) / count($annot)) : 0;
     }
-    $avg_labels[] = count($annot) ? (array_sum($annot) / count($annot)) : 0;
     $day += 86400;
 }
 
