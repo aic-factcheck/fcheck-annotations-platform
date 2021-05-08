@@ -235,7 +235,7 @@ $a = [[], []];
                                 'backgroundColor' => '#28a745',
                                 'data' => array_column($activity, 0)
                             ], [
-                                'type' => 'claims ',
+                                'type' => 'bar',
                                 'label' => 'claim mutation',
                                 'backgroundColor' =>
                                     '#dc3545',
