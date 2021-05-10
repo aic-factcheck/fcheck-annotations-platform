@@ -91,6 +91,30 @@ while ($day < $tomorrow) {
 }
 
 $a = [[], []];
+$evidence_count = [];
+$evidence_pars = [];
+
+$dataset_str = file_get_contents(__DIR__ .'/'.($summer ? "last_run.jsonl" : "all_time.jsonl"));
+$dataset = [];
+foreach (explode("\n", $dataset_str) as $datapoint) {
+    $datapoint = json_decode($datapoint, true);
+    if ($datapoint == null) continue;
+    $evs = count($datapoint['evidence']);
+    if (!array_key_exists($evs, $evidence_count)) {
+        $evidence_count[$evs] = 0;
+    }
+    $evidence_count[$evs]++;
+    foreach ($datapoint['evidence'] as $ev) {
+        $pars = count($ev);
+        if (!array_key_exists($pars, $evidence_pars)) {
+            $evidence_pars[$pars] = 0;
+        }
+        $evidence_pars[$pars]++;
+    }
+}
+ksort($evidence_count);
+ksort($evidence_pars)
+
 ?>
 <div class="container">
     <h1 class="mb-3"><?= $this->title ?></h1>
@@ -243,6 +267,74 @@ $a = [[], []];
                 </div>
             </div>
         </div>
+        <div class="col-lg-4 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Počet různých důkazů tvrzení</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">histogram</h6>
+                    <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+                    <p>
+                        <?= ChartJs::widget([
+                            'type' => 'bar',
+                            'clientOptions' => ['legend' => ['display' => false,]],
+                            'data' => [
+                                'labels' => array_keys($evidence_count),
+                                'datasets' => [
+                                    [
+                                        'data' => array_values($evidence_count), // Your dataset
+                                        'label' => '',
+                                        'backgroundColor' => '#dc3545',
+                                    ]
+                                ]
+                            ],
+                        ]) ?></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Počet odstavců v důkazu</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">histogram</h6>
+                    <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+                    <p>
+                        <?= ChartJs::widget([
+                            'type' => 'bar',
+                            'clientOptions' => ['legend' => ['display' => false,]],
+                            'data' => [
+                                'labels' => array_keys($evidence_pars),
+                                'datasets' => [
+                                    [
+                                        'data' => array_values($evidence_pars), // Your dataset
+                                        'label' => '',
+                                        'backgroundColor' => '#17a2b8',
+                                    ]
+                                ]
+                            ],
+                        ]) ?></p>
+                </div>
+            </div>
+        </div>
+        <!--div class="col-lg-4 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Shoda anotací</h5>
+                    p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <table class="table table-striped table-sm">
+                        <tr>
+                            <th>Metrika</th>
+                            <th>=</th>
+                            <th>Slovně</th>
+                        </tr>
+                        <tr>
+                            <td>Fleissovo κ</td>
+                            <td>0.66</td>
+                            <td>Použitelné</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div-->
 
         <div class="col-lg-12 my-4">
             <div class="card">
