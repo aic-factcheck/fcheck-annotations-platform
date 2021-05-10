@@ -7,7 +7,7 @@
 use app\models\Label;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
-
+//„A“
 $this->title = 'Sbírka nahlášených tvrzení';
 ?>
 <div class="container">
@@ -15,8 +15,8 @@ $this->title = 'Sbírka nahlášených tvrzení';
     <?php
     foreach ($claims as $claim) {
         try {
-            echo "<p><strong>Obměna tvrzení:</strong> \"".$claim->mutatedFrom->claim."\" <strong>extrahovaného z odstavce</strong> \"<em>".$claim->paragraph0->text."</em>\":</p>";
-            echo "<h4>" . $claim->claim . "</h4>";
+            echo "<p><strong>Obměna tvrzení:</strong> „<em>".$claim->mutatedFrom->claim."</em>“ <strong>extrahovaného z odstavce</strong> „<em>".$claim->paragraph0->text."</em>“:</p>";
+            echo "<h4>„" . $claim->claim . "“</h4>";
             echo "<p><strong>$claim->comment</strong></p>";
             echo "<hr/>";
         } catch (\yii\base\ErrorException $e) {
