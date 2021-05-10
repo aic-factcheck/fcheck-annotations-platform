@@ -14,7 +14,7 @@ use yii\web\JsExpression;
 
 $this->title = 'Statistiky';
 $summerStamp = strtotime('2021-03-01');
-$beginStamp = $summer ? strtotime('2021-03-01') : strtotime('2019-03-01');
+$beginStamp = $summer ? strtotime('2021-03-01') : strtotime('2020-11-01');
 $display = ['>=', 'created_at', $beginStamp];
 $winterOnly = "WHERE `created_at`<$summerStamp";
 $summerOnly = "WHERE `created_at`>$summerStamp";
