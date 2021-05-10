@@ -15,10 +15,15 @@ $this->title = 'Sbírka nahlášených tvrzení';
     <?php
     foreach ($claims as $claim) {
         try {
+            ?>
+                <div class="card bg-light mb-3 zdrojovy-clanek">
+            <div class="card-body">
+                <?php
             echo "<p><strong>Obměna tvrzení:</strong> „<em>".$claim->mutatedFrom->claim."</em>“ <strong>extrahovaného z odstavce</strong> „<em>".$claim->paragraph0->text."</em>“:</p>";
-            echo "<h3>„" . $claim->claim . "“</h3>";
-            echo "<p><strong>$claim->comment</strong></p>";
-            echo "<hr/>";
+            echo "<h4 class='card-title'>„" . $claim->claim . "“</h4>";
+            echo "<p><strong>$claim->comment</strong></p>";?>
+            </div></div>
+    <?php
         } catch (\yii\base\ErrorException $e) {
             continue;
         }
