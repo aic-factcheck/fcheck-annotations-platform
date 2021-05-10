@@ -175,4 +175,9 @@ class LabelController extends Controller
         return json_encode($ctr) . "\n" . $response;
     }
 
+    public function actionFlags(){
+        $claims = Claim::find(1)->andWhere(['like', 'comment', '%flag%', false])->all();
+        return $this->render("flags", ["claims" => $claims]);
+    }
+
 }
