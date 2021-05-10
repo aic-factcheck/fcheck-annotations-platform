@@ -135,6 +135,12 @@ $a = [[], []];
                     <th><?= array_sum($a[2]) ?></th>
                 </tr>
                 <tr>
+                    <th>Počet anotátorů</th>
+                    <td><?= $c_1 = User::find()->where(['<=', 'created_at', $summerStamp])->count() ?></td>
+                    <td><?= $c_2 = User::find()->where(['>=', 'created_at', $summerStamp])->count() ?></td>
+                    <td><?= $c_1 + $c_2 ?></td>
+                </tr>
+                <tr>
                     <th>Anotovaná tvrzení</th>
                     <td><?= $labels - $labels1 ?></td>
                     <td><?= $labels1 ?></td>
