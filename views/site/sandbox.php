@@ -315,26 +315,41 @@ ksort($evidence_pars)
                 </div>
             </div>
         </div>
-        <!--div class="col-lg-4 mt-4">
+        <div class="col-lg-4 mt-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Shoda anotací</h5>
-                    p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h6 class="card-subtitle mb-2 text-muted">pravdivosti tvrzení</h6>
                     <table class="table table-striped table-sm">
                         <tr>
                             <th>Metrika</th>
                             <th>=</th>
-                            <th>Slovně</th>
+                            <th>Shoda</th>
                         </tr>
                         <tr>
-                            <td>Fleissovo κ</td>
-                            <td>0.66</td>
-                            <td>Použitelné</td>
+                            <td>Shoda po párech</td>
+                            <td>74%</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Cohenovo κ po párech</td>
+                            <td>0.58</td>
+                            <td>Přiměřená</td>
+                        </tr>
+                        <tr>
+                            <td>Fleissovo κ trojic</td>
+                            <td>0.57</td>
+                            <td>Přiměřená</td>
+                        </tr>
+                        <tr>
+                            <td>Fleissovo κ čtveřic</td>
+                            <td>0.63</td>
+                            <td>Značná</td>
                         </tr>
                     </table>
                 </div>
             </div>
-        </div-->
+        </div>
 
         <div class="col-lg-12 my-4">
             <div class="card">
