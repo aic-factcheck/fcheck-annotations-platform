@@ -155,15 +155,16 @@ class LabelController extends Controller
         return $response;
     }
 
-    public function actionExport($shuffle = false, $evidenceFormat = 'ctkId')
+    public function actionExport($shuffle = false, $evidenceFormat = 'ctkId', $summer = false)
     {
+        $beginStamp = $summer ? strtotime('2021-03-01') : strtotime('2020-11-01');
         $ctr = ["SUPPORTS" => 0, "REFUTES" => 0, "NOT ENOUGH INFO" => 0];
         $response = "";
         Yii::$app->response->format = Response::FORMAT_RAW;
-        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->orderBy(new Expression('rand()*' . intval($shuffle)))->all() as $claim) {
+        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->andWhere(['>=', 'created_at', $beginStamp])->orderBy(new Expression('rand()*' . intval($shuffle)))->all() as $claim) {
             $labels = $claim->getEvidenceSets($evidenceFormat);
             foreach ($labels as $label => $evidenceSets) {
-                if (!empty($evidenceSets) and $label!=null) {
+                if (!empty($evidenceSets) and $label != null) {
                     $ctr[$label] += count($evidenceSets);
                     $response .= json_encode(["id" => $claim->id, "label" => $label, "claim" => Helper::detokenize($claim->claim),
                             "evidence" => array_values($evidenceSets)], JSON_UNESCAPED_UNICODE) . "\n";
@@ -171,7 +172,7 @@ class LabelController extends Controller
             }
         }
 
-        return json_encode($ctr)."\n".$response;
+        return json_encode($ctr) . "\n" . $response;
     }
 
 }
