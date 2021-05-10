@@ -320,6 +320,7 @@ ksort($evidence_pars)
                 <div class="card-body">
                     <h5 class="card-title">Shoda anotací</h5>
                     <h6 class="card-subtitle mb-2 text-muted">pravdivosti tvrzení</h6>
+                    <p>Berte s rezervou, teprve vyhodnocujeme.</p>
                     <table class="table table-striped table-sm">
                         <tr>
                             <th>Metrika</th>
