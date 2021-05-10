@@ -93,9 +93,9 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionStatistics()
+    public function actionStatistics($summer=false)
     {
-        return $this->render('sandbox');
+        return $this->render('sandbox',['summer'=>$summer]);
     }
 
     /**

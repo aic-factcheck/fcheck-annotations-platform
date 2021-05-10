@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+/* @var $summer bool */
+
 use app\models\Claim;
 use app\models\Label;
 use app\models\User;
@@ -11,18 +13,22 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 
 $this->title = 'Statistiky';
-$fsvOnly = "WHERE `user` >= '9' AND `user` <= '73'";
+$summerStamp = strtotime('2021-03-01');
+$beginStamp = $summer ? strtotime('2021-03-01') : strtotime('2019-03-01');
+$display = ['>=', 'created_at', $beginStamp];
+$winterOnly = "WHERE `created_at`<$summerStamp";
+$summerOnly = "WHERE `created_at`>$summerStamp";
 $contradictions = <<<SQL
 SELECT SUM(c) FROM (SELECT COUNT(DISTINCT `label`)>1 as c FROM `label` group by claim) as A
 SQL;
 $labels = <<<SQL
-SELECT SUM(c) FROM (SELECT COUNT(DISTINCT `label`)>=0 as c FROM `label` $fsvOnly group by claim) as A
+SELECT SUM(c) FROM (SELECT COUNT(DISTINCT `label`)>=0 as c FROM `label` group by claim) as A
 SQL;
 $contradictions1 = <<<SQL
-SELECT SUM(c) FROM (SELECT COUNT(DISTINCT `label`)>1 as c FROM `label` group by claim) as A
+SELECT SUM(c) FROM (SELECT COUNT(DISTINCT `label`)>1 as c FROM `label` $summerOnly group by claim) as A
 SQL;
 $labels1 = <<<SQL
-SELECT SUM(c) FROM (SELECT COUNT(DISTINCT `label`)>=0 as c FROM `label` $fsvOnly group by claim) as A
+SELECT SUM(c) FROM (SELECT COUNT(DISTINCT `label`)>=0 as c FROM `label` $summerOnly group by claim) as A
 SQL;
 $contradictions = Yii::$app->db->createCommand($contradictions)->queryScalar();
 $contradictions1 = Yii::$app->db->createCommand($contradictions1)->queryScalar();
@@ -30,7 +36,8 @@ $labels = Yii::$app->db->createCommand($labels)->queryScalar();
 $labels1 = Yii::$app->db->createCommand($labels1)->queryScalar();
 $hiscore = [];
 $fsv = ['between', 'user', 9, 73];
-foreach (User::find()->all() as $user) {
+foreach (User::find()->where($display)->all() as $user) {
+    if ($user->id == 110) continue;
     $u = [$user,
         Claim::find()->where(['user' => $user->id,])->andWhere(['IS', 'mutation_type', null])->count(),
         Claim::find()->where(['user' => $user->id,])->andWhere(['IS NOT', 'mutation_type', null])->count(),
@@ -47,6 +54,7 @@ $h = array_slice($hiscore, 0, 8, true);
 
 $annotations = Label::find()
     ->select(['COUNT(*) AS cnt'])
+    ->andWhere($display)
     ->groupBy(['claim'])
     ->all();
 $hist = [];
@@ -62,9 +70,9 @@ foreach ($annotations as $annotation) {
 $activity = [];
 $avg_labels = [];
 $tomorrow = strtotime((new DateTime('tomorrow'))->format('Y-m-d'));
-$day = $dayOne = strtotime('2020-11-17');
+$day = $dayOne = $beginStamp;
 while ($day < $tomorrow) {
-    if(!(($day > strtotime('2020-12-12') && $day < strtotime('2021-03-01'))|| $day>strtotime('2021-04-10'))) {
+    if (!(($day > strtotime('2020-12-12') && $day < strtotime('2021-03-01')) || $day > strtotime('2021-04-10'))) {
         $activity[date('d.m.Y', $day)] = [
             Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS', 'mutation_type', null])->count(),
             Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS NOT', 'mutation_type', null])->count(),
@@ -74,8 +82,8 @@ while ($day < $tomorrow) {
         $annot = [];
         foreach (Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS NOT', 'mutation_type', null])->all()
                  as $claim) {
-            $waveEnd = ($day < strtotime('2020-12-13')?strtotime('2020-12-13') : ($day < strtotime('2021-03-20')? strtotime('2021-03-20') : strtotime('tomorrow')));
-            $annot[] = Label::find()->where(['claim' => $claim->id])->andWhere(['<=','created_at',$waveEnd])->count();
+            $waveEnd = ($day < strtotime('2020-12-13') ? strtotime('2020-12-13') : ($day < strtotime('2021-03-20') ? strtotime('2021-03-20') : strtotime('tomorrow')));
+            $annot[] = Label::find()->where(['claim' => $claim->id])->andWhere(['<=', 'created_at', $waveEnd])->count();
         }
         $avg_labels[] = count($annot) ? (array_sum($annot) / count($annot)) : 0;
     }
@@ -86,55 +94,68 @@ $a = [[], []];
 ?>
 <div class="container">
     <h1 class="mb-3"><?= $this->title ?></h1>
+
     <div class="row mb-5">
         <div class="col-lg-5">
-                    <table class="table table-striped">
-                        <tr>
-                            <th></th>
-                            <th>∑<sub>FSV</sub></th>
-                            <th>∑</th>
-                        </tr>
-                        <tr>
-                            <th>Ú1a - Extrahovaná tvrzení</th>
-                            <td><?= $a[0][] = Claim::find()->where($fsv)->andWhere(['IS', 'mutation_type', null])->count() ?></td>
-                            <td><?= $a[1][] = Claim::find()->andWhere(['IS', 'mutation_type', null])->count() ?></td>
-                        </tr>
-                        <tr>
-                            <th>Ú1b - Odvozená tvrzení</th>
-                            <td><?= $a[0][] = Claim::find()->where($fsv)->andWhere(['IS NOT', 'mutation_type', null])->count() ?></td>
-                            <td><?= $a[1][] = Claim::find()->andWhere(['IS NOT', 'mutation_type', null])->count() ?></td>
-                        </tr>
-                        <tr>
-                            <th>Ú2a - Referenční anotace</th>
-                            <td><?= $a[0][] = Label::find()->where($fsv)->andWhere(['=', 'oracle', true])->count() ?></td>
-                            <td><?= $a[1][] = Label::find()->andWhere(['=', 'oracle', true])->count() ?></td>
-                        </tr>
-                        <tr>
-                            <th>Ú2b - Anotace výroků</th>
-                            <td><?= $a[0][] = Label::find()->where($fsv)->andWhere(['=', 'oracle', false])->count() ?></td>
-                            <td><?= $a[1][] = Label::find()->andWhere(['=', 'oracle', false])->count() ?></td>
-                        </tr>
-                        <tr>
-                            <th>∑<sub>Všechny úkoly</sub></th>
-                            <th><?= array_sum($a[0]) ?></th>
-                            <th><?= array_sum($a[1]) ?></th>
-                        </tr>
-                        <tr>
-                            <th>Anotovaná tvrzení</th>
-                            <td><?= $labels1 ?></td>
-                            <td><?= $labels ?></td>
-                        </tr>
-                        <tr>
-                            <th>Rozpory anotací</th>
-                            <td><?= $contradictions1 ?></td>
-                            <td><?= $contradictions ?></td>
-                        </tr>
-                    </table>
+            <table class="table table-striped">
+                <tr>
+                    <th></th>
+                    <th>∑<sub>zima</sub></th>
+                    <th>∑<sub>léto</sub></th>
+                    <th>∑</th>
+                </tr>
+                <tr>
+                    <th>Ú1a - Extrahovaná tvrzení</th>
+                    <td><?= $a[0][] = Claim::find()->where(['<=', 'created_at', $summerStamp])->andWhere(['IS', 'mutation_type', null])->count() ?></td>
+                    <td><?= $a[1][] = Claim::find()->where(['>=', 'created_at', $summerStamp])->andWhere(['IS', 'mutation_type', null])->count() ?></td>
+                    <td><?= $a[2][] = Claim::find()->andWhere(['IS', 'mutation_type', null])->count() ?></td>
+                </tr>
+                <tr>
+                    <th>Ú1b - Odvozená tvrzení</th>
+                    <td><?= $a[0][] = Claim::find()->where(['<=', 'created_at', $summerStamp])->andWhere(['IS NOT', 'mutation_type', null])->count() ?></td>
+                    <td><?= $a[1][] = Claim::find()->where(['>=', 'created_at', $summerStamp])->andWhere(['IS NOT', 'mutation_type', null])->count() ?></td>
+                    <td><?= $a[2][] = Claim::find()->andWhere(['IS NOT', 'mutation_type', null])->count() ?></td>
+                </tr>
+                <tr>
+                    <th>Ú2a - Referenční anotace</th>
+                    <td><?= $a[0][] = Label::find()->andWhere(['<=', 'created_at', $summerStamp])->andWhere(['=', 'oracle', true])->count() ?></td>
+                    <td><?= $a[1][] = Label::find()->andWhere(['>=', 'created_at', $summerStamp])->andWhere(['=', 'oracle', true])->count() ?></td>
+                    <td><?= $a[2][] = Label::find()->andWhere(['=', 'oracle', true])->count() ?></td>
+                </tr>
+                <tr>
+                    <th>Ú2b - Anotace výroků</th>
+                    <td><?= $a[0][] = Label::find()->andWhere(['<=', 'created_at', $summerStamp])->andWhere(['=', 'oracle', false])->count() ?></td>
+                    <td><?= $a[1][] = Label::find()->andWhere(['>=', 'created_at', $summerStamp])->andWhere(['=', 'oracle', false])->count() ?></td>
+                    <td><?= $a[2][] = Label::find()->andWhere(['=', 'oracle', false])->count() ?></td>
+                </tr>
+                <tr>
+                    <th>∑<sub>Všechny úkoly</sub></th>
+                    <th><?= array_sum($a[0]) ?></th>
+                    <th><?= array_sum($a[1]) ?></th>
+                    <th><?= array_sum($a[2]) ?></th>
+                </tr>
+                <tr>
+                    <th>Anotovaná tvrzení</th>
+                    <td><?= $labels - $labels1 ?></td>
+                    <td><?= $labels1 ?></td>
+                    <td><?= $labels ?></td>
+                </tr>
+                <tr>
+                    <th>Rozpory anotací</th>
+                    <td><?= $contradictions - $contradictions1 ?></td>
+                    <td><?= $contradictions1 ?></td>
+                    <td><?= $contradictions ?></td>
+                </tr>
+            </table>
         </div>
         <div class="col-lg-7">
             <img src="<?= Url::to(['/images/nakres.png']) ?>" style="width:100%">
         </div>
     </div>
+    <p>
+        <a href="?summer=<?= !$summer ? 1 : 0 ?>" class="btn btn-default">
+            <i class="fas fa-toggle-<?= $summer ? 'on' : 'off' ?>"></i> Zobrazit pouze letní semestr
+        </a></p>
     <div class="row">
         <div class="col-lg-4">
             <div class="card">
@@ -151,9 +172,9 @@ $a = [[], []];
                                 'datasets' => [
                                     [
                                         'data' => [
-                                            Label::find()->select('claim')->distinct()->where(['label' => "SUPPORTS"])->count(),
-                                            Label::find()->select('claim')->distinct()->where(['label' => "REFUTES"])->count(),
-                                            Label::find()->select('claim')->distinct()->where(['label' => "NOT ENOUGH INFO"])->count(),
+                                            Label::find()->select('claim')->distinct()->where(['label' => "SUPPORTS"])->andWhere($display)->count(),
+                                            Label::find()->select('claim')->distinct()->where(['label' => "REFUTES"])->andWhere($display)->count(),
+                                            Label::find()->select('claim')->distinct()->where(['label' => "NOT ENOUGH INFO"])->andWhere($display)->count(),
                                         ], // Your dataset
                                         'label' => '',
                                         'backgroundColor' => [
@@ -294,7 +315,8 @@ $a = [[], []];
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Průměrný počet anotací na jedno tvrzení</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">dle data vytvoření tvrzení</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">dle data vytvoření tvrzení, pouze anotace z aktivní
+                        vlny.</h6>
                     <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
                     `<?= ChartJs::widget([
                         'type' => 'bar',
