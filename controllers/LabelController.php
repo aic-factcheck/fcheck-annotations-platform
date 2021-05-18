@@ -167,7 +167,7 @@ class LabelController extends Controller
                 if (!empty($evidenceSets) and $label != null) {
                     $ctr[$label] += count($evidenceSets);
                     $response .= json_encode(["id" => $claim->id, "label" => $label, "claim" => Helper::detokenize($claim->claim),
-                            "evidence" => array_values($evidenceSets)], JSON_UNESCAPED_UNICODE) . "\n";
+                            "evidence" => array_values($evidenceSets), "source"=> $claim->paragraph0->ctkId], JSON_UNESCAPED_UNICODE) . "\n";
                 }
             }
         }
