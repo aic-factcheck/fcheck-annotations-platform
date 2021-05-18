@@ -155,8 +155,11 @@ class LabelController extends Controller
         return $response;
     }
 
-    public function actionExport($shuffle = false, $evidenceFormat = 'ctkId', $summer = false)
+    public function actionExport($shuffle = false, $evidenceFormat = 'ctkId', $summer = false, $fever = false)
     {
+        if ($fever) {
+            return $this->actionJsonl();
+        }
         $beginStamp = $summer ? strtotime('2021-03-01') : strtotime('2020-11-01');
         $ctr = ["SUPPORTS" => 0, "REFUTES" => 0, "NOT ENOUGH INFO" => 0];
         $response = "";
@@ -167,7 +170,7 @@ class LabelController extends Controller
                 if (!empty($evidenceSets) and $label != null) {
                     $ctr[$label] += count($evidenceSets);
                     $response .= json_encode(["id" => $claim->id, "label" => $label, "claim" => Helper::detokenize($claim->claim),
-                            "evidence" => array_values($evidenceSets), "source"=> $claim->paragraph0->ctkId], JSON_UNESCAPED_UNICODE) . "\n";
+                            "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId], JSON_UNESCAPED_UNICODE) . "\n";
                 }
             }
         }
@@ -175,7 +178,8 @@ class LabelController extends Controller
         return json_encode($ctr) . "\n" . $response;
     }
 
-    public function actionFlags(){
+    public function actionFlags()
+    {
         $claims = Claim::find(1)->andWhere(['like', 'comment', '%flag%', false])->all();
         return $this->render("flags", ["claims" => $claims]);
     }
