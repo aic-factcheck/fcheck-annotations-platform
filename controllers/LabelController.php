@@ -164,7 +164,7 @@ class LabelController extends Controller
         $ctr = ["SUPPORTS" => 0, "REFUTES" => 0, "NOT ENOUGH INFO" => 0];
         $response = "";
         Yii::$app->response->format = Response::FORMAT_RAW;
-        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->andWhere(['>=', 'created_at', $beginStamp])->orderBy(new Expression('rand()*' . intval($shuffle)))->all() as $claim) {
+        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->andWhere(['>=', 'created_at', $beginStamp])->orderBy($shuffle? new Expression('rand()'): 'paragraph')->all() as $claim) {
             $labels = $claim->getEvidenceSets($evidenceFormat);
             foreach ($labels as $label => $evidenceSets) {
                 if (!empty($evidenceSets) and $label != null) {
