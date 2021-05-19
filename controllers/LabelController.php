@@ -116,10 +116,11 @@ class LabelController extends Controller
     public function actionRys()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return <<<JSON
+        return json_decode(<<<JSON
 {"data":{"predictions":[{"predicted_evidence":[["Rys ostrovid",0],["Rys (rod)",6],["Wikipedie:WikiProjekt Chráněná území/Pexeso/Obrázky",0],
 ["Malé kočky",5],["Vogelsberg",10]],"predicted_label":"SUPPORTS","request_instance":{"claim":"Rys ostrovid je šelma.","id":0}}]},"result":"success"} 
-JSON;
+JSON
+        );
     }
 
     public function actionJsonl()
