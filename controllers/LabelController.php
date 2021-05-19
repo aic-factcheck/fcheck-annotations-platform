@@ -26,13 +26,14 @@ class LabelController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['export'],
+                        'actions' => ['export', 'jsonl', 'rys'],
                         'allow' => true,
                     ],
                 ],
             ],
         ];
     }
+
 
     public function actionIndex($sandbox = false, $oracle = false, $claim = null, $unannotated = false)
     {
@@ -112,6 +113,15 @@ class LabelController extends Controller
         return $this->render("clean", ["conflicts" => $result]);
     }
 
+    public function actionRys()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return <<<JSON
+{"data":{"predictions":[{"predicted_evidence":[["Rys ostrovid",0],["Rys (rod)",6],["Wikipedie:WikiProjekt Chráněná území/Pexeso/Obrázky",0],
+["Malé kočky",5],["Vogelsberg",10]],"predicted_label":"SUPPORTS","request_instance":{"claim":"Rys ostrovid je šelma.","id":0}}]},"result":"success"} 
+JSON;
+    }
+
     public function actionJsonl()
     {
         Yii::$app->response->format = Response::FORMAT_RAW;
@@ -164,7 +174,7 @@ class LabelController extends Controller
         $ctr = ["SUPPORTS" => 0, "REFUTES" => 0, "NOT ENOUGH INFO" => 0];
         $response = "";
         Yii::$app->response->format = Response::FORMAT_RAW;
-        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->andWhere(['>=', 'created_at', $beginStamp])->orderBy($shuffle? new Expression('rand()'): 'paragraph')->all() as $claim) {
+        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->andWhere(['>=', 'created_at', $beginStamp])->orderBy($shuffle ? new Expression('rand()') : 'paragraph')->all() as $claim) {
             $labels = $claim->getEvidenceSets($evidenceFormat);
             foreach ($labels as $label => $evidenceSets) {
                 if (!empty($evidenceSets) and $label != null) {
