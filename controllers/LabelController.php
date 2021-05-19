@@ -22,12 +22,12 @@ class LabelController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
                         'actions' => ['export', 'jsonl', 'rys'],
                         'allow' => true,
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
                 ],
             ],
