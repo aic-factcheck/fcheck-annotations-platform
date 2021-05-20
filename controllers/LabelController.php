@@ -113,21 +113,11 @@ class LabelController extends Controller
         return $this->render("clean", ["conflicts" => $result]);
     }
 
-    public function actionRys()
-    {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        return json_decode(<<<JSON
-{"data":{"predictions":[{"predicted_evidence":[["Rys ostrovid",0],["Rys (rod)",6],["Wikipedie:WikiProjekt Chráněná území/Pexeso/Obrázky",0],
-["Malé kočky",5],["Vogelsberg",10]],"predicted_label":"SUPPORTS","request_instance":{"claim":"Rys ostrovid je šelma.","id":0}}]},"result":"success"} 
-JSON
-        );
-    }
-
     public function actionJsonl()
     {
         Yii::$app->response->format = Response::FORMAT_RAW;
         $labels = [];
-        foreach (Label::find()->all() as $label) {
+        foreach (Label::find()->orderBy('id')->all() as $label) {
             if ($label->label != null) {
                 if (array_key_exists($label->claim, $labels) && ($labels[$label->claim] == null || $labels[$label->claim]->label != $label->label)) {
                     $labels[$label->claim] = null;
