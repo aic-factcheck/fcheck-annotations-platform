@@ -166,7 +166,7 @@ JSON
         return $response;
     }
 
-    public function actionExport($shuffle = false, $evidenceFormat = 'ctkId', $summer = false, $fever = false)
+    public function actionExport($shuffle = false, $evidenceFormat = 'ctkId', $summer = false, $fever = false, $simulateNei = false, $printCtr = false, $condition = 'none')
     {
         if ($fever) {
             return $this->actionJsonl();
@@ -175,8 +175,8 @@ JSON
         $ctr = ["SUPPORTS" => 0, "REFUTES" => 0, "NOT ENOUGH INFO" => 0];
         $response = "";
         Yii::$app->response->format = Response::FORMAT_RAW;
-        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->andWhere(['>=', 'created_at', $beginStamp])->orderBy($shuffle ? new Expression('rand()') : 'paragraph')->all() as $claim) {
-            $labels = $claim->getEvidenceSets($evidenceFormat);
+        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->andWhere(['>=', 'created_at', $beginStamp])->orderBy($shuffle ? new Expression('rand()') : 'paragraph,id')->all() as $claim) {
+            $labels = $claim->getEvidenceSets($evidenceFormat, $simulateNei, $condition);
             foreach ($labels as $label => $evidenceSets) {
                 if (!empty($evidenceSets) and $label != null) {
                     $ctr[$label] += count($evidenceSets);
@@ -186,7 +186,7 @@ JSON
             }
         }
 
-        return json_encode($ctr) . "\n" . $response;
+        return ($printCtr ? (json_encode($ctr) . "\n") : '') . $response;
     }
 
     public function actionFlags()

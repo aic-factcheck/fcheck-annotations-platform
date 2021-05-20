@@ -97,6 +97,15 @@ class SiteController extends Controller
     {
         return $this->render('sandbox',['summer'=>$summer]);
     }
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionThesis($summer=false)
+    {
+        return $this->render('thesis',['summer'=>$summer]);
+    }
 
     /**
      * Login action.
