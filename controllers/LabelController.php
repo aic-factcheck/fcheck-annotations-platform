@@ -150,7 +150,7 @@ class LabelController extends Controller
                         "label" => $label->label,
                         "claim" => $label->claim0->claim,
                         "evidence" => $evidences
-                    ]) . "\n";
+                    ], JSON_UNESCAPED_UNICODE) . "\n";
             }
         }
         return $response;
