@@ -161,14 +161,14 @@ class LabelController extends Controller
         if ($fever) {
             return $this->actionJsonl();
         }
-        $beginStamp = $summer ? strtotime('2021-03-01') : strtotime('2020-11-01');
+        $beginStamp = $summer ? strtotime('2021-03-01') : strtotime('2020-09-01');
         $ctr = ["SUPPORTS" => 0, "REFUTES" => 0, "NOT ENOUGH INFO" => 0];
         $response = "";
         Yii::$app->response->format = Response::FORMAT_RAW;
         foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->andWhere(['>=', 'created_at', $beginStamp])->orderBy($shuffle ? new Expression('rand()') : 'paragraph,id')->all() as $claim) {
             $labels = $claim->getEvidenceSets($evidenceFormat, $simulateNei, $condition);
             foreach ($labels as $label => $evidenceSets) {
-                if (!empty($evidenceSets) and $label != null) {
+                if ((!empty($evidenceSets) and $label != null) || $label == "NOT ENOUGH INFO") {
                     $ctr[$label] += count($evidenceSets);
                     $response .= json_encode(["id" => $claim->id, "label" => $label, "claim" => Helper::detokenize($claim->claim),
                             "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId], JSON_UNESCAPED_UNICODE) . "\n";
