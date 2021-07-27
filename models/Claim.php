@@ -7,6 +7,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -256,6 +257,51 @@ class Claim extends ActiveRecord
             $result[$key] = array_unique(array_values($value), SORT_REGULAR);
         }
         return $result;
+    }
+
+    public function getEvidenceSets2($label = "SUPPORTS", $attr = "ctkId", $simulateFever = false)
+    {
+        $labels = Label::find()->andWhere(['label' => $label, 'claim' => $this->id])->all();
+        $result = [];
+        foreach ($labels as $label) {
+            $evidence = Evidence::find()->where(['label' => $label->id])->orderBy('paragraph,label')->all();
+            foreach ($evidence as $ev) {
+                if (!array_key_exists($label->id . "_" . $ev->group, $result)) $result[$label->id . "_" . $ev->group] = [];
+                $result[$label->id . "_" . $ev->group][] = $ev->paragraph0->{$attr};
+            }
+        }
+        //die(json_encode( array_values($result)));
+        $result = array_unique(array_values($result), SORT_REGULAR);
+        if (!$simulateFever) return $result;
+        return $this->feverize($result);
+    }
+
+    private function feverize($evidenceSets)
+    {
+        $result2 = [];
+        $i = 1;
+        foreach ($evidenceSets as $evset) {
+            $evset2 = [];
+            foreach ($evset as $ev) {
+                $evset2[] = [10e2 * $this->id + $i, 10e2 * $this->id + ($i++), $ev, 0];
+            }
+            $result2[] = $evset2;
+        }
+        return $result2;
+    }
+
+    public function getMajorityLabel($skipConditional = true)
+    {
+        $max = 0;
+        $label = null;
+        foreach (Label::LABELS as $label_name) {
+            $condition = ['claim' => $this->id, 'label' => $label_name];
+            if ($skipConditional) $condition['condition'] = '';
+            if (Label::find()->andWhere($condition)->count() > $max) {
+                $label = $label_name;
+            }
+        }
+        return $label;
     }
 
     public function getAnnotation()

@@ -156,7 +156,7 @@ class LabelController extends Controller
         return $response;
     }
 
-    public function actionExport($shuffle = false, $evidenceFormat = 'ctkId', $summer = false, $fever = false, $simulateNei = false, $printCtr = false, $condition = 'none')
+    public function actionExport2($shuffle = false, $evidenceFormat = 'ctkId', $summer = false, $fever = false, $simulateNei = false, $printCtr = false, $condition = 'none')
     {
         if ($fever) {
             return $this->actionJsonl();
@@ -171,12 +171,32 @@ class LabelController extends Controller
                 if ((!empty($evidenceSets) and $label != null) || $label == "NOT ENOUGH INFO") {
                     $ctr[$label] += count($evidenceSets);
                     $response .= json_encode(["id" => $claim->id, "label" => $label, "claim" => Helper::detokenize($claim->claim),
-                            "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId], JSON_UNESCAPED_UNICODE) . "\n";
+                            "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId,
+                            "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"], JSON_UNESCAPED_UNICODE) . "\n";
                 }
             }
         }
 
         return ($printCtr ? (json_encode($ctr) . "\n") : '') . $response;
+    }
+
+    public function actionExport($evidenceFormat = 'ctkId', $fever = false)
+    {
+        $response = "";
+        Yii::$app->response->format = Response::FORMAT_RAW;
+        foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->all() as $claim) {
+            $label = $claim->getMajorityLabel();
+            if ($label == null) continue;
+            $evidenceSets = $claim->getEvidenceSets2($label, $evidenceFormat, $fever);
+            $response .= json_encode([
+                    "id" => $claim->id,
+                    "label" => $claim->getMajorityLabel(),
+                    "claim" => Helper::detokenize($claim->claim),
+                    "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId,
+                    "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"
+                ], JSON_UNESCAPED_UNICODE) . "\n";
+        }
+        return $response;
     }
 
     public function actionFlags()

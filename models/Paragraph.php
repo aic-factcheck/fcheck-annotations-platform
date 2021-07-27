@@ -175,4 +175,10 @@ class Paragraph extends CtkData
     {
         return $this->article . '_' . $this->rank;
     }
+
+    public function __toString()
+    {
+        return $this->getCtkId();
+    }
+
 }
