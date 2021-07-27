@@ -153,6 +153,7 @@ class LabelController extends Controller
                     ], JSON_UNESCAPED_UNICODE) . "\n";
             }
         }
+
         return $response;
     }
 
@@ -196,6 +197,8 @@ class LabelController extends Controller
                     "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"
                 ], JSON_UNESCAPED_UNICODE) . "\n";
         }
+        $u = (Yii::$app->user->isGuest ? 'guest' : Yii::$app->user->id);
+        file_put_contents('../runtime/debug/export_' . date('m-d-Y_hia') . '_' . $u . '.jsonl', $response);
         return $response;
     }
 

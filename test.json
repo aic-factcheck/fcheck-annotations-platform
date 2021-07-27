@@ -1,0 +1,158 @@
+{
+  "evidence": [
+    {
+      "content": [
+        "Keystone Exam_sentence_4",
+        "Keystone Exam_sentence_0"
+      ],
+      "context": {
+        "Keystone Exam_sentence_4": [
+          "Keystone Exam_title"
+        ],
+        "Keystone Exam_sentence_0": [
+          "Keystone Exam_title"
+        ]
+      }
+    }
+  ],
+  "id": 23219,
+  "claim": "To graduate from Pennsylvania public school, a student must complete a project and the Keystone Exam.",
+  "label": "REFUTES",
+  "annotator_operations": [
+    {
+      "operation": "start",
+      "value": "start",
+      "time": "0"
+    },
+    {
+      "operation": "Now on",
+      "value": "?search=",
+      "time": "1.717"
+    },
+    {
+      "operation": "search",
+      "value": "pennsylvania public schools",
+      "time": "20.745"
+    },
+    {
+      "operation": "Now on",
+      "value": "undefined",
+      "time": "23.679"
+    },
+    {
+      "operation": "search",
+      "value": "pennsylvania public school system",
+      "time": "37.279"
+    },
+    {
+      "operation": "Now on",
+      "value": "undefined",
+      "time": "38.649"
+    },
+    {
+      "operation": "hyperlink",
+      "value": "Emma Gillett",
+      "time": "42.055"
+    },
+    {
+      "operation": "Now on",
+      "value": "Emma Gillett",
+      "time": "42.987"
+    },
+    {
+      "operation": "hyperlink",
+      "value": "Pennsylvania",
+      "time": "51.425"
+    },
+    {
+      "operation": "Now on",
+      "value": "Pennsylvania",
+      "time": "54.901"
+    },
+    {
+      "operation": "search",
+      "value": "keystone exam",
+      "time": "91.073"
+    },
+    {
+      "operation": "Now on",
+      "value": "Keystone Exam",
+      "time": "92.422"
+    },
+    {
+      "operation": "Highlighting",
+      "value": "Keystone Exam_sentence_0",
+      "time": "105.045"
+    },
+    {
+      "operation": "Highlighting deleted",
+      "value": "Keystone Exam_sentence_0",
+      "time": "142.908"
+    },
+    {
+      "operation": "Highlighting",
+      "value": "Keystone Exam_sentence_7",
+      "time": "144.111"
+    },
+    {
+      "operation": "Highlighting",
+      "value": "Keystone Exam_section_1",
+      "time": "144.115"
+    },
+    {
+      "operation": "Highlighting",
+      "value": "Keystone Exam_sentence_8",
+      "time": "145.699"
+    },
+    {
+      "operation": "Highlighting deleted",
+      "value": "Keystone Exam_sentence_8",
+      "time": "150.321"
+    },
+    {
+      "operation": "Highlighting",
+      "value": "Keystone Exam_sentence_9",
+      "time": "150.737"
+    },
+    {
+      "operation": "Highlighting",
+      "value": "Keystone Exam_sentence_10",
+      "time": "165.61"
+    },
+    {
+      "operation": "Highlighting deleted",
+      "value": "Keystone Exam_sentence_9",
+      "time": "187.739"
+    },
+    {
+      "operation": "Highlighting deleted",
+      "value": "Keystone Exam_sentence_7",
+      "time": "188.323"
+    },
+    {
+      "operation": "Highlighting deleted",
+      "value": "Keystone Exam_sentence_10",
+      "time": "189.022"
+    },
+    {
+      "operation": "Highlighting deleted",
+      "value": "Keystone Exam_section_1",
+      "time": "189.028"
+    },
+    {
+      "operation": "Highlighting",
+      "value": "Keystone Exam_sentence_4",
+      "time": "189.897"
+    },
+    {
+      "operation": "Highlighting",
+      "value": "Keystone Exam_sentence_0",
+      "time": "193.52"
+    },
+    {
+      "operation": "finish",
+      "value": "finish",
+      "time": "200.045"
+    }
+  ]
+}
