@@ -19,8 +19,9 @@ $this->title = 'Protiřečící si anotace';
     <?php
     foreach ($misclassifications as $misclassification) {
         try {
-            echo "<h2>".$misclassification['claim']." (". (\app\models\Claim::findOne($misclassification['claim']))->getMajorityLabel()." &raquo; ".$misclassification['prediction']." (".$misclassification['certainty']."%))</h2>";
-            echo "<p>".json_encode($misclassification)."</p>";
+            echo "<h2>".$misclassification['claim']." (". $misclassification['claim_']->getMajorityLabel()." &raquo; ".$misclassification['prediction']." (".$misclassification['certainty']."%))</h2>";
+            echo "<p>".$misclassification['claim_']->claim."</p>";
+            echo Html::tag('p',Html::dropDownList('raz',Label::LABELS));
             echo "<hr/>";
         } catch (\yii\base\ErrorException $e) {
             echo $e;
