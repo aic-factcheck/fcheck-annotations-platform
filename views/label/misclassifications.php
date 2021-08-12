@@ -22,8 +22,8 @@ $this->title = 'Protiřečící si anotace';
             echo "<h2>".$misclassification['claim']." (". $misclassification['claim_']->getMajorityLabel()." &raquo; ".$misclassification['prediction']." (".$misclassification['certainty']."%))</h2>";
             echo "<p>".$misclassification['claim_']->claim."</p>";
             echo Html::tag('p',"Kontext: TODO");
-            echo Html::tag('p',"nový label:". Html::dropDownList('raz',null,Label::LABELS));
-            echo Html::tag('p',"soft-smazat úplně:". Html::checkbox('dva'));
+            echo Html::tag('p',"Nový label: ". Html::dropDownList('raz[]',null,Label::LABELS_WITH_VOID));
+            echo Html::tag('p',"Noft-smazat úplně: ". Html::checkbox('dva[]'));
             echo "<hr/>";
         } catch (\yii\base\ErrorException $e) {
             echo $e;

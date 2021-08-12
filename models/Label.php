@@ -30,6 +30,7 @@ use yii\db\ActiveRecord;
 class Label extends ActiveRecord
 {
     const LABELS = ["SUPPORTS", "REFUTES", "NOT ENOUGH INFO"];
+    const LABELS_WITH_VOID = ["","SUPPORTS", "REFUTES", "NOT ENOUGH INFO"];
     public $cnt;
 
     /**
