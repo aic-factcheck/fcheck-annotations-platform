@@ -19,7 +19,7 @@ $this->title = 'Protiřečící si anotace';
     <?php
     foreach ($misclassifications as $misclassification) {
         try {
-            echo "<h2>".$misclassification['claim']." (". $misclassification['claim_']->getMajorityLabel()." &raquo; ".$misclassification.")</h2>";
+            echo "<h2>".$misclassification['claim']." (". (\app\models\Claim::findOne($misclassification['claim']))->getMajorityLabel()." &raquo; ".$misclassification.")</h2>";
             echo "<p>".json_encode($misclassification)."</p>";
             echo "<hr/>";
         } catch (\yii\base\ErrorException $e) {
