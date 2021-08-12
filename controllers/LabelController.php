@@ -135,7 +135,7 @@ class LabelController extends Controller
         }
         $i=0;
         foreach ($misclas as $miscla){
-            $misclas[$i]["claim"] = Claim::find()->andWhere(['id'=>$miscla['claim']])->one();
+            $misclas[$i]["claim_"] = Claim::find()->andWhere(['id'=>$miscla['claim']])->one();
             $misclas[$i++]["labels"] = Label::find()->andWhere(['claim'=>$miscla['claim'],'label'=>$miscla['trueLabel']])->all();
         }
 
