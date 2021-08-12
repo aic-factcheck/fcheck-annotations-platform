@@ -23,6 +23,7 @@ $this->title = 'Protiřečící si anotace';
             echo "<p>".json_encode($misclassification)."</p>";
             echo "<hr/>";
         } catch (\yii\base\ErrorException $e) {
+            echo $e;
             continue;
         }
     }
