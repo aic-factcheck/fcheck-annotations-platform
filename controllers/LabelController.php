@@ -181,14 +181,14 @@ class LabelController extends Controller
         return ($printCtr ? (json_encode($ctr) . "\n") : '') . $response;
     }
 
-    public function actionExport($evidenceFormat = 'ctkId', $fever = false)
+    public function actionExport($evidenceFormat = 'ctkId', $fever = false, $simulateNeiEvidence = false)
     {
         $response = "";
         Yii::$app->response->format = Response::FORMAT_RAW;
         foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->all() as $claim) {
             $label = $claim->getMajorityLabel();
             if ($label == null) continue;
-            $evidenceSets = $claim->getEvidenceSets2($label, $evidenceFormat, $fever);
+            $evidenceSets = $claim->getEvidenceSets2($label, $evidenceFormat, $fever, $simulateNeiEvidence);
             $response .= json_encode([
                     "id" => $claim->id,
                     "label" => $claim->getMajorityLabel(),

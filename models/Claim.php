@@ -259,10 +259,13 @@ class Claim extends ActiveRecord
         return $result;
     }
 
-    public function getEvidenceSets2($label = "SUPPORTS", $attr = "ctkId", $simulateFever = false)
+    public function getEvidenceSets2($label = "SUPPORTS", $attr = "ctkId", $simulateFever = false, $simulateNeiEvidence = false)
     {
         $labels = Label::find()->andWhere(['label' => $label, 'claim' => $this->id])->all();
         $result = [];
+        if ($simulateNeiEvidence && $label == "NOT ENOUGH INFO") {
+            $result[] = [$this->paragraph0->{$attr}];
+        }
         foreach ($labels as $label) {
             $evidence = Evidence::find()->where(['label' => $label->id])->orderBy('paragraph,label')->all();
             foreach ($evidence as $ev) {
