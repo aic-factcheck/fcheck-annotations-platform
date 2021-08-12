@@ -1,0 +1,4 @@
+CLAIM \((.*) id=(.*),.*
+prediction (.*): (.*)%
+
+{"claim":"$2","trueLabel":"$1","prediction":"$3","certainty":$4}
