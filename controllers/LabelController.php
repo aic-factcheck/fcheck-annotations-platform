@@ -133,9 +133,9 @@ class LabelController extends Controller
             }
             return $this->refresh();
         }
-
+        $i=0;
         foreach ($misclas as $miscla){
-            $miscla["annotations"] = Label::find()->andWhere(['claim'=>$miscla['claim'],'label'=>$miscla['trueLabel']])->all();
+            $misclas[$i++]["annotations"] = Label::find()->andWhere(['claim'=>$miscla['claim'],'label'=>$miscla['trueLabel']])->all();
         }
 
         return $this->render("misclassifications", ["misclassifications" => $misclas]);
