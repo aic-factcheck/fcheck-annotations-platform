@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property int|null $user Anotátor
  * @property int $claim Výrok
  * @property string|null $label Label
+ * @property string|null $note poznámka
  * @property string|null $condition Label
  * @property int $sandbox Je label ze zkušební v.?
  * @property int $oracle Je label oracle anotací?
@@ -30,7 +31,11 @@ use yii\db\ActiveRecord;
 class Label extends ActiveRecord
 {
     const LABELS = ["SUPPORTS", "REFUTES", "NOT ENOUGH INFO"];
-    const LABELS_WITH_VOID = [" ","SUPPORTS", "REFUTES", "NOT ENOUGH INFO"];
+    const LABELS_WITH_VOID = [
+        null => " ",
+        "SUPPORTS" => "SUPPORTS",
+        "REFUTES" => "REFUTES",
+        "NOT ENOUGH INFO" => "NOT ENOUGH INFO"];
     public $cnt;
 
     /**
@@ -59,7 +64,7 @@ class Label extends ActiveRecord
         return [
             [['user', 'claim', 'sandbox', 'oracle', 'flag', 'deleted', 'created_at', 'updated_at'], 'integer'],
             [['claim'], 'required'],
-            [['label', 'condition'], 'string'],
+            [['label', 'condition', 'note'], 'string'],
             ['label', 'in', 'range' => self::LABELS],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
             [['claim'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::className(), 'targetAttribute' => ['claim' => 'id']],

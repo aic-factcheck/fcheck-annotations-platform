@@ -1,0 +1,14 @@
+Processor: Intel Core i5-8250U 4 x 1.6 - 3.4 GHz, Kaby Lake Refresh
+Graphics adapter: NVIDIA GeForce MX150 - 2048 MB, Core: 1700 MHz, Memory: 1252 MHz, GDDR5
+Memory: 8192 MB, DDR3L
+Display: 13.30 inch 16:9, 1920 x 1080 pixel 166 PPI, IPS, glossy: no
+Mainboard: Intel Kaby Lake-U iHDCP 2.2 Premium PCH
+Storage: 256 GB NVMe, 256 GB
+Connections: 3 USB 3.0 / 3.1 Gen1, 1 HDMI, Audio Connections: 3.5mm, Card Reader: microSD, 1 Fingerprint Reader
+Networking: Intel Dual Band Wireless-AC 8265 (a/b/g/n = Wi-Fi 4/ac = Wi-Fi 5), Bluetooth 4.2
+Size: height x width x depth (in mm): 13.9 x 310 x 216 ( = 0.55 x 12.2 x 8.5 in)
+Battery: 50 Wh Lithium-Polymer
+Operating System: Microsoft Windows 10 Home 64 Bit
+Camera: Webcam: 0.3MP
+Additional features: Speakers: Stereo (Harman Kardon), Keyboard: 6-row chiclet, Keyboard Light: yes
+Weight: 1.145 kg ( = 40.39 oz / 2.52 pounds), Power Supply: 200 g ( = 7.05 oz / 0.44 pounds)

@@ -1,4 +1,7 @@
-CLAIM \((.*) id=(.*),.*
-prediction (.*): (.*)%
+CLAIM \(([A-Z]+) id=(\d+), date=.*
+prediction ([A-Z]+): (.*)%
 
-{"claim":"$2","trueLabel":"$1","prediction":"$3","certainty":$4}
+{"claim":"$2","trueLabel":"$1","prediction":"$3","certainty":$4},
+
+
+^(?!\{).*
