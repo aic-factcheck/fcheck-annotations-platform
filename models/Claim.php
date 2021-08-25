@@ -270,7 +270,7 @@ class Claim extends ActiveRecord
             $evidence = Evidence::find()->where(['label' => $label->id])->orderBy('paragraph,label')->all();
             foreach ($evidence as $ev) {
                 if (!array_key_exists($label->id . "_" . $ev->group, $result)) $result[$label->id . "_" . $ev->group] = [];
-                $result[$label->id . "_" . $ev->group][] = $ev->paragraph0->{$attr};
+                $result[$label->id . "_" . $ev->group][] = Helper::detokenize($ev->paragraph0->{$attr});
             }
         }
         //die(json_encode( array_values($result)));
