@@ -253,7 +253,7 @@ class LabelController extends Controller
         return ($printCtr ? (json_encode($ctr) . "\n") : '') . $response;
     }
 
-    public function actionExport($evidenceFormat = 'ctkId', $fever = false, $simulateNeiEvidence = false)
+    public function actionExport($evidenceFormat = 'ctkId', $fever = false, $simulateNeiEvidence = false, $singleEvidence = false)
     {
         $response = "";
         Yii::$app->response->format = Response::FORMAT_RAW;
@@ -261,13 +261,26 @@ class LabelController extends Controller
             $label = $claim->getMajorityLabel();
             if ($label == null) continue;
             $evidenceSets = $claim->getEvidenceSets2($label, $evidenceFormat, $fever, $simulateNeiEvidence);
-            $response .= json_encode([
-                    "id" => $claim->id,
-                    "label" => $claim->getMajorityLabel(),
-                    "claim" => Helper::detokenize($claim->claim),
-                    "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId,
-                    "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"
-                ], JSON_UNESCAPED_UNICODE) . "\n";
+            if($singleEvidence){
+                foreach ($evidenceSets as $evidenceSet){
+                    $response .= json_encode([
+                            "id" => $claim->id,
+                            "label" => $claim->getMajorityLabel(),
+                            "claim" => Helper::detokenize($claim->claim),
+                            "evidence" => $evidenceSet,
+                            "source" => $claim->paragraph0->ctkId,
+                            "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"
+                        ], JSON_UNESCAPED_UNICODE) . "\n";
+                }
+            } else {
+                $response .= json_encode([
+                        "id" => $claim->id,
+                        "label" => $claim->getMajorityLabel(),
+                        "claim" => Helper::detokenize($claim->claim),
+                        "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId,
+                        "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"
+                    ], JSON_UNESCAPED_UNICODE) . "\n";
+            }
         }
         $u = (Yii::$app->user->isGuest ? 'guest' : Yii::$app->user->id);
         file_put_contents('../runtime/debug/export_' . date('m-d-Y_hia') . '_' . $u . '.jsonl', $response);
