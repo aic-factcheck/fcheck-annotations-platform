@@ -157,7 +157,7 @@ class LabelController extends Controller
             Yii::$app->session->addFlash('success', 'Změny byly úspěšně uloženy!');
             return $this->refresh();
         }
-        $batch = "2021-08-30";
+        $batch = "2021-09-07";
         $misclas_ = json_decode(file_get_contents(__DIR__ . "/../misclas/$batch.json"), true);
         $misclas = [];
         foreach ($misclas_ as $miscla) {
