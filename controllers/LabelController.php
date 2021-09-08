@@ -113,7 +113,7 @@ class LabelController extends Controller
         return $this->render("clean", ["conflicts" => $result]);
     }
 
-    public function actionMisclassifications()
+    public function actionMisclassifications($batch = "2021-09-07")
     {
         if (isset($_POST['note']) || isset($_POST['delete']) || isset($_POST['label'])) {
             if (isset($_POST['note'])) {
@@ -157,7 +157,6 @@ class LabelController extends Controller
             Yii::$app->session->addFlash('success', 'Změny byly úspěšně uloženy!');
             return $this->refresh();
         }
-        $batch = "2021-09-07";
         $misclas_ = json_decode(file_get_contents(__DIR__ . "/../misclas/$batch.json"), true);
         $misclas = [];
         foreach ($misclas_ as $miscla) {
@@ -182,7 +181,7 @@ class LabelController extends Controller
             $misclas[$i]["labels"] = Label::find()->andWhere(['claim' => $miscla['claim'], 'label' => $miscla['trueLabel']])->all();
         }
 
-        return $this->render("misclassifications", ["misclassifications" => $misclas, "image" => "images/misclas/$batch.png"]);
+        return $this->render("misclassifications", ["misclassifications" => $misclas, "image" => "images/misclas/$batch.png","batch"=>$batch]);
     }
 
     public function actionJsonl()
