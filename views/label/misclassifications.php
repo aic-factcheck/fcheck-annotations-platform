@@ -36,7 +36,7 @@ $this->title = 'Rozpory modelu a anotací (Dávka ' . $batch . ')';
                         </h3></div>
                     <div class="card-body">
                         <h6>Tvrzení</h6>
-                        <?= "<h5>„" . $misclassification['claim_']->claim . "“".\yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($misclassification['claim_']->paragraph0->article0->date), ['class' => 'badge badge-secondary '])
+                        <?= "<h5>„" . $misclassification['claim_']->claim . "“ ".\yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($misclassification['claim_']->paragraph0->article0->date), ['class' => 'badge badge-secondary '])
                         ."</h5>"; ?>
                         <h6>Kontext</h6>
                         <?php
