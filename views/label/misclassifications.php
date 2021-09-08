@@ -11,7 +11,7 @@ use app\models\Label;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
-$this->title = 'Rozpory modelu a anotací (Dávka' . $batch . ')';
+$this->title = 'Rozpory modelu a anotací (Dávka ' . $batch . ')';
 ?>
 <div class="container">
     <h1><?= $this->title ?></h1>
@@ -36,7 +36,7 @@ $this->title = 'Rozpory modelu a anotací (Dávka' . $batch . ')';
                         </h3></div>
                     <div class="card-body">
                         <h6>Tvrzení</h6>
-                        <?= "<h5>„" . $misclassification['claim_']->claim . "“</h5><br/>".\yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($misclassification['claim_']->claim->paragraph0->article0->date), ['class' => 'badge badge-secondary '])
+                        <?= "<h5>„" . $misclassification['claim_']->claim . "“</h5><br/>".\yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($misclassification['claim_']->paragraph0->article0->date), ['class' => 'badge badge-secondary '])
                         ; ?>
                         <h6>Kontext</h6>
                         <?php
