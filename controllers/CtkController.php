@@ -66,4 +66,14 @@ class CtkController extends Controller
         $claim->ners = $dictionary['ners'];
         return $claim->save();
     }
+
+    public function actionConditionalKnowledge($label)
+    {
+        $label = Claim::findOne($label);
+        $paragraph = $label->paragraph0;
+        $dictionary = $this->_ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $label->claim]);
+        ClaimKnowledge::fromDictionary($label, $dictionary);
+        $label->ners = $dictionary['ners'];
+        return $label->save();
+    }
 }

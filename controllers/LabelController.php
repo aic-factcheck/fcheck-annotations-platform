@@ -112,9 +112,11 @@ class LabelController extends Controller
         }
         return $this->render("clean", ["conflicts" => $result]);
     }
+
     public function actionConditional($batch = "2021-09-07")
     {
-        $claims = Claim::find()->andWhere([]);
+        $labels = Label::find()->andWhere(['not', ['condition' => null]])->all();
+        return $this->render("conditional", ["labels" => $labels]);
     }
 
     public function actionMisclassifications($batch = "2021-09-07")
@@ -147,10 +149,10 @@ class LabelController extends Controller
                         $label->deleted = 0;
                         $label->isNewRecord = true;
                         $label->id = null;
-                        $label->label=$newlabel;
+                        $label->label = $newlabel;
                         $label->user = Yii::$app->user->id;
                         $label->save();
-                        foreach (Evidence::find()->where(['label'=>$id])->all() as $evidence) {
+                        foreach (Evidence::find()->where(['label' => $id])->all() as $evidence) {
                             $evidence->isNewRecord = true;
                             $evidence->label = $label->id;
                             $evidence->save();
@@ -185,7 +187,7 @@ class LabelController extends Controller
             $misclas[$i]["labels"] = Label::find()->andWhere(['claim' => $miscla['claim'], 'label' => $miscla['trueLabel']])->all();
         }
 
-        return $this->render("misclassifications", ["misclassifications" => $misclas, "image" => "images/misclas/$batch.png","batch"=>$batch]);
+        return $this->render("misclassifications", ["misclassifications" => $misclas, "image" => "images/misclas/$batch.png", "batch" => $batch]);
     }
 
     public function actionJsonl()
@@ -264,8 +266,8 @@ class LabelController extends Controller
             $label = $claim->getMajorityLabel();
             if ($label == null) continue;
             $evidenceSets = $claim->getEvidenceSets2($label, $evidenceFormat, $fever, $simulateNeiEvidence);
-            if($singleEvidence){
-                foreach ($evidenceSets as $evidenceSet){
+            if ($singleEvidence) {
+                foreach ($evidenceSets as $evidenceSet) {
                     $response .= json_encode([
                             "id" => $claim->id,
                             "label" => $claim->getMajorityLabel(),
