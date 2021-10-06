@@ -112,6 +112,10 @@ class LabelController extends Controller
         }
         return $this->render("clean", ["conflicts" => $result]);
     }
+    public function actionConditional($batch = "2021-09-07")
+    {
+        $claims = Claim::find()->andWhere([]);
+    }
 
     public function actionMisclassifications($batch = "2021-09-07")
     {
