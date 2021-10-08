@@ -34,7 +34,6 @@ class LabelController extends Controller
         ];
     }
 
-
     public function actionIndex($sandbox = false, $oracle = false, $claim = null, $unannotated = false)
     {
         if ($claim == null) {
@@ -299,5 +298,4 @@ class LabelController extends Controller
         $claims = Claim::find(1)->andWhere(['like', 'comment', '%flag%', false])->all();
         return $this->render("flags", ["claims" => $claims]);
     }
-
 }

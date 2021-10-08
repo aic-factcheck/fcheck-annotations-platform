@@ -6,6 +6,8 @@ use app\helpers\CtkApi;
 use app\models\Article;
 use app\models\Claim;
 use app\models\ClaimKnowledge;
+use app\models\ConditionKnowledge;
+use app\models\Label;
 use app\models\Paragraph;
 use app\models\ParagraphKnowledge;
 use yii\helpers\ArrayHelper;
@@ -69,11 +71,10 @@ class CtkController extends Controller
 
     public function actionConditionalKnowledge($label)
     {
-        $label = Claim::findOne($label);
-        $paragraph = $label->paragraph0;
-        $dictionary = $this->_ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $label->claim]);
-        ClaimKnowledge::fromDictionary($label, $dictionary);
-        $label->ners = $dictionary['ners'];
+        $label = Label::findOne($label);
+        $paragraph = $label->claim0->paragraph0;
+        $dictionary = $this->_ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $label->condition]);
+        ConditionKnowledge::fromDictionary($label, $dictionary);
         return $label->save();
     }
 }
