@@ -22,7 +22,7 @@ class CtkApi
         $params = ArrayHelper::merge(self::CONFIG, $options);
         return $this->_client->createRequest()
             ->setMethod('GET')
-            ->setUrl(ArrayHelper::merge(["http://localhost:8601/dictionary/$ctk_id"], $params))
+            ->setUrl(ArrayHelper::merge(["http://fcheck.fel.cvut.cz:8601/dictionary/$ctk_id"], $params))
             ->send()
             ->getData();
     }

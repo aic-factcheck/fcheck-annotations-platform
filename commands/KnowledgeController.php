@@ -10,6 +10,8 @@ namespace app\commands;
 use app\helpers\CtkApi;
 use app\models\Claim;
 use app\models\ClaimKnowledge;
+use app\models\ConditionKnowledge;
+use app\models\Label;
 use app\models\Paragraph;
 use app\models\ParagraphKnowledge;
 use app\models\User;
@@ -65,4 +67,31 @@ class KnowledgeController extends Controller
         return ExitCode::OK;
     }
 
+    public function actionHideConflicts()
+    {
+        $labels = Label::find()->andWhere(['not', ['condition' => null]])->all();
+        foreach ($labels as $label) {
+            if ($label == null) continue;
+            $conflicts = Label::find()->andWhere(['claim' => $label->claim])->andWhere(['condition' => null])->andWhere(['not', ['label' => 'NOT ENOUGH INFO']])->count();
+            if ($conflicts > 0) {
+                $label->note = '[COND][' . $label->deleted . '] Podmíněná anotace je redudantní nebo konfliktní' . (!empty($label->note) ? '; ' . $label->note : '');
+                $label->deleted = 1;
+                $label->save();
+            }
+        }
+    }
+
+    public function actionFetchConditional()
+    {
+        $ctkApi = new CtkApi();
+        $labels = Label::find()->andWhere(['not', ['condition' => null]])->all();
+        ConditionKnowledge::deleteAll();
+        foreach ($labels as $label) {
+            if ($label->claim0 != null) {
+                $paragraph = $label->claim0->paragraph0;
+                $dictionary = $ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $label->condition, "nerlimit" => 2, "k" => 2, "npts" => 2, "older" => 1]);
+                ConditionKnowledge::fromDictionary($label, $dictionary);
+            }
+        }
+    }
 }

@@ -73,7 +73,7 @@ class CtkController extends Controller
     {
         $label = Label::findOne($label);
         $paragraph = $label->claim0->paragraph0;
-        $dictionary = $this->_ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $label->condition]);
+        $dictionary = $this->_ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $label->condition, "nerlimit" => 2, "k" => 2, "npts" => 2, "older" => 1]);
         ConditionKnowledge::fromDictionary($label, $dictionary);
         return $label->save();
     }

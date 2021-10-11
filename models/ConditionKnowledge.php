@@ -32,6 +32,7 @@ class ConditionKnowledge extends \yii\db\ActiveRecord
     {
         return [
             [['label', 'knowledge'], 'required'],
+            [['search_term'], 'string', 'max' => 512],
             [['label', 'knowledge'], 'integer'],
             [['created_at'], 'safe'],
             [['label'], 'exist', 'skipOnError' => true, 'targetClass' => Label::className(), 'targetAttribute' => ['label' => 'id']],
@@ -71,13 +72,14 @@ class ConditionKnowledge extends \yii\db\ActiveRecord
         return $this->hasOne(Paragraph::className(), ['id' => 'knowledge']);
     }
 
-    public static function fromDictionary($claim, $dictionary)
+    public static function fromDictionary($label, $dictionary)
     {
         foreach (ArrayHelper::merge($dictionary["semantic_blocks"], $dictionary["ner_blocks"]) as $sample) {
             Article::fromSample($sample);
             (new ConditionKnowledge([
-                "claim" => $claim->id,
-                "knowledge" => Paragraph::findByCtkId($sample["id"])->id
+                "label" => $label->id,
+                "knowledge" => Paragraph::findByCtkId($sample["id"])->id,
+                "search_term" => array_key_exists("search_term", $sample) ? $sample["search_term"] : ''
             ]))->save();
         }
     }

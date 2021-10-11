@@ -114,6 +114,61 @@ class LabelController extends Controller
 
     public function actionConditional($batch = "2021-09-07")
     {
+        if (isset($_POST['note']) || isset($_POST['delete']) || isset($_POST['label'])) {
+            if (isset($_POST['note'])) {
+                foreach ($_POST['note'] as $id => $note) {
+                    if (!empty($note)) {
+                        $label = Label::find()->where(['id' => $id])->one();
+                        $label->note = $note;
+                        $label->save();
+                    }
+                }
+            }
+            if (isset($_POST['delete'])) {
+                foreach ($_POST['delete'] as $id => $note) {
+                    if (intval($note) == 1) {
+                        $label = Label::find()->where(['id' => $id])->one();
+                        $label->deleted = 1;
+                        $label->save();
+                    }
+                }
+            }
+            if (isset($_POST['evidence'])) {
+                foreach ($_POST['evidence'] as $id => $evs) {
+                    if (!empty($evs)) {
+                        foreach ($evs as $ev) {
+                            $groups = Evidence::find()->andWhere(['label' => $id])->max('`group`');
+                            for ($group = 0; $group <= $groups; $group++) {
+                                (new Evidence(['label' => $id, 'paragraph' => $ev, 'group' => $group]))->save();
+                            }
+                        }
+                    }
+                }
+            }
+            if (isset($_POST['label'])) {
+                foreach ($_POST['label'] as $id => $newlabel) {
+                    if (!empty($newlabel)) {
+                        $label = Label::find()->where(['id' => $id])->one();
+                        $label->deleted = 1;
+                        $label->save();
+                        $label->deleted = 0;
+                        $label->isNewRecord = true;
+                        $label->id = null;
+                        $label->label = $newlabel;
+                        $label->condition = null;
+                        $label->user = Yii::$app->user->id;
+                        $label->save();
+                        foreach (Evidence::find()->where(['label' => $id])->all() as $evidence) {
+                            $evidence->isNewRecord = true;
+                            $evidence->label = $label->id;
+                            $evidence->save();
+                        }
+                    }
+                }
+            }
+            Yii::$app->session->addFlash('success', 'Změny byly úspěšně uloženy!');
+            return $this->refresh();
+        }
         $labels = Label::find()->andWhere(['not', ['condition' => null]])->all();
         return $this->render("conditional", ["labels" => $labels]);
     }
