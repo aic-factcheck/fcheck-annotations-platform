@@ -299,7 +299,7 @@ class Claim extends ActiveRecord
         $label = null;
         foreach (Label::LABELS as $label_name) {
             $condition = ['claim' => $this->id, 'label' => $label_name];
-            if ($skipConditional) $condition['condition'] = '';
+            if ($skipConditional) $condition['condition'] = null;
             if (Label::find()->andWhere($condition)->count() > $max) {
                 $label = $label_name;
             }
