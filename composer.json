@@ -49,6 +49,7 @@
     "codeception/module-asserts": "^1.0.0"
   },
   "config": {
+    "platform-check": false,
     "process-timeout": 1800,
     "fxp-asset": {
       "enabled": false
