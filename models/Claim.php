@@ -66,6 +66,7 @@ class Claim extends ActiveRecord
     const FROM = 0, TO = 1, BECAUSE = 2;
 
     private $_knowledge = null;
+    public $_majority_label = null;
 
     /**
      * {@inheritdoc}

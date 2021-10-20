@@ -352,6 +352,9 @@ class LabelController extends Controller
     public function actionTestSplits()
     {
         $model = new SplitsForm();
+        if ($model->load(Yii::$app->request->post()) && $model->submit()) {
+            Yii::$app->session->addFlash('success','Splity byly úspěšně odeslány');
+        }
         return $this->render("test-splits", ['model' => $model]);
     }
 
