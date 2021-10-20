@@ -305,6 +305,9 @@ class Claim extends ActiveRecord
                 $label = $label_name;
             }
         }
+        if ($label == null && Label::find()->andWhere(['claim' => $this->id])->andWhere(['not', ['condition' => null]])->exists()) {
+            return "NOT ENOUGH INFO";
+        }
         return $label;
     }
 

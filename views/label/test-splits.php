@@ -134,9 +134,9 @@ function percent($str)
                 ?>
                 <tr>
                     <th><?= $v ?></th>
-                    <td><?= $a = count(array_intersect($values[0], $values[1])) ?></td>
-                    <td><?= $b = count(array_intersect($values[1], $values[2])) ?></td>
-                    <td><?= $c = count(array_intersect($values[0], $values[2])) ?></td>
+                    <td><?= $a = count(array_intersect($values[0], $values[1])) ?> (z <?=count($values[0])?>)</td>
+                    <td><?= $b = count(array_intersect($values[1], $values[2])) ?> (z <?=count($values[1])?>)</td>
+                    <td><?= $c = count(array_intersect($values[0], $values[2])) ?> (z <?=count($values[2])?>)</td>
                     <td><?= ($a == 0 && $b == 0 && $c == 0) ? $ok : $bad ?></td>
                 </tr>
                 <?php
