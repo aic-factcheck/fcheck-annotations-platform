@@ -67,10 +67,13 @@ function percent($str)
             <tr>
                 <th>Podmíněné labely jsou NEI</th>
                 <td><?php
-                    $labels = \app\models\Label::find()->andWhere(['not', ['condition' => null]])->groupBy('claim')->all();
+                    $labels = \app\models\Label::find()->andWhere(['not', ['condition' => null]])->andWhere(['claim'=>array_keys($model->_claims)])->groupBy('claim')->all();
                     $a = 0;
                     foreach ($labels as $label) {
                         $a += (array_key_exists($label->claim, $model->_all) && $model->_all[$label->claim]["label"] == "NOT ENOUGH INFO");
+                        if(!(array_key_exists($label->claim, $model->_all) && $model->_all[$label->claim]["label"] == "NOT ENOUGH INFO")){
+                            echo $label->id.", ";
+                        }
                     }
                     echo $a;
                     ?></td>
