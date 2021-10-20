@@ -7,6 +7,7 @@ use app\models\Claim;
 use app\models\Evidence;
 use app\models\Label;
 use app\models\LabelForm;
+use app\models\SplitsForm;
 use Yii;
 use yii\db\Expression;
 use yii\filters\AccessControl;
@@ -346,6 +347,12 @@ class LabelController extends Controller
         $u = (Yii::$app->user->isGuest ? 'guest' : Yii::$app->user->id);
         file_put_contents('../runtime/debug/export_' . date('m-d-Y_hia') . '_' . $u . '.jsonl', $response);
         return $response;
+    }
+
+    public function actionTestSplits()
+    {
+        $model = new SplitsForm();
+        return $this->render("test-splits", ['model' => $model]);
     }
 
     public function actionFlags()
