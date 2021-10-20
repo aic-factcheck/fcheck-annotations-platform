@@ -16,6 +16,11 @@ use yii\helpers\ArrayHelper;
 $this->title = 'Validátor splitů';
 $ok = '<span class="text-success"><i class="fas fa-check"></i></span>';
 $bad = '<span class="text-danger"><i class="fas fa-times"></i></span>';
+function percent($str)
+{
+    return round((float)$str * 100) . '%';
+}
+
 ?>
 <?php $form = ActiveForm::begin([
     'id' => 'splits-form',
@@ -35,9 +40,6 @@ $bad = '<span class="text-danger"><i class="fas fa-times"></i></span>';
     </p>
     <?php
     if ($model->_ready) {
-        $train = $model->_splits[$model->_names[0]];
-        $val = $model->_splits[$model->_names[1]];
-        $test = $model->_splits[$model->_names[2]];
         ?>
         <br/><br/>
         <h2><i class="fas fa-database"></i> DB Integrita</h2>
@@ -56,8 +58,8 @@ $bad = '<span class="text-danger"><i class="fas fa-times"></i></span>';
             </tr>
             <tr>
                 <th>Počet labelů [SUP,REF,NEI]</th>
-                <td><?= $a = implode(",", $model->_label_count) ?></td>
-                <td><?= $b = implode(",", $model->_label_count_db) ?></td>
+                <td><?= $a = implode(", ", $model->_label_count) ?></td>
+                <td><?= $b = implode(", ", $model->_label_count_db) ?></td>
                 <td><?= $a == $b ? $ok : $bad ?></td>
             </tr>
             <tr>
@@ -73,12 +75,12 @@ $bad = '<span class="text-danger"><i class="fas fa-times"></i></span>';
                 <td><?= $b = count($labels) ?></td>
                 <td><?= $a == $b ? $ok : $bad ?></td>
             </tr>
-            <tr>
+            <!--tr>
                 <th>Počet článků [exp't, nepočítá softdely]</th>
                 <td></td>
                 <td></td>
                 <td><?= $ok ?></td>
-            </tr>
+            </tr-->
         </table>
         <br/>
         <h2><i class="fas fa-chart-pie"></i> Vnitřní integrita</h2>
@@ -91,15 +93,23 @@ $bad = '<span class="text-danger"><i class="fas fa-times"></i></span>';
             </tr>
             <tr>
                 <th>Podíl</th>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?= percent(count($model->_splits[0]) / count($model->_all)) ?></td>
+                <td><?= percent(count($model->_splits[1]) / count($model->_all)) ?></td>
+                <td><?= percent(count($model->_splits[2]) / count($model->_all)) ?></td>
             </tr>
             <tr>
-                <th>Rozložení labelů</th>
-                <td></td>
-                <td></td>
-                <td></td>
+                <th>Rozložení labelů [S/R/NEI]</th>
+                <?php
+                for ($i = 0; $i < 3; $i++) {
+                    $labels = ["SUPPORTS" => 0, "REFUTES" => 0, "NOT ENOUGH INFO" => 0];
+                    foreach ($model->_splits[$i] as $datapoint){
+                        $labels[$datapoint["label"]] += 1/count($model->_splits[$i]);
+                    }
+                    ?>
+                    <td><?=implode(', ',array_map('percent',$labels))?></td>
+                    <?php
+                }
+                ?>
             </tr>
         </table>
         <br/>
@@ -112,27 +122,27 @@ $bad = '<span class="text-danger"><i class="fas fa-times"></i></span>';
                 <th><?= $model->_names[2] ?>-<?= $model->_names[0] ?></th>
                 <th></th>
             </tr>
-            <tr>
-                <th>Zdrojový článek</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Ú<sub>1a</sub> tvrzení</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Ú<sub>1b</sub> tvrzení</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <?php
+            foreach (["source" => "Zdrojový článek", "mutated_from" => "Ú<sub>1a</sub> tvrzení", "id" => "Ú<sub>1b</sub> tvrzení"] as $attr => $v) {
+                $values = [];
+                foreach ($model->_splits as $key => $split) {
+                    $values[$key] = [];
+                    foreach ($split as $datapoint) {
+                        $values[$key][] = $datapoint[$attr];
+                    }
+                }
+                ?>
+                <tr>
+                    <th><?= $v ?></th>
+                    <td><?= $a = count(array_intersect($values[0], $values[1])) ?></td>
+                    <td><?= $b = count(array_intersect($values[1], $values[2])) ?></td>
+                    <td><?= $c = count(array_intersect($values[0], $values[2])) ?></td>
+                    <td><?= ($a == 0 && $b == 0 && $c == 0) ? $ok : $bad ?></td>
+                </tr>
+                <?php
+            }
+            ?>
+
 
         </table>
         <br/>

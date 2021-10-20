@@ -49,14 +49,15 @@ class SplitsForm extends Model
     {
         $this->files = UploadedFile::getInstances($this, 'files');
         if ($this->validate()) {
+            $i = -1;
             foreach ($this->files as $file) {
                 $this->_names[] = $file->baseName;
-                $this->_splits[$file->baseName] = [];
+                $this->_splits[++$i] = [];
                 $lines = explode("\n", file_get_contents($file->tempName));
                 foreach ($lines as $line) {
                     $datapoint = json_decode($line, true);
                     if ($datapoint == null) continue;
-                    $this->_splits[$file->baseName][] = $datapoint;
+                    $this->_splits[$i][] = $datapoint;
                     $this->_all[$datapoint["id"]] = $datapoint;
                     $this->_label_count[$datapoint["label"]]++;
                 }
