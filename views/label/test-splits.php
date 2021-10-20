@@ -21,6 +21,7 @@ function percent($str)
     return round((float)$str * 100) . '%';
 }
 
+
 ?>
 <?php $form = ActiveForm::begin([
     'id' => 'splits-form',
@@ -52,8 +53,9 @@ function percent($str)
             </tr>
             <tr>
                 <th>Počet tvrzení</th>
-                <td><?= $a = count($model->_all) ?></td>
-                <td><?= $b = count($model->_claims) ?></td>
+                <td>
+                    <strong><?= $a = count($model->_all) ?></strong> (<?= implode(", ", array_map('count', $model->_splits)) ?>)</td>
+                <td><strong><?= $b = count($model->_claims) ?></strong></td>
                 <td><?= $a == $b ? $ok : $bad ?></td>
             </tr>
             <tr>
@@ -102,11 +104,11 @@ function percent($str)
                 <?php
                 for ($i = 0; $i < 3; $i++) {
                     $labels = ["SUPPORTS" => 0, "REFUTES" => 0, "NOT ENOUGH INFO" => 0];
-                    foreach ($model->_splits[$i] as $datapoint){
-                        $labels[$datapoint["label"]] += 1/count($model->_splits[$i]);
+                    foreach ($model->_splits[$i] as $datapoint) {
+                        $labels[$datapoint["label"]] += 1 / count($model->_splits[$i]);
                     }
                     ?>
-                    <td><?=implode(', ',array_map('percent',$labels))?></td>
+                    <td><?= implode(', ', array_map('percent', $labels)) ?></td>
                     <?php
                 }
                 ?>
@@ -134,9 +136,9 @@ function percent($str)
                 ?>
                 <tr>
                     <th><?= $v ?></th>
-                    <td><?= $a = count(array_intersect($values[0], $values[1])) ?> (z <?=count($values[0])?>)</td>
-                    <td><?= $b = count(array_intersect($values[1], $values[2])) ?> (z <?=count($values[1])?>)</td>
-                    <td><?= $c = count(array_intersect($values[0], $values[2])) ?> (z <?=count($values[2])?>)</td>
+                    <td><?= $a = count(array_intersect($values[0], $values[1])) ?> (z <?= count($values[0]) ?>)</td>
+                    <td><?= $b = count(array_intersect($values[1], $values[2])) ?> (z <?= count($values[1]) ?>)</td>
+                    <td><?= $c = count(array_intersect($values[0], $values[2])) ?> (z <?= count($values[2]) ?>)</td>
                     <td><?= ($a == 0 && $b == 0 && $c == 0) ? $ok : $bad ?></td>
                 </tr>
                 <?php
