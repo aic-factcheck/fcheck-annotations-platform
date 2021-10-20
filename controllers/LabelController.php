@@ -313,14 +313,14 @@ class LabelController extends Controller
         return ($printCtr ? (json_encode($ctr) . "\n") : '') . $response;
     }
 
-    public function actionExport($evidenceFormat = 'ctkId', $fever = false, $simulateNeiEvidence = false, $singleEvidence = false)
+    public function actionExport($evidenceFormat = 'ctkId', $format = "nli", $simulateNeiEvidence = false, $singleEvidence = false)
     {
         $response = "";
         Yii::$app->response->format = Response::FORMAT_RAW;
         foreach (Claim::find()->andWhere(['not', ['mutation_type' => null]])->all() as $claim) {
             $label = $claim->getMajorityLabel();
             if ($label == null) continue;
-            $evidenceSets = $claim->getEvidenceSets2($label, $evidenceFormat, $fever, $simulateNeiEvidence);
+            $evidenceSets = $claim->getEvidenceSets2($label, $evidenceFormat, $format == "fever", $simulateNeiEvidence);
             if ($singleEvidence) {
                 foreach ($evidenceSets as $evidenceSet) {
                     $response .= json_encode([
@@ -353,7 +353,7 @@ class LabelController extends Controller
     {
         $model = new SplitsForm();
         if ($model->load(Yii::$app->request->post()) && $model->submit()) {
-            Yii::$app->session->addFlash('success','Splity byly úspěšně odeslány');
+            Yii::$app->session->addFlash('success', 'Splity byly úspěšně odeslány');
         }
         return $this->render("test-splits", ['model' => $model]);
     }
