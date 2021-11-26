@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\ClaimForm;
 use app\models\MutateForm;
+use app\models\TwitterForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -49,6 +50,15 @@ class ClaimController extends Controller
             return $this->redirect(['claim/mutate']);
         }
         return $this->render('annotate', ['sandbox' => $sandbox, 'model' => $model]);
+    }
+
+    public function actionExtractTweet($sandbox = false, $tweet = false)
+    {
+        $model = new TwitterForm($sandbox, $tweet);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->refresh();
+        }
+        return $this->render('twitter', ['sandbox' => $sandbox, 'model' => $model]);
     }
 
     public function actionMutate($sandbox = false)

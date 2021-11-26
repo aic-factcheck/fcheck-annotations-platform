@@ -14,10 +14,12 @@ use app\models\ConditionKnowledge;
 use app\models\Label;
 use app\models\Paragraph;
 use app\models\ParagraphKnowledge;
-use app\models\User;
+use app\models\Tweet;
+use app\models\TweetKnowledge;
 use Exception;
 use yii\console\Controller;
 use yii\console\ExitCode;
+use yii\db\Expression;
 
 class KnowledgeController extends Controller
 {
@@ -92,6 +94,18 @@ class KnowledgeController extends Controller
                 $dictionary = $ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $label->condition, "nerlimit" => 2, "k" => 2, "npts" => 2, "older" => 1]);
                 ConditionKnowledge::fromDictionary($label, $dictionary);
             }
+        }
+    }
+
+    public function actionFetchByTweet()
+    {
+        $ctkApi = new CtkApi();
+        $tweets = Tweet::find()->orderBy(new Expression('rand()'))->limit(150)->all();
+        foreach ($tweets as $tweet) {
+            TweetKnowledge::deleteAll(['tweet' => $tweet->id]);
+            $paragraph = Paragraph::nearest($tweet->created_at);
+            $dictionary = $ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $tweet->text, "nerlimit" => 3, "k" => 3, "npts" => 2, "older" => 1]);
+            TweetKnowledge::fromDictionary($tweet, $dictionary);
         }
     }
 }

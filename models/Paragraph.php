@@ -2,10 +2,9 @@
 
 namespace app\models;
 
-use phpDocumentor\Reflection\Types\Parent_;
-use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "paragraph".
@@ -43,6 +42,12 @@ class Paragraph extends CtkData
     {
         $id = explode("_", $id);
         return self::findOne(['article' => $id[0], 'rank' => $id[1]]);
+    }
+
+    public static function nearest($date)
+    {
+        $pars=Article::find()->orderBy(new Expression("ABS(DATEDIFF(`date`,'$date'))"))->one()->paragraphs;
+        return end($pars);
     }
 
     public function afterFind()
@@ -171,14 +176,13 @@ class Paragraph extends CtkData
             ->viaTable('paragraph_knowledge', ['paragraph' => 'id']);
     }
 
-    public function getCtkId()
-    {
-        return $this->article . '_' . $this->rank;
-    }
-
     public function __toString()
     {
         return $this->getCtkId();
     }
 
+    public function getCtkId()
+    {
+        return $this->article . '_' . $this->rank;
+    }
 }

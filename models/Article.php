@@ -7,6 +7,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "article".
@@ -90,4 +91,5 @@ class Article extends CtkData
     {
         return $this->hasMany(Paragraph::class, ['article' => 'id'])->orderBy(["paragraph.rank" => SORT_ASC]);
     }
+
 }

@@ -31,7 +31,7 @@ class CtkApi
     {
         return $this->_client->createRequest()
             ->setMethod('GET')
-            ->setUrl('http://localhost:8601/sample')
+            ->setUrl('http://fcheck.fel.cvut.cz:8601/sample')
             ->send()
             ->getData();
     }
