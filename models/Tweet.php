@@ -53,7 +53,7 @@ class Tweet extends \yii\db\ActiveRecord
 
     public static function find()
     {
-        return parent::find()->where(['deleted' => 0]);
+        return parent::find()->where(['deleted' => 0])->andWhere(['<=','date', '2019-03-03 05:00:00']);
     }
 
     /**
