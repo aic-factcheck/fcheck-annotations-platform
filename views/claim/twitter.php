@@ -75,7 +75,7 @@ $this->title = 'Extrakce tvrzení z Twitteru';
 
     <?php $form = ActiveForm::begin([
         'id' => 'claim-form',
-        'action' => ['claim/twitter', 'sandbox' => $sandbox, 'tweet' => $model->tweet->id]
+        'action' => ['claim/extract-tweet', 'sandbox' => $sandbox, 'tweet' => $model->tweet->id]
     ]); ?>
 
     <div class="card bg-light mb-3 tvrzeni">
