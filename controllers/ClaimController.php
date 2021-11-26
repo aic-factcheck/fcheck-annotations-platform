@@ -56,7 +56,7 @@ class ClaimController extends Controller
     {
         $model = new TwitterForm($sandbox, $tweet);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->refresh();
+            return $this->redirect(['claim/extract-tweet']);
         }
         return $this->render('twitter', ['sandbox' => $sandbox, 'model' => $model]);
     }
