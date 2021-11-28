@@ -43,7 +43,7 @@ AppAsset::register($this);
                 'class' => 'navbar-expand-lg navbar-light bg-light mb-3',
             ],
         ]);
-        $quotas = [3, 7, 7, 35];
+        $quotas = [Yii::$app->params['quotas']['t1a'], Yii::$app->params['quotas']['t1b'], Yii::$app->params['quotas']['t2a'], Yii::$app->params['quotas']['t2b']];
         for ($i = 0; $i <= 3; $i++) {
             $quotas[$i] =  $quotas[$i] * (Yii::$app->user->isGuest?1:Yii::$app->user->identity->getCoef());
         }

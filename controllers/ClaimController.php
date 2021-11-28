@@ -2,11 +2,17 @@
 
 namespace app\controllers;
 
+use app\helpers\CtkApi;
 use app\models\ClaimForm;
 use app\models\MutateForm;
+use app\models\Paragraph;
+use app\models\Tweet;
+use app\models\TweetKnowledge;
 use app\models\TwitterForm;
 use Yii;
+use yii\db\Expression;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class ClaimController extends Controller
@@ -61,10 +67,27 @@ class ClaimController extends Controller
         return $this->render('twitter', ['sandbox' => $sandbox, 'model' => $model]);
     }
 
+    public function actionShowDictionary($sandbox = false, $tweet = false)
+    {
+        if (!$tweet) {
+            $tweet = (Tweet::find()->orderBy(new Expression('rand()'))->one())->id;
+        }
+        $ctkApi = new CtkApi();
+        $model = new TwitterForm($sandbox, $tweet);
+        TweetKnowledge::deleteAll(['tweet' => $model->tweet->id]);
+        $paragraph = Paragraph::nearest($model->tweet->created_at);
+        $dictionary = $ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ArrayHelper::merge(['q' => $model->tweet->text], $_GET));
+        TweetKnowledge::fromDictionary($model->tweet, $dictionary);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['claim/extract-tweet']);
+        }
+        return $this->render('twitter', ['sandbox' => true, 'model' => $model]);
+    }
+
     public function actionMutate($sandbox = false)
     {
         $model = new MutateForm();
-        if ($model->claim == null){
+        if ($model->claim == null) {
             Yii::$app->session->addFlash("success", "Obměny všech Vašich tvrzení byly vyplněny 😊 Nyní se můžete pustit do tvorby dalších!");
             return $this->redirect(['claim/annotate', 'sandbox' => $sandbox]);
         }
@@ -73,7 +96,6 @@ class ClaimController extends Controller
         }
         return $this->render('mutate', ['model' => $model, 'sandbox' => $sandbox]);
     }
-
 
 
     /**

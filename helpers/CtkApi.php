@@ -9,6 +9,8 @@ use yii\httpclient\Client;
 
 class CtkApi
 {
+    const SERVER = 'http://fcheck.fel.cvut.cz';
+    const PORT = 8601;
     const CONFIG = ["nerlimit" => 2, "k" => 2, "npts" => 2, "older" => 1];
     private $_client;
 
@@ -22,7 +24,7 @@ class CtkApi
         $params = ArrayHelper::merge(self::CONFIG, $options);
         return $this->_client->createRequest()
             ->setMethod('GET')
-            ->setUrl(ArrayHelper::merge(["http://fcheck.fel.cvut.cz:8601/dictionary/$ctk_id"], $params))
+            ->setUrl(ArrayHelper::merge([self::SERVER.":".self::PORT."/dictionary/$ctk_id"], $params))
             ->send()
             ->getData();
     }
@@ -31,7 +33,7 @@ class CtkApi
     {
         return $this->_client->createRequest()
             ->setMethod('GET')
-            ->setUrl('http://fcheck.fel.cvut.cz:8601/sample')
+            ->setUrl(self::SERVER.":".self::PORT."/sample")
             ->send()
             ->getData();
     }

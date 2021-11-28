@@ -48,7 +48,7 @@ $this->title = 'Extrakce tvrzení z Twitteru';
             <div class="row">
 
                 <div class="col-md-6">
-                    <h4 class="card-title">Zdrojový Tweet</h4>
+                    <h4 class="card-title">Zdrojový Tweet (<?=$sandbox?$model->tweet->id:''?>)</h4>
                     <blockquote class="twitter-tweet" data-dnt="true">
                         <a href="https://twitter.com/x/status/<?= $model->tweet->id ?>"></a>
                     </blockquote>

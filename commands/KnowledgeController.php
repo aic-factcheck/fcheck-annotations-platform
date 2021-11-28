@@ -17,6 +17,8 @@ use app\models\ParagraphKnowledge;
 use app\models\Tweet;
 use app\models\TweetKnowledge;
 use Exception;
+use PDOException;
+use yii\base\ErrorException;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\db\Expression;
@@ -100,12 +102,16 @@ class KnowledgeController extends Controller
     public function actionFetchByTweet()
     {
         $ctkApi = new CtkApi();
-        $tweets = Tweet::find()->orderBy(new Expression('rand()'))->limit(150)->all();
+        $tweets = Tweet::find()->orderBy(new Expression('rand()'))->limit(15000)->all();
         foreach ($tweets as $tweet) {
-            TweetKnowledge::deleteAll(['tweet' => $tweet->id]);
-            $paragraph = Paragraph::nearest($tweet->created_at);
-            $dictionary = $ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $tweet->text, "nerlimit" => 3, "k" => 3, "npts" => 2, "older" => 1]);
-            TweetKnowledge::fromDictionary($tweet, $dictionary);
+            try {
+                //TweetKnowledge::deleteAll(['tweet' => $tweet->id]);
+                $paragraph = Paragraph::nearest($tweet->created_at);
+                $dictionary = $ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $tweet->text, "nerlimit" => 3, "k" => 3, "npts" => 2, "older" => 1]);
+                TweetKnowledge::fromDictionary($tweet, $dictionary);
+            } catch (PDOException $e){
+                echo $e->getTraceAsString();
+            }
         }
     }
 }
