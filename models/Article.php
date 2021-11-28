@@ -3,11 +3,8 @@
 namespace app\models;
 
 use DateTime;
-use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
-use yii\db\Expression;
 
 /**
  * This is the model class for table "article".
@@ -22,6 +19,8 @@ use yii\db\Expression;
  */
 class Article extends CtkData
 {
+    public $_interest_id = null;
+    public $_pars_tmp = [];
 
     /**
      * {@inheritdoc}
@@ -31,16 +30,24 @@ class Article extends CtkData
         return 'article';
     }
 
-    public static function fromSample($sample)
+    public static function fromSample($sample, $save = true)
     {
         if (($result = self::findOne($sample["did"])) == null) {
             $result = new Article([
                 "id" => $sample["did"],
                 "title" => $sample["title"],
                 "date" => (new DateTime($sample["date"]))->format("Y-m-d h:i:s")]);
-            $result->save();
+            if ($save) {
+                $result->save();
+            }
             foreach ($sample["blocks"] as $id => $text) {
-                (new Paragraph(["article" => $result->id, "rank" => explode("_", $id)[1], "text" => $text]))->save();
+                if ($save) {
+                    $p = new Paragraph(["article" => $result->id, "rank" => explode("_", $id)[1], "text" => $text]);
+                    $p->save();
+                } else {
+                    $p = new Paragraph(["rank" => explode("_", $id)[1], "text" => $text]);
+                    $result->_pars_tmp[] = $p;
+                }
             }
         }
         return $result;

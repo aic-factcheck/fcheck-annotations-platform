@@ -46,7 +46,7 @@ class Paragraph extends CtkData
 
     public static function nearest($date)
     {
-        $pars=Article::find()->orderBy(new Expression("ABS(DATEDIFF(`date`,'$date'))"))->one()->paragraphs;
+        $pars=Article::find()->andWhere(['>=','date',$date])->orderBy('date')->one()->paragraphs;
         return end($pars);
     }
 

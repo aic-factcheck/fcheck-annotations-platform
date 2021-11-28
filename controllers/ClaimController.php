@@ -67,7 +67,7 @@ class ClaimController extends Controller
         return $this->render('twitter', ['sandbox' => $sandbox, 'model' => $model]);
     }
 
-    public function actionShowDictionary($sandbox = false, $tweet = false)
+    public function actionShowDictionary($sandbox = false, $tweet = false, $k_latest=null)
     {
         if (!$tweet) {
             $tweet = (Tweet::find()->orderBy(new Expression('rand()'))->one())->id;
@@ -77,7 +77,7 @@ class ClaimController extends Controller
         TweetKnowledge::deleteAll(['tweet' => $model->tweet->id]);
         $paragraph = Paragraph::nearest($model->tweet->created_at);
         $dictionary = $ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ArrayHelper::merge(['q' => $model->tweet->text], $_GET));
-        TweetKnowledge::fromDictionary($model->tweet, $dictionary);
+        TweetKnowledge::fromDictionary($model->tweet, $dictionary, $k_latest);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['claim/extract-tweet']);
         }

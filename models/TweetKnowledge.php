@@ -2,7 +2,8 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -15,14 +16,49 @@ use yii\helpers\ArrayHelper;
  * @property Tweet $tweet0
  * @property Paragraph $knowledge0
  */
-class TweetKnowledge extends \yii\db\ActiveRecord
+class TweetKnowledge extends ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'tweet_knowledge';
+    }
+
+    public static function fromDictionary($tweet, $dictionary, $limit = null)
+    {
+        $tweetTimestamp = strtotime($tweet->created_at);
+
+        $timeProxComparator = function ($a, $b) use ($tweetTimestamp) {
+            return ($tweetTimestamp - strtotime($a->date)) - ($tweetTimestamp - strtotime($b->date));
+        };
+
+        $articles = [];
+        $used_dids = [];
+        foreach (ArrayHelper::merge($dictionary["semantic_blocks"], $dictionary["ner_blocks"]) as $sample) {
+            if(in_array($sample["did"],$used_dids)) continue;
+            $a = Article::fromSample($sample, false);
+            $a->_interest_id = $sample["id"];
+            $articles[] = $a;
+            $used_dids[] = $sample["did"];
+        }
+        usort($articles, $timeProxComparator);
+        $articles = array_slice($articles, 0, $limit);
+
+        foreach ($articles as $article) {
+            $article->save();
+            foreach($article->_pars_tmp as $par){
+                $par->article = $article->id;
+                $par->save();
+            }
+            (new TweetKnowledge([
+                "tweet" => $tweet->id,
+                "knowledge" => Paragraph::findByCtkId($article->_interest_id)->id,
+                "search_term" => ''
+            ]))->save();
+        }
     }
 
     /**
@@ -55,7 +91,7 @@ class TweetKnowledge extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Tweet0]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getTweet0()
     {
@@ -65,22 +101,10 @@ class TweetKnowledge extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Knowledge0]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getKnowledge0()
     {
         return $this->hasOne(Paragraph::className(), ['id' => 'knowledge']);
-    }
-
-    public static function fromDictionary($tweet, $dictionary)
-    {
-        foreach (ArrayHelper::merge($dictionary["semantic_blocks"], $dictionary["ner_blocks"]) as $sample) {
-            Article::fromSample($sample);
-            (new TweetKnowledge([
-                "tweet" => $tweet->id,
-                "knowledge" => Paragraph::findByCtkId($sample["id"])->id,
-                "search_term" => array_key_exists("search_term", $sample) ? $sample["search_term"] : ''
-            ]))->save();
-        }
     }
 }
