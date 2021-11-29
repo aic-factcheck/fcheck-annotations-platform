@@ -115,7 +115,7 @@ class KnowledgeController extends Controller
         $tweets = Tweet::find()->orderBy(new Expression('rand()'))->limit(15000)->all();
         foreach ($tweets as $tweet) {
             try {
-                //TweetKnowledge::deleteAll(['tweet' => $tweet->id]);
+                if(TweetKnowledge::find()->andWhere(['tweet'=>$tweet->id])->exists()) continue;
                 $paragraph = Paragraph::nearest($tweet->created_at);
                 $dictionary = $ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ArrayHelper::merge(['q' => $tweet->text],$conf));
                 TweetKnowledge::fromDictionary($tweet, $dictionary, $conf["k_latest"]);
