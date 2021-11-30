@@ -38,7 +38,7 @@ $this->title = 'Extrakce tvrzení z Twitteru';
                 která <strong>má smysl ověřovat</strong>.
             </li>
             <li>Pokud to zdrojový Tweet neumožňuje, nebo se Vám zdá nezajímavý, nebojte se
-                ho <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/extract-tweet', 'sandbox' => $sandbox], ['class' => 'btn btn-light btn-sm']) ?>
+                ho <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-light btn-sm']) ?>
             </li>
         </ul>
     </div>
@@ -119,7 +119,7 @@ $this->title = 'Extrakce tvrzení z Twitteru';
     </div>
     <p class="text-right">
         <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
-        <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/extract-tweet', 'sandbox' => $sandbox], ['class' => 'btn btn-light']) ?>
+        <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-light']) ?>
         <?= Html::submitButton('<i class="fas fa-clipboard-check"></i> Odeslat tvrzení', ['class' => 'btn btn-primary']) ?>
     </p>
 
@@ -139,7 +139,7 @@ $this->title = 'Extrakce tvrzení z Twitteru';
                     <ul>
                         <li><strong>Každé vaše tvrzení by mělo být potenciálně zajímavé pro ověřování.</strong> Pokud
                             vás pro daný zdrojový tweet žádné rozumné tvrzení nenapadne, raději
-                            zvolte <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/extract-tweet', 'sandbox' => $sandbox], ['class' => 'btn btn-light btn-sm']) ?>
+                            zvolte <?= Html::a('<i class="fas fa-forward"></i> Přeskočit', ['claim/annotate', 'sandbox' => $sandbox], ['class' => 'btn btn-light btn-sm']) ?>
                             .
                         </li>
                         <li>Extrahujte jednoduchá (dále nedělitelná) tvrzení týkající se některých pojmenovaných entitit

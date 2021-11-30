@@ -25,7 +25,6 @@ $this->title = 'Anotační Platforma FCheck TAČR';
 
                 <?= Html::a('<i class="fab fa-youtube"></i> Tutoriál', ['site/tutorial', 't' => 0], ['class' => 'btn btn-success', 'disabled' => true]) ?>
                 <?= Html::a('<i class="fas fa-asterisk"></i> Začít tvořit tvrzení', ['claim/annotate', 'sandbox' => false], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('<i class="fab fa-twitter"></i> BETA: extrahovat tvrzení z Twitteru', ['claim/extract-tweet', 'sandbox' => false], ['class' => 'btn btn-info']) ?>
         </div>
     </div>
     <?php if (Yii::$app->user->identity->getLastUnmutatedClaim() != null) { ?>

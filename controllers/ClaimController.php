@@ -52,6 +52,7 @@ class ClaimController extends Controller
 
     public function actionAnnotate($sandbox = false, $paragraph = false)
     {
+        if(!$paragraph && random_int(0, 1)) return $this->redirect(['claim/extract-tweet']);
         $model = new ClaimForm($sandbox, $paragraph);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['claim/mutate']);
@@ -63,7 +64,7 @@ class ClaimController extends Controller
     {
         $model = new TwitterForm($sandbox, $tweet);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['claim/extract-tweet']);
+            return $this->redirect(['claim/mutate']);
         }
         return $this->render('twitter', ['sandbox' => $sandbox, 'model' => $model]);
     }

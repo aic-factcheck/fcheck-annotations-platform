@@ -3,11 +3,9 @@
 namespace app\models;
 
 use app\helpers\Helper;
-use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -64,9 +62,8 @@ class Claim extends ActiveRecord
         "negate" => ["Barack Obama navštívil Velkou Británii.", "Obama při svých cestách vynechal Velkou Británii.", "Negace: Velkou Británii nemohl navštívit, když ji vynechal."],
     ];
     const FROM = 0, TO = 1, BECAUSE = 2;
-
-    private $_knowledge = null;
     public $_majority_label = null;
+    private $_knowledge = null;
 
     /**
      * {@inheritdoc}
@@ -74,6 +71,11 @@ class Claim extends ActiveRecord
     public static function tableName()
     {
         return 'claim';
+    }
+
+    public static function find($deleted = 0)
+    {
+        return parent::find()->where(['deleted' => $deleted]);
     }
 
     public function afterFind()
@@ -101,24 +103,20 @@ class Claim extends ActiveRecord
         ];
     }
 
-    public static function find($deleted = 0)
-    {
-        return parent::find()->where(['deleted' => $deleted]);
-    }
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['user', 'paragraph', 'mutated_from', 'sandbox', 'labelled', 'created_at', 'updated_at', 'deleted'], 'integer'],
+            [['user', 'paragraph', 'mutated_from', 'sandbox', 'labelled', 'created_at', 'updated_at', 'deleted', 'tweet'], 'integer'],
             [['claim'], 'required'],
             [['claim', 'ners', 'comment'], 'string'],
             [['mutation_type'], 'string', 'max' => 32],
             [['mutated_from'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::class, 'targetAttribute' => ['mutated_from' => 'id']],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user' => 'id']],
             [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['paragraph' => 'id']],
+            [['tweet'], 'exist', 'skipOnError' => true, 'targetClass' => Tweet::className(), 'targetAttribute' => ['tweet' => 'id']],
         ];
     }
 
@@ -209,23 +207,6 @@ class Claim extends ActiveRecord
             ->viaTable('claim_knowledge', ['claim' => 'id']);
     }
 
-    public function getKnowledge()
-    {
-        if ($this->_knowledge == null) {
-            $this->_knowledge = [];
-            foreach (ArrayHelper::merge($this->claimKnowledge, $this->paragraph0->knowledge) as $paragraph) {
-                $this->_knowledge[$paragraph->id] = $paragraph;
-            }
-        }
-        $keys = array_keys($this->_knowledge);
-        shuffle($keys);
-        $shuffled = [];
-        foreach ($keys as $key) {
-            $shuffled[$key] = $this->_knowledge[$key];
-        }
-        return $shuffled;
-    }
-
     public function getEvidenceSets($param = 'ctkId', $simulate_nei_evidence = true, $condition = "double", $len_only = false)
     {
         $result = ["SUPPORTS" => [], "REFUTES" => [], "NOT ENOUGH INFO" => []];
@@ -258,6 +239,23 @@ class Claim extends ActiveRecord
             $result[$key] = array_unique(array_values($value), SORT_REGULAR);
         }
         return $result;
+    }
+
+    public function getKnowledge()
+    {
+        if ($this->_knowledge == null) {
+            $this->_knowledge = [];
+            foreach (ArrayHelper::merge($this->claimKnowledge, ($this->paragraph0 == null ? $this->tweet0->knowledge : $this->paragraph0->knowledge)) as $paragraph) {
+                $this->_knowledge[$paragraph->id] = $paragraph;
+            }
+        }
+        $keys = array_keys($this->_knowledge);
+        shuffle($keys);
+        $shuffled = [];
+        foreach ($keys as $key) {
+            $shuffled[$key] = $this->_knowledge[$key];
+        }
+        return $shuffled;
     }
 
     public function getEvidenceSets2($label = "SUPPORTS", $attr = "ctkId", $simulateFever = false, $simulateNeiEvidence = false)
@@ -317,5 +315,15 @@ class Claim extends ActiveRecord
             return null;
         }
         return $this->labels[0]->label;
+    }
+
+    /**
+     * Gets query for [[Tweet0]].
+     *
+     * @return ActiveQuery
+     */
+    public function getTweet0()
+    {
+        return $this->hasOne(Tweet::className(), ['id' => 'tweet']);
     }
 }

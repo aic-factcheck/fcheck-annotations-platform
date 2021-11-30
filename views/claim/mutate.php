@@ -13,7 +13,7 @@ use yii\bootstrap4\Html;
 
 
 $this->title = 'Tvorba tvrzení';
-Helper::setEntities($ners = $model->claim->paragraph0->ners);
+Helper::setEntities($ners = $model->claim->paragraph0 == null ? [] : $model->claim->paragraph0->ners);
 ?>
 <div class="container">
     <div class="ng-scope sandbox">
@@ -39,10 +39,12 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                         přečtěte <?= Html::button('<i class="fas fa-info"></i> Pokyny', ['class' => 'btn btn-info btn-sm', 'data' => ['toggle' => 'modal', 'target' => '#guidelines']]) ?>
                     </li>
                     <li>
-                        <i class="fas fa-exclamation"></i> Tvořte <strong>jen taková tvrzení</strong>, která <strong>má smysl ověřovat</strong>.
+                        <i class="fas fa-exclamation"></i> Tvořte <strong>jen taková tvrzení</strong>, která <strong>má
+                            smysl ověřovat</strong>.
                     </li>
                     <li>
-                        Není tedy třeba využít všech 6 způsobů obměny tvrzení, stačí zhruba <strong>3</strong>, klidně i pouze <strong>1</strong>.
+                        Není tedy třeba využít všech 6 způsobů obměny tvrzení, stačí zhruba <strong>3</strong>, klidně i
+                        pouze <strong>1</strong>.
                     </li>
                 </ul>
             </div>
@@ -58,31 +60,43 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                         </div>
                         <div class="modal-body">
                             <p>Cílem tohoto úkolu je <strong>vygenerovat obměny tvrzení</strong>. Obměny mohou být
-                                <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů obměn jsou uvedeny
+                                <strong>pravdivé či nepravdivé</strong>. Podrobnější instrukce ohledně typů obměn jsou
+                                uvedeny
                                 dále.</p>
                             <ul>
                                 <li><strong>Tvořte jen taková tvrzení, která má smysl ověřovat.</strong></li>
-                                <li>Není tedy třeba využít všech 6 způsobů obměny tvrzení, stačí zhruba <strong>3</strong>, klidně i pouze <strong>1</strong>.</li>
-                                <li>Použijte <strong>původní tvrzení</strong> a poskytnuté související články jako základ pro
+                                <li>Není tedy třeba využít všech 6 způsobů obměny tvrzení, stačí zhruba
+                                    <strong>3</strong>, klidně i pouze <strong>1</strong>.
+                                </li>
+                                <li>Použijte <strong>původní tvrzení</strong> a poskytnuté související články jako
+                                    základ pro
                                     jednotlivé
                                     obměny.<strong class="ng-binding"></strong></li>
                                 <li>Na každou entitu se odkazujte přímo (tzn. zájmena by neměla být užívána).</li>
-                                <li>Mírné variace jmen a názvů jsou přijatelné (např. John F Kennedy, JFK, prezident Kennedy).</li>
-                                <li><strong>Vyvarujte se</strong> vágního, neurčitého a příliš opatrného jazyka (např. mohlo by,
+                                <li>Mírné variace jmen a názvů jsou přijatelné (např. John F Kennedy, JFK, prezident
+                                    Kennedy).
+                                </li>
+                                <li><strong>Vyvarujte se</strong> vágního, neurčitého a příliš opatrného jazyka (např.
+                                    mohlo by,
                                     asi, snad, pravděpodobně atd.)
                                 </li>
                                 <li>Při vytváření obměn <strong>můžete zahrnout vlastní znalosti o světě</strong>.</li>
                                 <li>Obměny, které vymyslíte, by měly být <strong>objektivní</strong> a <strong>ověřitelné</strong>
                                     pomocí veřejně dostupných informací a všeobecných znalostí.
                                 </li>
-                                <li>Dodržujte správné psaní velkých počátečních písmen u názvů (např. Indie a nikoliv indie).</li>
-                                <li>Věty ukončujte tečkou.</li>
-                                <li>Čísla mohou být uváděna v libovolném korektním formátu (pro menší čísla lze i slovy).
+                                <li>Dodržujte správné psaní velkých počátečních písmen u názvů (např. Indie a nikoliv
+                                    indie).
                                 </li>
-                                <li>Další informace jsou poskytnuty ve formě <em>znalostního rámce</em>, který by měl umožnit tvořit složitější tvrzení závislá na více článcích.
+                                <li>Věty ukončujte tečkou.</li>
+                                <li>Čísla mohou být uváděna v libovolném korektním formátu (pro menší čísla lze i
+                                    slovy).
+                                </li>
+                                <li>Další informace jsou poskytnuty ve formě <em>znalostního rámce</em>, který by měl
+                                    umožnit tvořit složitější tvrzení závislá na více článcích.
                                 </li>
                                 <!--<li>Additional world knowledge is given to the you in the form of a dictionary. This allows for more complex claims to be generated in a structured manner with information that can be backed up from Wikipedia</li>-->
-                                <li>Některé z poskytnutých textů nemusejí být přesné či pravdivé. Přesto jsou to validní kandidáti -
+                                <li>Některé z poskytnutých textů nemusejí být přesné či pravdivé. Přesto jsou to validní
+                                    kandidáti -
                                     v této fázi není vašim úkolem ověřovat danou informaci.
                                 </li>
                             </ul>
@@ -94,78 +108,111 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                 </div>
             </div>
 
-
-
-            <div class="card bg-light mb-3 zdrojovy-clanek">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-5"><h4 class="card-title">Zdrojový článek</h4>
-                            <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card bg-white">
-                                <div class="card-body">
-                                    <h5 class="card-title d-inline"><?= $model->claim->paragraph0->article0->get('title') ?> </h5>
-                                    <?= Yii::$app->formatter->asDatetime($model->claim->paragraph0->article0->date) ?>
+            <?php
+            if ($model->claim->paragraph0 != null) {
+                ?>
+                <div class="card bg-light mb-3 zdrojovy-clanek">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-5"><h4 class="card-title">Zdrojový článek</h4>
+                                <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card bg-white">
+                                    <div class="card-body">
+                                        <h5 class="card-title d-inline"><?= $model->claim->paragraph0->article0->get('title') ?> </h5>
+                                        <?= Yii::$app->formatter->asDatetime($model->claim->paragraph0->article0->date) ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="card bg-light mb-3 zdrojova-veta">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-5"><h4 class="card-title">Zdrojový odstavec</h4>
-                            <p class="card-text">Z tohoto odstavce a příslušného článku vycházejte při tvorbě tvrzení o
-                                jedné z
-                                jmenných entit.<br/>
-                                <em>(<?= implode(", ", $ners) ?>)</em></p>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card bg-white">
-                                <div class="card-body">
-                                    <?php
-                                    foreach ($model->claim->paragraph0->article0->paragraphs as $paragraph) {
-                                        if ($paragraph->id == $model->claim->paragraph0->id) {
-                                            echo Html::tag('p', Html::tag("strong", $paragraph->get('text')));
-                                        } else {
-                                            echo Html::tag("p", $paragraph->get('text'), ["class" => "context"]);
-                                        }
-                                    } ?>
-                                    <?= Helper::expandLink('Zobrazit kontext', '.context', 'Skrýt kontext') ?>
+                <div class="card bg-light mb-3 zdrojova-veta">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-5"><h4 class="card-title">Zdrojový odstavec</h4>
+                                <p class="card-text">Z tohoto odstavce a příslušného článku vycházejte při tvorbě tvrzení o
+                                    jedné z
+                                    jmenných entit.<br/>
+                                    <em>(<?= implode(", ", $ners) ?>)</em></p>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card bg-white">
+                                    <div class="card-body">
+                                        <?php
+                                        foreach ($model->claim->paragraph0->article0->paragraphs as $paragraph) {
+                                            if ($paragraph->id == $model->claim->paragraph0->id) {
+                                                echo Html::tag('p', Html::tag("strong", $paragraph->get('text')));
+                                            } else {
+                                                echo Html::tag("p", $paragraph->get('text'), ["class" => "context"]);
+                                            }
+                                        } ?>
+                                        <?= Helper::expandLink('Zobrazit kontext', '.context', 'Skrýt kontext') ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card bg-light mb-3 slovnicek">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-5"><h4 class="card-title">Znalostní rámec</h4>
-                            <p class="card-text">Rozklikněte název článku pro zobrazení části, která byla vybrána jako
-                                <strong>relevantní</strong> pro danou zdrojovou větu.</p>
-                            <p class="card-text">Články ve <em>znalostním rámci</em> byly vybrány podle frekvence
-                                výskytu
-                                společných pojmenovaných entit, nebo pomocí sémantického vyhledávání vět z původního
-                                článku.</p>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card bg-white">
-                                <div class="card-body">
-                                    <?php foreach ($model->claim->paragraph0->knowledge as $paragraph) {
-                                        echo Helper::dictionaryItem($paragraph);
-                                    } ?>
+                <div class="card bg-light mb-3 slovnicek">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-5"><h4 class="card-title">Znalostní rámec</h4>
+                                <p class="card-text">Rozklikněte název článku pro zobrazení části, která byla vybrána jako
+                                    <strong>relevantní</strong> pro danou zdrojovou větu.</p>
+                                <p class="card-text">Články ve <em>znalostním rámci</em> byly vybrány podle frekvence
+                                    výskytu
+                                    společných pojmenovaných entit, nebo pomocí sémantického vyhledávání vět z původního
+                                    článku.</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card bg-white">
+                                    <div class="card-body">
+                                        <?php foreach ($model->claim->paragraph0->knowledge as $paragraph) {
+                                            echo Helper::dictionaryItem($paragraph);
+                                        } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <?php
+            }else{
+                ?>
+                <div class="card bg-light mb-3 zdrojovy-clanek">
+                    <div class="card-body">
+                        <div class="row">
 
+                            <div class="col-md-6">
+                                <h4 class="card-title">Zdrojový Tweet <?= $sandbox ? '(' . $model->claim->tweet0->id . ')' : '' ?></h4>
+                                <blockquote class="twitter-tweet" data-dnt="true">
+                                    <a href="https://twitter.com/x/status/<?= $model->claim->tweet0->id ?>"></a>
+                                </blockquote>
 
+                            </div>
+
+                            <div class="col-md-6"><h4 class="card-title">Znalostní rámec</h4>
+                                <p class="card-text">Rozklikněte název článku pro zobrazení části, která byla vybrána jako
+                                    <strong>relevantní</strong> pro daný zdrojový tweet.</p>
+                                <p class="card-text">Články ve <em>znalostním rámci</em> byly vybrány podle frekvence výskytu
+                                    společných pojmenovaných entit (jména osob, obcí, firem apod.), nebo pomocí sémantického
+                                    vyhledávání odstavců z původního článku.</p>
+                                <div class="card bg-white">
+                                    <div class="card-body">
+                                        <?php foreach ($model->claim->tweet0->knowledge as $paragraph) {
+                                            echo Helper::dictionaryItem($paragraph);
+                                        } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
             <div class="card bg-primary text-white mb-3 zdrojovy-vyrok">
                 <div class="card-body">
                     <div class="row">
@@ -210,7 +257,7 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
                                             <p><strong>Obměna:</strong>
                                                 <?= Claim::MUTATION_EXAMPLES[$mutation][Claim::TO] ?></p>
                                             <p><em><strong>Vysvětlení</strong>
-                                                <?= Claim::MUTATION_EXAMPLES[$mutation][Claim::BECAUSE] ?></em></p>
+                                                    <?= Claim::MUTATION_EXAMPLES[$mutation][Claim::BECAUSE] ?></em></p>
                                         </div>
                                     </div>
                                 </div>
@@ -234,3 +281,5 @@ Helper::setEntities($ners = $model->claim->paragraph0->ners);
         </div>
     </div>
 </div>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

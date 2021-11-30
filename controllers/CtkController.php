@@ -65,7 +65,7 @@ class CtkController extends Controller
     public function actionAugmentKnowledge($claim)
     {
         $claim = Claim::findOne($claim);
-        $paragraph = $claim->paragraph0;
+        $paragraph = $claim->paragraph0 ?: Paragraph::nearest($claim->tweet0);
         $dictionary = $this->_ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ['q' => $claim->claim]);
         ClaimKnowledge::fromDictionary($claim, $dictionary);
         $claim->ners = $dictionary['ners'];

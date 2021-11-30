@@ -41,6 +41,7 @@ class MutateForm extends Model
                 foreach (explode("\n", $this->mutations[$mutation]) as $claim_) {
                     $claim = new Claim([
                         'paragraph' => $this->claim->paragraph,
+                        'tweet' => $this->claim->tweet,
                         'claim' => $claim_,
                         'mutation_type' => $mutation,
                         'mutated_from' => $this->claim->id,
