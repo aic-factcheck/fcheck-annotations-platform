@@ -49,11 +49,14 @@ class CtkController extends Controller
         return $this->render('index', ['article' => Article::fromSample($sample), "target" => (int)explode("_", $sample["id"])[1]]);
     }
 
-    public function actionNominate($paragraph)
+    public function actionNominate($paragraph, $k_latest=4)
     {
         $paragraph = Paragraph::findOne($paragraph);
-        $dictionary = $this->_ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank);
-        ParagraphKnowledge::fromDictionary($paragraph, $dictionary);
+        $conf = [
+            "k"=>3,"nerlimit"=>256,"prek"=>1024,"niter"=>12,"npts"=>128,"notitles"=>0,"randompts"=>0
+        ];
+        $dictionary = $this->_ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, $conf);
+        ParagraphKnowledge::fromDictionary($paragraph, $dictionary, 5);
         $paragraph->ners = $dictionary['ners'];
         $paragraph->candidate_of = Yii::$app->user->id;
         return $paragraph->save();

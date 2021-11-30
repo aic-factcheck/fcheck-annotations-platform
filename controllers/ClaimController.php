@@ -6,6 +6,7 @@ use app\helpers\CtkApi;
 use app\models\ClaimForm;
 use app\models\MutateForm;
 use app\models\Paragraph;
+use app\models\ParagraphKnowledge;
 use app\models\Tweet;
 use app\models\TweetKnowledge;
 use app\models\TwitterForm;
@@ -67,21 +68,37 @@ class ClaimController extends Controller
         return $this->render('twitter', ['sandbox' => $sandbox, 'model' => $model]);
     }
 
-    public function actionShowDictionary($sandbox = false, $tweet = false, $k_latest=null)
+    public function actionShowDictionary($sandbox = false, $tweet = false, $k_latest = null, $paragraph = false)
     {
-        if (!$tweet) {
-            $tweet = (Tweet::find()->orderBy(new Expression('rand()'))->one())->id;
-        }
         $ctkApi = new CtkApi();
-        $model = new TwitterForm($sandbox, $tweet);
-        TweetKnowledge::deleteAll(['tweet' => $model->tweet->id]);
-        $paragraph = Paragraph::nearest($model->tweet->created_at);
-        $dictionary = $ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ArrayHelper::merge(['q' => $model->tweet->text], $_GET));
-        TweetKnowledge::fromDictionary($model->tweet, $dictionary, $k_latest);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['claim/extract-tweet']);
+        if ($paragraph) {
+            if ($paragraph == 1) {
+                $paragraph = (Paragraph::find()->andWhere(['not', ['candidate_of' => null]])->orderBy(new Expression('rand()'))->one())->id;
+            }
+            $model = new ClaimForm($sandbox, $paragraph);
+            ParagraphKnowledge::deleteAll(['paragraph'=>$model->paragraph->id]);
+            $dictionary = $ctkApi->getDictionary($model->paragraph->article . '_' . $model->paragraph->rank, $_GET);
+            ParagraphKnowledge::fromDictionary($model->paragraph, $dictionary, $k_latest);
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['claim/mutate']);
+            }
+            return $this->render('annotate', ['sandbox' => $sandbox, 'model' => $model]);
+
+        } else {
+            if (!$tweet) {
+                $tweet = (Tweet::find()->orderBy(new Expression('rand()'))->one())->id;
+            }
+            $model = new TwitterForm($sandbox, $tweet);
+            TweetKnowledge::deleteAll(['tweet' => $model->tweet->id]);
+            $paragraph = Paragraph::nearest($model->tweet->created_at);
+            $dictionary = $ctkApi->getDictionary($paragraph->article . '_' . $paragraph->rank, ArrayHelper::merge(['q' => $model->tweet->text], $_GET));
+            TweetKnowledge::fromDictionary($model->tweet, $dictionary, $k_latest);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['claim/extract-tweet']);
+            }
+            return $this->render('twitter', ['sandbox' => true, 'model' => $model]);
         }
-        return $this->render('twitter', ['sandbox' => true, 'model' => $model]);
     }
 
     public function actionMutate($sandbox = false)

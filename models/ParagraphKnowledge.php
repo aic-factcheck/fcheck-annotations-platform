@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
@@ -28,7 +27,45 @@ class ParagraphKnowledge extends ActiveRecord
         return 'paragraph_knowledge';
     }
 
-    public static function fromDictionary($paragraph, $dictionary)
+    public static function fromDictionary($paragraph, $dictionary, $limit = null)
+    {
+        if ($limit == null) {
+            self::fromDictionary2($paragraph, $dictionary);
+            return;
+        }
+        $parTimestamp = strtotime($paragraph->article0->date);
+
+        $timeProxComparator = function ($a, $b) use ($parTimestamp) {
+            return ($parTimestamp - strtotime($a->date)) - ($parTimestamp - strtotime($b->date));
+        };
+
+        $articles = [];
+        $used_dids = [];
+        foreach (ArrayHelper::merge($dictionary["semantic_blocks"], $dictionary["ner_blocks"]) as $sample) {
+            if (in_array($sample["did"], $used_dids)) continue;
+            $a = Article::fromSample($sample, false);
+            $a->_interest_id = $sample["id"];
+            $articles[] = $a;
+            $used_dids[] = $sample["did"];
+        }
+        usort($articles, $timeProxComparator);
+        $articles = array_slice($articles, 0, $limit);
+
+        foreach ($articles as $article) {
+            $article->save();
+            foreach ($article->_pars_tmp as $par) {
+                $par->article = $article->id;
+                $par->save();
+            }
+            (new ParagraphKnowledge([
+                "paragraph" => $paragraph->id,
+                "knowledge" => Paragraph::findByCtkId($article->_interest_id)->id,
+                "search_term" => ''
+            ]))->save();
+        }
+    }
+
+    public static function fromDictionary2($paragraph, $dictionary)
     {
         foreach (ArrayHelper::merge($dictionary["semantic_blocks"], $dictionary["ner_blocks"]) as $sample) {
             Article::fromSample($sample);
