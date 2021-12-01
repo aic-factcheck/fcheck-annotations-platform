@@ -37,7 +37,7 @@ $labels1 = Yii::$app->db->createCommand($labels1)->queryScalar();
 $hiscore = [];
 $fsv = ['between', 'user', 9, 73];
 foreach (User::find()->where($display)->all() as $user) {
-    if ($user->id == 110) continue;
+    if ($user->id == 110 || $user->id == 172) continue;
     $u = [$user,
         Claim::find()->where(['user' => $user->id,])->andWhere(['IS', 'mutation_type', null])->count(),
         Claim::find()->where(['user' => $user->id,])->andWhere(['IS NOT', 'mutation_type', null])->count(),
