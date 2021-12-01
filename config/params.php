@@ -20,9 +20,9 @@ return [
     ],
     'quotas' => [
         't1a' => 3,
-        't1b' => 7,
-        't2a' => 7,
-        't2b' => 35
+        't1b' => 13,
+        't2a' => 4,
+        't2b' => 32
     ]
     //'sandbox' => json_decode(file_get_contents(__DIR__ . '/datasets/sandbox.json'),true),
     //'live' => json_decode(file_get_contents(__DIR__ . '/datasets/live.json'),true),

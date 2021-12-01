@@ -81,6 +81,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['quota_coef'], 'integer'],
             [['username', 'password'], 'required'],
             [['username', 'password', 'note'], 'string', 'max' => 64],
             [['username'], 'unique'],
@@ -165,6 +166,6 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getCoef()
     {
-        return ($this->getId() == 137 || $this->getId() == 136 || $this->getId() == 119)?2:1;
+        return $this->quota_coef;
     }
 }

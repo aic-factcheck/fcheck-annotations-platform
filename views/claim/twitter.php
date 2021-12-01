@@ -16,7 +16,7 @@ $this->title = 'Extrakce tvrzení z Twitteru';
 
 ?>
 <div class="container">
-    <h1>Tvorba tvrzení (Ú<sub>1</sub>c)</h1>
+    <h1>Tvorba tvrzení (Ú<sub>1</sub>a)</h1>
     <?php if ($sandbox) { ?>
         <div>
             <h4 style="color:red; margin-bottom:0;">Zkušební verze</h4>
