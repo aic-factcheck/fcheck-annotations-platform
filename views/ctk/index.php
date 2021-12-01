@@ -6,21 +6,28 @@
 
 /* @var $target int */
 
-use app\helpers\Helper;
 use app\models\Article;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = 'Předvýběr kandidátních vět';
-$baseUrl = Url::to(['ctk/nominate','paragraph'=>'']);
+$baseUrl = Url::to(['ctk/nominate', 'paragraph' => '']);
 $this->registerJs(<<<JS
 $(".paragraph-selector").click(function() {
     var request = $.ajax({
       url: '$baseUrl'+$(this).data('id'),
       method: "GET"
     });
-    location.reload();
-})
+    // location.reload();
+});
+
+$(document).ready(function() {
+    $(document).keydown(function (e) {
+      if ((e.ctrlKey||e.metaKey) && e.keyCode == 13) {
+        $(".suggested").trigger('click');
+      }
+    });
+});
 JS
 );
 ?>
@@ -62,7 +69,8 @@ JS
             <?php
             foreach ($article->paragraphs as $paragraph) {
                 ?>
-                <div class="card bg-white mb-2 paragraph-selector" data-id="<?= $paragraph->id ?>">
+                <div class="card bg-white mb-2 paragraph-selector <?= $paragraph->rank == $target ? "suggested" : '' ?>"
+                     data-id="<?= $paragraph->id ?>">
                     <div class="card-body text-block <?= $paragraph->rank == $target ? "bg-success" : '' ?>">
                         <?= $paragraph->get('text') ?>
                     </div>
@@ -74,3 +82,4 @@ JS
     </div>
 </div>
 </div>
+<script src="https://raw.githubusercontent.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js"></script>

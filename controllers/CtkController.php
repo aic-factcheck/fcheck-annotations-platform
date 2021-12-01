@@ -10,6 +10,7 @@ use app\models\ConditionKnowledge;
 use app\models\Label;
 use app\models\Paragraph;
 use app\models\ParagraphKnowledge;
+use app\models\ParagraphQueue;
 use yii\helpers\ArrayHelper;
 use yii\httpclient\Client;
 use Yii;
@@ -45,7 +46,7 @@ class CtkController extends Controller
 
     public function actionIndex()
     {
-        $sample = $this->_ctkApi->getSample();
+        $sample = $this->_ctkApi->getParagraph(ParagraphQueue::dequeue());
         return $this->render('index', ['article' => Article::fromSample($sample), "target" => (int)explode("_", $sample["id"])[1]]);
     }
 

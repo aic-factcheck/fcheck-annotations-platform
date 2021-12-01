@@ -9,7 +9,7 @@ use yii\httpclient\Client;
 
 class CtkApi
 {
-    const SERVER = 'http://fcheck.fel.cvut.cz';
+    const SERVER = 'http://127.0.0.1';
     const PORT = 8601;
     const CONFIG = ["nerlimit" => 2, "k" => 2, "npts" => 2, "older" => 1];
     private $_client;
@@ -34,6 +34,15 @@ class CtkApi
         return $this->_client->createRequest()
             ->setMethod('GET')
             ->setUrl(self::SERVER.":".self::PORT."/sample")
+            ->send()
+            ->getData();
+    }
+
+    public function getParagraph($ctk_id)
+    {
+        return $this->_client->createRequest()
+            ->setMethod('GET')
+            ->setUrl(self::SERVER.":".self::PORT."/fetch/$ctk_id")
             ->send()
             ->getData();
     }

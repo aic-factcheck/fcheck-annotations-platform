@@ -125,4 +125,5 @@ class KnowledgeController extends Controller
             }
         }
     }
+
 }
