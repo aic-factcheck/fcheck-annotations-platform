@@ -18,7 +18,7 @@ $(".paragraph-selector").click(function() {
       url: '$baseUrl'+$(this).data('id'),
       method: "GET"
     });
-    // location.reload();
+    location.reload();
 });
 
 $(document).ready(function() {

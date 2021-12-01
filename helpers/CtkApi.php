@@ -42,7 +42,7 @@ class CtkApi
     {
         return $this->_client->createRequest()
             ->setMethod('GET')
-            ->setUrl(self::SERVER.":".self::PORT."/fetch/$ctk_id")
+            ->setUrl(self::SERVER.":8602/fetch/$ctk_id")
             ->send()
             ->getData();
     }
