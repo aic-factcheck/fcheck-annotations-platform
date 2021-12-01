@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/site.js?2020-11-25-2',
+        'js/jquery.hotkeys.js'
     ];
 
     public $depends = [

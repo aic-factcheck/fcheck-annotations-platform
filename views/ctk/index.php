@@ -24,7 +24,11 @@ $(".paragraph-selector").click(function() {
 $(document).ready(function() {
     $(document).keydown(function (e) {
       if ((e.ctrlKey||e.metaKey) && e.keyCode == 13) {
-        $(".suggested").trigger('click');
+            $(".suggested").trigger('click');
+      }
+      if((e.ctrlKey||e.metaKey) && e.keyCode == 39){
+            location.reload();
+            e.preventDefault();
       }
     });
 });
@@ -61,7 +65,7 @@ JS
                 <span class="float-right">
                     <span class="badge badge-info"><?= Yii::$app->formatter->asDatetime($article->date) ?></span>
                     <a href="<?= Url::current() ?>"
-                       class="btn btn-warning btn-sm font-weight-bold">Přeskočit &raquo;</a>
+                       class="btn btn-warning btn-sm font-weight-bold skip">Přeskočit &raquo;</a>
                 </span>
             </h4>
             <!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
@@ -82,4 +86,3 @@ JS
     </div>
 </div>
 </div>
-<script src="https://raw.githubusercontent.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js"></script>
