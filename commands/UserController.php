@@ -159,7 +159,7 @@ TSV;
         foreach (explode("\n", $tsv) as $line) {
             $l = explode("\t", $line);
             if (array_key_exists($l[0], $inserted)) {
-                $inserted[$l[0]]->coef++;
+                $inserted[$l[0]]->quota_coef=2;
                 $inserted[$l[0]]->save();
             } else {
                 if (($user = User::find()->andWhere(['username' => $l[0]])->one()) != null) {
