@@ -19,8 +19,8 @@ return [
         Module::FORMAT_DATETIME => 'php:Y-m-d H:i:s',
     ],
     'quotas' => [
-        't1a' => 3,
-        't1b' => 13,
+        't1a' => 7,
+        't1b' => 21,
         't2a' => 4,
         't2b' => 32
     ]
