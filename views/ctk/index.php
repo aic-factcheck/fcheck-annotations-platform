@@ -30,10 +30,17 @@ $(document).ready(function() {
             location.reload();
             e.preventDefault();
       }
+        for(var i = 1; i < 10; i++) {
+          if ((e.ctrlKey||e.metaKey) && e.keyCode == 48+i) {
+                $(".par-"+i).trigger('click');
+                e.preventDefault();
+          }
+        }
     });
 });
 JS
 );
+$i=1;
 ?>
 <div class="container">
     <h1>Ú<sub>0</sub>: <?= $this->title ?></h1>
@@ -73,10 +80,10 @@ JS
             <?php
             foreach ($article->paragraphs as $paragraph) {
                 ?>
-                <div class="card bg-white mb-2 paragraph-selector <?= $paragraph->rank == $target ? "suggested" : '' ?>"
+                <div class="card bg-white mb-2 paragraph-selector par-<?=$i ?> <?= $paragraph->rank == $target ? "suggested" : '' ?>"
                      data-id="<?= $paragraph->id ?>">
                     <div class="card-body text-block <?= $paragraph->rank == $target ? "bg-success" : '' ?>">
-                        <?= $paragraph->get('text') ?>
+                        <strong>[<?= $i++ ?>] </strong><?= $paragraph->get('text') ?>
                     </div>
                 </div>
                 <?php
