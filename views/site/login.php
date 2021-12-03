@@ -13,7 +13,7 @@ $this->title = 'Login';
 <div class="site-login container">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Prosíme, zadejte své SIDOS ID pro přihlášení (anotace před <strong>3. 5. 2021</strong>):</p>
+    <p>Prosíme, zadejte své SIDOS ID pro přihlášení:</p>
     <div class="row">
         <div class="col-lg-7">
             <?php $form = ActiveForm::begin([
@@ -33,6 +33,6 @@ $this->title = 'Login';
         </div>
     </div>
 
-    <p>nebo přejděte na platformu Doccano (od <strong>3. 5. 2021</strong>):<?=Html::a('<i class="fas fa-sign-out-alt"></i> Přejít na platformu Doccano',['doccano/index'],['class'=>'btn btn-success'])?>
-    </p>
+    <!--p>nebo přejděte na platformu Doccano (od <strong>3. 5. 2021</strong>):<?=Html::a('<i class="fas fa-sign-out-alt"></i> Přejít na platformu Doccano',['doccano/index'],['class'=>'btn btn-success'])?>
+    </p-->
 </div>
