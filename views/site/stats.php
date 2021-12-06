@@ -12,8 +12,8 @@ $this->title = 'Plnění';
 <div class="container">
     <h1><?= $this->title ?></h1>
     <ul>
-        <?php foreach (User::find()->where(['>=','id',77])->all() as $user) {
-            $quotas = [3, 7, 7, 35];
+        <?php foreach (User::find()->where(['>=','id',198])->all() as $user) {
+            $quotas = [Yii::$app->params['quotas']['t1a'], Yii::$app->params['quotas']['t1b'], Yii::$app->params['quotas']['t2a'], Yii::$app->params['quotas']['t2b']];
             for ($i = 0; $i <= 3; $i++) {
                 $quotas[$i] = $quotas[$i]*(Yii::$app->user->isGuest?1:$user->getCoef());
             }
