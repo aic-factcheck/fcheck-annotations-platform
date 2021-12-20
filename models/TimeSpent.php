@@ -35,7 +35,7 @@ class TimeSpent extends \yii\db\ActiveRecord
             [['time', 'user'], 'integer'],
             [['created_at'], 'safe'],
             [['route'], 'string', 'max' => 128],
-            [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user' => 'id']],
+            [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user' => 'id']],
         ];
     }
 
@@ -60,6 +60,6 @@ class TimeSpent extends \yii\db\ActiveRecord
      */
     public function getUser0()
     {
-        return $this->hasOne(User::className(), ['id' => 'user']);
+        return $this->hasOne(User::class, ['id' => 'user']);
     }
 }

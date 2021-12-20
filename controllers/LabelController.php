@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\helpers\Helper;
 use app\models\Claim;
 use app\models\Evidence;
+use app\models\FeverPair;
 use app\models\Label;
 use app\models\LabelForm;
 use app\models\SplitsForm;
@@ -58,7 +59,8 @@ class LabelController extends Controller
             } while (Label::find()
                 ->where(['claim' => $claim, 'user' => Yii::$app->user->id])
                 ->orWhere(['flag' => 1, 'claim' => $claim])
-                ->exists());
+                ->exists()
+            );
             return $this->redirect([
                 'index',
                 'sandbox' => $sandbox,
@@ -73,7 +75,6 @@ class LabelController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', "Anotace úspěšně uložena.");
             return $this->redirect(['index', 'sandbox' => $sandbox, 'oracle' => $oracle, 'unannotated' => $unannotated,]);
-
         }
         return $this->render('index', ['model' => $model, 'oracle' => $oracle]);
     }
@@ -277,12 +278,12 @@ class LabelController extends Controller
                 }
                 $evidences = array_values($evidences);
                 $response .= json_encode([
-                        "id" => $id,
-                        "verifiable" => ($label->label == "NOT ENOUGH INFO" ? "NOT VERIFIABLE" : "VERIFIABLE"),
-                        "label" => $label->label,
-                        "claim" => $label->claim0->claim,
-                        "evidence" => $evidences
-                    ], JSON_UNESCAPED_UNICODE) . "\n";
+                    "id" => $id,
+                    "verifiable" => ($label->label == "NOT ENOUGH INFO" ? "NOT VERIFIABLE" : "VERIFIABLE"),
+                    "label" => $label->label,
+                    "claim" => $label->claim0->claim,
+                    "evidence" => $evidences
+                ], JSON_UNESCAPED_UNICODE) . "\n";
             }
         }
 
@@ -303,9 +304,11 @@ class LabelController extends Controller
             foreach ($labels as $label => $evidenceSets) {
                 if ((!empty($evidenceSets) and $label != null) || $label == "NOT ENOUGH INFO") {
                     $ctr[$label] += count($evidenceSets);
-                    $response .= json_encode(["id" => $claim->id, "label" => $label, "claim" => Helper::detokenize($claim->claim),
-                            "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId,
-                            "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"], JSON_UNESCAPED_UNICODE) . "\n";
+                    $response .= json_encode([
+                        "id" => $claim->id, "label" => $label, "claim" => Helper::detokenize($claim->claim),
+                        "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId,
+                        "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"
+                    ], JSON_UNESCAPED_UNICODE) . "\n";
                 }
             }
         }
@@ -324,24 +327,24 @@ class LabelController extends Controller
             if ($singleEvidence) {
                 foreach ($evidenceSets as $evidenceSet) {
                     $response .= json_encode([
-                            "id" => $claim->id,
-                            "label" => $claim->getMajorityLabel(),
-                            "claim" => Helper::detokenize($claim->claim),
-                            "evidence" => $evidenceSet,
-                            "source" => $claim->paragraph0->ctkId,
-                            "mutated_from" => $claim->mutated_from,
-                            "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"
-                        ], JSON_UNESCAPED_UNICODE) . "\n";
-                }
-            } else {
-                $response .= json_encode([
                         "id" => $claim->id,
                         "label" => $claim->getMajorityLabel(),
                         "claim" => Helper::detokenize($claim->claim),
-                        "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId,
+                        "evidence" => $evidenceSet,
+                        "source" => $claim->paragraph0->ctkId,
                         "mutated_from" => $claim->mutated_from,
                         "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"
                     ], JSON_UNESCAPED_UNICODE) . "\n";
+                }
+            } else {
+                $response .= json_encode([
+                    "id" => $claim->id,
+                    "label" => $claim->getMajorityLabel(),
+                    "claim" => Helper::detokenize($claim->claim),
+                    "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId,
+                    "mutated_from" => $claim->mutated_from,
+                    "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"
+                ], JSON_UNESCAPED_UNICODE) . "\n";
             }
         }
         $u = (Yii::$app->user->isGuest ? 'guest' : Yii::$app->user->id);
@@ -362,5 +365,21 @@ class LabelController extends Controller
     {
         $claims = Claim::find(1)->andWhere(['like', 'comment', '%flag%', false])->all();
         return $this->render("flags", ["claims" => $claims]);
+    }
+
+    public function actionFever($fever_pair = null, $label = null)
+    {
+        if ($fever_pair != null && $label != null) {
+            $fever_pair = FeverPair::find()->where(['id'=>$fever_pair])->one();
+            $fever_pair->label_cs = $label;
+            $fever_pair->checked_by = Yii::$app->user->getId();
+            $fever_pair->save(false);
+            return $this->redirect(['label/fever']);
+        }
+        return $this->render('fever', [
+            'done' => FeverPair::find()->andWhere(['IS NOT', 'label_cs', null])->count(),
+            'goal' => 1257,
+            'pair' => FeverPair::find()->andWhere(['IS', 'label_cs', null])->orderBy(new Expression('rand()'))->limit(1)->one()
+        ]);
     }
 }

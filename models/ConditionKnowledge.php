@@ -35,8 +35,8 @@ class ConditionKnowledge extends \yii\db\ActiveRecord
             [['search_term'], 'string', 'max' => 512],
             [['label', 'knowledge'], 'integer'],
             [['created_at'], 'safe'],
-            [['label'], 'exist', 'skipOnError' => true, 'targetClass' => Label::className(), 'targetAttribute' => ['label' => 'id']],
-            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['knowledge' => 'id']],
+            [['label'], 'exist', 'skipOnError' => true, 'targetClass' => Label::class, 'targetAttribute' => ['label' => 'id']],
+            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['knowledge' => 'id']],
         ];
     }
 
@@ -59,7 +59,7 @@ class ConditionKnowledge extends \yii\db\ActiveRecord
      */
     public function getLabel0()
     {
-        return $this->hasOne(Label::className(), ['id' => 'label']);
+        return $this->hasOne(Label::class, ['id' => 'label']);
     }
 
     /**
@@ -69,7 +69,7 @@ class ConditionKnowledge extends \yii\db\ActiveRecord
      */
     public function getKnowledge0()
     {
-        return $this->hasOne(Paragraph::className(), ['id' => 'knowledge']);
+        return $this->hasOne(Paragraph::class, ['id' => 'knowledge']);
     }
 
     public static function fromDictionary($label, $dictionary)

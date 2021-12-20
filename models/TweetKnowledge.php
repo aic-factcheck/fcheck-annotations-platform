@@ -71,8 +71,8 @@ class TweetKnowledge extends ActiveRecord
             [['search_term'], 'string', 'max' => 512],
             [['tweet', 'knowledge'], 'integer'],
             [['created_at'], 'safe'],
-            [['tweet'], 'exist', 'skipOnError' => true, 'targetClass' => Tweet::className(), 'targetAttribute' => ['tweet' => 'id']],
-            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['knowledge' => 'id']],
+            [['tweet'], 'exist', 'skipOnError' => true, 'targetClass' => Tweet::class, 'targetAttribute' => ['tweet' => 'id']],
+            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['knowledge' => 'id']],
         ];
     }
 
@@ -95,7 +95,7 @@ class TweetKnowledge extends ActiveRecord
      */
     public function getTweet0()
     {
-        return $this->hasOne(Tweet::className(), ['id' => 'tweet']);
+        return $this->hasOne(Tweet::class, ['id' => 'tweet']);
     }
 
     /**
@@ -105,6 +105,6 @@ class TweetKnowledge extends ActiveRecord
      */
     public function getKnowledge0()
     {
-        return $this->hasOne(Paragraph::className(), ['id' => 'knowledge']);
+        return $this->hasOne(Paragraph::class, ['id' => 'knowledge']);
     }
 }

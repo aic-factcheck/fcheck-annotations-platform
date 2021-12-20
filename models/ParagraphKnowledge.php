@@ -88,8 +88,8 @@ class ParagraphKnowledge extends ActiveRecord
             [['created_at'], 'safe'],
             [['search_term'], 'string', 'max' => 512],
             [['paragraph', 'knowledge', 'search_term'], 'unique', 'targetAttribute' => ['paragraph', 'knowledge', 'search_term']],
-            [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['paragraph' => 'id']],
-            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::className(), 'targetAttribute' => ['knowledge' => 'id']],
+            [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['paragraph' => 'id']],
+            [['knowledge'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['knowledge' => 'id']],
         ];
     }
 
@@ -113,7 +113,7 @@ class ParagraphKnowledge extends ActiveRecord
      */
     public function getParagraph0()
     {
-        return $this->hasOne(Paragraph::className(), ['id' => 'paragraph']);
+        return $this->hasOne(Paragraph::class, ['id' => 'paragraph']);
     }
 
     /**
@@ -123,6 +123,6 @@ class ParagraphKnowledge extends ActiveRecord
      */
     public function getKnowledge0()
     {
-        return $this->hasOne(Paragraph::className(), ['id' => 'knowledge']);
+        return $this->hasOne(Paragraph::class, ['id' => 'knowledge']);
     }
 }

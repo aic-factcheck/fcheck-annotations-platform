@@ -116,7 +116,7 @@ class Claim extends ActiveRecord
             [['mutated_from'], 'exist', 'skipOnError' => true, 'targetClass' => Claim::class, 'targetAttribute' => ['mutated_from' => 'id']],
             [['user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user' => 'id']],
             [['paragraph'], 'exist', 'skipOnError' => true, 'targetClass' => Paragraph::class, 'targetAttribute' => ['paragraph' => 'id']],
-            [['tweet'], 'exist', 'skipOnError' => true, 'targetClass' => Tweet::className(), 'targetAttribute' => ['tweet' => 'id']],
+            [['tweet'], 'exist', 'skipOnError' => true, 'targetClass' => Tweet::class, 'targetAttribute' => ['tweet' => 'id']],
         ];
     }
 
@@ -324,6 +324,6 @@ class Claim extends ActiveRecord
      */
     public function getTweet0()
     {
-        return $this->hasOne(Tweet::className(), ['id' => 'tweet']);
+        return $this->hasOne(Tweet::class, ['id' => 'tweet']);
     }
 }
