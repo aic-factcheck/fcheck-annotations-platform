@@ -179,7 +179,7 @@ class Paragraph extends CtkData
 
     public function getOrderedKnowledge(){
         $ordered_knowledge = $this->knowledge;
-        usort($ordered_knowledge, fn($a, $b) => -strcmp($a->article0->date, $b->article0->date));
+        usort($ordered_knowledge, function($a, $b) {return -strcmp($a->article0->date, $b->article0->date);});
         return $ordered_knowledge;
     }
 
