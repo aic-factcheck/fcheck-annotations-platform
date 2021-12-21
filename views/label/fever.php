@@ -84,7 +84,7 @@ $i = 1;
                 <?= Html::a('<i class="fas fa-check"></i> Potvrzeno', ['label/fever', 'fever_pair' => $pair->id, 'label' => 'SUPPORTS'], ['class' => 'btn btn-success']) ?>
                 <?= Html::a('<i class="fas fa-times"></i> Vyvráceno', ['label/fever', 'fever_pair' => $pair->id, 'label' => 'REFUTES'], ['class' => 'btn btn-danger']) ?>
                 <?= Html::a('<i class="far fa-question-circle"></i> Nedostatek informací', ['label/fever', 'fever_pair' => $pair->id, 'label' => 'NOT ENOUGH INFO'], ['class' => 'btn btn-secondary'])  ?>
-                <?= Html::a('<i class="fas fa-exclamation-triangle"></i> Nepoužitelný překlad tvrz.', ['label/fever', 'fever_pair' => $pair->id, 'label' => 'MISTRANSLATED'], ['class' => 'btn btn-warning'])  ?>
+                <?= Html::a('<i class="fas fa-exclamation-triangle"></i> Nepoužitelný překlad tvrzení', ['label/fever', 'fever_pair' => $pair->id, 'label' => 'MISTRANSLATED'], ['class' => 'btn btn-warning'])  ?>
             </h4>
         </div>
     </div>
