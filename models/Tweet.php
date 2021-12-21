@@ -137,4 +137,10 @@ class Tweet extends \yii\db\ActiveRecord
         return $this->hasMany(Paragraph::class, ['id' => 'knowledge'])
             ->viaTable('tweet_knowledge', ['tweet' => 'id']);
     }
+
+    public function getOrderedKnowledge(){
+        $ordered_knowledge = $this->knowledge;
+        usort($ordered_knowledge, fn($a, $b) => -strcmp($a->article0->date, $b->article0->date));
+        return $ordered_knowledge;
+    }
 }

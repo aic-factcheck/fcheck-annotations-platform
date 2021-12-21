@@ -63,7 +63,7 @@ $this->title = 'Extrakce tvrzení z Twitteru';
                         vyhledávání odstavců z původního článku.</p>
                     <div class="card bg-white">
                         <div class="card-body">
-                            <?php foreach ($model->tweet->knowledge as $paragraph) {
+                            <?php foreach ($model->tweet->orderedKnowledge as $paragraph) {
                                 echo Helper::dictionaryItem($paragraph);
                             } ?>
                         </div>

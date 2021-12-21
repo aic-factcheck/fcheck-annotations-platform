@@ -95,7 +95,7 @@ Helper::setEntities($ners = $model->paragraph->ners);
                 <div class="col-md-7">
                     <div class="card bg-white">
                         <div class="card-body">
-                            <?php foreach ($model->paragraph->knowledge as $paragraph) {
+                            <?php foreach ($model->paragraph->orderedKnowledge as $paragraph) {
                                 echo Helper::dictionaryItem($paragraph);
                             } ?>
                         </div>

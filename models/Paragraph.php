@@ -11,6 +11,7 @@ use yii\db\Expression;
  *
  * @property int $id Identifikátor
  * @property int $rank Pořadí věty ve článku
+ * @property int $extractions Počet extrahovaných tvrzení
  * @property string $article ČTK článek
  * @property string $text Text odstavce
  * @property string[] $ners Pojmenované entity
@@ -80,7 +81,7 @@ class Paragraph extends CtkData
     {
         return [
             [['rank', 'article', 'text'], 'required'],
-            [['rank', 'candidate_of', 'created_at', 'updated_at'], 'integer'],
+            [['rank', 'candidate_of', 'created_at', 'updated_at', 'extractions'], 'integer'],
             [['text', 'ners'], 'string'],
             [['article'], 'string', 'max' => 64],
             [['article'], 'exist', 'skipOnError' => true, 'targetClass' => Article::class, 'targetAttribute' => ['article' => 'id']],
@@ -174,6 +175,12 @@ class Paragraph extends CtkData
     {
         return $this->hasMany(Paragraph::class, ['id' => 'knowledge'])
             ->viaTable('paragraph_knowledge', ['paragraph' => 'id']);
+    }
+
+    public function getOrderedKnowledge(){
+        $ordered_knowledge = $this->knowledge;
+        usort($ordered_knowledge, fn($a, $b) => -strcmp($a->article0->date, $b->article0->date));
+        return $ordered_knowledge;
     }
 
     public function __toString()

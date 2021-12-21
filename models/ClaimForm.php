@@ -70,10 +70,11 @@ class ClaimForm extends Model
                     ]);
                     if ($claim->save(false)) {
                         $result[] = $claim->id;
+                        $this->paragraph->extractions++;
                     }
                 }
             }
-            return true;
+            return $this->paragraph->save();
         }
         return false;
     }

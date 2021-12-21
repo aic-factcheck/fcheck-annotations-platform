@@ -2,3 +2,4 @@
 ctk.db
 web/static
 composer.phar
+*.jsonl
