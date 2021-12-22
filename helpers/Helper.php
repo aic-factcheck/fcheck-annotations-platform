@@ -21,7 +21,7 @@ class Helper
     public static function setEntities($entities)
     {
         foreach ($entities as $entity) {
-            if(strlen($entity))
+            if(strlen($entity)>1)
             self::$entityMarks[$entity] = Html::tag('mark', $entity);
         }
         self::$entities = $entities;
