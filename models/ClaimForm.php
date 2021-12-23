@@ -28,7 +28,7 @@ class ClaimForm extends Model
                 $this->paragraph = Paragraph::find()
                     ->where(['IS NOT', 'candidate_of', null])
                     ->andWhere(['not in', 'id', $traversed])
-                    ->orderBy(new Expression('rand()'))
+                    ->orderBy(new Expression('rand()+extractions'))
                     ->one();
                 $traversed[] = $this->paragraph->id;
             } while (Claim::find()->where(['paragraph' => $this->paragraph->id, 'user' => Yii::$app->user->id])->exists());
