@@ -7,6 +7,7 @@
 /* @var $target int */
 
 use app\models\Article;
+use app\models\Paragraph;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -44,6 +45,8 @@ $i=1;
 ?>
 <div class="container">
     <h1>Ú<sub>0</sub>: <?= $this->title ?></h1>
+    <p><strong>Statistiky: zatím nominováno <span class="text-primary"><?= Paragraph::find()->andWhere(['is not','candidate_of', null])->count() ?></span> odstavců, z toho <span class="text-primary"><?= Paragraph::find()->andWhere(['is not','candidate_of', null])->andWhere(['extractions'=>0])->count() ?></span> ještě neextrahovaných (Ú<sub>1a</sub>).</p></strong>
+
     <div class="alert alert-warning mt-0" role="alert">
         <h3 class="alert-heading">Pokyny</h3>
         <ul>
