@@ -106,7 +106,7 @@ $this->title = 'Anotace tvrzení';
                                 }
                                 ?>
 
-                                <?php foreach ($model->claim->knowledge as $paragraph) { ?>
+                                <?php foreach ($model->claim->orderedKnowledge as $paragraph) { ?>
                                     <tr class="table-info dictionary-item bg-info">
                                         <th class="text-left">Znalostní
                                             rámec: <?= $paragraph->article0->get('title') . ' ' . \yii\helpers\Html::tag('small', Yii::$app->formatter->asDatetime($paragraph->article0->date), ['class' => 'badge badge-secondary ']) ?></th>

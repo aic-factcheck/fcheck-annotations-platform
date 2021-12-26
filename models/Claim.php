@@ -255,8 +255,13 @@ class Claim extends ActiveRecord
         foreach ($keys as $key) {
             $shuffled[$key] = $this->_knowledge[$key];
         }
-        usort($ordered_knowledge, function($a, $b) {return -strcmp($a->article0->date, $b->article0->date);});
         return $shuffled;
+    }
+
+    public function getOrderedKnowledge(){
+        $ordered_knowledge = $this->knowledge;
+        usort($ordered_knowledge, function($a, $b) {return -strcmp($a->article0->date, $b->article0->date);});
+        return $ordered_knowledge;
     }
 
     public function getEvidenceSets2($label = "SUPPORTS", $attr = "ctkId", $simulateFever = false, $simulateNeiEvidence = false)
