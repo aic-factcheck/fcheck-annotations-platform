@@ -72,7 +72,7 @@ $avg_labels = [];
 $tomorrow = strtotime((new DateTime('tomorrow'))->format('Y-m-d'));
 $day = $dayOne = $beginStamp;
 while ($day < $tomorrow) {
-    if (!(($day > strtotime('2020-12-12') && $day < strtotime('2021-03-01')) || ($day > strtotime('2021-04-10') && $day < strtotime('2021-05-12')))) {
+    if (!(($day > strtotime('2020-12-12') && $day < strtotime('2021-03-01')) || ($day > strtotime('2021-04-10') && $day < strtotime('2021-12-01')))) {
         $activity[date('d.m.Y', $day)] = [
             Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS', 'mutation_type', null])->count(),
             Claim::find()->where(['>=', 'created_at', $day])->andWhere(['<=', 'created_at', $day + 86400])->andWhere(['IS NOT', 'mutation_type', null])->count(),
