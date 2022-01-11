@@ -331,7 +331,7 @@ class LabelController extends Controller
                         "label" => $claim->getMajorityLabel(),
                         "claim" => Helper::detokenize($claim->claim),
                         "evidence" => $evidenceSet,
-                        "source" => $claim->paragraph0->ctkId,
+                        "source" => $claim->source,
                         "mutated_from" => $claim->mutated_from,
                         "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"
                     ], JSON_UNESCAPED_UNICODE) . "\n";
@@ -341,7 +341,8 @@ class LabelController extends Controller
                     "id" => $claim->id,
                     "label" => $claim->getMajorityLabel(),
                     "claim" => Helper::detokenize($claim->claim),
-                    "evidence" => array_values($evidenceSets), "source" => $claim->paragraph0->ctkId,
+                    "evidence" => array_values($evidenceSets), 
+                    "source" => $claim->source,
                     "mutated_from" => $claim->mutated_from,
                     "verifiable" => ($label == "NOT ENOUGH INFO" ? "NOT " : "") . "VERIFIABLE"
                 ], JSON_UNESCAPED_UNICODE) . "\n";

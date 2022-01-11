@@ -73,6 +73,11 @@ class Claim extends ActiveRecord
         return 'claim';
     }
 
+    public function getSource()
+    {
+        return $this->paragraph != null ? $this->paragraph0->ctkId : $this->tweet;
+    }
+
     public static function find($deleted = 0)
     {
         return parent::find()->where(['deleted' => $deleted]);
@@ -218,8 +223,7 @@ class Claim extends ActiveRecord
                 $k = $label->claim0->getKnowledge();
                 $result[$label->label][] = [array_shift($k)->{$param}];
             } else {
-                $dispatch_condition = $condition == "double" && !empty($label->condition) /*&& $param = 'text'*/
-                ;
+                $dispatch_condition = $condition == "double" && !empty($label->condition) /*&& $param = 'text'*/;
                 foreach ($e as $evidence) {
                     if (!array_key_exists($label->id . '_' . $evidence->group, $result)) {
                         $result[$label->label][$label->id . '_' . $evidence->group] = [];
@@ -258,9 +262,12 @@ class Claim extends ActiveRecord
         return $shuffled;
     }
 
-    public function getOrderedKnowledge(){
+    public function getOrderedKnowledge()
+    {
         $ordered_knowledge = $this->knowledge;
-        usort($ordered_knowledge, function($a, $b) {return -strcmp($a->article0->date, $b->article0->date);});
+        usort($ordered_knowledge, function ($a, $b) {
+            return -strcmp($a->article0->date, $b->article0->date);
+        });
         return $ordered_knowledge;
     }
 
